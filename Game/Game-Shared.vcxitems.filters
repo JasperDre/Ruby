@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GamePCH.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Game\Game.cpp">
+      <Filter>Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Mesh\Mesh.cpp">
+      <Filter>Source\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Sprites\AnimatedSprite.cpp">
+      <Filter>Source\Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\Trainer.cpp">
+      <Filter>Source\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\GameCamera.cpp">
+      <Filter>Source\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\ResourceManager.cpp">
+      <Filter>Source\GameObjects\UI\GameplayHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\TileMap.cpp">
+      <Filter>Source\GameObjects\UI\GameplayHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Mesh\Canvas.cpp">
+      <Filter>Source\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\SceneManager.cpp">
+      <Filter>Source\GameObjects\UI\GameplayHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\EventHandler.cpp">
+      <Filter>Source\GameObjects\UI\GameplayHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Scenes\Scene.cpp">
+      <Filter>Source\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\TileMapOakLab.cpp">
+      <Filter>Source\GameObjects\UI\GameplayHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\TileMapPalletTown.cpp">
+      <Filter>Source\GameObjects\UI\GameplayHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Scenes\PalletTown.cpp">
+      <Filter>Source\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Scenes\OakLab.cpp">
+      <Filter>Source\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\PlayerHouse.cpp">
+      <Filter>Source\GameObjects\PalletTownObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\RivalHouse.cpp">
+      <Filter>Source\GameObjects\PalletTownObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\PalletTownMap.cpp">
+      <Filter>Source\GameObjects\PalletTownObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\OakHouse.cpp">
+      <Filter>Source\GameObjects\PalletTownObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabDeskTop.cpp">
+      <Filter>Source\GameObjects\OakLabObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabMachineTop.cpp">
+      <Filter>Source\GameObjects\OakLabObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabMap.cpp">
+      <Filter>Source\GameObjects\OakLabObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabPlantTop.cpp">
+      <Filter>Source\GameObjects\OakLabObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabTableTop.cpp">
+      <Filter>Source\GameObjects\OakLabObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\GameObject.cpp">
+      <Filter>Source\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\ProfessorOak.cpp">
+      <Filter>Source\GameObjects\OakLabObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Controllers\PlayerController.cpp">
+      <Filter>Source\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Controllers\AIController.cpp">
+      <Filter>Source\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Controllers\AStarPathFinder.cpp">
+      <Filter>Source\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\TownGirl.cpp">
+      <Filter>Source\GameObjects\PalletTownObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\TownBoy.cpp">
+      <Filter>Source\GameObjects\PalletTownObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\FileIOManager.cpp">
+      <Filter>Source\GameObjects\UI\GameplayHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Scenes\PetalbergWoods.cpp">
+      <Filter>Source\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\WoodsObjects\PettleburgWoodsMap.cpp">
+      <Filter>Source\GameObjects\WoodsObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\TileMapWoods.cpp">
+      <Filter>Source\GameObjects\UI\GameplayHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\UI\UIObject.cpp">
+      <Filter>Source\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\TileMapExtras.cpp">
+      <Filter>Source\GameObjects\UI\GameplayHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\UI\PokeBall.cpp">
+      <Filter>Source\GameObjects\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\UI\ScoreNumber.cpp">
+      <Filter>Source\GameObjects\UI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GamePCH.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Mesh\Mesh.h">
+      <Filter>Source\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Sprites\AnimatedSprite.h">
+      <Filter>Source\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Constants.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\GameCamera.h">
+      <Filter>Source\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\Trainer.h">
+      <Filter>Source\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Game\Game.h">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\TileMap.h">
+      <Filter>Source\GameObjects\UI\GameplayHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\ResourceManager.h">
+      <Filter>Source\GameObjects\UI\GameplayHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Mesh\Canvas.h">
+      <Filter>Source\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\SceneManager.h">
+      <Filter>Source\GameObjects\UI\GameplayHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\EventHandler.h">
+      <Filter>Source\GameObjects\UI\GameplayHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Scenes\Scene.h">
+      <Filter>Source\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\TileMapPalletTown.h">
+      <Filter>Source\GameObjects\UI\GameplayHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\TileMapOakLab.h">
+      <Filter>Source\GameObjects\UI\GameplayHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Scenes\PalletTown.h">
+      <Filter>Source\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Scenes\OakLab.h">
+      <Filter>Source\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\RivalHouse.h">
+      <Filter>Source\GameObjects\PalletTownObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\PlayerHouse.h">
+      <Filter>Source\GameObjects\PalletTownObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\PalletTownMap.h">
+      <Filter>Source\GameObjects\PalletTownObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\OakHouse.h">
+      <Filter>Source\GameObjects\PalletTownObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabTableTop.h">
+      <Filter>Source\GameObjects\OakLabObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabMachineTop.h">
+      <Filter>Source\GameObjects\OakLabObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabMap.h">
+      <Filter>Source\GameObjects\OakLabObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabPlantTop.h">
+      <Filter>Source\GameObjects\OakLabObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\GameObject.h">
+      <Filter>Source\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\ProfessorOak.h">
+      <Filter>Source\GameObjects\OakLabObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabDeskTop.h">
+      <Filter>Source\GameObjects\OakLabObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Controllers\PlayerController.h">
+      <Filter>Source\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Controllers\AStarPathFinder.h">
+      <Filter>Source\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Controllers\AIController.h">
+      <Filter>Source\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\TownGirl.h">
+      <Filter>Source\GameObjects\PalletTownObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\TownBoy.h">
+      <Filter>Source\GameObjects\PalletTownObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\FileIOManager.h">
+      <Filter>Source\GameObjects\UI\GameplayHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Scenes\PetalBergWoods.h">
+      <Filter>Source\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\WoodsObjects\PettleburgWoodsMap.h">
+      <Filter>Source\GameObjects\WoodsObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\TileMapWoods.h">
+      <Filter>Source\GameObjects\UI\GameplayHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\UI\UIObject.h">
+      <Filter>Source\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\TileMapExtras.h">
+      <Filter>Source\GameObjects\UI\GameplayHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\UI\PokeBall.h">
+      <Filter>Source\GameObjects\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\UI\ScoreNumber.h">
+      <Filter>Source\GameObjects\UI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Data">
+      <UniqueIdentifier>{c793aa77-1210-4e59-9925-4a71367b3b35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shaders">
+      <UniqueIdentifier>{5d66ae9e-89b9-400f-a379-e5176b7b7f78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{9f74afd4-f513-4aaf-a6be-624326236288}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Game">
+      <UniqueIdentifier>{617175d8-08e5-4be8-82ec-e3f1163403f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Mesh">
+      <UniqueIdentifier>{10a6275b-242b-42ae-b975-117a759fcea9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GameObjects">
+      <UniqueIdentifier>{09d079c9-e37f-46f2-82bd-ff6e2269bace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Sprites">
+      <UniqueIdentifier>{3d2e5618-acb3-453e-8394-34e31d749b77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Scenes">
+      <UniqueIdentifier>{dbbf26a5-dddd-48ab-93db-85fb9c784bcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GameObjects\OakLabObjects">
+      <UniqueIdentifier>{3f6d86dd-cd1a-4473-9fc3-3aca8dcd7e9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GameObjects\PalletTownObjects">
+      <UniqueIdentifier>{1e305c0a-65b8-44c3-9caf-009c863950c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Controllers">
+      <UniqueIdentifier>{bf5bba06-cb20-44fa-9249-44ba5acce22f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Textures">
+      <UniqueIdentifier>{6519da31-7b42-40d3-967c-ac1eba5cf92c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GameObjects\WoodsObjects">
+      <UniqueIdentifier>{14ba2d8f-6250-4326-a709-4d999a96a0b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GameObjects\UI">
+      <UniqueIdentifier>{edfb8ee9-c574-4f4a-a5d0-844bf3cedfe1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GameObjects\UI\GameplayHelpers">
+      <UniqueIdentifier>{6a81e7c2-782b-4237-bd91-15caa53e9912}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Data\Shaders\Color.frag">
+      <Filter>Data\Shaders</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Data\Shaders\Color.vert">
+      <Filter>Data\Shaders</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Data\Shaders\Moving.frag">
+      <Filter>Data\Shaders</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Data\Shaders\Moving.vert">
+      <Filter>Data\Shaders</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Data\Textures\TileSet.json">
+      <Filter>Data\Textures</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Data\Textures\OakLabTileSet.json">
+      <Filter>Data\Textures</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Data\Textures\Player_NPCSprites.json">
+      <Filter>Data\Textures</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Data\Textures\BattleScene.json">
+      <Filter>Data\Textures</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Data\Textures\ExtrasTileSet.json">
+      <Filter>Data\Textures</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Data\Textures\WoodsTileSet.json">
+      <Filter>Data\Textures</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="$(MSBuildThisFileDirectory)..\readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="$(MSBuildThisFileDirectory)Data\Textures\TileSet.png">
+      <Filter>Data\Textures</Filter>
+    </Image>
+    <Image Include="$(MSBuildThisFileDirectory)Data\Textures\Player_NPCSprites.png">
+      <Filter>Data\Textures</Filter>
+    </Image>
+    <Image Include="$(MSBuildThisFileDirectory)Data\Textures\OakLabTileSet.png">
+      <Filter>Data\Textures</Filter>
+    </Image>
+    <Image Include="$(MSBuildThisFileDirectory)Data\Textures\ExtrasTileSet.png">
+      <Filter>Data\Textures</Filter>
+    </Image>
+    <Image Include="$(MSBuildThisFileDirectory)Data\Textures\BattleScene.png">
+      <Filter>Data\Textures</Filter>
+    </Image>
+    <Image Include="$(MSBuildThisFileDirectory)Data\Textures\WoodsTileSet.png">
+      <Filter>Data\Textures</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

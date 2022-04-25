@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{04735107-3ecb-4bb0-986f-ab19fcf6073a}</ItemsProjectGuid>
+    <ItemsProjectName>Game-Shared</ItemsProjectName>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\UI\ScoreNumber.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\UI\PokeBall.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\UI\UIObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\WoodsObjects\PettleburgWoodsMap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\FileIOManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Controllers\AIController.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Controllers\AStarPathFinder.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\ProfessorOak.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabDeskTop.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabMachineTop.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabMap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabPlantTop.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabTableTop.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\TownBoy.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\TownGirl.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\EventHandler.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\TileMapExtras.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\TileMapOakLab.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\TileMapPalletTown.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\TileMapWoods.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Scenes\OakLab.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Scenes\PalletTown.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Scenes\PetalBergWoods.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Scenes\Scene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\SceneManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\GameCamera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\OakHouse.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\PalletTownMap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Constants.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\GameObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Controllers\PlayerController.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\PlayerHouse.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\RivalHouse.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GamePCH.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Game\Game.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Mesh\Canvas.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Mesh\Mesh.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\Sprites\AnimatedSprite.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\ResourceManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\Trainer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\TileMap.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\UI\PokeBall.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\UI\ScoreNumber.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\UI\UIObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\WoodsObjects\PettleburgWoodsMap.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\FileIOManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Controllers\AIController.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Controllers\AStarPathFinder.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabDeskTop.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabMachineTop.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabMap.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabPlantTop.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabTableTop.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\ProfessorOak.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\TownBoy.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\TownGirl.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\EventHandler.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\TileMapExtras.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\TileMapOakLab.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\TileMapPalletTown.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\TileMapWoods.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Scenes\OakLab.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Scenes\PalletTown.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Scenes\PetalbergWoods.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Scenes\Scene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\SceneManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\GameCamera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\OakHouse.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\PalletTownMap.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\GameObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Controllers\PlayerController.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\PlayerHouse.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\RivalHouse.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\Trainer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GamePCH.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Game\Game.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Mesh\Canvas.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Mesh\Mesh.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\Sprites\AnimatedSprite.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\ResourceManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameplayHelpers\TileMap.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Data\Shaders\Color.frag" />
+    <None Include="$(MSBuildThisFileDirectory)Data\Shaders\Color.vert" />
+    <None Include="$(MSBuildThisFileDirectory)Data\Shaders\Moving.frag" />
+    <None Include="$(MSBuildThisFileDirectory)Data\Shaders\Moving.vert" />
+    <None Include="$(MSBuildThisFileDirectory)Data\Textures\BattleScene.json" />
+    <None Include="$(MSBuildThisFileDirectory)Data\Textures\ExtrasTileSet.json" />
+    <None Include="$(MSBuildThisFileDirectory)Data\Textures\OakLabTileSet.json" />
+    <None Include="$(MSBuildThisFileDirectory)Data\Textures\Player_NPCSprites.json" />
+    <None Include="$(MSBuildThisFileDirectory)Data\Textures\TileSet.json" />
+    <None Include="$(MSBuildThisFileDirectory)Data\Textures\WoodsTileSet.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="$(MSBuildThisFileDirectory)..\readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="$(MSBuildThisFileDirectory)Data\Textures\BattleScene.png" />
+    <Image Include="$(MSBuildThisFileDirectory)Data\Textures\ExtrasTileSet.png" />
+    <Image Include="$(MSBuildThisFileDirectory)Data\Textures\OakLabTileSet.png" />
+    <Image Include="$(MSBuildThisFileDirectory)Data\Textures\Player_NPCSprites.png" />
+    <Image Include="$(MSBuildThisFileDirectory)Data\Textures\TileSet.png" />
+    <Image Include="$(MSBuildThisFileDirectory)Data\Textures\WoodsTileSet.png" />
+  </ItemGroup>
+</Project>
