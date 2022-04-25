@@ -1,11 +1,11 @@
 #pragma once
 
-class GameObject;
+class Entity;
 class Mesh;
 class ResourceManager;
 class TileMap;
 
-class OakLabDeskTop : public GameObject
+class OakLabDeskTop : public Entity
 {
 public:
 	OakLabDeskTop(ResourceManager * myResourceManager, TileMap * myTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture);

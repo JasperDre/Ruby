@@ -4,7 +4,7 @@
 
 #include "Game/Game.h"
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "GameObjects/Trainer.h"
 
 #include "GameplayHelpers/ResourceManager.h"

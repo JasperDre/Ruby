@@ -1,9 +1,9 @@
 #pragma once
-class GameObject;
+class Entity;
 class TileMap;
 class ResourceManager;
 
-class PokeBall : public GameObject
+class PokeBall : public Entity
 {
 protected:
 

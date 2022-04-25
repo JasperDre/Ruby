@@ -167,9 +167,9 @@ enum SpriteDirection
 const vec2 DIRECTIONVECTOR[] = { vec2(0.0f, -1.0f), vec2(1.0f, 0.0f), vec2(-1.0f, 0.0f), vec2(0.0f, 1.0f) };
 
 //Global AI State function declaration
-typedef bool (GameObject::*GetForNodeIsClearOnSpecial)(int tx, int ty);
-typedef int (GameObject::*GetRangeRandomIntAlg)(int min, int max);
-typedef void(*AIStateUpdate)(GameObject* aGameObject, float deltatime);
+typedef bool (Entity::*GetForNodeIsClearOnSpecial)(int tx, int ty);
+typedef int (Entity::*GetRangeRandomIntAlg)(int min, int max);
+typedef void(*AIStateUpdate)(Entity* aGameObject, float deltatime);
 
 //Const Enum of NPC States
 

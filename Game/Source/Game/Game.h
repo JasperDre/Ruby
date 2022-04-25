@@ -3,7 +3,7 @@
 
 
 class Mesh;
-class GameObject;
+class Entity;
 
 class ResourceManager;
 class TileMap;

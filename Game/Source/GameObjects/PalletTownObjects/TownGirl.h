@@ -1,12 +1,12 @@
 #pragma once
 
-class GameObject;
+class Entity;
 class AnimatedSprite;
 class AStarPathFinder;
 class ResourceManager;
 class TileMap;
 
-class TownGirl : public GameObject
+class TownGirl : public Entity
 {
 protected:
 

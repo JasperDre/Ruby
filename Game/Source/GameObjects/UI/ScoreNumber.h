@@ -1,11 +1,11 @@
 #pragma once
-class GameObject;
+class Entity;
 class TileMap;
 class ResourceManager;
 
 using namespace std;
 
-class ScoreNumber : public GameObject
+class ScoreNumber : public Entity
 {
 protected:
 

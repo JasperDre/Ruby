@@ -10,7 +10,7 @@
 #include "Mesh/Mesh.h"
 #include "Mesh/Canvas.h"
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "GameObjects/PalletTownObjects/PalletTownMap.h"
 #include "GameObjects/PalletTownObjects/OakHouse.h"
 #include "GameObjects/PalletTownObjects/PlayerHouse.h"

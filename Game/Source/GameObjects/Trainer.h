@@ -1,11 +1,11 @@
 #pragma once
 
-class GameObject;
+class Entity;
 class AnimatedSprite;
 class PlayerController;
 class ResourceManager;
 
-class Trainer : public GameObject
+class Trainer : public Entity
 {
 protected:
 

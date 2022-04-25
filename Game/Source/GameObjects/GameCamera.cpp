@@ -1,6 +1,6 @@
 #include "GamePCH.h"
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "GameCamera.h"
 
 #include "Mesh/Mesh.h"
@@ -9,7 +9,7 @@
 #include "GameplayHelpers/SceneManager.h"
 #include "Scenes/Scene.h"
 
-GameCamera::GameCamera(GameCore* pGame, Mesh* pMesh, GLuint myTexture, Trainer* myTrainer) : GameObject(pGame, pMesh, myTexture)
+GameCamera::GameCamera(GameCore* pGame, Mesh* pMesh, GLuint myTexture, Trainer* myTrainer) : Entity(pGame, pMesh, myTexture)
 {
 	m_MyMesh = pMesh;
 	m_Position = vec2(myTrainer->GetPosition() + vec2(0.0f, 1.0f));
@@ -109,17 +109,17 @@ void GameCamera::SetMyProjection(vec2 aProjection)
 	m_MyProjection = aProjection;
 }
 
-vec2 GameCamera::GetCameraProjection()
+vec2 GameCamera::GetCameraProjection() const
 {
 	return m_MyProjection;
 }
 
-void GameCamera::OnEvent(Event * anEvent)
+void GameCamera::OnEvent(Event* anEvent)
 {
-	DoorEvent* e = (DoorEvent*)anEvent;
-	if (e->GetEventType() == EventType_Door)
+	const DoorEvent* doorEvent = static_cast<DoorEvent*>(anEvent);
+	if (doorEvent->GetEventType() == EventType_Door)
 	{
-		Areas newArea = m_pGame->GetSceneManager()->GetActiveScene()->GetMyArea();
+		const Areas newArea = m_pGame->GetSceneManager()->GetActiveScene()->GetMyArea();
 		if (newArea == Area_OakLab)
 		{
 			CAMERAMIN = vec2(-6.0f, -6.0f);
@@ -135,18 +135,13 @@ void GameCamera::OnEvent(Event * anEvent)
 			CAMERAMIN = vec2(16.0f, 18.0f);
 			CAMERAMAX = vec2(76.0f, 80.0f);
 		}
-		if (e->GetDoorType() != 11 && e->GetDoorType() != 10)
+		if (doorEvent->GetDoorType() != 11 && doorEvent->GetDoorType() != 10)
 		{
-			vec2 newpos = m_pGame->GetSceneManager()->GetActiveScene()->GetPlayerStart();
-
-			vec2 aDirection = DIRECTIONVECTOR[m_pGame->GetMyPlayer()->GetMyDirection()];
-
+			const vec2 newpos = m_pGame->GetSceneManager()->GetActiveScene()->GetPlayerStart();
+			const vec2 aDirection = DIRECTIONVECTOR[m_pGame->GetMyPlayer()->GetMyDirection()];
 			CamOffset = aDirection * (CAMERAMIN);
-
 			newCamPos = newpos + CamOffset;
-
 			SetPosition(newCamPos);
-
 			m_InTransition = true;
 		}
 	}

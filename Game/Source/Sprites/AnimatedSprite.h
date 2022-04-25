@@ -1,49 +1,48 @@
 #pragma once
-#include "GameObjects/GameObject.h"
+
+#include "GameObjects/Entity.h"
 #include "Constants.h"
 
 class GameCore;
 class ResourceManager;
 class Mesh;
 
-class AnimatedSprite : public GameObject
+class AnimatedSprite : public Entity
 {
 public:
 	AnimatedSprite(ResourceManager* aResourceManager, GameCore* myGame, Mesh* myMesh, int aTextureIndex, GLuint aTexture);
-	~AnimatedSprite();
+	~AnimatedSprite() override;
 
-	void Update(float deltatime);
-	void Draw(vec2 camPos, vec2 projScale);
+	void Update(float deltatime) override;
+	void Draw(vec2 camPos, vec2 projScale) override;
 
-	void AddFrame(const std::string& newframe);	
+	void AddFrame(const std::string& newframe);
 	void UseFrame(const std::string& aFrame);
 
 	unsigned int GetFrameCount();
 
 	void SetFrameSpeed(float fps);
-	float GetFrameSpeed();
+	float GetFrameSpeed() const;
 
 	void SetFrameIndex(unsigned int aFrameIndex);
 
 	void SetLoop(bool isLooped);
-	bool GetLoop();
+	bool GetLoop() const;
 
 	void Pause();
 	void Resume();
-	bool IsAnimating();
+	bool IsAnimating() const;
 
 private:
-
 	std::vector<Frame>m_ActiveFrames;
-	float m_FrameSpeed;
-	float m_ElapsedTime;
-	vec2 m_UVScale;
-	vec2 m_UVOffset;
-	int m_CurrentFrame;
-	bool m_isLooped;
-	bool m_isPaused;
 	ResourceManager* m_MyResourceManager;
 	Mesh* m_MyMesh;
+	vec2 m_UVScale;
+	vec2 m_UVOffset;
+	float m_FrameSpeed;
+	float m_ElapsedTime;
 	int m_MyTexutureIndex;
+	int m_CurrentFrame;
+	bool m_isPaused;
+	bool m_isLooped;
 };
-

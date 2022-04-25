@@ -1,10 +1,10 @@
 #pragma once
-class GameObject;
+class Entity;
 class TileMap;
 class PokeBall;
 class ScoreNumber;
 
-class UIObject : public GameObject
+class UIObject : public Entity
 {
 protected:
 

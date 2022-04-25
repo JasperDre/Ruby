@@ -1,6 +1,6 @@
 #include "GamePCH.h"
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "OakHouse.h"
 
 #include "Mesh/Mesh.h"
@@ -10,7 +10,7 @@
 #include "GameplayHelpers/TileMapPalletTown.h"
 
 
-OakHouse::OakHouse(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : GameObject(myGame, myMesh, aTexture)
+OakHouse::OakHouse(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : Entity(myGame, myMesh, aTexture)
 {
 	m_pMesh = myMesh;
 	m_pMyTexture = aTexture;

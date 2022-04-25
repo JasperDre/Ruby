@@ -9,7 +9,7 @@
 #include "Mesh/Mesh.h"
 #include "Mesh/Canvas.h"
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "GameObjects/Trainer.h"
 #include "GameObjects/WoodsObjects/PettleburgWoodsMap.h"
 

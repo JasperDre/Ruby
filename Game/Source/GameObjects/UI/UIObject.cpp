@@ -1,6 +1,6 @@
 #include "GamePCH.h"
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "UIObject.h"
 #include "GameObjects/UI/ScoreNumber.h"
 #include "GameObjects/UI/PokeBall.h"
@@ -12,7 +12,7 @@
 #include "Game/Game.h"
 #include "GameObjects/Trainer.h"
 
-UIObject::UIObject(ResourceManager * aResourceManager, TileMap* aTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : GameObject(myGame, myMesh, aTexture)
+UIObject::UIObject(ResourceManager * aResourceManager, TileMap* aTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : Entity(myGame, myMesh, aTexture)
 {
 	m_PokeBall = new PokeBall(aResourceManager, aTileMap, myGame, myMesh, aTexture);
 	m_ScoreNumber = new ScoreNumber(aResourceManager, aTileMap, myGame, myMesh, aTexture);

@@ -6,9 +6,9 @@
 #include "GameplayHelpers/TileMapOakLab.h"
 #include "GameplayHelpers/TileMapPalletTown.h"
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 
-AStarPathFinder::AStarPathFinder(TileMap* aTileMap, GameObject* aNPC)
+AStarPathFinder::AStarPathFinder(TileMap* aTileMap, Entity* aNPC)
 {
 	m_pMyTileMap = aTileMap;
 

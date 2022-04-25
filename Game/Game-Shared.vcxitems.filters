@@ -76,7 +76,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabTableTop.cpp">
       <Filter>Source\GameObjects\OakLabObjects</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\GameObject.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\Entity.cpp">
       <Filter>Source\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\ProfessorOak.cpp">
@@ -198,7 +198,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\OakLabPlantTop.h">
       <Filter>Source\GameObjects\OakLabObjects</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\GameObject.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\Entity.h">
       <Filter>Source\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\OakLabObjects\ProfessorOak.h">

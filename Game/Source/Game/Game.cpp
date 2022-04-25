@@ -3,7 +3,7 @@
 #include "Game/Game.h"
 #include "Mesh/Mesh.h"
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "Controllers/PlayerController.h"
 #include "GameObjects/Trainer.h"
 #include "GameObjects/GameCamera.h"

@@ -10,7 +10,7 @@
 #include "Mesh/Mesh.h"
 #include "Mesh/Canvas.h"
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "GameObjects/Trainer.h"
 #include "GameObjects/OakLabObjects/ProfessorOak.h"
 #include "GameObjects/OakLabObjects/OakLabMap.h"

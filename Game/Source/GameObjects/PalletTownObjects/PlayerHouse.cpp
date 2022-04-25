@@ -1,6 +1,6 @@
 #include "GamePCH.h"
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "PlayerHouse.h"
 
 #include "Mesh/Mesh.h"
@@ -9,7 +9,7 @@
 #include "GameplayHelpers/TileMap.h"
 #include "GameplayHelpers/TileMapPalletTown.h"
 
-PlayerHouse::PlayerHouse(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture) : GameObject(myGame, myMesh, aTexture)
+PlayerHouse::PlayerHouse(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture) : Entity(myGame, myMesh, aTexture)
 {
 	m_pMesh = myMesh;
 	m_pMyTexture = aTexture;

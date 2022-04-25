@@ -54,7 +54,7 @@ public:
         m_Position = pos;
     }
 
-    EventTypes GetEventType() { return EventType_Input; }
+    EventTypes GetEventType() const override { return EventType_Input; }
 
     InputDeviceTypes GetInputDeviceType() { return m_InputDeviceType; }
     InputStates GetInputState() { return m_InputState; }

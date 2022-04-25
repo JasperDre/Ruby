@@ -1,12 +1,12 @@
 #pragma once
-class GameObject;
+class Entity;
 class Mesh;
 class ResourceManager;
 class TileMap;
 
 using namespace std;
 
-class RivalHouse : public GameObject
+class RivalHouse : public Entity
 {
 public:
 	RivalHouse(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);

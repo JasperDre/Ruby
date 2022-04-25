@@ -1,12 +1,12 @@
 #pragma once
 
-class GameObject;
+class Entity;
 class AnimatedSprite;
 class AStarPathFinder;
 class ResourceManager;
 class TileMap;
 
-class TownBoy : public GameObject
+class TownBoy : public Entity
 {
 public:
 	TownBoy(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);

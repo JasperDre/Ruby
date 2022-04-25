@@ -1,12 +1,12 @@
 #pragma once
-class GameObject;
+class Entity;
 class ResourceManager;
 class TileMap;
 class Mesh;
 class GameCore;
 class Canvas;
 
-class PettleburgWoodsMap : public GameObject
+class PettleburgWoodsMap : public Entity
 {
 public:
 	PettleburgWoodsMap(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);

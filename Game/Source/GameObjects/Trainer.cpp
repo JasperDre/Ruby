@@ -1,6 +1,6 @@
 #include "GamePCH.h"
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "Trainer.h"
 #include "Controllers/PlayerController.h"
 
@@ -15,7 +15,7 @@
 #include "Scenes/OakLab.h"
 #include "Scenes/PalletTown.h"
 
-Trainer::Trainer(ResourceManager * aResourceManager, GameCore * myGame, Mesh * myMesh, GLuint aTexture) :GameObject(myGame, myMesh, aTexture)
+Trainer::Trainer(ResourceManager * aResourceManager, GameCore * myGame, Mesh * myMesh, GLuint aTexture) :Entity(myGame, myMesh, aTexture)
 {
 	myDirection = SpriteWalkDown;
 	myResourceManager = aResourceManager;

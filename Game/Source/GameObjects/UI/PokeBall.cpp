@@ -1,6 +1,6 @@
 #include "GamePCH.h"
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "PokeBall.h"
 
 #include "GameplayHelpers/TileMap.h"
@@ -10,7 +10,7 @@
 
 #include "Game/Game.h"
 
-PokeBall::PokeBall(ResourceManager * aResourceManager, TileMap* aTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : GameObject(myGame, myMesh, aTexture)
+PokeBall::PokeBall(ResourceManager * aResourceManager, TileMap* aTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : Entity(myGame, myMesh, aTexture)
 {
 	m_MyResourceManager = aResourceManager;
 	m_MyExtrasTileMap = aTileMap;

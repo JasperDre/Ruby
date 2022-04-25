@@ -1,11 +1,13 @@
 #include "GamePCH.h"
 #include "AnimatedSprite.h"
-#include "GameObjects/GameObject.h"
-#include "Mesh/Mesh.h"
-#include "GameplayHelpers/ResourceManager.h"
+
 #include <fstream>
 
-AnimatedSprite::AnimatedSprite(ResourceManager* aResourceManager, GameCore* myGame, Mesh * myMesh, int aTextureIndex, GLuint aTexture):GameObject(myGame, myMesh, aTexture)
+#include "GameObjects/Entity.h"
+#include "GameplayHelpers/ResourceManager.h"
+#include "Mesh/Mesh.h"
+
+AnimatedSprite::AnimatedSprite(ResourceManager* aResourceManager, GameCore* myGame, Mesh * myMesh, int aTextureIndex, GLuint aTexture): Entity(myGame, myMesh, aTexture)
 {
 	m_MyMesh = myMesh;
 	m_pMyTexture = aTexture;
@@ -29,7 +31,7 @@ void AnimatedSprite::Update(float deltatime)
 	{
 		m_ElapsedTime += deltatime;
 
-		int lastFrame = m_CurrentFrame;
+		const int lastFrame = m_CurrentFrame;
 
 		int frameIndex = static_cast<int>((m_ElapsedTime / (1.0 / m_FrameSpeed)));
 
@@ -49,8 +51,8 @@ void AnimatedSprite::Update(float deltatime)
 		m_CurrentFrame = 0;
 	}
 
-	vec2 frameorigin = m_ActiveFrames.at(m_CurrentFrame).origin;
-	vec2 framesize = m_ActiveFrames.at(m_CurrentFrame).size;
+	const vec2 frameorigin = m_ActiveFrames.at(m_CurrentFrame).origin;
+	const vec2 framesize = m_ActiveFrames.at(m_CurrentFrame).size;
 	m_UVScale = vec2((framesize.x / m_MyResourceManager->GetTextureSize(m_MyTexutureIndex).x), (framesize.y / m_MyResourceManager->GetTextureSize(m_MyTexutureIndex).y));
 	m_UVOffset = vec2((frameorigin.x / m_MyResourceManager->GetTextureSize(m_MyTexutureIndex).x), (frameorigin.y / m_MyResourceManager->GetTextureSize(m_MyTexutureIndex).y));
 
@@ -84,7 +86,7 @@ void AnimatedSprite::SetFrameSpeed(float fps)
 	m_FrameSpeed = fps;
 }
 
-float AnimatedSprite::GetFrameSpeed()
+float AnimatedSprite::GetFrameSpeed() const
 {
 	return m_FrameSpeed;
 }
@@ -102,7 +104,7 @@ void AnimatedSprite::SetLoop(bool isLooped)
 	m_isLooped = isLooped;
 }
 
-bool AnimatedSprite::GetLoop()
+bool AnimatedSprite::GetLoop() const
 {
 	return m_isLooped;
 }
@@ -117,7 +119,7 @@ void AnimatedSprite::Resume()
 	m_isPaused = false;
 }
 
-bool AnimatedSprite::IsAnimating()
+bool AnimatedSprite::IsAnimating() const
 {
 	return m_isPaused;
 }

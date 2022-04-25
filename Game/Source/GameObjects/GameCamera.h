@@ -1,17 +1,16 @@
 #pragma once
-class GameObject;
+
+class Entity;
 class Trainer;
 
-class GameCamera : public GameObject
+class GameCamera : public Entity
 {
-protected:
-
 public:
 	GameCamera(GameCore* pGame, Mesh* pMesh, GLuint myTexture, Trainer* myTrainer);
-	~GameCamera();
+	~GameCamera() override;
 
-	// Inherited via GameObject
-	virtual void Update(float deltatime) override;
+	// Inherited via Entity
+	void Update(float deltatime) override;
 
 	void Draw();
 
@@ -20,21 +19,18 @@ public:
 	vec2 GetCameraPosition();
 
 	void SetMyProjection(vec2 aProjection);
-	vec2 GetCameraProjection();
+	vec2 GetCameraProjection() const;
 
 	void OnEvent(Event* anEvent);
 
 	void SetScreenSize(vec2 awidowsize);
 
 private:
-
+	Mesh* m_MyMesh;
 	vec2 m_MyProjection;
 	vec2 m_MyScreenSize;
-	Mesh* m_MyMesh;
-
 	vec2 CAMERAMAX;
 	vec2 CAMERAMIN;
-
 	vec2 newCamPos;
 	vec2 CamOffset;
 	bool m_InTransition;

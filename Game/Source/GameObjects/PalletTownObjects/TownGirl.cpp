@@ -1,6 +1,6 @@
 #include "GamePCH.h"
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "TownGirl.h"
 
 #include "Sprites/AnimatedSprite.h"
@@ -20,7 +20,7 @@
 #include "Controllers/AStarPathFinder.h"
 
 
-TownGirl::TownGirl(ResourceManager * aResourceManager, TileMap* aTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : GameObject(myGame, myMesh, aTexture)
+TownGirl::TownGirl(ResourceManager * aResourceManager, TileMap* aTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : Entity(myGame, myMesh, aTexture)
 {
 	myDirection = SpriteWalkDown;
 	myNewDirection = SpriteWalkDown;

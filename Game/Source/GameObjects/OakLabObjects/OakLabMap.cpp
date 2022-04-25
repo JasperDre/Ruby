@@ -1,6 +1,6 @@
 #include "GamePCH.h"
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "OakLabMap.h"
 
 #include "GameplayHelpers/ResourceManager.h"
@@ -10,7 +10,7 @@
 #include "Mesh/Mesh.h"
 #include "Mesh/Canvas.h"
 
-OakLabMap::OakLabMap(ResourceManager * myResourceManager, TileMap * myTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : GameObject(myGame, myMesh, aTexture)
+OakLabMap::OakLabMap(ResourceManager * myResourceManager, TileMap * myTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : Entity(myGame, myMesh, aTexture)
 {
 	m_pMyTexture = aTexture;
 	m_MyTileMap = myTileMap;

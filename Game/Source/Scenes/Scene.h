@@ -4,7 +4,7 @@ class GameCore;
 class Mesh;
 class ResourceManager;
 class TileMap;
-class GameObject;
+class Entity;
 class Trainer;
 
 
@@ -25,7 +25,7 @@ protected:
 
 	vec2 m_pMyPlayerStart;
 
-	vector<GameObject*> m_MyGameObjects;
+	vector<Entity*> m_MyGameObjects;
 
 public:
 	Scene(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer* aPlayer, GLuint aTexture);

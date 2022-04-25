@@ -1,12 +1,12 @@
 #pragma once
-class GameObject;
+class Entity;
 class Mesh;
 class ResourceManager;
 class TileMap;
 
 using namespace std;
 
-class OakLabPlantTop : public GameObject
+class OakLabPlantTop : public Entity
 {
 public:
 	OakLabPlantTop(ResourceManager * myResourceManager, TileMap * myTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture);

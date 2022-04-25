@@ -1,10 +1,10 @@
 #pragma once
-class GameObject;
+class Entity;
 class Mesh;
 class ResourceManager;
 class TileMap;
 
-class PlayerHouse : public GameObject
+class PlayerHouse : public Entity
 {
 public:
 	PlayerHouse(ResourceManager* aSpriteMap, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);

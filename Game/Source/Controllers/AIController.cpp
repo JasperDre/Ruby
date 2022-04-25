@@ -7,10 +7,10 @@
 #include "GameplayHelpers/TileMapOakLab.h"
 #include "GameplayHelpers/TileMapPalletTown.h"
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 
 
-AIController::AIController(TileMap * aTileMap, int aMinIndex, int aMaxIndex, GameObject* aNPC)
+AIController::AIController(TileMap * aTileMap, int aMinIndex, int aMaxIndex, Entity* aNPC)
 {
 	m_MyTileMap = aTileMap;
 	m_MyNPC = aNPC;

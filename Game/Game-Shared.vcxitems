@@ -44,7 +44,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\OakHouse.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\PalletTownMap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\Constants.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\GameObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\Entity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\Controllers\PlayerController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\PlayerHouse.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\RivalHouse.h" />
@@ -86,7 +86,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\GameCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\OakHouse.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\PalletTownMap.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\GameObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\Entity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\Controllers\PlayerController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\PlayerHouse.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Source\GameObjects\PalletTownObjects\RivalHouse.cpp" />

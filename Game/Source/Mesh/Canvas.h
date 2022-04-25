@@ -5,11 +5,11 @@
 class TileMap;
 class ResourceManager;
 
-class Canvas : public Mesh
+class Canvas final : public Mesh
 {
 public:
     Canvas(TileMap* aTileMap, ResourceManager* aResourceManager);
-    ~Canvas();
+    ~Canvas() override;
 
 	void GeneratePalletVertexData(const unsigned short BitMap[MAPSIZE]);
 	void GenerateLabVertexData(const unsigned short BitMap[LABSIZE]);
@@ -20,22 +20,23 @@ public:
 	void SetIsReverse(bool isreverse);
 
 private:
-
 	TileMap* m_MyTileMap;
 	ResourceManager* m_MyResourceManager;
-
 	bool IsReversed;
 
-	std::vector<VertexFormat> m_BaseTileVerts = {
-	VertexFormat(vec2(0.0f,  0.0f), MyColor(255, 255, 255, 255), vec2(0.0f, 0.0f)),
-	VertexFormat(vec2(0.0f,  1.0f), MyColor(255, 255, 255, 255), vec2(0.0f, 1.0f)),
-	VertexFormat(vec2(1.0f,  0.0f), MyColor(255, 255, 255, 255), vec2(1.0f, 0.0f)),
-	VertexFormat(vec2(1.0f,  1.0f), MyColor(255, 255, 255, 255), vec2(1.0f, 1.0f))
+	std::vector<VertexFormat> m_BaseTileVerts =
+	{
+		VertexFormat(vec2(0.0f,  0.0f), MyColor(255, 255, 255, 255), vec2(0.0f, 0.0f)),
+		VertexFormat(vec2(0.0f,  1.0f), MyColor(255, 255, 255, 255), vec2(0.0f, 1.0f)),
+		VertexFormat(vec2(1.0f,  0.0f), MyColor(255, 255, 255, 255), vec2(1.0f, 0.0f)),
+		VertexFormat(vec2(1.0f,  1.0f), MyColor(255, 255, 255, 255), vec2(1.0f, 1.0f))
 	};
-	std::vector<VertexFormat> m_BaseTileVertsReverse = {
-	VertexFormat(vec2(1.0f,  0.0f), MyColor(255, 255, 255, 255), vec2(1.0f, 0.0f)),
-	VertexFormat(vec2(1.0f,  1.0f), MyColor(255, 255, 255, 255), vec2(1.0f, 1.0f)),
-	VertexFormat(vec2(0.0f,  0.0f), MyColor(255, 255, 255, 255), vec2(0.0f, 0.0f)),
-	VertexFormat(vec2(0.0f,  1.0f), MyColor(255, 255, 255, 255), vec2(0.0f, 1.0f))
+
+	std::vector<VertexFormat> m_BaseTileVertsReverse =
+	{
+		VertexFormat(vec2(1.0f,  0.0f), MyColor(255, 255, 255, 255), vec2(1.0f, 0.0f)),
+		VertexFormat(vec2(1.0f,  1.0f), MyColor(255, 255, 255, 255), vec2(1.0f, 1.0f)),
+		VertexFormat(vec2(0.0f,  0.0f), MyColor(255, 255, 255, 255), vec2(0.0f, 0.0f)),
+		VertexFormat(vec2(0.0f,  1.0f), MyColor(255, 255, 255, 255), vec2(0.0f, 1.0f))
 	};
 };
