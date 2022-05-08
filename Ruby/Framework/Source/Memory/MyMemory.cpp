@@ -16,18 +16,18 @@
 class MemObject : public CPPListNode
 {
 public:
-    const char* m_file;
-    unsigned long m_line;
-    unsigned int m_type;
-    unsigned int m_size;
-    unsigned int m_count;
+    const char* myFile;
+    unsigned long myLine;
+    unsigned int myType;
+    unsigned int mySize;
+    unsigned int myCount;
 
     MemObject()
-        : m_file(nullptr)
-        , m_line(0)
-        , m_type(0)
-        , m_size(0)
-        , m_count(0)
+        : myFile(nullptr)
+        , myLine(0)
+        , myType(0)
+        , mySize(0)
+        , myCount(0)
     {}
 };
 
@@ -41,84 +41,84 @@ void MyMemory_ForgetAllPreviousAllocations()
         g_Allocations.RemHead();
 }
 
-void MyMemory_ValidateAllocations(bool breakIfThereAreLeaks)
+void MyMemory_ValidateAllocations(bool anIsBreakForLeaksEnabled)
 {
     OutputMessage("\\/\\/\\/\\/\\/\\/ Start of memory leak dump \\/\\/\\/\\/\\/\\/ \n");
     for (const CPPListNode* pNode = g_Allocations.HeadNode.Next; pNode->Next; pNode = pNode->Next)
     {
-        const auto* memObject = static_cast<const MemObject*>(pNode);
-        assert(memObject->m_type == newtype_regular || memObject->m_type == newtype_array);
+        const auto* memObject = reinterpret_cast<const MemObject*>(pNode);
+        assert(memObject->myType == newtype_regular || memObject->myType == newtype_array);
         assert(memObject->Next);
         assert(memObject->Prev);
 
-        OutputMessage("%s(%d): %d bytes unreleased. Count(%d) %s\n", memObject->m_file, memObject->m_line, memObject->m_size, memObject->m_count, memObject->m_type == newtype_regular ? "" : "Array Allocation");
+        OutputMessage("%s(%d): %d bytes unreleased. Count(%d) %s\n", memObject->myFile, memObject->myLine, memObject->mySize, memObject->myCount, memObject->myType == newtype_regular ? "" : "Array Allocation");
     }
 
     OutputMessage("/\\/\\/\\/\\/\\/\\ End of memory leak dump /\\/\\/\\/\\/\\/\\ \n");
 
-    if (breakIfThereAreLeaks && g_Allocations.GetHead())
+    if (anIsBreakForLeaksEnabled && g_Allocations.GetHead())
         __debugbreak();
 }
 
 //===========================================================================================
 // Overrides for new/delete with file/line numbers
 //===========================================================================================
-void* operator new(size_t size, const char* file, unsigned long line)
+void* operator new(size_t aSize, const char* aFile, unsigned long aLine)
 {
     assert(CountToAssertOn == UINT_MAX || g_AllocationCount != CountToAssertOn);
-    assert(size > 0);
+    assert(aSize > 0);
 
-    const auto memObject = static_cast<MemObject*>(malloc(size + sizeof(MemObject)));
-    memObject->m_file = file;
-    memObject->m_line = line;
-    memObject->m_type = newtype_regular;
-    memObject->m_size = size;
-    memObject->m_count = g_AllocationCount++;
-    g_AllocationBytes += size;
+    const auto memObject = static_cast<MemObject*>(malloc(aSize + sizeof(MemObject)));
+    memObject->myFile = aFile;
+    memObject->myLine = aLine;
+    memObject->myType = newtype_regular;
+    memObject->mySize = aSize;
+    memObject->myCount = g_AllocationCount++;
+    g_AllocationBytes += aSize;
     g_Allocations.AddTail(memObject);
 
     return reinterpret_cast<char*>(memObject) + sizeof(MemObject);
 }
 
-void* operator new[](size_t size, const char* file, unsigned long line)
+void* operator new[](size_t aSize, const char* aFile, unsigned long aLine)
 {
     assert(CountToAssertOn == UINT_MAX || g_AllocationCount != CountToAssertOn);
-    assert(size > 0);
+    assert(aSize > 0);
 
-    const auto memObject = static_cast<MemObject*>(malloc(size + sizeof(MemObject)));
-    memObject->m_file = file;
-    memObject->m_line = line;
-    memObject->m_type = newtype_array;
-    memObject->m_size = size;
-    memObject->m_count = g_AllocationCount++;
-    g_AllocationBytes += size;
+    const auto memObject = static_cast<MemObject*>(malloc(aSize + sizeof(MemObject)));
+    memObject->myFile = aFile;
+    memObject->myLine = aLine;
+    memObject->myType = newtype_array;
+    memObject->mySize = aSize;
+    memObject->myCount = g_AllocationCount++;
+    g_AllocationBytes += aSize;
 
     g_Allocations.AddTail(memObject);
 
     return reinterpret_cast<char*>(memObject) + sizeof(MemObject);
 }
 
-void operator delete(void* ptr, const char* file, unsigned long line)
+void operator delete(void* aPtr, const char* /*aFile*/, unsigned long /*aLine*/)
 {
-    if (!ptr)
+    if (!aPtr)
         return;
 
-    const auto memObject = reinterpret_cast<MemObject*>(static_cast<char*>(ptr) - sizeof(MemObject));
-    assert(memObject->m_type == newtype_regular);
-    g_AllocationBytes -= memObject->m_size;
+    const auto memObject = reinterpret_cast<MemObject*>(static_cast<char*>(aPtr) - sizeof(MemObject));
+    assert(memObject->myType == newtype_regular);
+    g_AllocationBytes -= memObject->mySize;
     memObject->Remove();
 
     free(memObject);
 }
 
-void operator delete[](void* ptr, const char* file, unsigned long line)
+void operator delete[](void* aPtr, const char* /*aFile*/, unsigned long /*aLine*/)
 {
-    if (!ptr)
+    if (!aPtr)
         return;
 
-    const auto memObject = reinterpret_cast<MemObject*>(static_cast<char*>(ptr) - sizeof(MemObject));
-    assert(memObject->m_type == newtype_array);
-    g_AllocationBytes -= memObject->m_size;
+    const auto memObject = reinterpret_cast<MemObject*>(static_cast<char*>(aPtr) - sizeof(MemObject));
+    assert(memObject->myType == newtype_array);
+    g_AllocationBytes -= memObject->mySize;
     memObject->Remove();
 
     free(memObject);
@@ -127,23 +127,23 @@ void operator delete[](void* ptr, const char* file, unsigned long line)
 //===========================================================================================
 // Overrides for global new/delete
 //===========================================================================================
-void* operator new(size_t size)
+void* operator new(size_t aSize)
 {
-    return operator new(size, "File not defined", 0);
+    return operator new(aSize, "File not defined", 0);
 }
 
-void* operator new[](size_t size)
+void* operator new[](size_t aSize)
 {
-    return operator new[](size, "File not defined", 0);
+    return operator new[](aSize, "File not defined", 0);
 }
 
-void operator delete(void* ptr)
+void operator delete(void* aPtr)
 {
-    operator delete(ptr, nullptr, 0);
+    operator delete(aPtr, nullptr, 0);
 }
 
-void operator delete[](void* ptr)
+void operator delete[](void* aPtr)
 {
-    operator delete[](ptr, nullptr, 0);
+    operator delete[](aPtr, nullptr, 0);
 }
 #endif //_DEBUG
