@@ -1,14 +1,11 @@
 #include "GamePCH.h"
-
-#include "GameObjects/GameObject.h"
 #include "GameCamera.h"
 
-#include "Mesh/Mesh.h"
-#include "GameObjects/Trainer.h"
-
 #include "Game/Game.h"
-
+#include "GameObjects/GameObject.h"
+#include "GameObjects/Trainer.h"
 #include "GameplayHelpers/SceneManager.h"
+#include "Mesh/Mesh.h"
 #include "Scenes/Scene.h"
 
 GameCamera::GameCamera(GameCore* pGame, Mesh* pMesh, GLuint myTexture, Trainer* myTrainer) : GameObject(pGame, pMesh, myTexture)

@@ -1,7 +1,7 @@
-#ifndef __Mesh_H__
-#define __Mesh_H__
+#pragma once
 
-using namespace std;
+#include <vector>
+
 class Mesh
 {
 protected:
@@ -31,7 +31,7 @@ protected:
 	float p_MyWidth;
 	float p_MyHeight;
 
-	vector<VertexFormat>*m_CanvasVerts = new vector<VertexFormat>;
+	std::vector<VertexFormat>*m_CanvasVerts = new std::vector<VertexFormat>;
 
 	bool IsDebug;
 
@@ -58,5 +58,3 @@ public:
     void GenterateCanvasMesh(int aSize);
 
 };
-
-#endif //__Mesh_H__

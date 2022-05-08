@@ -1,24 +1,12 @@
 #include "GamePCH.h"
-
-#include "GameObjects/GameObject.h"
 #include "GameObjects/OakLabObjects/ProfessorOak.h"
 
-#include "Sprites/AnimatedSprite.h"
-
+#include "Controllers/AStarPathFinder.h"
+#include "GameObjects/GameObject.h"
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/TileMap.h"
-#include "GameplayHelpers/TileMapOakLab.h"
-#include "GameplayHelpers/TileMapPalletTown.h"
-
 #include "Mesh/Mesh.h"
-
-#include "GameplayHelpers/SceneManager.h"
-#include "Scenes/Scene.h"
-#include "Scenes/OakLab.h"
-#include "Scenes/PalletTown.h"
-
-#include "Controllers/AStarPathFinder.h"
-#include "ProfessorOak.h"
+#include "Sprites/AnimatedSprite.h"
 
 ProfessorOak::ProfessorOak(ResourceManager * aResourceManager, TileMap* aTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : GameObject(myGame, myMesh, aTexture)
 {

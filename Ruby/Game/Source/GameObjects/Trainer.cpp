@@ -1,19 +1,13 @@
 #include "GamePCH.h"
-
-#include "GameObjects/GameObject.h"
 #include "Trainer.h"
+
 #include "Controllers/PlayerController.h"
-
-#include "Sprites/AnimatedSprite.h"
 #include "GameplayHelpers/ResourceManager.h"
-#include "GameplayHelpers/TileMap.h"
-
-#include "Mesh/Mesh.h"
-
 #include "GameplayHelpers/SceneManager.h"
+#include "GameplayHelpers/TileMap.h"
+#include "Mesh/Mesh.h"
 #include "Scenes/Scene.h"
-#include "Scenes/OakLab.h"
-#include "Scenes/PalletTown.h"
+#include "Sprites/AnimatedSprite.h"
 
 Trainer::Trainer(ResourceManager * aResourceManager, GameCore * myGame, Mesh * myMesh, GLuint aTexture) :GameObject(myGame, myMesh, aTexture)
 {

@@ -1,14 +1,11 @@
 #include "GamePCH.h"
-
-#include "GameObjects/GameObject.h"
 #include "WildPokemonTile.h"
-#include "GameObjects/Trainer.h"
 
 #include "Controllers/AStarPathFinder.h"
-
-#include "GameplayHelpers/TileMap.h"
-#include "GameplayHelpers/TileMapWoods.h"
 #include "Game/Game.h"
+#include "GameObjects/Trainer.h"
+#include "GameplayHelpers/TileMap.h"
+#include "Mesh/Mesh.h"
 
 WildPokemonTile::WildPokemonTile(ResourceManager * aResourceManager, TileMap * aTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : GameObject(myGame, myMesh, aTexture)
 {

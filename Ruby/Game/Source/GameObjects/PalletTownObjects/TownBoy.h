@@ -1,5 +1,7 @@
 #pragma once
-class GameObject;
+
+#include "GameObjects/GameObject.h"
+
 class AnimatedSprite;
 class AStarPathFinder;
 class ResourceManager;
@@ -7,18 +9,15 @@ class TileMap;
 
 class TownBoy : public GameObject
 {
-protected:
-
-
 public:
 	TownBoy(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
-	~TownBoy();
+	~TownBoy() override;
 
-	virtual void Update(float deltatime) override;
+	void Update(float deltatime) override;
 
-	virtual void Draw(vec2 camPos, vec2 projecScale) override;
+	void Draw(vec2 camPos, vec2 projecScale) override;
 
-	void SetAIController(AStarPathFinder* aController) { ; }
+	void SetAIController(AStarPathFinder* aController) {}
 	void Move(SpriteDirection dir, float deltatime);
 
 	void Pause();
@@ -29,37 +28,33 @@ public:
 	bool GetNextPath(ivec2 anIndex);
 	SpriteDirection CalculateNextInput(ivec2 anIndex);
 
-	void OnEvent(Event* anEvent);
+	void OnEvent(Event* anEvent) override;
 
 	bool CheckForCollision(vec2 NPCNewPosition);
 
-	virtual int* GetInputSet() override;
+	int* GetInputSet() override;
 
-	virtual bool GetNodeIsClearOnSpecial(int tx, int ty) override;
+	bool GetNodeIsClearOnSpecial(int tx, int ty) override;
 
-	virtual int GetMyMapWidth() override;
-	virtual int GetMaxPathSize() override;
+	int GetMyMapWidth() override;
+	int GetMaxPathSize() override;
 
-	virtual int RangeRandomIntAlg(int min, int max) override;
+	int RangeRandomIntAlg(int min, int max) override;
 
 private:
-	string AnimationKeys[NUM_DIRECTIONS] = { "TownBoyWalkDown_", "TownBoyWalkRight_", "TownBoyWalkLeft_", "TownBoyWalkUp_" };
+	std::string AnimationKeys[NUM_DIRECTIONS] = { "TownBoyWalkDown_", "TownBoyWalkRight_", "TownBoyWalkLeft_", "TownBoyWalkUp_" };
+	int m_MyInputSet[MAXPATHSIZE_TOWN_NPC];
 	AnimatedSprite* m_Animations[NUM_DIRECTIONS];
-	SpriteDirection myDirection;
-	SpriteDirection myNewDirection;
-	ResourceManager* myResourceManager;
-	TileMap* m_MyTileMap;
 	vec2 NewPosition;
-
-	bool m_Stop;
-	bool m_IsFirstInput;
-
 	ivec2 m_MyNewDestination;
 	ivec2 m_MyIndex;
-	bool m_PathingComplete;
-
-	int m_CurrentInput;
+	ResourceManager* myResourceManager;
+	TileMap* m_MyTileMap;
 	int* m_MyPath;
-	int m_MyInputSet[MAXPATHSIZE_TOWN_NPC];
-
+	SpriteDirection myNewDirection;
+	SpriteDirection myDirection;
+	int m_CurrentInput;
+	bool m_IsFirstInput;
+	bool m_PathingComplete;
+	bool m_Stop;
 };

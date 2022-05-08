@@ -1,28 +1,22 @@
 #include "GamePCH.h"
-
 #include "Game/Game.h"
-#include "Mesh/Mesh.h"
 
-#include "GameObjects/GameObject.h"
+#include <filesystem>
+
 #include "Controllers/PlayerController.h"
-#include "GameObjects/Trainer.h"
 #include "GameObjects/GameCamera.h"
+#include "GameObjects/GameObject.h"
+#include "GameObjects/Trainer.h"
 #include "GameObjects/UI/UIObject.h"
-
 #include "GameplayHelpers/ResourceManager.h"
+#include "GameplayHelpers/SceneManager.h"
 #include "GameplayHelpers/TileMap.h"
+#include "GameplayHelpers/TileMapExtras.h"
 #include "GameplayHelpers/TileMapOakLab.h"
 #include "GameplayHelpers/TileMapPalletTown.h"
 #include "GameplayHelpers/TileMapWoods.h"
-#include "GameplayHelpers/TileMapExtras.h"
-
-#include "GameplayHelpers/SceneManager.h"
-#include "Game.h"
-
+#include "Mesh/Mesh.h"
 #include "Scenes/Scene.h"
-#include "Scenes/PalletTown.h"
-
-#include <filesystem>
 
 static std::string GetFilePath(const std::string& aRootDirectory, const char* aFilename)
 {
