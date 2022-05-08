@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{8ba614ee-66d8-4403-9640-179d5c7c82b8}</ProjectGuid>
+    <RootNamespace>Ruby</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Game</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeaderFile>GamePCH.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>E:\Repositories\Ruby\Source\Ruby\Ruby\Source;E:\Repositories\Ruby\Source\Ruby\Framework\Source;E:\Repositories\Ruby\Source\Ruby\Framework\Libraries;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Framework.lib;opengl32.lib;CJson.lib;LodePNG.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Constants.h" />
+    <ClInclude Include="Source\Controllers\AIController.h" />
+    <ClInclude Include="Source\Controllers\AStarPathFinder.h" />
+    <ClInclude Include="Source\Controllers\PlayerController.h" />
+    <ClInclude Include="Source\GameObjects\GameCamera.h" />
+    <ClInclude Include="Source\GameObjects\GameObject.h" />
+    <ClInclude Include="Source\GameObjects\OakLabObjects\OakLabDeskTop.h" />
+    <ClInclude Include="Source\GameObjects\OakLabObjects\OakLabMachineTop.h" />
+    <ClInclude Include="Source\GameObjects\OakLabObjects\OakLabMap.h" />
+    <ClInclude Include="Source\GameObjects\OakLabObjects\OakLabPlantTop.h" />
+    <ClInclude Include="Source\GameObjects\OakLabObjects\OakLabTableTop.h" />
+    <ClInclude Include="Source\GameObjects\OakLabObjects\ProfessorOak.h" />
+    <ClInclude Include="Source\GameObjects\PalletTownObjects\OakHouse.h" />
+    <ClInclude Include="Source\GameObjects\PalletTownObjects\PalletTownMap.h" />
+    <ClInclude Include="Source\GameObjects\PalletTownObjects\PlayerHouse.h" />
+    <ClInclude Include="Source\GameObjects\PalletTownObjects\RivalHouse.h" />
+    <ClInclude Include="Source\GameObjects\PalletTownObjects\TownBoy.h" />
+    <ClInclude Include="Source\GameObjects\PalletTownObjects\TownGirl.h" />
+    <ClInclude Include="Source\GameObjects\Trainer.h" />
+    <ClInclude Include="Source\GameObjects\UI\PokeBall.h" />
+    <ClInclude Include="Source\GameObjects\UI\ScoreNumber.h" />
+    <ClInclude Include="Source\GameObjects\UI\UIObject.h" />
+    <ClInclude Include="Source\GameObjects\WoodsObjects\PettleburgWoodsMap.h" />
+    <ClInclude Include="Source\GameObjects\WoodsObjects\WildPokemonTile.h" />
+    <ClInclude Include="Source\GamePCH.h" />
+    <ClInclude Include="Source\GameplayHelpers\EventHandler.h" />
+    <ClInclude Include="Source\GameplayHelpers\FileIOManager.h" />
+    <ClInclude Include="Source\GameplayHelpers\ResourceManager.h" />
+    <ClInclude Include="Source\GameplayHelpers\SceneManager.h" />
+    <ClInclude Include="Source\GameplayHelpers\TileMap.h" />
+    <ClInclude Include="Source\GameplayHelpers\TileMapExtras.h" />
+    <ClInclude Include="Source\GameplayHelpers\TileMapOakLab.h" />
+    <ClInclude Include="Source\GameplayHelpers\TileMapPalletTown.h" />
+    <ClInclude Include="Source\GameplayHelpers\TileMapWoods.h" />
+    <ClInclude Include="Source\Game\Game.h" />
+    <ClInclude Include="Source\Mesh\Canvas.h" />
+    <ClInclude Include="Source\Mesh\Mesh.h" />
+    <ClInclude Include="Source\Scenes\OakLab.h" />
+    <ClInclude Include="Source\Scenes\PalletTown.h" />
+    <ClInclude Include="Source\Scenes\PetalBergWoods.h" />
+    <ClInclude Include="Source\Scenes\Scene.h" />
+    <ClInclude Include="Source\Sprites\AnimatedSprite.h" />
+    <ClInclude Include="Source\Win32\WinMain.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Controllers\AIController.cpp" />
+    <ClCompile Include="Source\Controllers\AStarPathFinder.cpp" />
+    <ClCompile Include="Source\Controllers\PlayerController.cpp" />
+    <ClCompile Include="Source\GameObjects\GameCamera.cpp" />
+    <ClCompile Include="Source\GameObjects\GameObject.cpp" />
+    <ClCompile Include="Source\GameObjects\OakLabObjects\OakLabDeskTop.cpp" />
+    <ClCompile Include="Source\GameObjects\OakLabObjects\OakLabMachineTop.cpp" />
+    <ClCompile Include="Source\GameObjects\OakLabObjects\OakLabMap.cpp" />
+    <ClCompile Include="Source\GameObjects\OakLabObjects\OakLabPlantTop.cpp" />
+    <ClCompile Include="Source\GameObjects\OakLabObjects\OakLabTableTop.cpp" />
+    <ClCompile Include="Source\GameObjects\OakLabObjects\ProfessorOak.cpp" />
+    <ClCompile Include="Source\GameObjects\PalletTownObjects\OakHouse.cpp" />
+    <ClCompile Include="Source\GameObjects\PalletTownObjects\PalletTownMap.cpp" />
+    <ClCompile Include="Source\GameObjects\PalletTownObjects\PlayerHouse.cpp" />
+    <ClCompile Include="Source\GameObjects\PalletTownObjects\RivalHouse.cpp" />
+    <ClCompile Include="Source\GameObjects\PalletTownObjects\TownBoy.cpp" />
+    <ClCompile Include="Source\GameObjects\PalletTownObjects\TownGirl.cpp" />
+    <ClCompile Include="Source\GameObjects\Trainer.cpp" />
+    <ClCompile Include="Source\GameObjects\UI\PokeBall.cpp" />
+    <ClCompile Include="Source\GameObjects\UI\ScoreNumber.cpp" />
+    <ClCompile Include="Source\GameObjects\UI\UIObject.cpp" />
+    <ClCompile Include="Source\GameObjects\WoodsObjects\PettleburgWoodsMap.cpp" />
+    <ClCompile Include="Source\GameObjects\WoodsObjects\WildPokemonTile.cpp" />
+    <ClCompile Include="Source\GamePCH.cpp" />
+    <ClCompile Include="Source\GameplayHelpers\EventHandler.cpp" />
+    <ClCompile Include="Source\GameplayHelpers\FileIOManager.cpp" />
+    <ClCompile Include="Source\GameplayHelpers\ResourceManager.cpp" />
+    <ClCompile Include="Source\GameplayHelpers\SceneManager.cpp" />
+    <ClCompile Include="Source\GameplayHelpers\TileMap.cpp" />
+    <ClCompile Include="Source\GameplayHelpers\TileMapExtras.cpp" />
+    <ClCompile Include="Source\GameplayHelpers\TileMapOakLab.cpp" />
+    <ClCompile Include="Source\GameplayHelpers\TileMapPalletTown.cpp" />
+    <ClCompile Include="Source\GameplayHelpers\TileMapWoods.cpp" />
+    <ClCompile Include="Source\Game\Game.cpp" />
+    <ClCompile Include="Source\Mesh\Canvas.cpp" />
+    <ClCompile Include="Source\Mesh\Mesh.cpp" />
+    <ClCompile Include="Source\Scenes\OakLab.cpp" />
+    <ClCompile Include="Source\Scenes\PalletTown.cpp" />
+    <ClCompile Include="Source\Scenes\PetalbergWoods.cpp" />
+    <ClCompile Include="Source\Scenes\Scene.cpp" />
+    <ClCompile Include="Source\Sprites\AnimatedSprite.cpp" />
+    <ClCompile Include="Source\Win32\WinMain.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
