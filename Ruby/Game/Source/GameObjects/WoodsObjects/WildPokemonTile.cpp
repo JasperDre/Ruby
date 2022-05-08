@@ -9,8 +9,8 @@
 
 WildPokemonTile::WildPokemonTile(ResourceManager * aResourceManager, TileMap * aTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : GameObject(myGame, myMesh, aTexture)
 {
-	myDirection = SpriteWalkDown;
-	myNewDirection = SpriteWalkDown;
+	myDirection = SpriteDirection::SpriteWalkDown;
+	myNewDirection = SpriteDirection::SpriteWalkDown;
 	myResourceManager = aResourceManager;
 	m_MyTileMap = aTileMap;
 
@@ -27,23 +27,18 @@ WildPokemonTile::WildPokemonTile(ResourceManager * aResourceManager, TileMap * a
 
 	m_MyNewDestination = ivec2(0, 0);
 
-
 	for (int i = 0; i < MAXPATHSIZE_TOWN_NPC; i++)
-	{
 		m_MyInputSet[i] = -1;
-	}
 
 	m_MyPathFinder = new AStarPathFinder(m_MyTileMap, this);
 
 	m_MyIndex = ivec2(m_Position.x / TILESIZE, m_Position.y / TILESIZE);
-
 }
 
 WildPokemonTile::~WildPokemonTile()
 {
 	delete m_MyPathFinder;
 	m_MyPathFinder = nullptr;
-
 	myResourceManager = nullptr;
 }
 
@@ -51,33 +46,31 @@ void WildPokemonTile::Update(float deltatime)
 {
 	switch (m_MyState)
 	{
-	case PathingState:
-		PathingUpdate(deltatime);
-		break;
-
-	case WalkingState:
-		WalkingUpdate(deltatime);
-		break;
-	case TrackToPlayerState:
-		TrackToPlayerUpdate(deltatime);
-		break;
+		case PathingState:
+			PathingUpdate(deltatime);
+			break;
+		case WalkingState:
+			WalkingUpdate(deltatime);
+			break;
+		case TrackToPlayerState:
+			TrackToPlayerUpdate(deltatime);
+			break;
+		case IdleState:
+			break;
 	}
 }
 
 void WildPokemonTile::PathingUpdate(float delatime)
 {
 	if (GetNextPath(GetMyIndex()))
-	{
 		SetMyState(WalkingState);
-	}
 }
 
 void WildPokemonTile::WalkingUpdate(float deltatime)
 {
-	int TargetTile = GetNextTileFromSet(m_CurrentInput);
+	const int TargetTile = GetNextTileFromSet(m_CurrentInput);
 
-	ivec2 aNPCIndex = GetMyIndex();
-
+	const ivec2 aNPCIndex = GetMyIndex();
 
 	if (m_IsFirstInput == true)
 	{
@@ -89,8 +82,7 @@ void WildPokemonTile::WalkingUpdate(float deltatime)
 		myNewDirection = CalculateNextInput(aNPCIndex);
 	}
 
-
-	if (myNewDirection != SpriteDirectionStop)
+	if (myNewDirection != SpriteDirection::SpriteDirectionStop)
 	{
 		Move(myNewDirection, deltatime);
 		SetMyDirection(myNewDirection);
@@ -109,10 +101,7 @@ void WildPokemonTile::WalkingUpdate(float deltatime)
 	ivec2 MaxRange = m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex);
 
 	if (aPlayerColumnRow.x > MinRange.x && aPlayerColumnRow.x < MaxRange.x && aPlayerColumnRow.y > MinRange.y && aPlayerColumnRow.y < MaxRange.y)
-	{
 		SetMyState(TrackToPlayerState);
-	}
-
 }
 
 void WildPokemonTile::TrackToPlayerUpdate(float deltatime)
@@ -129,11 +118,9 @@ void WildPokemonTile::Move(SpriteDirection dir, float deltatime)
 	NewPosition = m_Position;
 
 	if (myDirection != dir)
-	{
 		myDirection = dir;
-	}
 
-	vec2 velocity = DIRECTIONVECTOR[dir] * NPC_SPEED;
+	const vec2 velocity = DIRECTIONVECTOR[static_cast<int>(dir)] * NPC_SPEED;
 
 	NewPosition += velocity * deltatime;
 
@@ -160,8 +147,8 @@ bool WildPokemonTile::GetNextPath(ivec2 anIndex)
 
 	m_PathingComplete = false;
 
-	ivec2 aMin = m_MyTileMap->GetColumRowFromIndex(m_MyMinIndex);
-	ivec2 aMax = m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex);
+	const ivec2 aMin = m_MyTileMap->GetColumRowFromIndex(m_MyMinIndex);
+	const ivec2 aMax = m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex);
 
 	m_MyNewDestination.x = RangeRandomIntAlg(aMin.x, aMax.x);
 	m_MyNewDestination.y = RangeRandomIntAlg(aMin.y, aMax.y);
@@ -170,14 +157,12 @@ bool WildPokemonTile::GetNextPath(ivec2 anIndex)
 	{
 		m_PathingComplete = m_MyPathFinder->FindPath(anIndex.x, anIndex.y, m_MyNewDestination.x, m_MyNewDestination.y);
 
-		if (m_PathingComplete == true)
-		{
+		if (m_PathingComplete)
 			m_MyPathFinder->GetPath(m_MyPath, GetMaxPathSize(), m_MyNewDestination.x, m_MyNewDestination.y);
-		}
-		if (m_MyPath == nullptr)
-		{
+
+		if (!m_MyPath)
 			m_PathingComplete = false;
-		}
+
 		if (m_PathingComplete == false)
 		{
 			m_MyNewDestination.x = RangeRandomIntAlg(aMin.x, aMax.x);
@@ -197,39 +182,33 @@ SpriteDirection WildPokemonTile::CalculateNextInput(ivec2 anIndex)
 
 	if (m_CurrentInput != -1)
 	{
-		int NextTileIndex = GetNextTileFromSet(m_CurrentInput);
+		const int NextTileIndex = GetNextTileFromSet(m_CurrentInput);
 
-		ivec2 m_NextTileColumnRow = ivec2(NextTileIndex % GetMyMapWidth(), NextTileIndex / GetMyMapWidth());
+		const ivec2 m_NextTileColumnRow = ivec2(NextTileIndex % GetMyMapWidth(), NextTileIndex / GetMyMapWidth());
 
 		if (m_NextTileColumnRow.x != anIndex.x)
 		{
-
 			if (m_NextTileColumnRow.x > anIndex.x)
-			{
-				return SpriteWalkRight;
-			}
+				return SpriteDirection::SpriteWalkRight;
+
 			if (m_NextTileColumnRow.x < anIndex.x)
-			{
-				return SpriteWalkLeft;
-			}
+				return SpriteDirection::SpriteWalkLeft;
 		}
 		else if (m_NextTileColumnRow.y != anIndex.y)
 		{
 			if (m_NextTileColumnRow.y > anIndex.y)
-			{
-				return SpriteWalkUp;
-			}
+				return SpriteDirection::SpriteWalkUp;
 
 			if (m_NextTileColumnRow.y < anIndex.y)
-			{
-				return SpriteWalkDown;
-			}
+				return SpriteDirection::SpriteWalkDown;
 		}
 	}
 	else
 	{
-		return SpriteDirectionStop;
+		return SpriteDirection::SpriteDirectionStop;
 	}
+
+	return SpriteDirection::SpriteDirectionStop;
 }
 
 AI_States WildPokemonTile::GetMyState()
@@ -244,15 +223,13 @@ void WildPokemonTile::SetMyState(AI_States aState)
 
 bool WildPokemonTile::GetNodeIsClearOnSpecial(int tx, int ty)
 {
-	ivec2 MinColumnRow = m_MyTileMap->GetColumRowFromIndex(m_MyMinIndex);
-	ivec2 MaxColumnRow = m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex);
+	const ivec2 MinColumnRow = m_MyTileMap->GetColumRowFromIndex(m_MyMinIndex);
+	const ivec2 MaxColumnRow = m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex);
 	if (tx > MinColumnRow.x && tx < MaxColumnRow.x && ty > MinColumnRow.y && ty < MaxColumnRow.y)
 	{
-		int CheckTileIndex = m_MyTileMap->GetIndexFromColumnRow(tx, ty);
+		const int CheckTileIndex = m_MyTileMap->GetIndexFromColumnRow(tx, ty);
 		if (m_MyTileMap->GetTileAtIndex(CheckTileIndex).MyForestType == Forest_Wild_Grass_)
-		{
 			return true;
-		}
 	}
 	else
 	{
@@ -268,19 +245,19 @@ void WildPokemonTile::OnEvent(Event * anEvent)
 bool WildPokemonTile::CheckForCollision(vec2 NPCNewPosition)
 {
 	//Get the location of each point of collision on the player and then truncate it to a row and column
-	ivec2 OriginIndex = ivec2((NPCNewPosition.x / TILESIZE), ((NPCNewPosition.y - 0.3f) / TILESIZE));
-	ivec2 TopLeftIndex = ivec2((NPCNewPosition.x / TILESIZE), (((NPCNewPosition.y - 0.5f) + (TILESIZE / 2)) / TILESIZE));
-	ivec2 TopRightIndex = ivec2(((NPCNewPosition.x + (TILESIZE / 2)) / TILESIZE), (((NPCNewPosition.y - 0.5f) + (TILESIZE / 2)) / TILESIZE));
-	ivec2 BottomRightIndex = ivec2(((NPCNewPosition.x + (TILESIZE / 2)) / TILESIZE), ((NPCNewPosition.y - 0.3f) / TILESIZE));
+	const ivec2 OriginIndex = ivec2((NPCNewPosition.x / TILESIZE), ((NPCNewPosition.y - 0.3f) / TILESIZE));
+	const ivec2 TopLeftIndex = ivec2((NPCNewPosition.x / TILESIZE), (((NPCNewPosition.y - 0.5f) + (TILESIZE / 2)) / TILESIZE));
+	const ivec2 TopRightIndex = ivec2(((NPCNewPosition.x + (TILESIZE / 2)) / TILESIZE), (((NPCNewPosition.y - 0.5f) + (TILESIZE / 2)) / TILESIZE));
+	const ivec2 BottomRightIndex = ivec2(((NPCNewPosition.x + (TILESIZE / 2)) / TILESIZE), ((NPCNewPosition.y - 0.3f) / TILESIZE));
 
 	//Check each index for whether the tile it lands on is walkable
-	bool CheckOrigin = m_pGame->GetTileMap()->GetTileAtNPC(OriginIndex);
-	bool CheckTopLeft = m_pGame->GetTileMap()->GetTileAtNPC(TopLeftIndex);
-	bool CheckTopRight = m_pGame->GetTileMap()->GetTileAtNPC(TopRightIndex);
-	bool CheckBottomRight = m_pGame->GetTileMap()->GetTileAtNPC(BottomRightIndex);
+	const bool CheckOrigin = m_pGame->GetTileMap()->GetTileAtNPC(OriginIndex);
+	const bool CheckTopLeft = m_pGame->GetTileMap()->GetTileAtNPC(TopLeftIndex);
+	const bool CheckTopRight = m_pGame->GetTileMap()->GetTileAtNPC(TopRightIndex);
+	const bool CheckBottomRight = m_pGame->GetTileMap()->GetTileAtNPC(BottomRightIndex);
 
 	//If all the point land on walkable tile return true else return false
-	bool Collision = (CheckOrigin && CheckTopLeft && CheckTopRight && CheckBottomRight);
+	const bool Collision = (CheckOrigin && CheckTopLeft && CheckTopRight && CheckBottomRight);
 
 	return Collision;
 }
@@ -313,18 +290,15 @@ int WildPokemonTile::GetNextTileFromSet(int aCurrentInput)
 void WildPokemonTile::ResetInputSet()
 {
 	for (int i = 0; i < MAXPATHSIZE_TOWN_NPC; i++)
-	{
 		m_MyInputSet[i] = -1;
-	}
+
 	m_CurrentInput = 0;
 }
 
 void WildPokemonTile::NPCSeekStartPath()
 {
 	while (m_MyInputSet[m_CurrentInput] != -1)
-	{
 		m_CurrentInput++;
-	}
 
 	m_CurrentInput--;
 }
@@ -342,7 +316,6 @@ ivec2 WildPokemonTile::GetMyMaxIndex()
 int WildPokemonTile::GetMyMapWidth()
 {
 	return m_MyTileMap->GetMapWidth();
-
 }
 
 int WildPokemonTile::GetMaxPathSize()
@@ -357,7 +330,5 @@ void WildPokemonTile::SetMyDirection(SpriteDirection aDirection)
 
 int WildPokemonTile::RangeRandomIntAlg(int min, int max)
 {
-	int randNum = rand() % (max - min + 1) + min;
-
-	return randNum;
+	return rand() % (max - min + 1) + min;
 }

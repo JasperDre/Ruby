@@ -44,28 +44,28 @@ void GameCamera::ClampToPlayer(vec2 aPlayerPos)
 
 		SpriteDirection aDirection = m_pGame->GetMyPlayer()->GetMyDirection();
 
-		if (aDirection == SpriteWalkDown)
+		if (aDirection == SpriteDirection::SpriteWalkDown)
 		{
 			if (Target.y > aPlayerPos.y)
 			{
 				m_InTransition = false;
 			}
 		}
-		else if (aDirection == SpriteWalkUp)
+		else if (aDirection == SpriteDirection::SpriteWalkUp)
 		{
 			if (Target.y < aPlayerPos.y)
 			{
 				m_InTransition = false;
 			}
 		}
-		else if (aDirection == SpriteWalkLeft)
+		else if (aDirection == SpriteDirection::SpriteWalkLeft)
 		{
 			if (Target.x > aPlayerPos.x)
 			{
 				m_InTransition = false;
 			}
 		}
-		else if (aDirection == SpriteWalkRight)
+		else if (aDirection == SpriteDirection::SpriteWalkRight)
 		{
 			if (Target.x < aPlayerPos.x)
 			{
@@ -138,7 +138,7 @@ void GameCamera::OnEvent(Event * anEvent)
 		{
 			vec2 newpos = m_pGame->GetSceneManager()->GetActiveScene()->GetPlayerStart();
 
-			vec2 aDirection = DIRECTIONVECTOR[m_pGame->GetMyPlayer()->GetMyDirection()];
+			vec2 aDirection = DIRECTIONVECTOR[static_cast<int>(m_pGame->GetMyPlayer()->GetMyDirection())];
 
 			CamOffset = aDirection * (CAMERAMIN);
 

@@ -11,7 +11,7 @@
 
 Trainer::Trainer(ResourceManager * aResourceManager, GameCore * myGame, Mesh * myMesh, GLuint aTexture) :GameObject(myGame, myMesh, aTexture)
 {
-	myDirection = SpriteWalkDown;
+	myDirection = SpriteDirection::SpriteWalkDown;
 	myResourceManager = aResourceManager;
 	m_pMesh->GenerateFrameMesh();
 
@@ -54,19 +54,19 @@ void Trainer::Update(float deltatime)
 			{
 				if (myController->IsForwardHeld())
 				{
-					Move(SpriteWalkUp, deltatime);
+					Move(SpriteDirection::SpriteWalkUp, deltatime);
 				}
 				if (myController->IsReverseHeld())
 				{
-					Move(SpriteWalkDown, deltatime);
+					Move(SpriteDirection::SpriteWalkDown, deltatime);
 				}
 				if (myController->IsTurnRightHeld())
 				{
-					Move(SpriteWalkRight, deltatime);
+					Move(SpriteDirection::SpriteWalkRight, deltatime);
 				}
 				if (myController->IsTurnLeftHeld())
 				{
-					Move(SpriteWalkLeft, deltatime);
+					Move(SpriteDirection::SpriteWalkLeft, deltatime);
 				}
 				if (myController->IsInputReleased())
 				{
@@ -82,7 +82,7 @@ void Trainer::Update(float deltatime)
 
 	if (m_InTransition == true)
 	{
-		if (myDirection == SpriteWalkUp || myDirection == SpriteWalkRight)
+		if (myDirection == SpriteDirection::SpriteWalkUp || myDirection == SpriteDirection::SpriteWalkRight)
 		{
 			if (m_Position.y < aTransitionDestination.y)
 			{
@@ -97,7 +97,7 @@ void Trainer::Update(float deltatime)
 				m_InTransition = false;
 			}
 		}
-		if (myDirection == SpriteWalkDown || myDirection == SpriteWalkLeft)
+		if (myDirection == SpriteDirection::SpriteWalkDown || myDirection == SpriteDirection::SpriteWalkLeft)
 		{
 			if (m_Position.y > aTransitionDestination.y)
 			{
@@ -123,7 +123,7 @@ void Trainer::Update(float deltatime)
 
 void Trainer::Draw(vec2 camPos, vec2 projecScale)
 {
-	m_Animations[myDirection]->Draw(camPos, projecScale);
+	m_Animations[static_cast<int>(myDirection)]->Draw(camPos, projecScale);
 }
 
 void Trainer::Move(SpriteDirection dir, float deltatime)
@@ -137,7 +137,7 @@ void Trainer::Move(SpriteDirection dir, float deltatime)
 		myDirection = dir;
 	}
 
-	vec2 velocity = DIRECTIONVECTOR[dir] * PLAYER_SPEED;
+	vec2 velocity = DIRECTIONVECTOR[static_cast<int>(dir)] * PLAYER_SPEED;
 
 	NewPosition += velocity * deltatime;
 	if (m_InTransition == false)
@@ -183,13 +183,13 @@ void Trainer::OnEvent(Event * anEvent)
 
 	if (e->GetDoorType() == 11)
 	{
-		myDirection = SpriteWalkUp;
+		myDirection = SpriteDirection::SpriteWalkUp;
 		SetPosition(m_pGame->GetSceneManager()->GetActiveScene()->GetPlayerStart());
 		PlayerTransition();
 	}
 	if (e->GetDoorType() == 10)
 	{
-		myDirection = SpriteWalkDown;
+		myDirection = SpriteDirection::SpriteWalkDown;
 		SetPosition(m_pGame->GetSceneManager()->GetActiveScene()->GetPlayerStart());
 		PlayerTransition();
 	}
@@ -199,7 +199,7 @@ void Trainer::PlayerTransition()
 {
 	m_InTransition = true;
 
-	aTransitionDestination = GetPosition() + vec2(DIRECTIONVECTOR[myDirection] * (TILESIZE / 4));
+	aTransitionDestination = GetPosition() + vec2(DIRECTIONVECTOR[static_cast<int>(myDirection)] * (TILESIZE / 4));
 }
 
 SpriteDirection Trainer::GetMyDirection()

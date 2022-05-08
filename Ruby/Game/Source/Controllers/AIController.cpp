@@ -1,16 +1,11 @@
 #include "GamePCH.h"
-
 #include "AIController.h"
+
 #include "Controllers/AStarPathFinder.h"
-
-#include "GameplayHelpers/TileMap.h"
-#include "GameplayHelpers/TileMapOakLab.h"
-#include "GameplayHelpers/TileMapPalletTown.h"
-
 #include "GameObjects/GameObject.h"
+#include "GameplayHelpers/TileMap.h"
 
-
-AIController::AIController(TileMap * aTileMap, int aMinIndex, int aMaxIndex, GameObject* aNPC)
+AIController::AIController(TileMap* aTileMap, int aMinIndex, int aMaxIndex, GameObject* aNPC)
 {
 	m_MyTileMap = aTileMap;
 	m_MyNPC = aNPC;
@@ -23,9 +18,7 @@ AIController::AIController(TileMap * aTileMap, int aMinIndex, int aMaxIndex, Gam
 	m_MyPath = new int[m_MyMaxPathSize + 1];
 
 	for (int i = 0; i < m_MyMaxPathSize + 1; i++)
-	{
 		m_MyPath[i] = -1;
-	}
 
 	m_MyMaxIndex = aMaxIndex;
 	m_MyMinIndex = aMinIndex;
@@ -35,7 +28,7 @@ AIController::AIController(TileMap * aTileMap, int aMinIndex, int aMaxIndex, Gam
 	m_MyNewDestination = m_MyNPCindex;
 	m_PathingComplete = false;
 
-	m_CurrentDirection = SpriteDirectionStop;
+	m_CurrentDirection = SpriteDirection::SpriteDirectionStop;
 }
 
 AIController::~AIController()
@@ -48,31 +41,27 @@ bool AIController::GetNextPath()
 {
 	m_MyNPCindex = SetNPCCurrentPosition(m_MyNPC->GetPosition());
 	for (int i = 0; i < m_MyMaxPathSize + 1; i++)
-	{
 		m_MyPath[i] = -1;
-	}
+
 	ResetPathFinder();
 
 	m_PathingComplete = false;
 
-	while (m_PathingComplete == false)
+	while (!m_PathingComplete)
 	{
 		m_MyNewDestination.x = RangeRandomIntAlg(m_MyMinIndex % m_MyMapWidth, m_MyMaxIndex % m_MyMapWidth);
 		m_MyNewDestination.y = RangeRandomIntAlg(m_MyMinIndex / m_MyMapWidth, m_MyMaxIndex / m_MyMapWidth);
 
 		m_PathingComplete = m_MyPathFinder->FindPath(m_MyNPCindex.x, m_MyNPCindex.y, m_MyNewDestination.x, m_MyNewDestination.y);
 	}
-	if (m_PathingComplete == true)
-	{
+
+	if (m_PathingComplete)
 		m_MyPathFinder->GetPath(m_MyPath, m_MyMaxPathSize, m_MyNewDestination.x, m_MyNewDestination.y);
-	}
 
 	m_CurrentInput = 0;
 
 	while (*(m_MyPath + m_CurrentInput) != -1)
-	{
 		m_CurrentInput++;
-	}
 
 	m_CurrentInput--;
 
@@ -88,36 +77,34 @@ SpriteDirection AIController::MoveNPC()
 {
 	m_CurrentDirection = CalculateNextInput();
 
-	if (m_CurrentDirection == SpriteDirectionStop)
-	{
-		return SpriteDirectionStop;
-	}
-
+	if (m_CurrentDirection == SpriteDirection::SpriteDirectionStop)
+		return SpriteDirection::SpriteDirectionStop;
 
 	if (m_NextTileColumnRow != m_MyNPCindex)
 	{
-		if (m_CurrentDirection == SpriteWalkRight)
+		if (m_CurrentDirection == SpriteDirection::SpriteWalkRight)
 		{
-			return SpriteDirection(SpriteWalkRight);
+			return SpriteDirection::SpriteWalkRight;
 		}
-		if (m_CurrentDirection == SpriteWalkLeft)
+		if (m_CurrentDirection == SpriteDirection::SpriteWalkLeft)
 		{
-			return SpriteDirection(SpriteWalkLeft);
+			return SpriteDirection::SpriteWalkLeft;
 		}
-		if (m_CurrentDirection == SpriteWalkDown)
+		if (m_CurrentDirection == SpriteDirection::SpriteWalkDown)
 		{
-			return SpriteDirection(SpriteWalkDown);
+			return SpriteDirection::SpriteWalkDown;
 		}
-		if (m_CurrentDirection == SpriteWalkUp)
+		if (m_CurrentDirection == SpriteDirection::SpriteWalkUp)
 		{
-			return SpriteDirection(SpriteWalkUp);
+			return SpriteDirection::SpriteWalkUp;
 		}
 	}
 	else
 	{
-		m_CurrentDirection = SpriteDirectionStop;
+		m_CurrentDirection = SpriteDirection::SpriteDirectionStop;
 	}
 
+	return m_CurrentDirection;
 }
 
 SpriteDirection AIController::CalculateNextInput()
@@ -130,60 +117,51 @@ SpriteDirection AIController::CalculateNextInput()
 
 		if (m_NextTileColumnRow.x != m_MyNPCindex.x)
 		{
-
 			if (m_NextTileColumnRow.x > m_MyNPCindex.x)
-			{
-				return SpriteWalkRight;
-			}
+				return SpriteDirection::SpriteWalkRight;
+
 			if (m_NextTileColumnRow.x < m_MyNPCindex.x)
-			{
-				return SpriteWalkLeft;
-			}
+				return SpriteDirection::SpriteWalkLeft;
 		}
-		else if ((m_NextTileColumnRow.y != m_MyNPCindex.y))
+		else if (m_NextTileColumnRow.y != m_MyNPCindex.y)
 		{
 			if (m_NextTileColumnRow.y > m_MyNPCindex.y)
-
-				return SpriteWalkUp;
+				return SpriteDirection::SpriteWalkUp;
 		}
 
 		if (m_NextTileColumnRow.y < m_MyNPCindex.y)
-		{
-			return SpriteWalkDown;
-		}
+			return SpriteDirection::SpriteWalkDown;
 	}
 	else
 	{
-		return SpriteDirectionStop;
+		return SpriteDirection::SpriteDirectionStop;
 	}
+
+	return SpriteDirection::SpriteDirectionStop;
 }
 
 ivec2 AIController::SetNPCCurrentPosition(vec2 aNPCPosition)
 {
-	ivec2 newIndex = ivec2(aNPCPosition.x / TILESIZE, aNPCPosition.y / TILESIZE);
-
-	return newIndex;
+	return ivec2(aNPCPosition.x / TILESIZE, aNPCPosition.y / TILESIZE);
 }
 
 ivec2 AIController::CalculatedDirection(ivec2 aCurrentIndex, vec2 aDirection)
 {
-	ivec2 IndexandDirection = ivec2((aCurrentIndex.x + aDirection.x), (aCurrentIndex.y + aDirection.y));
-
-	return IndexandDirection;
+	return ivec2((aCurrentIndex.x + aDirection.x), (aCurrentIndex.y + aDirection.y));
 }
 
 int AIController::RangeRandomIntAlg(int min, int max)
 {
-	int aRange = max - min + 1;
-	int aRemainder = RAND_MAX % aRange;
+	const int aRange = max - min + 1;
+	const int aRemainder = RAND_MAX % aRange;
 	int x;
-	do {
+	do
+	{
 
 		x = rand();
 
-	} while (x >= RAND_MAX - aRemainder);
+	}
+	while (x >= RAND_MAX - aRemainder);
+
 	return min + x % aRange;
-
 }
-
-

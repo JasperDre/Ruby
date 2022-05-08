@@ -188,9 +188,9 @@ struct TileInfo
 };
 
 //Player and NPC direction Enum and matching direction vectors
-enum SpriteDirection
+enum class SpriteDirection
 {
-	SpriteWalkDown = 0,
+	SpriteWalkDown,
 	SpriteWalkRight,
 	SpriteWalkLeft,
 	SpriteWalkUp,

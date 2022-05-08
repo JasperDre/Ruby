@@ -103,7 +103,7 @@ void Game::LoadContent()
 	wglSwapInterval(1);
 #endif
 
-	srand(GetSystemTime());
+	srand(static_cast<unsigned int>(GetSystemTime()));
 
 	// Turn on depth buffer testing.
 	glEnable(GL_DEPTH_TEST);
@@ -189,21 +189,28 @@ void Game::LoadContent()
 
 void Game::OnEvent(Event* pEvent)
 {
-	if (pEvent->GetEventType() == EventTypes::EventType_Input)
+	switch (pEvent->GetEventType())
 	{
-		m_pPlayerController->OnEvent(pEvent);
-	}
-	if (pEvent->GetEventType() == EventTypes::EventType_Collision)
-	{
-		m_Trainer->OnEvent(pEvent);
-	}
-	if (pEvent->GetEventType() == EventTypes::EventType_Door);
-	{
-		m_MySceneManager->OnEvent(pEvent);
-		if (pEvent->GetEventType() != EventTypes::EventType_Input)
+		case EventTypes::EventType_Input:
+		{
+			m_pPlayerController->OnEvent(pEvent);
+			break;
+		}
+		case EventTypes::EventType_Collision:
 		{
 			m_Trainer->OnEvent(pEvent);
-			m_TrainerCamera->OnEvent(pEvent);
+			break;
+		}
+		case EventTypes::EventType_Door:
+		{
+			m_MySceneManager->OnEvent(pEvent);
+			if (pEvent->GetEventType() != EventTypes::EventType_Input)
+			{
+				m_Trainer->OnEvent(pEvent);
+				m_TrainerCamera->OnEvent(pEvent);
+			}
+
+			break;
 		}
 	}
 }

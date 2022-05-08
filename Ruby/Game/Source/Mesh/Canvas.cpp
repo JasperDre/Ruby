@@ -212,7 +212,9 @@ void Canvas::GenerateForestVertexData(const unsigned short BitMap[FORESTMAPSIZE]
 }
 void Canvas::AddVert(vec2 objectPos, float objectAngle, vec2 objectScale, vec2 aUVscale, vec2 aUVoffset)
 {
-	for (int i = 0; i < m_BaseTileVerts.size(); i++)
+	const float radians = objectAngle / 180.0f * PI;
+
+	for (unsigned int i = 0; i < m_BaseTileVerts.size(); i++)
 	{
 		if (IsReversed == true)
 		{
@@ -220,10 +222,8 @@ void Canvas::AddVert(vec2 objectPos, float objectAngle, vec2 objectScale, vec2 a
 
 			finalPos *= objectScale;
 
-			float radians = objectAngle / 180.0f * PI;
-
-			finalPos = vec2(finalPos.x*cos(radians) - finalPos.y*sin(radians),
-				finalPos.x*sin(radians) + finalPos.y*cos(radians));
+			finalPos = vec2(finalPos.x * cos(radians) - finalPos.y * sin(radians),
+				finalPos.x * sin(radians) + finalPos.y * cos(radians));
 
 			finalPos += objectPos;
 
@@ -243,10 +243,8 @@ void Canvas::AddVert(vec2 objectPos, float objectAngle, vec2 objectScale, vec2 a
 
 			finalPos *= objectScale;
 
-			float radians = objectAngle / 180.0f * PI;
-
-			finalPos = vec2(finalPos.x*cos(radians) - finalPos.y*sin(radians),
-				finalPos.x*sin(radians) + finalPos.y*cos(radians));
+			finalPos = vec2(finalPos.x * cos(radians) - finalPos.y * sin(radians),
+				finalPos.x * sin(radians) + finalPos.y * cos(radians));
 
 			finalPos += objectPos;
 

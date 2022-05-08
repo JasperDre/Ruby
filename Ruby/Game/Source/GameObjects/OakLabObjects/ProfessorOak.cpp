@@ -1,5 +1,5 @@
 #include "GamePCH.h"
-#include "GameObjects/OakLabObjects/ProfessorOak.h"
+#include "ProfessorOak.h"
 
 #include "Controllers/AStarPathFinder.h"
 #include "GameObjects/GameObject.h"
@@ -10,8 +10,8 @@
 
 ProfessorOak::ProfessorOak(ResourceManager * aResourceManager, TileMap* aTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : GameObject(myGame, myMesh, aTexture)
 {
-	myDirection = SpriteWalkDown;
-	myNewDirection = SpriteWalkDown;
+	myDirection = SpriteDirection::SpriteWalkDown;
+	myNewDirection = SpriteDirection::SpriteWalkDown;
 	myResourceManager = aResourceManager;
 	m_MyTileMap = aTileMap;
 	m_pMesh->GenerateFrameMesh();
@@ -43,9 +43,7 @@ ProfessorOak::ProfessorOak(ResourceManager * aResourceManager, TileMap* aTileMap
 	m_MyNewDestination = ivec2(0, 0);
 
 	for (int i = 0; i < OAKMAXPATHSIZE; i++)
-	{
 		m_MyInputSet[i] = -1;
-	}
 
 	m_MyPathFinder = new AStarPathFinder(m_MyTileMap, this);
 
@@ -54,7 +52,6 @@ ProfessorOak::ProfessorOak(ResourceManager * aResourceManager, TileMap* aTileMap
 
 ProfessorOak::~ProfessorOak()
 {
-
 	for (int i = 0; i < NUM_DIRECTIONS; i++)
 	{
 		delete m_Animations[i];
@@ -63,9 +60,7 @@ ProfessorOak::~ProfessorOak()
 
 	delete m_MyPathFinder;
 	m_MyPathFinder = nullptr;
-
 	myResourceManager = nullptr;
-
 }
 
 void ProfessorOak::Update(float deltatime)
@@ -74,15 +69,13 @@ void ProfessorOak::Update(float deltatime)
 
 	switch (m_MyState)
 	{
-	case PathingState:
-		PathingUpdate(deltatime);
-		break;
-
-	case WalkingState:
-		WalkingUpdate(deltatime);
-		break;
+		case PathingState:
+			PathingUpdate(deltatime);
+			break;
+		case WalkingState:
+			WalkingUpdate(deltatime);
+			break;
 	}
-
 
 	for (int i = 0; i < NUM_DIRECTIONS; i++)
 	{
@@ -94,17 +87,14 @@ void ProfessorOak::Update(float deltatime)
 void ProfessorOak::PathingUpdate(float delatime)
 {
 	if (GetNextPath(GetMyIndex()))
-	{
 		SetMyState(WalkingState);
-	}
 }
 
 void ProfessorOak::WalkingUpdate(float deltatime)
 {
-	int TargetTile = GetNextTileFromSet(m_CurrentInput);
+	const int TargetTile = GetNextTileFromSet(m_CurrentInput);
 
-	ivec2 aNPCIndex = GetMyIndex();
-
+	const ivec2 aNPCIndex = GetMyIndex();
 
 	if (m_IsFirstInput == true)
 	{
@@ -116,8 +106,7 @@ void ProfessorOak::WalkingUpdate(float deltatime)
 		myNewDirection = CalculateNextInput(aNPCIndex);
 	}
 
-
-	if (myNewDirection != SpriteDirectionStop)
+	if (myNewDirection != SpriteDirection::SpriteDirectionStop)
 	{
 		Move(myNewDirection, deltatime);
 		SetMyDirection(myNewDirection);
@@ -125,18 +114,16 @@ void ProfessorOak::WalkingUpdate(float deltatime)
 	else
 	{
 		for (int i = 0; i < NUM_DIRECTIONS; i++)
-		{
 			m_Animations[i]->SetFrameIndex(0);
-		}
+
 		m_IsFirstInput = true;
 		SetMyState(PathingState);
 	}
-
 }
 
 void ProfessorOak::Draw(vec2 camPos, vec2 projecScale)
 {
-	m_Animations[myDirection]->Draw(camPos, projecScale);
+	m_Animations[static_cast<int>(myDirection)]->Draw(camPos, projecScale);
 }
 
 void ProfessorOak::Move(SpriteDirection dir, float deltatime)
@@ -146,11 +133,9 @@ void ProfessorOak::Move(SpriteDirection dir, float deltatime)
 	Resume();
 
 	if (myDirection != dir)
-	{
 		myDirection = dir;
-	}
 
-	vec2 velocity = DIRECTIONVECTOR[dir] * NPC_SPEED;
+	vec2 velocity = DIRECTIONVECTOR[static_cast<int>(dir)] * NPC_SPEED;
 
 	NewPosition += velocity * deltatime;
 
@@ -167,17 +152,13 @@ void ProfessorOak::Move(SpriteDirection dir, float deltatime)
 void ProfessorOak::Pause()
 {
 	for (int i = 0; i < NUM_DIRECTIONS; i++)
-	{
 		m_Animations[i]->Pause();
-	}
 }
 
 void ProfessorOak::Resume()
 {
 	for (int i = 0; i < NUM_DIRECTIONS; i++)
-	{
 		m_Animations[i]->Resume();
-	}
 }
 
 void ProfessorOak::ResetPathFinder()
@@ -193,24 +174,22 @@ bool ProfessorOak::GetNextPath(ivec2 anIndex)
 
 	m_PathingComplete = false;
 
-	ivec2 aMin = m_MyTileMap->GetColumRowFromIndex(m_MyMinIndex);
-	ivec2 aMax = m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex);
+	const ivec2 aMin = m_MyTileMap->GetColumRowFromIndex(m_MyMinIndex);
+	const ivec2 aMax = m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex);
 
 	m_MyNewDestination.x = RangeRandomIntAlg(aMin.x, aMax.x);
 	m_MyNewDestination.y = RangeRandomIntAlg(aMin.y, aMax.y);
 
-	while (m_PathingComplete == false)
+	while (!m_PathingComplete)
 	{
 		m_PathingComplete = m_MyPathFinder->FindPath(anIndex.x, anIndex.y, m_MyNewDestination.x, m_MyNewDestination.y);
 
-		if (m_PathingComplete == true)
-		{
+		if (m_PathingComplete)
 			m_MyPathFinder->GetPath(m_MyPath, GetMaxPathSize(), m_MyNewDestination.x, m_MyNewDestination.y);
-		}
-		if (m_MyPath == nullptr)
-		{
+
+		if (!m_MyPath)
 			m_PathingComplete = false;
-		}
+
 		if (m_PathingComplete == false)
 		{
 			m_MyNewDestination.x = RangeRandomIntAlg(aMin.x, aMax.x);
@@ -222,8 +201,8 @@ bool ProfessorOak::GetNextPath(ivec2 anIndex)
 	NPCSeekStartPath();
 
 	return m_PathingComplete;
-
 }
+
 SpriteDirection ProfessorOak::CalculateNextInput(ivec2 anIndex)
 {
 	m_CurrentInput--;
@@ -239,29 +218,29 @@ SpriteDirection ProfessorOak::CalculateNextInput(ivec2 anIndex)
 
 			if (m_NextTileColumnRow.x > anIndex.x)
 			{
-				return SpriteWalkRight;
+				return SpriteDirection::SpriteWalkRight;
 			}
 			if (m_NextTileColumnRow.x < anIndex.x)
 			{
-				return SpriteWalkLeft;
+				return SpriteDirection::SpriteWalkLeft;
 			}
 		}
 		else if (m_NextTileColumnRow.y != anIndex.y)
 		{
 			if (m_NextTileColumnRow.y > anIndex.y)
 			{
-				return SpriteWalkUp;
+				return SpriteDirection::SpriteWalkUp;
 			}
 
 			if (m_NextTileColumnRow.y < anIndex.y)
 			{
-				return SpriteWalkDown;
+				return SpriteDirection::SpriteWalkDown;
 			}
 		}
 	}
 	else
 	{
-		return SpriteDirectionStop;
+		return SpriteDirection::SpriteDirectionStop;
 	}
 }
 AI_States ProfessorOak::GetMyState()
@@ -274,16 +253,12 @@ void ProfessorOak::SetMyState(AI_States aState)
 }
 bool ProfessorOak::GetNodeIsClearOnSpecial(int tx, int ty)
 {
-	ivec2 MinColumnRow = m_MyTileMap->GetColumRowFromIndex(m_MyMinIndex);
-	ivec2 MaxColumnRow = m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex);
+	const ivec2 MinColumnRow = m_MyTileMap->GetColumRowFromIndex(m_MyMinIndex);
+	const ivec2 MaxColumnRow = m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex);
 	if (tx > MinColumnRow.x && tx < MaxColumnRow.x && ty > MinColumnRow.y && ty < MaxColumnRow.y)
-	{
 		return true;
-	}
-	else
-	{
-		return false;
-	}
+
+	return false;
 }
 
 void ProfessorOak::OnEvent(Event * anEvent)
@@ -294,56 +269,60 @@ void ProfessorOak::OnEvent(Event * anEvent)
 bool ProfessorOak::CheckForCollision(vec2 NPCNewPosition)
 {
 	//Get the location of each point of collision on the player and then truncate it to a row and column
-	ivec2 OriginIndex = ivec2((NPCNewPosition.x / TILESIZE), ((NPCNewPosition.y - 0.3f) / TILESIZE));
-	ivec2 TopLeftIndex = ivec2((NPCNewPosition.x / TILESIZE), (((NPCNewPosition.y - 0.5f) + (TILESIZE / 2)) / TILESIZE));
-	ivec2 TopRightIndex = ivec2(((NPCNewPosition.x + (TILESIZE / 2)) / TILESIZE), (((NPCNewPosition.y - 0.5f) + (TILESIZE / 2)) / TILESIZE));
-	ivec2 BottomRightIndex = ivec2(((NPCNewPosition.x + (TILESIZE / 2)) / TILESIZE), ((NPCNewPosition.y - 0.3f) / TILESIZE));
+	const ivec2 OriginIndex = ivec2((NPCNewPosition.x / TILESIZE), ((NPCNewPosition.y - 0.3f) / TILESIZE));
+	const ivec2 TopLeftIndex = ivec2((NPCNewPosition.x / TILESIZE), (((NPCNewPosition.y - 0.5f) + (TILESIZE / 2)) / TILESIZE));
+	const ivec2 TopRightIndex = ivec2(((NPCNewPosition.x + (TILESIZE / 2)) / TILESIZE), (((NPCNewPosition.y - 0.5f) + (TILESIZE / 2)) / TILESIZE));
+	const ivec2 BottomRightIndex = ivec2(((NPCNewPosition.x + (TILESIZE / 2)) / TILESIZE), ((NPCNewPosition.y - 0.3f) / TILESIZE));
 
 	//Check each index for whether the tile it lands on is walkable
-	bool CheckOrigin = m_pGame->GetTileMap()->GetTileAtNPC(OriginIndex);
-	bool CheckTopLeft = m_pGame->GetTileMap()->GetTileAtNPC(TopLeftIndex);
-	bool CheckTopRight = m_pGame->GetTileMap()->GetTileAtNPC(TopRightIndex);
-	bool CheckBottomRight = m_pGame->GetTileMap()->GetTileAtNPC(BottomRightIndex);
+	const bool CheckOrigin = m_pGame->GetTileMap()->GetTileAtNPC(OriginIndex);
+	const bool CheckTopLeft = m_pGame->GetTileMap()->GetTileAtNPC(TopLeftIndex);
+	const bool CheckTopRight = m_pGame->GetTileMap()->GetTileAtNPC(TopRightIndex);
+	const bool CheckBottomRight = m_pGame->GetTileMap()->GetTileAtNPC(BottomRightIndex);
 
 	//If all the point land on walkable tile return true else return false
-	bool Collision = (CheckOrigin && CheckTopLeft && CheckTopRight && CheckBottomRight);
+	const bool Collision = (CheckOrigin && CheckTopLeft && CheckTopRight && CheckBottomRight);
 
 	return Collision;
 }
-int * ProfessorOak::GetInputSet()
+
+int* ProfessorOak::GetInputSet()
 {
 	return m_MyPath;
 }
+
 void ProfessorOak::SetInputSet(int * aPath)
 {
 	m_MyPath = aPath;
 }
+
 int ProfessorOak::GetCurrentInput()
 {
 	return m_CurrentInput;
 }
+
 void ProfessorOak::SetCurrentInput(int aCurrentInput)
 {
 	m_CurrentInput = aCurrentInput;
 }
+
 int ProfessorOak::GetNextTileFromSet(int aCurrentInput)
 {
 	return m_MyInputSet[aCurrentInput];
 }
+
 void ProfessorOak::ResetInputSet()
 {
 	for (int i = 0; i < OAKMAXPATHSIZE; i++)
-	{
 		m_MyInputSet[i] = -1;
-	}
+
 	m_CurrentInput = 0;
 }
+
 void ProfessorOak::NPCSeekStartPath()
 {
 	while (m_MyInputSet[m_CurrentInput] != -1)
-	{
 		m_CurrentInput++;
-	}
 
 	m_CurrentInput--;
 }
@@ -351,25 +330,28 @@ ivec2 ProfessorOak::GetMyMinIndex()
 {
 	return ivec2(m_MyTileMap->GetColumRowFromIndex(m_MyMinIndex));
 }
+
 ivec2 ProfessorOak::GetMyMaxIndex()
 {
 	return ivec2(m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex));
 }
+
 int ProfessorOak::GetMyMapWidth()
 {
 	return m_MyTileMap->GetMapWidth();
 }
+
 int ProfessorOak::GetMaxPathSize()
 {
 	return OAKMAXPATHSIZE;
 }
+
 void ProfessorOak::SetMyDirection(SpriteDirection aDirection)
 {
 	myNewDirection = aDirection;
 }
+
 int ProfessorOak::RangeRandomIntAlg(int min, int max)
 {
-	int randNum = rand() % (max - min + 1) + min;
-
-	return randNum;
+	return rand() % (max - min + 1) + min;
 }

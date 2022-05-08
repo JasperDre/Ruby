@@ -26,15 +26,15 @@ public:
     inline float LengthSquared() const { return x*x + y*y; }
     inline float Length() const { return sqrtf(x*x + y*y); }
 
-    inline Vector2 GetNormalized() const { float len = Length(); if( fequal(len,0) ) return Vector2(x,y); len = 1.0f/len; return Vector2(x*len, y*len); }
-    inline Vector2 Normalize() { float len = Length(); if( !fequal(len,0) ) { x /= len; y /= len; } return *this; }
+    inline Vector2 GetNormalized() const { float len = Length(); if( IsEqualFloat(len,0) ) return Vector2(x,y); len = 1.0f/len; return Vector2(x*len, y*len); }
+    inline Vector2 Normalize() { float len = Length(); if( !IsEqualFloat(len,0) ) { x /= len; y /= len; } return *this; }
     inline float Dot(const Vector2 &o) const { return x*o.x + y*o.y; }
     inline Vector2 Add(const Vector2& o) const { return Vector2(this->x + o.x, this->y + o.y); }
     inline Vector2 Sub(const Vector2& o) const { return Vector2(this->x - o.x, this->y - o.y); }
     inline Vector2 Scale(const float o) const { return Vector2(this->x * o, this->y * o); }
 
-    inline bool operator ==(const Vector2& o) const { return fequal(this->x, o.x) && fequal(this->y, o.y); }
-    inline bool operator !=(const Vector2& o) const { return !fequal(this->x, o.x) || !fequal(this->y, o.y); }
+    inline bool operator ==(const Vector2& o) const { return IsEqualFloat(this->x, o.x) && IsEqualFloat(this->y, o.y); }
+    inline bool operator !=(const Vector2& o) const { return !IsEqualFloat(this->x, o.x) || !IsEqualFloat(this->y, o.y); }
 
     inline Vector2 operator -() const { return Vector2(-this->x, -this->y); }
     inline Vector2 operator *(const float o) const { return Vector2(this->x * o, this->y * o); }
@@ -85,8 +85,8 @@ public:
     inline float LengthSquared() const { return x*x + y*y + z*z; }
     inline float Length() const { return sqrtf(x*x + y*y + z*z); }
 
-    inline Vector3 GetNormalized() const { float len = Length(); if( fequal(len,0) ) return Vector3(x,y,z); len = 1.0f/len; return Vector3(x*len, y*len, z*len);}
-    inline Vector3 Normalize() { float len = Length(); if( !fequal(len,0) ) { x /= len; y /= len; z /= len; } return *this; }
+    inline Vector3 GetNormalized() const { float len = Length(); if( IsEqualFloat(len,0) ) return Vector3(x,y,z); len = 1.0f/len; return Vector3(x*len, y*len, z*len);}
+    inline Vector3 Normalize() { float len = Length(); if( !IsEqualFloat(len,0) ) { x /= len; y /= len; z /= len; } return *this; }
     inline Vector3 Cross(const Vector3& o) const { return Vector3( (y*o.z - z*o.y), (z*o.x - x*o.z), (x*o.y - y*o.x) ); }
     inline float Dot(const Vector3 &o) const { return x*o.x + y*o.y + z*o.z; }
     inline Vector3 Add(const Vector3& o) const { return Vector3(this->x + o.x, this->y + o.y, this->z + o.z); }
@@ -96,8 +96,8 @@ public:
     inline Vector3 DivideComponents(const Vector3& o) const { return Vector3(this->x / o.x, this->y / o.y, this->z / o.z); }
     //inline Vector3 MultiplyComponents(const Vector3Int& o) const { return Vector3(this->x * o.x, this->y * o.y, this->z * o.z); }
 
-    inline bool operator ==(const Vector3& o) const { return fequal(this->x, o.x) && fequal(this->y, o.y) && fequal(this->z, o.z); }
-    inline bool operator !=(const Vector3& o) const { return !fequal(this->x, o.x) || !fequal(this->y, o.y) || !fequal(this->z, o.z); }
+    inline bool operator ==(const Vector3& o) const { return IsEqualFloat(this->x, o.x) && IsEqualFloat(this->y, o.y) && IsEqualFloat(this->z, o.z); }
+    inline bool operator !=(const Vector3& o) const { return !IsEqualFloat(this->x, o.x) || !IsEqualFloat(this->y, o.y) || !IsEqualFloat(this->z, o.z); }
 
     inline Vector3 operator -() const { return Vector3(-this->x, -this->y, -this->z); }
     inline Vector3 operator *(const float o) const { return Vector3(this->x * o, this->y * o, this->z * o); }
@@ -149,8 +149,8 @@ public:
     inline float LengthSquared() const {return x*x + y*y + z*z + w*w;}
     inline float Length() const { return sqrtf(x*x + y*y + z*z + w*w); }
 
-    inline Vector4 GetNormalized() const { float len = Length(); if( fequal(len,0) ) return Vector4(x,y,z,w); len = 1.0f/len; return Vector4(x*len, y*len, z*len, w*len); }
-    inline Vector4 Normalize() { float len = Length(); if( !fequal(len,0) ) { x /= len; y /= len; z /= len; w /= len; } return *this; }
+    inline Vector4 GetNormalized() const { float len = Length(); if( IsEqualFloat(len,0) ) return Vector4(x,y,z,w); len = 1.0f/len; return Vector4(x*len, y*len, z*len, w*len); }
+    inline Vector4 Normalize() { float len = Length(); if( !IsEqualFloat(len,0) ) { x /= len; y /= len; z /= len; w /= len; } return *this; }
     //Vector4 CrossProduct(const Vector4& b, const Vector4& c)
     // from http://www.gamedev.net/topic/269241-4d-vector-class/
     //  not sure if right and have no use for it.
@@ -203,7 +203,7 @@ public:
     inline float LengthSquared() const {return (float)x*x + y*y;}
     inline float Length() const {return sqrtf((float)x*x + y*y);}
 
-    //inline Vector2Int Normalize() const {float len = Length(); if( fequal(len,0) ) return Vector2Int(x,y); len = 1.0f/len; return Vector2Int(x*len, y*len);}
+    //inline Vector2Int Normalize() const {float len = Length(); if( IsEqualFloat(len,0) ) return Vector2Int(x,y); len = 1.0f/len; return Vector2Int(x*len, y*len);}
 
     inline bool operator ==(const Vector2Int& o) const { return this->x == o.x && this->y == o.y; }
     inline bool operator !=(const Vector2Int& o) const { return this->x != o.x || this->y != o.y; }
@@ -235,7 +235,7 @@ public:
     inline int LengthSquared() const { return x*x + y*y + z*z; }
     inline float Length() const { return sqrtf((float)x*x + y*y + z*z); }
 
-    //inline Vector3Int Normalize() const {float len = Length(); if( fequal(len,0) ) return Vector3Int(x,y,z); len = 1.0f/len; return Vector3Int(x*len, y*len, z*len);}
+    //inline Vector3Int Normalize() const {float len = Length(); if( IsEqualFloat(len,0) ) return Vector3Int(x,y,z); len = 1.0f/len; return Vector3Int(x*len, y*len, z*len);}
     //inline Vector3Int Cross(const Vector3Int& o) const {return Vector3Int( (y*o.z - z*o.y), (z*o.x - x*o.z), (x*o.y - y*o.x) );}
 
     inline Vector3 MultiplyComponents(const Vector3& o) const { return Vector3(this->x * o.x, this->y * o.y, this->z * o.z); }
@@ -300,7 +300,7 @@ public:
     inline float LengthSquared() const {return (float)x*x + y*y + z*z + w*w;}
     inline float Length() const {return sqrtf((float)x*x + y*y + z*z + w*w);}
 
-    //inline Vector4Int Normalize() const {float len = Length(); if( fequal(len,0) ) return Vector4Int(x,y,z); len = 1.0f/len; return Vector4Int(x*len, y*len, z*len);}
+    //inline Vector4Int Normalize() const {float len = Length(); if( IsEqualFloat(len,0) ) return Vector4Int(x,y,z); len = 1.0f/len; return Vector4Int(x*len, y*len, z*len);}
     //inline Vector4Int Cross(const Vector4Int& o) const {return Vector4Int( (y*o.z - z*o.y), (z*o.x - x*o.z), (x*o.y - y*o.x) );}
 
     inline bool operator ==(const Vector4Int& o) const { return this->x == o.x && this->y == o.y && this->z == o.z && this->w == o.w; }
@@ -347,8 +347,8 @@ public:
     inline float LengthSquared() const {return (float)x*x + y*y;}
     inline float Length() const {return sqrtf((float)x*x + y*y);}
 
-    inline Vector2T<MyType> GetNormalized() const { float len = Length(); if( fequal(len,0) ) return Vector2T<MyType>(x,y); len = 1.0f/len; return Vector2T<MyType>(x*len, y*len); }
-    //inline Vector2T<MyType> Normalize() const {float len = Length(); if( fequal(len,0) ) return Vector2T<MyType>(x,y); len = 1.0f/len; return Vector2T<MyType>(x*len, y*len);}
+    inline Vector2T<MyType> GetNormalized() const { float len = Length(); if( IsEqualFloat(len,0) ) return Vector2T<MyType>(x,y); len = 1.0f/len; return Vector2T<MyType>(x*len, y*len); }
+    //inline Vector2T<MyType> Normalize() const {float len = Length(); if( IsEqualFloat(len,0) ) return Vector2T<MyType>(x,y); len = 1.0f/len; return Vector2T<MyType>(x*len, y*len);}
 
     inline bool operator ==(const Vector2T<MyType>& o) const { return this->x == o.x && this->y == o.y; }
     inline bool operator !=(const Vector2T<MyType>& o) const { return this->x != o.x || this->y != o.y; }
