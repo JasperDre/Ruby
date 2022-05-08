@@ -19,7 +19,7 @@ public:
 
 	void Draw(vec2 camPos, vec2 projecScale) override;
 
-	void SetAIController(AStarPathFinder* aController) { ; }
+	void SetAIController(AStarPathFinder* aController) {}
 	void Move(SpriteDirection dir, float deltatime);
 
 	void ResetPathFinder();

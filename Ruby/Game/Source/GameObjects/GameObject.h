@@ -2,6 +2,7 @@
 
 class Mesh;
 class AStarPathFinder;
+class GameCore;
 
 class GameObject
 {
@@ -16,7 +17,7 @@ public:
 	virtual bool IsColliding(GameObject* pOtherGameObject);
 	virtual void OnCollision(GameObject* pOtherGameObject);
 
-	virtual AI_States GetMyState() { return AI_States(); }
+	virtual AI_States GetMyState() { return AI_States::IdleState; }
 	virtual void SetMyState(AI_States aState) {}
 
 	virtual bool GetNodeIsClearOnSpecial(int tx, int ty) { return false; }

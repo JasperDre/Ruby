@@ -1,16 +1,17 @@
 #pragma once
+
 class TileMap;
 class GameObject;
 
+enum class PathNodeStatus
+{
+	Unchecked,
+	Open,
+	Closed
+};
+
 struct PathNode
 {
-	enum PathNodeStatus
-	{
-		Unchecked,
-		Open,
-		Closed
-	};
-	
 	int parentNodeIndex;
 	PathNodeStatus Status;
 
@@ -18,10 +19,10 @@ struct PathNode
 	float G; // Cost to get to current node.
 	float H; // Heuristic: Manhatten distance to destination.
 };
+
 class AStarPathFinder
 {
 protected:
-
 	int m_MapWidth;
 	int m_MapHeight;
 	int m_MyMinIndex;
@@ -45,10 +46,9 @@ protected:
 	int CheckIfNodeIsClearAndReturnNodeIndex(int tx, int ty);
 	void AddNeighboursToOpenList(int nodeIndex, int endNodeIndex);
 
-	float CalculateH(int nodeIndex, int endNodeIndex);
+	int CalculateH(int nodeIndex, int endNodeIndex) const;
 
 public:
-
 	AStarPathFinder(TileMap* aTileMap, GameObject* aNPC);
 	virtual ~AStarPathFinder();
 
@@ -62,5 +62,4 @@ public:
 	int* GetPath(int* path, int maxdistance, int ex, int ey);
 
 	GetForNodeIsClearOnSpecial m_GetNodeIsClearSpecial;
-
 };

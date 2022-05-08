@@ -205,9 +205,9 @@ typedef int (GameObject::*GetRangeRandomIntAlg)(int min, int max);
 typedef void(*AIStateUpdate)(GameObject* aGameObject, float deltatime);
 
 //Const Enum of NPC States
-enum AI_States
+enum class AI_States
 {
-	IdleState = 0,
+	IdleState,
 	WalkingState,
 	PathingState,
 	TrackToPlayerState

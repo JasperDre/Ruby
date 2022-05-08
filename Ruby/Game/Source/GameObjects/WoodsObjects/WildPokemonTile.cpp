@@ -7,7 +7,9 @@
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 
-WildPokemonTile::WildPokemonTile(ResourceManager * aResourceManager, TileMap * aTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : GameObject(myGame, myMesh, aTexture)
+WildPokemonTile::WildPokemonTile(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
+	: GameObject(myGame, myMesh, aTexture)
+	, m_PathingComplete(false)
 {
 	myDirection = SpriteDirection::SpriteWalkDown;
 	myNewDirection = SpriteDirection::SpriteWalkDown;
@@ -16,7 +18,7 @@ WildPokemonTile::WildPokemonTile(ResourceManager * aResourceManager, TileMap * a
 
 	m_IsFirstInput = true;
 
-	m_MyState = PathingState;
+	m_MyState = AI_States::PathingState;
 
 	m_CurrentInput = 0;
 
@@ -46,16 +48,16 @@ void WildPokemonTile::Update(float deltatime)
 {
 	switch (m_MyState)
 	{
-		case PathingState:
+		case AI_States::PathingState:
 			PathingUpdate(deltatime);
 			break;
-		case WalkingState:
+		case AI_States::WalkingState:
 			WalkingUpdate(deltatime);
 			break;
-		case TrackToPlayerState:
+		case AI_States::TrackToPlayerState:
 			TrackToPlayerUpdate(deltatime);
 			break;
-		case IdleState:
+		case AI_States::IdleState:
 			break;
 	}
 }
@@ -63,7 +65,7 @@ void WildPokemonTile::Update(float deltatime)
 void WildPokemonTile::PathingUpdate(float delatime)
 {
 	if (GetNextPath(GetMyIndex()))
-		SetMyState(WalkingState);
+		SetMyState(AI_States::WalkingState);
 }
 
 void WildPokemonTile::WalkingUpdate(float deltatime)
@@ -90,7 +92,7 @@ void WildPokemonTile::WalkingUpdate(float deltatime)
 	else
 	{
 		m_IsFirstInput = true;
-		SetMyState(PathingState);
+		SetMyState(AI_States::PathingState);
 	}
 
 	vec2 PlayerPos = m_pGame->GetMyPlayer()->GetPosition();
@@ -101,7 +103,7 @@ void WildPokemonTile::WalkingUpdate(float deltatime)
 	ivec2 MaxRange = m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex);
 
 	if (aPlayerColumnRow.x > MinRange.x && aPlayerColumnRow.x < MaxRange.x && aPlayerColumnRow.y > MinRange.y && aPlayerColumnRow.y < MaxRange.y)
-		SetMyState(TrackToPlayerState);
+		SetMyState(AI_States::TrackToPlayerState);
 }
 
 void WildPokemonTile::TrackToPlayerUpdate(float deltatime)
@@ -130,7 +132,7 @@ void WildPokemonTile::Move(SpriteDirection dir, float deltatime)
 	}
 	else
 	{
-		m_MyState = PathingState;
+		m_MyState = AI_States::PathingState;
 	}
 }
 
@@ -153,7 +155,7 @@ bool WildPokemonTile::GetNextPath(ivec2 anIndex)
 	m_MyNewDestination.x = RangeRandomIntAlg(aMin.x, aMax.x);
 	m_MyNewDestination.y = RangeRandomIntAlg(aMin.y, aMax.y);
 
-	while (m_PathingComplete == false)
+	while (!m_PathingComplete)
 	{
 		m_PathingComplete = m_MyPathFinder->FindPath(anIndex.x, anIndex.y, m_MyNewDestination.x, m_MyNewDestination.y);
 
