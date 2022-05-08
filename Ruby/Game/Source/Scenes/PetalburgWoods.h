@@ -1,19 +1,19 @@
 #pragma once
 
-class Scene;
+#include "Scenes/Scene.h"
+
 class Mesh;
 class TileMap;
 class TileMapWoods;
 class Trainer;
-class PettleburgWoodsMap;
+class PetalburgWoodsMap;
 
-
-class PettleBurgWoods : public Scene
+class PetalburgWoods : public Scene
 {
 
 public:
-	PettleBurgWoods(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer* aPlayer, GLuint aTexture);
-	~PettleBurgWoods();
+	PetalburgWoods(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer* aPlayer, GLuint aTexture);
+	~PetalburgWoods();
 
 	void LoadContent();
 
@@ -34,7 +34,7 @@ private:
 	TileMap* m_MyTileMap;
 
 	Trainer* m_MyTrainer;
-	PettleburgWoodsMap* m_MyPettleburgWoods;
+	PetalburgWoodsMap* m_MyPetalburg;
 	vec2 PlayerSavedPosition;
 
 };

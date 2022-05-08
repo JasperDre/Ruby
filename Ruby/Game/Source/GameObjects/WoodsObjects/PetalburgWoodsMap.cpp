@@ -1,16 +1,12 @@
 #include "GamePCH.h"
-
-#include "GameObjects/GameObject.h"
-#include "PettleburgWoodsMap.h"
+#include "PetalburgWoodsMap.h"
 
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/TileMap.h"
-#include "GameplayHelpers/TileMapWoods.h"
-
-#include "Mesh/Mesh.h"
 #include "Mesh/Canvas.h"
+#include "Mesh/Mesh.h"
 
-PettleburgWoodsMap::PettleburgWoodsMap(ResourceManager * myResourceManager, TileMap * myTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : GameObject(myGame, myMesh, aTexture)
+PetalburgWoodsMap::PetalburgWoodsMap(ResourceManager * myResourceManager, TileMap * myTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : GameObject(myGame, myMesh, aTexture)
 {
 	m_pMyTexture = aTexture;
 	m_MyTileMap = myTileMap;
@@ -24,17 +20,17 @@ PettleburgWoodsMap::PettleburgWoodsMap(ResourceManager * myResourceManager, Tile
 	m_MyCanvas->GenterateCanvasMesh((FORESTMAPSIZE * 4) - (NUM_FOREST_COLUMNS));
 }
 
-PettleburgWoodsMap::~PettleburgWoodsMap()
+PetalburgWoodsMap::~PetalburgWoodsMap()
 {
 	delete m_MyCanvas;
 }
 
-void PettleburgWoodsMap::Update(float deltatime)
+void PetalburgWoodsMap::Update(float deltatime)
 {
 
 }
 
-void PettleburgWoodsMap::Draw(vec2 camPos, vec2 projecScale)
+void PetalburgWoodsMap::Draw(vec2 camPos, vec2 projecScale)
 {
 	m_MyCanvas->DrawCanvas(camPos, projecScale, m_pMyTexture);
 }

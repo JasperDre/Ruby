@@ -5,7 +5,7 @@
 #include "Scenes/Scene.h"
 #include "Scenes/PalletTown.h"
 #include "Scenes/OakLab.h"
-#include "Scenes/PetalBergWoods.h"
+#include "Scenes/PetalburgWoods.h"
 
 SceneManager::SceneManager()
 {
@@ -35,7 +35,7 @@ void SceneManager::GenerateScenes(GameCore * myGame, Areas myArea, TileMap* aTil
 	}
 	if (myArea == Area_Woods)
 	{
-		PettleBurgWoods* myNewScene = new PettleBurgWoods(myGame, Area_Woods, aTileMap, aResourceManager, aMesh, aPlayer, aTexture);
+		PetalburgWoods* myNewScene = new PetalburgWoods(myGame, Area_Woods, aTileMap, aResourceManager, aMesh, aPlayer, aTexture);
 		myNewScene->LoadContent();
 		m_MyScenes.insert(std::pair<Areas, Scene*>(Area_Woods, myNewScene));
 	}

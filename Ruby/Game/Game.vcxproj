@@ -168,7 +168,7 @@
     <ClInclude Include="Source\GameObjects\UI\PokeBall.h" />
     <ClInclude Include="Source\GameObjects\UI\ScoreNumber.h" />
     <ClInclude Include="Source\GameObjects\UI\UIObject.h" />
-    <ClInclude Include="Source\GameObjects\WoodsObjects\PettleburgWoodsMap.h" />
+    <ClInclude Include="Source\GameObjects\WoodsObjects\PetalburgWoodsMap.h" />
     <ClInclude Include="Source\GameObjects\WoodsObjects\WildPokemonTile.h" />
     <ClInclude Include="Source\GamePCH.h" />
     <ClInclude Include="Source\GameplayHelpers\EventHandler.h" />
@@ -185,7 +185,7 @@
     <ClInclude Include="Source\Mesh\Mesh.h" />
     <ClInclude Include="Source\Scenes\OakLab.h" />
     <ClInclude Include="Source\Scenes\PalletTown.h" />
-    <ClInclude Include="Source\Scenes\PetalBergWoods.h" />
+    <ClInclude Include="Source\Scenes\PetalburgWoods.h" />
     <ClInclude Include="Source\Scenes\Scene.h" />
     <ClInclude Include="Source\Sprites\AnimatedSprite.h" />
     <ClInclude Include="Source\Win32\WinMain.h" />
@@ -212,7 +212,7 @@
     <ClCompile Include="Source\GameObjects\UI\PokeBall.cpp" />
     <ClCompile Include="Source\GameObjects\UI\ScoreNumber.cpp" />
     <ClCompile Include="Source\GameObjects\UI\UIObject.cpp" />
-    <ClCompile Include="Source\GameObjects\WoodsObjects\PettleburgWoodsMap.cpp" />
+    <ClCompile Include="Source\GameObjects\WoodsObjects\PetalburgWoodsMap.cpp" />
     <ClCompile Include="Source\GameObjects\WoodsObjects\WildPokemonTile.cpp" />
     <ClCompile Include="Source\GamePCH.cpp" />
     <ClCompile Include="Source\GameplayHelpers\EventHandler.cpp" />
@@ -229,7 +229,7 @@
     <ClCompile Include="Source\Mesh\Mesh.cpp" />
     <ClCompile Include="Source\Scenes\OakLab.cpp" />
     <ClCompile Include="Source\Scenes\PalletTown.cpp" />
-    <ClCompile Include="Source\Scenes\PetalbergWoods.cpp" />
+    <ClCompile Include="Source\Scenes\PetalburgWoods.cpp" />
     <ClCompile Include="Source\Scenes\Scene.cpp" />
     <ClCompile Include="Source\Sprites\AnimatedSprite.cpp" />
     <ClCompile Include="Source\Win32\WinMain.cpp" />

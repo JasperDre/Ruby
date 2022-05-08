@@ -78,7 +78,7 @@
     <ClInclude Include="Source\GameObjects\UI\UIObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\WoodsObjects\PettleburgWoodsMap.h">
+    <ClInclude Include="Source\GameObjects\WoodsObjects\PetalburgWoodsMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameObjects\WoodsObjects\WildPokemonTile.h">
@@ -132,7 +132,7 @@
     <ClInclude Include="Source\Scenes\PalletTown.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Scenes\PetalBergWoods.h">
+    <ClInclude Include="Source\Scenes\PetalburgWoods.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Scenes\Scene.h">
@@ -206,7 +206,7 @@
     <ClCompile Include="Source\GameObjects\UI\UIObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\WoodsObjects\PettleburgWoodsMap.cpp">
+    <ClCompile Include="Source\GameObjects\WoodsObjects\PetalburgWoodsMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameObjects\WoodsObjects\WildPokemonTile.cpp">
@@ -260,7 +260,7 @@
     <ClCompile Include="Source\Scenes\PalletTown.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Scenes\PetalbergWoods.cpp">
+    <ClCompile Include="Source\Scenes\PetalburgWoods.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scenes\Scene.cpp">

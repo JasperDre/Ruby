@@ -1,16 +1,18 @@
 #pragma once
-class GameObject;
+
+#include "GameObjects/GameObject.h"
+
 class ResourceManager;
 class TileMap;
 class Mesh;
 class GameCore;
 class Canvas;
 
-class PettleburgWoodsMap : public GameObject
+class PetalburgWoodsMap : public GameObject
 {
 public:
-	PettleburgWoodsMap(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
-	~PettleburgWoodsMap();
+	PetalburgWoodsMap(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
+	~PetalburgWoodsMap();
 
 	void Update(float deltatime);
 	void Draw(vec2 camPos, vec2 projecScale);
