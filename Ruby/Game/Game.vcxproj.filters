@@ -93,12 +93,6 @@
     <ClInclude Include="Source\GameObjects\Trainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameplayHelpers\EventHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameplayHelpers\FileIOManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\GameplayHelpers\ResourceManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -219,12 +213,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameObjects\Trainer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameplayHelpers\EventHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameplayHelpers\FileIOManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameplayHelpers\ResourceManager.cpp">

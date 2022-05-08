@@ -171,8 +171,6 @@
     <ClInclude Include="Source\GameObjects\WoodsObjects\PetalburgWoodsMap.h" />
     <ClInclude Include="Source\GameObjects\WoodsObjects\WildPokemonTile.h" />
     <ClInclude Include="Source\GamePCH.h" />
-    <ClInclude Include="Source\GameplayHelpers\EventHandler.h" />
-    <ClInclude Include="Source\GameplayHelpers\FileIOManager.h" />
     <ClInclude Include="Source\GameplayHelpers\ResourceManager.h" />
     <ClInclude Include="Source\GameplayHelpers\SceneManager.h" />
     <ClInclude Include="Source\GameplayHelpers\TileMap.h" />
@@ -215,8 +213,6 @@
     <ClCompile Include="Source\GameObjects\WoodsObjects\PetalburgWoodsMap.cpp" />
     <ClCompile Include="Source\GameObjects\WoodsObjects\WildPokemonTile.cpp" />
     <ClCompile Include="Source\GamePCH.cpp" />
-    <ClCompile Include="Source\GameplayHelpers\EventHandler.cpp" />
-    <ClCompile Include="Source\GameplayHelpers\FileIOManager.cpp" />
     <ClCompile Include="Source\GameplayHelpers\ResourceManager.cpp" />
     <ClCompile Include="Source\GameplayHelpers\SceneManager.cpp" />
     <ClCompile Include="Source\GameplayHelpers\TileMap.cpp" />

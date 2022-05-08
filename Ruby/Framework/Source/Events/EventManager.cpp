@@ -1,36 +1,28 @@
 #include "FrameworkPCH.h"
 
-EventManager::EventManager()
-{
-}
-
 EventManager::~EventManager()
 {
-    while( m_Events.empty() == false )
+    while (myEvents.empty() == false)
     {
-        delete m_Events.front();
-        m_Events.pop();
+        delete myEvents.front();
+        myEvents.pop();
     }
 }
 
-void EventManager::QueueEvent(Event* pEvent)
+void EventManager::QueueEvent(Event* anEvent)
 {
-    assert( pEvent != 0 );
-
-    m_Events.push( pEvent );
+    assert(anEvent);
+    myEvents.push(anEvent);
 }
 
-void EventManager::DispatchEvents(GameCore* pGameCore)
+void EventManager::DispatchEvents(GameCore* aGameCore)
 {
-    while( m_Events.empty() == false )
+    while (!myEvents.empty())
     {
-        Event* pEvent = m_Events.front();
-
-        pGameCore->OnEvent( pEvent );
-        m_Events.pop();
-
-		assert(pEvent != nullptr);
-
+        Event* pEvent = myEvents.front();
+        aGameCore->OnEvent(pEvent);
+        myEvents.pop();
+        assert(pEvent);
         delete pEvent;
     }
 }

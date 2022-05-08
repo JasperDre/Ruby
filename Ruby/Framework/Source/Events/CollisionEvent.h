@@ -1,22 +1,25 @@
-#ifndef _CollisionEvent_H_
-#define _CollisionEvent_H_
+#pragma once
+
+#include "Event.h"
 
 class CollisionEvent : public Event
 {
-protected:
-	vec2 ColliderPosition;
-	vec2 ObsticlePosition;
-
 public:
+	CollisionEvent()
+		: myColliderPosition(0.0f)
+		, myObsticlePosition(0.0f)
+	{}
+
 	CollisionEvent(vec2 anObsticlePos, vec2 aColliderPos)
-	{
-		ColliderPosition = aColliderPos;
-		ObsticlePosition = anObsticlePos;
-	}
+		: myColliderPosition(aColliderPos)
+		, myObsticlePosition(anObsticlePos)
+	{}
 
-	EventTypes GetEventType() { return EventType_Collision; }
-	vec2 GetColliderPosition() { return ColliderPosition; }
-	vec2 GetObsticlePosition() { return ObsticlePosition; }
+	[[nodiscard]] EventTypes GetEventType() const override { return EventTypes::EventType_Collision; }
+	[[nodiscard]] vec2 GetColliderPosition() const { return myColliderPosition; }
+	[[nodiscard]] vec2 GetObsticlePosition() const { return myObsticlePosition; }
 
+protected:
+	vec2 myColliderPosition;
+	vec2 myObsticlePosition;
 };
-#endif // _CollisionEvent_H_

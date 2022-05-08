@@ -189,18 +189,18 @@ void Game::LoadContent()
 
 void Game::OnEvent(Event* pEvent)
 {
-	if (pEvent->GetEventType() == EventType_Input)
+	if (pEvent->GetEventType() == EventTypes::EventType_Input)
 	{
 		m_pPlayerController->OnEvent(pEvent);
 	}
-	if (pEvent->GetEventType() == EventType_Collision)
+	if (pEvent->GetEventType() == EventTypes::EventType_Collision)
 	{
 		m_Trainer->OnEvent(pEvent);
 	}
-	if (pEvent->GetEventType() == EventType_Door);
+	if (pEvent->GetEventType() == EventTypes::EventType_Door);
 	{
 		m_MySceneManager->OnEvent(pEvent);
-		if (pEvent->GetEventType() != EventType_Input)
+		if (pEvent->GetEventType() != EventTypes::EventType_Input)
 		{
 			m_Trainer->OnEvent(pEvent);
 			m_TrainerCamera->OnEvent(pEvent);

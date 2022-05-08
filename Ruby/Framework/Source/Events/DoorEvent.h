@@ -1,21 +1,24 @@
 #pragma once
-#ifndef _DoorEvent_H_
-#define _DoorEvent_H_
+
+#include "Event.h"
 
 class DoorEvent : public Event
 {
-protected:
-	vec2 ColliderPosition;
-	int DoorType;
-
 public:
+	DoorEvent()
+		: myColliderPosition(0.0f)
+		, myDoorType(0)
+	{}
+
 	DoorEvent(int aDoorType)
-	{
-		DoorType = aDoorType;
-	}
+		: myColliderPosition(0.0f)
+		, myDoorType(aDoorType)
+	{}
 
-	EventTypes GetEventType() { return EventType_Door; }
-	int GetDoorType() { return DoorType; }
+	[[nodiscard]] EventTypes GetEventType() const override { return EventTypes::EventType_Door; }
+	[[nodiscard]] int GetDoorType() const { return myDoorType; }
 
+protected:
+	vec2 myColliderPosition;
+	int myDoorType;
 };
-#endif // _DoorEvent_H_

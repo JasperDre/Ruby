@@ -1,17 +1,17 @@
-#ifndef __EventManager_H__
-#define __EventManager_H__
+#pragma once
+
+#include <queue>
+
+class Event;
 
 class EventManager
 {
-protected:
-    std::queue<Event*> m_Events;
-
 public:
-    EventManager();
     virtual ~EventManager();
 
-    virtual void QueueEvent(Event* pEvent);
-    virtual void DispatchEvents(GameCore* pGameCore);
-};
+    virtual void QueueEvent(Event* anEvent);
+    virtual void DispatchEvents(GameCore* aGameCore);
 
-#endif //__EventManager_H__
+protected:
+    std::queue<Event*> myEvents;
+};

@@ -1,7 +1,8 @@
-#ifndef __InputEvent_H__
-#define __InputEvent_H__
+#pragma once
 
-enum InputDeviceTypes
+#include "Event.h"
+
+enum class InputDeviceTypes
 {
     InputDeviceType_Keyboard,
     InputDeviceType_Mouse,
@@ -9,7 +10,7 @@ enum InputDeviceTypes
     InputDeviceType_NumTypes,
 };
 
-enum InputStates
+enum class InputStates
 {
     InputState_Pressed,
     InputState_Released,
@@ -17,7 +18,7 @@ enum InputStates
     InputState_NumStates,
 };
 
-enum GamepadIDs
+enum class GamepadIDs
 {
     GamepadID_LeftStick,
     GamepadID_RightStick,
@@ -25,10 +26,36 @@ enum GamepadIDs
 
 class InputEvent : public Event
 {
-protected:
-    InputDeviceTypes m_InputDeviceType;
-    InputStates m_InputState;
+public:
+    InputEvent()
+        : m_ID(0)
+        , m_Position(0.0f)
+        , m_InputDeviceType(InputDeviceTypes::InputDeviceType_Gamepad)
+        , m_InputState(InputStates::InputState_Held)
+    {}
 
+    InputEvent(InputDeviceTypes devicetype, InputStates state, int id, vec2 pos)
+        : m_ID(id)
+        , m_Position(pos)
+        , m_InputDeviceType(devicetype)
+        , m_InputState(state)
+    {}
+
+    InputEvent(InputDeviceTypes devicetype, InputStates state, GamepadIDs id, vec2 pos)
+        : m_GamepadID(id)
+        , m_Position(pos)
+        , m_InputDeviceType(devicetype)
+        , m_InputState(state)
+    {}
+
+    [[nodiscard]] EventTypes GetEventType() const override { return EventTypes::EventType_Input; }
+    [[nodiscard]] InputDeviceTypes GetInputDeviceType() const { return m_InputDeviceType; }
+    [[nodiscard]] InputStates GetInputState() const { return m_InputState; }
+    [[nodiscard]] int GetID() const { return m_ID; }
+    [[nodiscard]] GamepadIDs GetGamepadID() const { return m_GamepadID; }
+    [[nodiscard]] vec2 GetPosition() const { return m_Position; }
+
+protected:
     union
     {
         int m_ID;
@@ -36,33 +63,6 @@ protected:
     };
 
     vec2 m_Position;
-
-public:
-    InputEvent(InputDeviceTypes devicetype, InputStates state, int id, vec2 pos)
-    {
-        m_InputDeviceType = devicetype;
-        m_InputState = state;
-        m_ID = id;
-        m_Position = pos;
-    }
-
-    InputEvent(InputDeviceTypes devicetype, InputStates state, GamepadIDs id, vec2 pos)
-    {
-        m_InputDeviceType = devicetype;
-        m_InputState = state;
-        m_GamepadID = id;
-        m_Position = pos;
-    }
-
-    EventTypes GetEventType() { return EventType_Input; }
-
-    InputDeviceTypes GetInputDeviceType() { return m_InputDeviceType; }
-    InputStates GetInputState() { return m_InputState; }
-
-    int GetID() { return m_ID; }
-    GamepadIDs GetGamepadID() { return m_GamepadID; }
-
-    vec2 GetPosition() { return m_Position; }
+    InputDeviceTypes m_InputDeviceType;
+    InputStates m_InputState;
 };
-
-#endif //__InputEvent_H__

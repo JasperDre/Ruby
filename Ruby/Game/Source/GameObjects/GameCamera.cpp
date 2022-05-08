@@ -116,7 +116,7 @@ vec2 GameCamera::GetCameraProjection()
 void GameCamera::OnEvent(Event * anEvent)
 {
 	DoorEvent* e = (DoorEvent*)anEvent;
-	if (e->GetEventType() == EventType_Door)
+	if (e->GetEventType() == EventTypes::EventType_Door)
 	{
 		Areas newArea = m_pGame->GetSceneManager()->GetActiveScene()->GetMyArea();
 		if (newArea == Area_OakLab)

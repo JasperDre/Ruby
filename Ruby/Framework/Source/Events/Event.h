@@ -1,7 +1,6 @@
-#ifndef __Event_H__
-#define __Event_H__
+#pragma once
 
-enum EventTypes
+enum class EventTypes
 {
 	EventType_Input,
 	EventType_Collision,
@@ -10,13 +9,6 @@ enum EventTypes
 
 class Event
 {
-protected:
-
 public:
-    Event() {}
-    virtual ~Event() {}
-
-    virtual EventTypes GetEventType() = 0;
+	[[nodiscard]] virtual EventTypes GetEventType() const = 0;
 };
-
-#endif //__Event_H__
