@@ -3,7 +3,6 @@
 #include "TileMap.h"
 
 class GameCore;
-using namespace std;
 
 class TileMapExtras : public TileMap
 {
@@ -11,9 +10,9 @@ public:
 	TileMapExtras(GameCore* myGame, Areas anArea);
 	~TileMapExtras();
 
-	void AddTile(const string& anIndex, Frame aFrame) override;
+	void AddTile(const std::string& anIndex, Frame aFrame) override;
 
-	Frame GetFrameFromExtrasMap(string aType) override;
+	Frame GetFrameFromExtrasMap(std::string aType) override;
 
 	bool GetTileAtPlayer(ivec2 playerColumnRow) override;
 	bool GetTileAtNPC(ivec2 npcColumnRow) override;
@@ -23,5 +22,5 @@ public:
 	ivec2 GetColumRowFromIndex(int anIndex) override;
 
 private:
-	map<string, Frame> m_TileInfoMap;
+	std::map<std::string, Frame> m_TileInfoMap;
 };

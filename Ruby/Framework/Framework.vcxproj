@@ -32,6 +32,7 @@
     <ClInclude Include="Source\Math\Vector.h" />
     <ClInclude Include="Source\Memory\MyMemory.h" />
     <ClInclude Include="Source\Utility\CPPList.h" />
+    <ClInclude Include="Source\Utility\FileUtility.h" />
     <ClInclude Include="Source\Utility\Helpers.h" />
     <ClInclude Include="Source\Utility\ShaderProgram.h" />
     <ClInclude Include="Source\Win32\FrameworkMain.h" />

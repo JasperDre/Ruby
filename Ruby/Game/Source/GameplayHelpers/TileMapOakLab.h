@@ -4,15 +4,13 @@
 
 class GameCore;
 
-using namespace std;
-
 class TileMapOakLab : public TileMap
 {
 public:
 	TileMapOakLab(GameCore* myGame, Areas anArea);
 	~TileMapOakLab();
 
-	void AddTile(const string& anIndex, Frame aFrame) override;
+	void AddTile(const std::string& anIndex, Frame aFrame) override;
 
 	TileInfo GetTileFromOakLabMap(OakLab_Tile_Type aType) override;
 
@@ -28,5 +26,5 @@ public:
 	ivec2 GetColumRowFromIndex(int anIndex) override;
 
 private:
-	map<OakLab_Tile_Type, TileInfo> m_TileInfoMap;
+	std::map<OakLab_Tile_Type, TileInfo> m_TileInfoMap;
 };

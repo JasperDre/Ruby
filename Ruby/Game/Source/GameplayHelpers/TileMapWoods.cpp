@@ -31,9 +31,9 @@ TileMapWoods::~TileMapWoods()
 	m_TileInfoMap.clear();
 }
 
-void TileMapWoods::AddTile(const string & anIndex, Frame aFrame)
+void TileMapWoods::AddTile(const std::string & anIndex, Frame aFrame)
 {
-	if (m_MyArea == Area_Woods)
+	if (m_MyArea == Areas::Area_Woods)
 	{
 		//Find the Tile Type from the index string
 		Forest_Tile_Type aType = WoodsTypeSelecter.find(anIndex)->second;

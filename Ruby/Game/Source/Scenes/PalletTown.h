@@ -1,6 +1,7 @@
 #pragma once
 
-class Scene;
+#include "Scene.h"
+
 class Mesh;
 class TileMap;
 class TileMapPalletTown;
@@ -17,41 +18,36 @@ class PalletTown : public Scene
 
 public:
 	PalletTown(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer* aPlayer, GLuint aTexture);
-	~PalletTown();
+	~PalletTown() override;
 
-	void LoadContent();
+	void LoadContent() override;
 
-	void Update(float deltatime);
+	void Update(float deltatime) override;
 
 	void Draw(vec2 camPos, vec2 camProjection) override;
 
-	virtual TileMap* GetMyTileMap() override;
+	TileMap* GetMyTileMap() override;
 
-	virtual void OnIsActive() override;
+	void OnIsActive() override;
 
-	virtual void Reload() override;
+	void Reload() override;
 
-	virtual void Unload() override;
+	void Unload() override;
 
 private:
-
-	TileMap* m_MyTileMap;
-
-	Trainer* m_MyTrainer;
-	PalletTownMap* m_PalletTownMap;
-	OakHouse* m_OakHouseTop;
-	PlayerHouse* m_PlayerHouseTop;
-	RivalHouse* m_RivalHouseTop;
-
-	Mesh* m_MyGirlMesh;
-	Mesh* m_MyBoyMesh;
-
-	TownGirl* m_GirlNPC;
-	TownBoy* m_BoyNPC;
-
 	vec2 PlayerSavedPosition;
 	vec2 GirlSavedPosition;
 	vec2 BoySavedPosition;
 	vec2 m_GirlNPCStart;
 	vec2 m_BoyNPCStart;
+	TileMap* m_MyTileMap;
+	Trainer* m_MyTrainer;
+	PalletTownMap* m_PalletTownMap;
+	OakHouse* m_OakHouseTop;
+	PlayerHouse* m_PlayerHouseTop;
+	RivalHouse* m_RivalHouseTop;
+	Mesh* m_MyGirlMesh;
+	Mesh* m_MyBoyMesh;
+	TownGirl* m_GirlNPC;
+	TownBoy* m_BoyNPC;
 };

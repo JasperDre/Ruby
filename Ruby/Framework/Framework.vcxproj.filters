@@ -78,6 +78,9 @@
     <ClInclude Include="Source\Utility\ShaderProgram.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Utility\FileUtility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\FrameworkPCH.cpp">

@@ -1,5 +1,7 @@
 #pragma once
-class Scene;
+
+#include "Scene.h"
+
 class Mesh;
 class Trainer;
 class TileMap;
@@ -16,39 +18,32 @@ class OakLab : public Scene
 {
 public:
 	OakLab(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer* aPlayer, GLuint aTexture);
-	~OakLab();
+	~OakLab() override;
 
-	void LoadContent();
+	void LoadContent() override;
 
-	void Update(float deltatime);
+	void Update(float deltatime) override;
 
 	void Draw(vec2 camPos, vec2 camProjection) override;
 
-	virtual TileMap* GetMyTileMap() override;
+	TileMap* GetMyTileMap() override;
 
-	virtual void OnIsActive() override;
+	void OnIsActive() override;
 
-	virtual void Reload() override;
+	void Reload() override;
 
-	virtual void Unload() override;
+	void Unload() override;
 
 private:
-
+	vec2 m_OakStartPosition;
 	Mesh* m_ProfOakMesh;
-
 	TileMap* m_MyTileMap;
-
 	Trainer* m_MyTrainer;
-
 	ProfessorOak* m_ProfOak;
 	AIController* m_OakAIController;
-
 	OakLabMap* m_OakLabMap;
 	OakLabDeskTop* m_OakLabWorkDesk;
 	OakLabMachineTop* m_OakLabMachineTop;
 	OakLabPlantTop* m_OakLabPlantTops;
 	OakLabTableTop* m_OakLabTableTop;
-
-	vec2 m_OakStartPosition;
-
 };

@@ -1,5 +1,4 @@
-#ifndef __ShaderBase_H__
-#define __ShaderBase_H__
+#pragma once
 
 #include <string>
 
@@ -27,5 +26,3 @@ public:
 
     GLuint GetProgram() { return m_Program; }
 };
-
-#endif //__ShaderBase_H__

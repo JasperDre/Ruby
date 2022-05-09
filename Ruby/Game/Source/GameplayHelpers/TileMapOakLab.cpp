@@ -1,10 +1,8 @@
 #include "GamePCH.h"
-
-#include "GameplayHelpers/TileMap.h"
 #include "TileMapOakLab.h"
 
 #include "Game/Game.h"
-
+#include "GameplayHelpers/TileMap.h"
 
 TileMapOakLab::TileMapOakLab(GameCore* myGame, Areas anArea) : TileMap(myGame, anArea)
 {
@@ -32,9 +30,9 @@ TileMapOakLab::~TileMapOakLab()
 
 }
 
-void TileMapOakLab::AddTile(const string& anIndex, Frame aFrame)
+void TileMapOakLab::AddTile(const std::string& anIndex, Frame aFrame)
 {
-	if (m_MyArea == Area_OakLab)
+	if (m_MyArea == Areas::Area_OakLab)
 	{
 		//Find the Tile Type from the index string
 		OakLab_Tile_Type aType = LabTypeSelecter.find(anIndex)->second;

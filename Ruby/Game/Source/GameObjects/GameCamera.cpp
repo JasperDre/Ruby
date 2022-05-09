@@ -119,17 +119,17 @@ void GameCamera::OnEvent(Event * anEvent)
 	if (e->GetEventType() == EventTypes::EventType_Door)
 	{
 		Areas newArea = m_pGame->GetSceneManager()->GetActiveScene()->GetMyArea();
-		if (newArea == Area_OakLab)
+		if (newArea == Areas::Area_OakLab)
 		{
 			CAMERAMIN = vec2(-6.0f, -6.0f);
 			CAMERAMAX = vec2(32.0f, 32.0f);
 		}
-		if (newArea == Area_PalletTown)
+		if (newArea == Areas::Area_PalletTown)
 		{
 			CAMERAMIN = vec2(15.0f, 15.0f);
 			CAMERAMAX = vec2(48.0f, 48.0f);
 		}
-		if (newArea == Area_Woods)
+		if (newArea == Areas::Area_Woods)
 		{
 			CAMERAMIN = vec2(16.0f, 18.0f);
 			CAMERAMAX = vec2(76.0f, 80.0f);

@@ -1,10 +1,11 @@
 #pragma once
+
+#include <vector>
+
 class GameObject;
 class Mesh;
 class ResourceManager;
 class TileMap;
-
-using namespace std;
 
 class OakLabPlantTop : public GameObject
 {
@@ -24,7 +25,7 @@ private:
 	ResourceManager* m_MyResourceManager;
 	TileMap* m_MyTileMap;
 
-	vector<Frame>m_MyFrames;
+	std::vector<Frame>m_MyFrames;
 
 	vec2 m_MyTileUVOffset;
 	vec2 m_MyTileUVScale;

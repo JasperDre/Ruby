@@ -144,10 +144,10 @@ void Game::LoadContent()
 	m_BattleScene = GLHelpers::LoadTexture(GetFilePath(rootDirectory, "Data/Textures/BattleScene.png"));
 
 	//Create a Resource Manager to parse JSON file and set up frames from sprite sheet
-	m_PalletTileMap = new TileMapPalletTown(this, Area_PalletTown);
-	m_OakLabTileMap = new TileMapOakLab(this, Area_OakLab);
-	m_WoodsTileMap = new TileMapWoods(this, Area_Woods);
-	m_ExtrasTileMap = new TileMapExtras(this, Area_Null);
+	m_PalletTileMap = new TileMapPalletTown(this, Areas::Area_PalletTown);
+	m_OakLabTileMap = new TileMapOakLab(this, Areas::Area_OakLab);
+	m_WoodsTileMap = new TileMapWoods(this, Areas::Area_Woods);
+	m_ExtrasTileMap = new TileMapExtras(this, Areas::Area_Null);
 	m_MyResourceManager = new ResourceManager();
 
 	m_MyResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/TileSet.json"), m_PalletTileMap);
@@ -157,10 +157,10 @@ void Game::LoadContent()
 	m_MyResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/ExtrasTileSet.json"), m_ExtrasTileMap);
 	m_MyResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/BattleScene.json"), m_ExtrasTileMap);
 
-	m_MyResourceManager->HoldTexture(TileSet, m_Tileset);
-	m_MyResourceManager->HoldTexture(OakLabTileSet, m_OakLabTileset);
-	m_MyResourceManager->HoldTexture(Player_NPCSprites, m_Sprites);
-	m_MyResourceManager->HoldTexture(ForestTileSet, m_WoodsTileset);
+	m_MyResourceManager->HoldTexture(TextureHandle::TileSet, m_Tileset);
+	m_MyResourceManager->HoldTexture(TextureHandle::OakLabTileSet, m_OakLabTileset);
+	m_MyResourceManager->HoldTexture(TextureHandle::Player_NPCSprites, m_Sprites);
+	m_MyResourceManager->HoldTexture(TextureHandle::ForestTileSet, m_WoodsTileset);
 
 	//Create our game objects
 	m_Trainer = new Trainer(m_MyResourceManager, this, m_TrainerMesh, m_Sprites);
@@ -177,10 +177,10 @@ void Game::LoadContent()
 
 	//Finally Create our SceneManager and Scenes
 	m_MySceneManager = new SceneManager();
-	m_MySceneManager->GenerateScenes(this, Area_PalletTown, m_PalletTileMap, m_MyResourceManager, m_TileMesh, m_Trainer, m_Tileset);
-	m_MySceneManager->GenerateScenes(this, Area_OakLab, m_OakLabTileMap, m_MyResourceManager, m_TileMesh, m_Trainer, m_OakLabTileset);
-	m_MySceneManager->GenerateScenes(this, Area_Woods, m_WoodsTileMap, m_MyResourceManager, m_TileMesh, m_Trainer, m_WoodsTileset);
-	m_MySceneManager->SetActiveScene(Area_PalletTown);
+	m_MySceneManager->GenerateScenes(this, Areas::Area_PalletTown, m_PalletTileMap, m_MyResourceManager, m_TileMesh, m_Trainer, m_Tileset);
+	m_MySceneManager->GenerateScenes(this, Areas::Area_OakLab, m_OakLabTileMap, m_MyResourceManager, m_TileMesh, m_Trainer, m_OakLabTileset);
+	m_MySceneManager->GenerateScenes(this, Areas::Area_Woods, m_WoodsTileMap, m_MyResourceManager, m_TileMesh, m_Trainer, m_WoodsTileset);
+	m_MySceneManager->SetActiveScene(Areas::Area_PalletTown);
 
 	m_UICanvas->SetPosition(m_TrainerCamera->GetPosition());
 

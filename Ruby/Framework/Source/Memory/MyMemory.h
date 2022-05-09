@@ -1,8 +1,6 @@
-#ifndef __MyMemory_H__
-#define __MyMemory_H__
+#pragma once
 
 #if _DEBUG
-
 void MyMemory_ForgetAllPreviousAllocations();
 void MyMemory_ValidateAllocations(bool anIsBreakForLeaksEnabled);
 
@@ -17,7 +15,4 @@ void operator delete(void* ptr);
 void operator delete[](void* ptr);
 
 #define new new(__FILE__, __LINE__)
-
 #endif //_DEBUG
-
-#endif //__MyMemory_H__

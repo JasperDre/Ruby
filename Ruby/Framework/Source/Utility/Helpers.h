@@ -1,5 +1,4 @@
-#ifndef __Helpers_H__
-#define __Helpers_H__
+#pragma once
 
 class MyColor
 {
@@ -9,9 +8,7 @@ public:
     unsigned char b;
     unsigned char a;
 
-    MyColor()
-    {
-    }
+    MyColor() {}
     MyColor(unsigned char nr, unsigned char ng, unsigned char nb, unsigned char na)
     {
         r = nr;
@@ -20,5 +17,3 @@ public:
         a = na;
     }
 };
-
-#endif //__Helpers_H__

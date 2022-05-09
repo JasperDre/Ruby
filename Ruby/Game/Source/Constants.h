@@ -4,20 +4,20 @@
 #include "Game/Game.h"
 
 //Area names used to call the conrtuctors of initial areas through the Scene Manager as well as switching the active scene & loading/unloading inactive scenes
-enum Areas
+enum class Areas
 {
-	Area_PalletTown = 0,
+	Area_PalletTown,
 	Area_TrainerHouse,
 	Area_RivalHouse,
 	Area_OakLab,
 	Area_Woods,
-	Area_Null,
+	Area_Null
 };
 
 //Names of Textures used to call texture charactistics from ResourceManager
-enum TextureHandle
+enum class TextureHandle
 {
-	TileSet = 0,
+	TileSet ,
 	OakLabTileSet,
 	Player_NPCSprites,
 	ForestTileSet,
@@ -55,9 +55,9 @@ enum OakLab_Tile_Type
 	Oak_Lab_Seat_ = 5,		//(0000 0000 0000 0101)
 	Oak_Lab_Table_ = 6,		//(0000 0000 0000 0110)
 	Oak_Lab_Wall_ = 7,		//(0000 0000 0000 0111)
-	Oak_Lab_WorkDesk_ = 8,	//(0000 0000 0000 1000)
-	Oak_Lab_NullWall_ = 9,	//(0000 0000 0000 1001)
-	Oak_Lab_NullDoor_ = 10	//(0000 0000 0000 1010)
+	Oak_Lab_WorkDesk_ = 8, //(0000 0000 0000 1000)
+	Oak_Lab_NullWall_ = 9, //(0000 0000 0000 1001)
+	Oak_Lab_NullDoor_ = 10 //(0000 0000 0000 1010)
 };
 
 enum Forest_Tile_Type
@@ -109,7 +109,7 @@ enum Tile_Variants
 	TileVariant_31 = 496,	//(0000 0010 0000 0000)
 	TileVariant_32 = 512,	//(0000 0010 0001 0000)
 	TileVariant_33 = 528,	//(0000 0010 0010 0000)
-	TileVariant_34 = 544,	//(0000 0010 0011 0000)	
+	TileVariant_34 = 544,	//(0000 0010 0011 0000)
 	TileVariant_35 = 560,	//(0000 0010 0100 0000)
 };
 

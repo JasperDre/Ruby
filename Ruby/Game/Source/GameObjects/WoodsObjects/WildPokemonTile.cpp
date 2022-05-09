@@ -233,10 +233,8 @@ bool WildPokemonTile::GetNodeIsClearOnSpecial(int tx, int ty)
 		if (m_MyTileMap->GetTileAtIndex(CheckTileIndex).MyForestType == Forest_Wild_Grass_)
 			return true;
 	}
-	else
-	{
-		return false;
-	}
+
+	return false;
 }
 
 void WildPokemonTile::OnEvent(Event * anEvent)

@@ -13,12 +13,12 @@ TileMapExtras::~TileMapExtras()
 	m_TileInfoMap.clear();
 }
 
-void TileMapExtras::AddTile(const string & anIndex, Frame aFrame)
+void TileMapExtras::AddTile(const std::string & anIndex, Frame aFrame)
 {
-	m_TileInfoMap.insert(std::pair<string, Frame>(anIndex, aFrame));
+	m_TileInfoMap.insert(std::pair<std::string, Frame>(anIndex, aFrame));
 }
 
-Frame TileMapExtras::GetFrameFromExtrasMap(string aType)
+Frame TileMapExtras::GetFrameFromExtrasMap(std::string aType)
 {
 	return m_TileInfoMap.find(aType)->second;
 }

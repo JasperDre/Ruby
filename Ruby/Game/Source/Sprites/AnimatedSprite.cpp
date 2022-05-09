@@ -68,9 +68,7 @@ void AnimatedSprite::AddFrame(const std::string& newframe)
 
 void AnimatedSprite::UseFrame(const std::string& aFrame)
 {
-	//clear the current vector of Frames
-	m_ActiveFrames.empty();
-	//Insert only the desired frame
+	m_ActiveFrames.clear();
 	m_ActiveFrames.push_back(m_MyResourceManager->GetFrameat(aFrame));
 }
 

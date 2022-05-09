@@ -210,47 +210,43 @@ SpriteDirection ProfessorOak::CalculateNextInput(ivec2 anIndex)
 	if (m_CurrentInput != -1)
 	{
 		int NextTileIndex = GetNextTileFromSet(m_CurrentInput);
-
 		ivec2 m_NextTileColumnRow = ivec2(NextTileIndex % GetMyMapWidth(), NextTileIndex / GetMyMapWidth());
 
 		if (m_NextTileColumnRow.x != anIndex.x)
 		{
-
 			if (m_NextTileColumnRow.x > anIndex.x)
-			{
 				return SpriteDirection::SpriteWalkRight;
-			}
+
 			if (m_NextTileColumnRow.x < anIndex.x)
-			{
 				return SpriteDirection::SpriteWalkLeft;
-			}
 		}
 		else if (m_NextTileColumnRow.y != anIndex.y)
 		{
 			if (m_NextTileColumnRow.y > anIndex.y)
-			{
 				return SpriteDirection::SpriteWalkUp;
-			}
 
 			if (m_NextTileColumnRow.y < anIndex.y)
-			{
 				return SpriteDirection::SpriteWalkDown;
-			}
 		}
 	}
 	else
 	{
 		return SpriteDirection::SpriteDirectionStop;
 	}
+
+	return SpriteDirection::SpriteDirectionStop;
 }
+
 AI_States ProfessorOak::GetMyState()
 {
 	return m_MyState;
 }
+
 void ProfessorOak::SetMyState(AI_States aState)
 {
 	m_MyState = aState;
 }
+
 bool ProfessorOak::GetNodeIsClearOnSpecial(int tx, int ty)
 {
 	const ivec2 MinColumnRow = m_MyTileMap->GetColumRowFromIndex(m_MyMinIndex);

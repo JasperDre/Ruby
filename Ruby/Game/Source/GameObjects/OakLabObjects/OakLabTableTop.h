@@ -1,16 +1,16 @@
 #pragma once
-class GameObject;
+
+#include "GameObjects/GameObject.h"
+
 class Mesh;
 class ResourceManager;
 class TileMap;
-
-using namespace std;
 
 class OakLabTableTop : public GameObject
 {
 public:
 	OakLabTableTop(ResourceManager * myResourceManager, TileMap * myTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture);
-	~OakLabTableTop();
+	~OakLabTableTop() override;
 
 	virtual void Update(float deltatime) override;
 
@@ -23,7 +23,7 @@ private:
 
 	ResourceManager* m_MyResourceManager;
 	TileMap* m_MyTileMap;
-	vector<Frame> m_MyFrames;
+	std::vector<Frame> m_MyFrames;
 
 	vec2 m_MyTileUVOffset;
 	vec2 m_MyTileUVScale;

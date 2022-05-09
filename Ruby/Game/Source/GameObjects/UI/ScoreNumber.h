@@ -5,8 +5,6 @@
 class TileMap;
 class ResourceManager;
 
-using namespace std;
-
 class ScoreNumber : public GameObject
 {
 public:
@@ -19,7 +17,7 @@ public:
 	void SetScore(int aScore);
 
 private:
-	vector<Frame>MyScoreFrames;
+	std::vector<Frame>MyScoreFrames;
 	int DigitsOnScore[6];
 	TileMap* m_MyExtrasTileMap;
 	ResourceManager* m_MyResourceManager;

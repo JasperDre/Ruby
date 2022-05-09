@@ -1,7 +1,9 @@
 #pragma once
+
+#include <map>
+
 class TileMap;
 class GameCore;
-using namespace std;
 
 class TileMapWoods : public TileMap
 {
@@ -9,7 +11,7 @@ public:
 	TileMapWoods(GameCore* myGame, Areas anArea);
 	~TileMapWoods();
 
-	virtual void AddTile(const string& anIndex, Frame aFrame) override;
+	virtual void AddTile(const std::string& anIndex, Frame aFrame) override;
 
 	virtual TileInfo GetTileFromWoodsMap(Forest_Tile_Type aType) override;
 
@@ -23,7 +25,7 @@ public:
 	virtual int GetMapHeight() override;
 	virtual int GetIndexFromColumnRow(int aColumn, int aRow) override;
 	virtual ivec2 GetColumRowFromIndex(int anIndex) override;
-private:
 
-	map<Forest_Tile_Type, TileInfo> m_TileInfoMap;
+private:
+	std::map<Forest_Tile_Type, TileInfo> m_TileInfoMap;
 };

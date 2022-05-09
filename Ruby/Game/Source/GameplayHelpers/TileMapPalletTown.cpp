@@ -30,9 +30,9 @@ TileMapPalletTown::~TileMapPalletTown()
 {
 	m_TileInfoMap.clear();
 }
-void TileMapPalletTown::AddTile(const string& anIndex, Frame aFrame)
+void TileMapPalletTown::AddTile(const std::string& anIndex, Frame aFrame)
 {
-	if (m_MyArea == Area_PalletTown)
+	if (m_MyArea == Areas::Area_PalletTown)
 	{
 		//Find the Tile Type from the index string
 		Tile_Type aType = TypeSelecter.find(anIndex)->second;

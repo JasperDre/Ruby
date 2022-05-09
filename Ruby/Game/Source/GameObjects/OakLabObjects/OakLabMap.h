@@ -1,4 +1,5 @@
 #pragma once
+
 class GameObject;
 class ResourceManager;
 class TileMap;
@@ -16,9 +17,7 @@ public:
 	void Draw(vec2 camPos, vec2 projecScale);
 
 private:
-
 	TileMap* m_MyTileMap;
 	ResourceManager* m_MyResourceManager;
-
 	Canvas* m_MyCanvas;
 };

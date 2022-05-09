@@ -1,13 +1,9 @@
 #include "GamePCH.h"
-
-#include "GameObjects/GameObject.h"
 #include "OakLabMachineTop.h"
-
-#include "Mesh/Mesh.h"
 
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/TileMap.h"
-#include "GameplayHelpers/TileMapPalletTown.h"
+#include "Mesh/Mesh.h"
 
 OakLabMachineTop::OakLabMachineTop(ResourceManager * myResourceManager, TileMap * myTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : GameObject(myGame, myMesh, aTexture)
 {

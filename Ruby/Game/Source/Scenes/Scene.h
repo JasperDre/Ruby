@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 class GameCore;
 class Mesh;
 class ResourceManager;
@@ -7,26 +9,8 @@ class TileMap;
 class GameObject;
 class Trainer;
 
-
-using namespace std;
-
 class Scene
 {
-protected:
-
-	GameCore* m_pMyGame;
-	ResourceManager* m_pMyResourceManager;
-	Mesh* m_pMyMesh;
-	GLuint m_pMyTexture;
-	Trainer* m_pMyTrainer;
-
-	Areas m_MyArea;
-	bool m_Active;
-
-	vec2 m_pMyPlayerStart;
-
-	vector<GameObject*> m_MyGameObjects;
-
 public:
 	Scene(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer* aPlayer, GLuint aTexture);
 	virtual ~Scene();
@@ -56,6 +40,14 @@ public:
 	virtual void Reload() = 0;
 	virtual void Unload() = 0;
 
-private:
-
+protected:
+	std::vector<GameObject*> m_MyGameObjects;
+	Areas m_MyArea;
+	vec2 m_pMyPlayerStart;
+	GameCore* m_pMyGame;
+	ResourceManager* m_pMyResourceManager;
+	Mesh* m_pMyMesh;
+	Trainer* m_pMyTrainer;
+	GLuint m_pMyTexture;
+	bool m_Active;
 };

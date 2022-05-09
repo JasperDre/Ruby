@@ -1,4 +1,5 @@
 #pragma once
+
 #include "GameObjects/GameObject.h"
 #include "Constants.h"
 
@@ -33,7 +34,6 @@ public:
 	bool IsAnimating();
 
 private:
-
 	std::vector<Frame>m_ActiveFrames;
 	float m_FrameSpeed;
 	float m_ElapsedTime;

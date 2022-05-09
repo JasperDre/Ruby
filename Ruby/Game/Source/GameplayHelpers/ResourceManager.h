@@ -1,9 +1,8 @@
 #pragma once
+
 #include "Constants.h"
 
 class TileMap;
-
-using namespace std;
 
 class ResourceManager
 {
@@ -13,21 +12,17 @@ public:
 
 	void UnpackJson(const std::string& JSONfilename, TileMap* aTileMap);
 	 
-	Frame GetFrameat(const std::string& anIndex);
+	Frame GetFrameat(const std::string& anIndex) const;
 
-	ivec2 GetTextureSize(int anIndex);
+	ivec2 GetTextureSize(int anIndex) const;
 
-	GLuint GetaTexture(TextureHandle aTextureName);
+	GLuint GetaTexture(TextureHandle aTextureName) const;
 
 	void HoldTexture(TextureHandle aTextureName, GLuint aTexture);
 
 protected:
-
-	TileMap* m_MyTileMap;;
-	map<string, Frame> m_AnimationsMap;
-	
-	map<TextureHandle, GLuint>m_MyTextures;
-
-	vector<ivec2>m_MyTextureSize;
-
+	std::map<std::string, Frame> m_AnimationsMap;
+	std::map<TextureHandle, GLuint> m_MyTextures;
+	std::vector<ivec2> m_MyTextureSize;
+	TileMap* m_MyTileMap;
 };
