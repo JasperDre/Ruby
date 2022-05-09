@@ -38,7 +38,7 @@
     <ClInclude Include="Source\Win32\GL\GLExtensions.h" />
     <ClInclude Include="Source\Win32\GL\wglext.h" />
     <ClInclude Include="Source\Win32\GL\WGLExtensions.h" />
-    <ClInclude Include="Source\Win32\Utility\WindowsHelpers.h" />
+    <ClInclude Include="Source\Win32\Utility\WindowsUtility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Events\EventManager.cpp" />
@@ -50,7 +50,7 @@
     <ClCompile Include="Source\Win32\FrameworkMain.cpp" />
     <ClCompile Include="Source\Win32\GL\GLExtensions.cpp" />
     <ClCompile Include="Source\Win32\GL\WGLExtensions.cpp" />
-    <ClCompile Include="Source\Win32\Utility\WindowsHelpers.cpp" />
+    <ClCompile Include="Source\Win32\Utility\WindowsUtility.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

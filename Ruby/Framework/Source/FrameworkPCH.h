@@ -26,7 +26,7 @@
 #include "cJSON/cJSON.h"
 
 #if WIN32
-#include "Win32/Utility/WindowsHelpers.h"
+#include "Win32/Utility/WindowsUtility.h"
 #endif
 #include "GL/GLHelpers.h"
 #include "Math/MathHelpers.h"

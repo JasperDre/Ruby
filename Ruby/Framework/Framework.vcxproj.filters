@@ -30,7 +30,7 @@
     <ClInclude Include="Source\Win32\GL\WGLExtensions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Win32\Utility\WindowsHelpers.h">
+    <ClInclude Include="Source\Win32\Utility\WindowsUtility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Win32\FrameworkMain.h">
@@ -86,7 +86,7 @@
     <ClCompile Include="Source\Win32\GL\WGLExtensions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Win32\Utility\WindowsHelpers.cpp">
+    <ClCompile Include="Source\Win32\Utility\WindowsUtility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Win32\FrameworkMain.cpp">
