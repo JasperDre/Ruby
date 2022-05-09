@@ -18,7 +18,7 @@ ResourceManager::~ResourceManager()
 
 void ResourceManager::UnpackJson(const std::string& JSONfilename, TileMap* aTileMap)
 {
-	const bool isFileValid = IsFileValid(JSONfilename);
+	const bool isFileValid = FileUtility::IsFileValid(JSONfilename);
 	assert(isFileValid);
 	if (!isFileValid)
 		return;
@@ -29,7 +29,7 @@ void ResourceManager::UnpackJson(const std::string& JSONfilename, TileMap* aTile
 		return;
 
 	//Before reading file we need to allocate a char array of the correct size
-	const int fileSize = GetFileSize(JSONfilename);
+	const int fileSize = FileUtility::GetFileSize(JSONfilename);
 	char* buffer = new char[fileSize];
 	InputStream.read(buffer, fileSize);
 

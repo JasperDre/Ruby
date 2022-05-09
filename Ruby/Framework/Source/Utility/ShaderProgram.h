@@ -19,10 +19,9 @@ public:
     virtual ~ShaderProgram();
 
     void Cleanup();
-
     void CompileShader(GLuint& shaderhandle, const char* shaderstring);
     bool Init(const char* vertfilename, const char* fragfilename);
     bool Reload();
 
-    GLuint GetProgram() { return m_Program; }
+    [[nodiscard]] GLuint GetProgram() const { return m_Program; }
 };
