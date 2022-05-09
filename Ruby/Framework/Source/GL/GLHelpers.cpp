@@ -1,5 +1,6 @@
 #include "FrameworkPCH.h"
 #include "GLHelpers.h"
+
 #include "lodepng/lodepng.h"
 
 namespace GLHelpers
@@ -10,7 +11,7 @@ namespace GLHelpers
 
         if( error != 0 )
         {
-            OutputMessage( "glGetError\n" );
+            WindowsUtility::OutputMessage( "glGetError\n" );
 #if _WIN32
             assert( false );
 #endif
@@ -22,7 +23,7 @@ namespace GLHelpers
         unsigned char* pngbuffer;
         unsigned int width, height;
         long filesize;
-        unsigned char* filebuffer = (unsigned char*)LoadCompleteFile( filename.c_str(), &filesize );
+        unsigned char* filebuffer = (unsigned char*)WindowsUtility::LoadCompleteFile( filename.c_str(), &filesize );
         unsigned int result = lodepng_decode32( &pngbuffer, &width, &height, filebuffer, filesize );
         delete[] filebuffer;
         assert( result == 0 );

@@ -18,7 +18,6 @@ public:
 
 private:
 	std::vector<Frame>MyScoreFrames;
-	int DigitsOnScore[6];
 	TileMap* m_MyExtrasTileMap;
 	ResourceManager* m_MyResourceManager;
 };

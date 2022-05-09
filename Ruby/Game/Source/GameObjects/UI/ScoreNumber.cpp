@@ -40,7 +40,7 @@ void ScoreNumber::Draw(vec2 camPos, vec2 camProjection)
 
 void ScoreNumber::SetScore(int aScore)
 {
-	int DigitsOnScore[6] = {
+	const int DigitsOnScore[6] = {
 								aScore % 10,
 							  (aScore % 100 - aScore % 10) / 10,
 							  (aScore % 1000 - aScore % 100) / 100,

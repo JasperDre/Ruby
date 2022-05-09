@@ -103,7 +103,7 @@ void Game::LoadContent()
 	wglSwapInterval(1);
 #endif
 
-	srand(static_cast<unsigned int>(GetSystemTime()));
+	srand(static_cast<unsigned int>(WindowsUtility::GetSystemTime()));
 
 	// Turn on depth buffer testing.
 	glEnable(GL_DEPTH_TEST);
