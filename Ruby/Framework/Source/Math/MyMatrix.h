@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Vector.h"
+
 // Values are stored column major.
 // m11 m21 m31 m41       Sx  0  0 Tx
 // m12 m22 m32 m42  --\   0 Sy  0 Ty
@@ -67,7 +69,7 @@ public:
     void CreateLookAtWorld(const Vector3& eye, const Vector3& up, const Vector3& at);
 
     // get values from matrix
-    Vector3 GetTranslation() { return Vector3( m41, m42, m43 ); }
+    Vector3 GetTranslation() const { return Vector3( m41, m42, m43 ); }
     Vector3 GetEulerAngles();
     Vector3 GetScale();
     Vector3 GetUp();

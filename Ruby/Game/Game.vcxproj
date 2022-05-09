@@ -230,6 +230,11 @@
     <ClCompile Include="Source\Sprites\AnimatedSprite.cpp" />
     <ClCompile Include="Source\Win32\WinMain.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\Framework.vcxproj">
+      <Project>{a51b2ad9-eabb-4bc4-ac88-eff4a587b53d}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

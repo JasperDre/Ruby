@@ -344,14 +344,14 @@ Vector3 MyMatrix::GetEulerAngles()
     //}
 
     // rearranged from above and using FEQUALEPSILON to give special cases more chance of hitting
-    if( m32 > 1.0f - FEQUALEPSILON ) // Not a unique solution: thetaZ - thetaY = atan2( -m21, m11 )
+    if(m32 > 1.0f - epsilonFloat) // Not a unique solution: thetaZ - thetaY = atan2( -m21, m11 )
     {
         float x = PI/2;
         float y = atan2f( m21, m11 );
         float z = 0.0f;
         return Vector3( x, y, z );
     }
-    else if( m32 < -1.0f + FEQUALEPSILON ) // Not a unique solution: thetaZ + thetaY = atan2( -m21, m11 )
+    else if(m32 < -1.0f + epsilonFloat) // Not a unique solution: thetaZ + thetaY = atan2( -m21, m11 )
     {
         float x = -PI/2;
         float y = -atan2f( m21, m11 );

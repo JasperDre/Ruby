@@ -66,12 +66,6 @@
     <ClInclude Include="Source\Math\Vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Memory\MyMemory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Utility\CPPList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Utility\Helpers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -108,9 +102,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Math\MyMatrix.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Memory\MyMemory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Utility\ShaderProgram.cpp">

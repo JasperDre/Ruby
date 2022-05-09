@@ -2,6 +2,7 @@
 
 #include <queue>
 
+class GameCore;
 class Event;
 
 class EventManager

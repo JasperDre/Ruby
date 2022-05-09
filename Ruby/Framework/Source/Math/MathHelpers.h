@@ -5,14 +5,14 @@
 #define PI 3.14159265358979323846f
 
 static constexpr double epsilonDouble = std::numeric_limits<double>::epsilon();
-static constexpr float episilonFloat = std::numeric_limits<float>::epsilon();
+static constexpr float epsilonFloat = std::numeric_limits<float>::epsilon();
 
-inline bool IsEqualFloat(const float a, const float b, const float epsilon = episilonFloat)
+inline bool IsEqualFloat(const float a, const float b, const float epsilon = epsilonFloat)
 {
     return std::abs(a - b) <= epsilon;
 }
 
-inline bool IsNotEqualFloat(const float a, const float b, const float epsilon = episilonFloat)
+inline bool IsNotEqualFloat(const float a, const float b, const float epsilon = epsilonFloat)
 {
     return std::abs(a - b) > epsilon;
 }

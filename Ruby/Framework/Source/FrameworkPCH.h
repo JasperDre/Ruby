@@ -6,23 +6,19 @@
 #include <windowsx.h>
 #endif
 
-#include <assert.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cassert>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
 #include <malloc.h>
-#include <memory.h>
-#include <math.h>
-
 #include <map>
-#include <vector>
+#include <memory.h>
 #include <queue>
-
-#if WIN32 && _DEBUG
-#include "Memory/MyMemory.h"
-#endif
+#include <vector>
 
 #if WIN32
 #include <gl/GL.h>
+
 #include "Win32/GL/glext.h"
 #include "Win32/GL/wglext.h"
 #endif
@@ -32,14 +28,13 @@
 #if WIN32
 #include "Win32/Utility/WindowsHelpers.h"
 #endif
+#include "GL/GLHelpers.h"
+#include "Math/MathHelpers.h"
+#include "Math/MyMatrix.h"
+#include "Math/Vector.h"
 #include "Utility/Helpers.h"
 #include "Utility/ShaderProgram.h"
 
-#include "Math/MathHelpers.h"
-#include "Math/Vector.h"
-#include "Math/MyMatrix.h"
-
-#include "GL/GLHelpers.h"
 #if WIN32
 #include "Win32/GL/GLExtensions.h"
 #include "Win32/GL/WGLExtensions.h"
@@ -53,12 +48,12 @@ typedef Vector3Int ivec3;
 typedef Vector4Int ivec4;
 typedef MyMatrix mat4;
 
-#include "GameCore/GameCore.h"
-#include "Events/Event.h"
-#include "Events/InputEvent.h"
 #include "Events/CollisionEvent.h"
 #include "Events/DoorEvent.h"
+#include "Events/Event.h"
 #include "Events/EventManager.h"
+#include "Events/InputEvent.h"
+#include "GameCore/GameCore.h"
 
 #if WIN32
 #include "Win32/FrameworkMain.h"
