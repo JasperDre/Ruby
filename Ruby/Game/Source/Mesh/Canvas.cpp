@@ -235,7 +235,7 @@ void Canvas::AddVert(vec2 objectPos, float objectAngle, vec2 objectScale, vec2 a
 
 			VertexFormat aVert = VertexFormat(vec2(finalPos), MyColor(m_BaseTileVertsReverse.at(i).m_Color), vec2(UVTemp));
 
-			m_CanvasVerts->push_back(aVert);
+			m_CanvasVerts.push_back(aVert);
 		}
 		else
 		{
@@ -256,7 +256,7 @@ void Canvas::AddVert(vec2 objectPos, float objectAngle, vec2 objectScale, vec2 a
 
 			VertexFormat aVert = VertexFormat(vec2(finalPos), MyColor(m_BaseTileVerts.at(i).m_Color), vec2(UVTemp));
 
-			m_CanvasVerts->push_back(aVert);
+			m_CanvasVerts.push_back(aVert);
 		}
 	}
 }

@@ -16,8 +16,12 @@ TownGirl::TownGirl(ResourceManager * aResourceManager, TileMap* aTileMap, GameCo
 	m_MyTileMap = aTileMap;
 	m_pMesh->GenerateFrameMesh();
 
-	//Initialize the animated sprites
-	for (int i = 0; i < NUM_DIRECTIONS; i++)
+	AnimationKeys[0] = "TownGirlWalkDown_";
+	AnimationKeys[1] = "TownGirlWalkRight_";
+	AnimationKeys[2] = "TownGirlWalkLeft_";
+	AnimationKeys[3] = "TownGirlWalkUp_";
+
+	for (unsigned int i = 0; i < NUM_DIRECTIONS; i++)
 	{
 		m_Animations[i] = new AnimatedSprite(myResourceManager, myGame, myMesh, 1, aTexture);
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "1.png");
@@ -32,7 +36,6 @@ TownGirl::TownGirl(ResourceManager * aResourceManager, TileMap* aTileMap, GameCo
 	m_Stop = true;
 	m_IsFirstInput = false;
 
-
 	m_CurrentInput = 0;
 
 	m_MyMinIndex = 303;
@@ -40,10 +43,8 @@ TownGirl::TownGirl(ResourceManager * aResourceManager, TileMap* aTileMap, GameCo
 
 	m_MyPath = &m_MyInputSet[0];
 
-	for (int i = 0; i < MAXPATHSIZE_TOWN_NPC; i++)
-	{
-		m_MyInputSet[i] = -1;
-	}
+	for (int& i : m_MyInputSet)
+		i = -1;
 
 	m_MyPathFinder = new AStarPathFinder(m_MyTileMap, this);
 
@@ -53,10 +54,10 @@ TownGirl::TownGirl(ResourceManager * aResourceManager, TileMap* aTileMap, GameCo
 
 TownGirl::~TownGirl()
 {
-	for (int i = 0; i < NUM_DIRECTIONS; i++)
+	for (auto& m_Animation : m_Animations)
 	{
-		delete m_Animations[i];
-		m_Animations[i] = nullptr;
+		delete m_Animation;
+		m_Animation = nullptr;
 	}
 
 	myResourceManager = nullptr;
@@ -78,7 +79,7 @@ void TownGirl::Update(float deltatime)
 	}
 	if (m_Stop == false)
 	{
-		int myTarget = m_MyInputSet[m_CurrentInput];
+		const int myTarget = m_MyInputSet[m_CurrentInput];
 
 		if (m_IsFirstInput == true)
 		{
@@ -105,10 +106,10 @@ void TownGirl::Update(float deltatime)
 	}
 
 
-	for (int i = 0; i < NUM_DIRECTIONS; i++)
+	for (const auto& m_Animation : m_Animations)
 	{
-		m_Animations[i]->SetPosition(GetPosition());
-		m_Animations[i]->Update(deltatime);
+		m_Animation->SetPosition(GetPosition());
+		m_Animation->Update(deltatime);
 	}
 }
 
@@ -142,14 +143,14 @@ void TownGirl::Move(SpriteDirection dir, float deltatime)
 
 void TownGirl::Pause()
 {
-	for (int i = 0; i < NUM_DIRECTIONS; i++)
-		m_Animations[i]->Pause();
+	for (const auto& m_Animation : m_Animations)
+		m_Animation->Pause();
 }
 
 void TownGirl::Resume()
 {
-	for (int i = 0; i < NUM_DIRECTIONS; i++)
-		m_Animations[i]->Resume();
+	for (const auto& m_Animation : m_Animations)
+		m_Animation->Resume();
 }
 
 void TownGirl::SetStop(bool StopNPC)
@@ -158,7 +159,7 @@ void TownGirl::SetStop(bool StopNPC)
 		m_Stop = StopNPC;
 }
 
-void TownGirl::ResetPathFinder()
+void TownGirl::ResetPathFinder() const
 {
 	m_MyPathFinder->Reset();
 }
@@ -167,8 +168,8 @@ bool TownGirl::GetNextPath(ivec2 anIndex)
 {
 	const ivec2 GirlIndex = anIndex;
 
-	for (int i = 0; i < MAXPATHSIZE_TOWN_NPC; i++)
-		m_MyInputSet[i] = -1;
+	for (int& i : m_MyInputSet)
+		i = -1;
 
 	ResetPathFinder();
 
@@ -230,12 +231,11 @@ SpriteDirection TownGirl::CalculateNextInput(ivec2 anIndex)
 	return SpriteDirection::SpriteDirectionStop;
 
 }
-void TownGirl::OnEvent(Event * anEvent)
+void TownGirl::OnEvent(Event* anEvent)
 {
-
 }
 
-bool TownGirl::CheckForCollision(vec2 NPCNewPosition)
+bool TownGirl::CheckForCollision(vec2 NPCNewPosition) const
 {
 	//Get the location of each point of collision on the player and then truncate it to a row and column
 	const ivec2 OriginIndex = ivec2((NPCNewPosition.x / TILESIZE), ((NPCNewPosition.y - 0.3f) / TILESIZE));

@@ -6,7 +6,6 @@ class Mesh;
 class ResourceManager;
 class TileMap;
 
-
 class OakHouse : public GameObject
 {
 public:

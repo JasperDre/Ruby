@@ -18,8 +18,6 @@ public:
 	virtual void TrackToPlayerUpdate(float deltatime);
 
 	void Draw(vec2 camPos, vec2 projecScale) override;
-
-	void SetAIController(AStarPathFinder* aController) {}
 	void Move(SpriteDirection dir, float deltatime);
 
 	void ResetPathFinder();
@@ -33,7 +31,7 @@ public:
 
 	void OnEvent(Event* anEvent) override;
 
-	bool CheckForCollision(vec2 NPCNewPosition);
+	[[nodiscard]] bool CheckForCollision(vec2 NPCNewPosition) const;
 
 	int* GetInputSet() override;
 	void SetInputSet(int* aPath) override;
@@ -57,17 +55,17 @@ public:
 	int RangeRandomIntAlg(int min, int max) override;
 
 private:
-	SpriteDirection myDirection;
-	SpriteDirection myNewDirection;
+	int m_MyInputSet[MAXPATHSIZE_TOWN_NPC];
 	ResourceManager* myResourceManager;
 	vec2 NewPosition;
 	ivec2 m_MyNewDestination;
 	ivec2 m_MyIndex;
 	TileMap* m_MyTileMap;
-	int m_MyInputSet[MAXPATHSIZE_TOWN_NPC];
 	int* m_MyPath;
 	int m_CurrentInput;
 	bool m_IsFirstInput;
 	bool m_PathingComplete;
+	SpriteDirection myDirection;
+	SpriteDirection myNewDirection;
 	AI_States m_MyState;
 };

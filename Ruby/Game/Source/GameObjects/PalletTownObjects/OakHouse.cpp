@@ -5,7 +5,8 @@
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 
-OakHouse::OakHouse(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : GameObject(myGame, myMesh, aTexture)
+OakHouse::OakHouse(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture)
+	: GameObject(myGame, myMesh, aTexture)
 {
 	m_pMesh = myMesh;
 	m_pMyTexture = aTexture;
@@ -15,7 +16,6 @@ OakHouse::OakHouse(ResourceManager* myResourceManager, TileMap* myTileMap, GameC
 
 	for (int i = 0; i < OakHouse_NumTiles; i++)
 	{
-
 		TileInfo atile = m_MyTileMap->GetTileFromPalletMap(Oak_House_);
 
 		Frame aframe = atile.MyVariant.at(OakHouseMap[i]);

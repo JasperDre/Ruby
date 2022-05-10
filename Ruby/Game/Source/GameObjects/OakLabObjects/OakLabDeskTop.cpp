@@ -5,7 +5,8 @@
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 
-OakLabDeskTop::OakLabDeskTop(ResourceManager * myResourceManager, TileMap * myTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : GameObject(myGame, myMesh, aTexture)
+OakLabDeskTop::OakLabDeskTop(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
+	: GameObject(myGame, myMesh, aTexture)
 {
 	m_pMesh = myMesh;
 	m_pMyTexture = aTexture;
@@ -15,7 +16,6 @@ OakLabDeskTop::OakLabDeskTop(ResourceManager * myResourceManager, TileMap * myTi
 
 	for (int i = 0; i < OakLabDesk_NumTiles; i++)
 	{
-
 		TileInfo atile = m_MyTileMap->GetTileFromOakLabMap(Oak_Lab_WorkDesk_);
 
 		Frame aframe = atile.MyVariant.at(OakHOakLabDeskMap[i]);
@@ -36,7 +36,6 @@ OakLabDeskTop::~OakLabDeskTop()
 
 void OakLabDeskTop::Update(float deltatime)
 {
-
 }
 
 void OakLabDeskTop::Draw(vec2 camPos, vec2 camProject)

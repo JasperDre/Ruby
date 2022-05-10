@@ -19,28 +19,27 @@ public:
 	void Move(SpriteDirection dir, float deltatime);
 
 	void Pause();
-	void Resume();
+	void Resume() const;
 	void SetStop(bool StopPlayer);
 
 	void OnEvent(Event* anEvent) override;
 
 	void PlayerTransition();
 
-	SpriteDirection GetMyDirection();
+	[[nodiscard]] SpriteDirection GetMyDirection() const;
 
-	bool CheckForCollision(vec2 playersNewPosition);
+	[[nodiscard]] bool CheckForCollision(vec2 aPosition) const;
 
 protected:
 	PlayerController* myController;
 
 private:
-	std::string AnimationKeys[NUM_DIRECTIONS] = { "PlayerWalkDown_", "PlayerWalkRight_", "PlayerWalkLeft_", "PlayerWalkUp_" };
+	std::string AnimationKeys[NUM_DIRECTIONS];
 	AnimatedSprite* m_Animations[NUM_DIRECTIONS];
 	vec2 NewPosition;
 	vec2 aTransitionDestination;
 	ResourceManager* myResourceManager;
 	SpriteDirection myDirection;
-	int PlayerOriginIndex;
 	bool m_InTransition;
 	bool m_Stop;
 };

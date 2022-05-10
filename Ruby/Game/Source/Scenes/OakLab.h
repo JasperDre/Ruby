@@ -21,24 +21,16 @@ public:
 	~OakLab() override;
 
 	void LoadContent() override;
-
 	void Update(float deltatime) override;
-
 	void Draw(vec2 camPos, vec2 camProjection) override;
-
-	TileMap* GetMyTileMap() override;
-
 	void OnIsActive() override;
-
 	void Reload() override;
-
 	void Unload() override;
+	void OnEvent(Event* /*anEvent*/) override {}
 
 private:
 	vec2 m_OakStartPosition;
 	Mesh* m_ProfOakMesh;
-	TileMap* m_MyTileMap;
-	Trainer* m_MyTrainer;
 	ProfessorOak* m_ProfOak;
 	AIController* m_OakAIController;
 	OakLabMap* m_OakLabMap;

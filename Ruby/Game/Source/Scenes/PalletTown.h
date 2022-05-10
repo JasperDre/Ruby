@@ -21,18 +21,12 @@ public:
 	~PalletTown() override;
 
 	void LoadContent() override;
-
 	void Update(float deltatime) override;
-
 	void Draw(vec2 camPos, vec2 camProjection) override;
-
-	TileMap* GetMyTileMap() override;
-
 	void OnIsActive() override;
-
 	void Reload() override;
-
 	void Unload() override;
+	void OnEvent(Event* /*anEvent*/) override {}
 
 private:
 	vec2 PlayerSavedPosition;
@@ -40,8 +34,6 @@ private:
 	vec2 BoySavedPosition;
 	vec2 m_GirlNPCStart;
 	vec2 m_BoyNPCStart;
-	TileMap* m_MyTileMap;
-	Trainer* m_MyTrainer;
 	PalletTownMap* m_PalletTownMap;
 	OakHouse* m_OakHouseTop;
 	PlayerHouse* m_PlayerHouseTop;

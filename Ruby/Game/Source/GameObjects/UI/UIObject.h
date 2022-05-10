@@ -1,24 +1,22 @@
 #pragma once
-class GameObject;
+
+#include "GameObjects/GameObject.h"
+
 class TileMap;
 class PokeBall;
 class ScoreNumber;
 
 class UIObject : public GameObject
 {
-protected:
-
 public:
 	UIObject(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
-	~UIObject();
+	~UIObject() override;
 
-	virtual void Update(float deltatime) override;
+	void Update(float deltatime) override;
+	void Draw(vec2 camPos, vec2 camProjection) override;
 
-	virtual void Draw(vec2 camPos, vec2 camProjection);
-
-	void SetScore(int aScore);
+	void SetScore(int aScore) const;
 private:
 	PokeBall* m_PokeBall;
 	ScoreNumber* m_ScoreNumber;
-
 };

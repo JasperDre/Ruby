@@ -1,8 +1,5 @@
 #include "GamePCH.h"
-
-#include "Mesh/Mesh.h"
 #include "Mesh.h"
-
 
 Mesh::Mesh()
 {
@@ -21,9 +18,7 @@ Mesh::Mesh()
 Mesh::~Mesh()
 {
 	glDeleteBuffers(1, &m_VBO);
-
-	delete m_CanvasVerts;
-	m_CanvasVerts = nullptr;
+	m_CanvasVerts.clear();
 }
 
 void SetUniform1f(GLuint shader, const char* uniformName, float value)
@@ -44,7 +39,7 @@ void SetUniform2f(GLuint shader, const char* uniformName, vec2 value)
 	}
 }
 
-void Mesh::Draw(vec2 objectPos, float objectAngle, vec2 objectScale, vec2 cameraPos, vec2 projectionScale, GLuint aTexture, vec2 aUVscale, vec2 aUVoffset)
+void Mesh::Draw(vec2 objectPos, float objectAngle, vec2 objectScale, vec2 camPos, vec2 projScale, GLuint aTexture, vec2 aUVscale, vec2 aUVoffset)
 {
 	//TEXTURES ARE GLuint
 	assert(m_PrimitiveType != -1);
@@ -85,8 +80,8 @@ void Mesh::Draw(vec2 objectPos, float objectAngle, vec2 objectScale, vec2 camera
 	SetUniform2f(shader, "u_ObjectScale", objectScale);
 	SetUniform1f(shader, "u_ObjectAngleRadians", objectAngle / 180.0f * PI);
 	SetUniform2f(shader, "u_ObjectPosition", objectPos);
-	SetUniform2f(shader, "u_CameraTranslation", cameraPos * -1);
-	SetUniform2f(shader, "u_ProjectionScale", projectionScale);
+	SetUniform2f(shader, "u_CameraTranslation", camPos * -1);
+	SetUniform2f(shader, "u_ProjectionScale", projScale);
 
 
 
@@ -107,7 +102,7 @@ void Mesh::Draw(vec2 objectPos, float objectAngle, vec2 objectScale, vec2 camera
 
 	if (IsDebug == true)
 	{
-		DebugDraw(objectPos, objectAngle, objectScale, cameraPos, projectionScale);
+		DebugDraw(objectPos, objectAngle, objectScale, camPos, projScale);
 	}
 
 	GLHelpers::CheckForGLErrors();
@@ -440,7 +435,7 @@ void Mesh::GenterateCanvasMesh(int aSize)
 
     glGenBuffers(1, &m_VBO);
     glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(VertexFormat) * aSize, &m_CanvasVerts->front(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(VertexFormat) * aSize, &m_CanvasVerts.front(), GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	m_PrimitiveType = GL_TRIANGLE_STRIP;

@@ -186,7 +186,6 @@
     <ClInclude Include="Source\Scenes\PetalburgWoods.h" />
     <ClInclude Include="Source\Scenes\Scene.h" />
     <ClInclude Include="Source\Sprites\AnimatedSprite.h" />
-    <ClInclude Include="Source\Win32\WinMain.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Controllers\AIController.cpp" />

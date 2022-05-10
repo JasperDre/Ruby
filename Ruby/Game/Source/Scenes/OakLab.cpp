@@ -16,20 +16,16 @@
 #include "Scenes/Scene.h"
 
 OakLab::OakLab(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer * aPlayer, GLuint aTexture)
-	: Scene(myGame, myArea, aTileMap, aResourceManager, aMesh, aPlayer, aTexture)
+	: Scene(myGame, myArea, aTileMap, aResourceManager, aMesh, aPlayer, vec2(7.5f * TILESIZE, 2.0f * TILESIZE), aTexture)
 {
-	m_ProfOakMesh = 0;
-	m_MyTileMap = aTileMap;
-	m_MyTrainer = aPlayer;
-	m_ProfOak = 0;
-	m_OakAIController = 0;
-
-	m_OakLabMap = 0;
-	m_OakLabWorkDesk = 0;
-	m_OakLabMachineTop = 0;
-	m_OakLabPlantTops = 0;
-	m_OakLabTableTop = 0;
-	m_pMyPlayerStart = vec2(7.5f * TILESIZE, 2.0f * TILESIZE);
+	m_ProfOakMesh = nullptr;
+	m_ProfOak = nullptr;
+	m_OakAIController = nullptr;
+	m_OakLabMap = nullptr;
+	m_OakLabWorkDesk = nullptr;
+	m_OakLabMachineTop = nullptr;
+	m_OakLabPlantTops = nullptr;
+	m_OakLabTableTop = nullptr;
 	m_OakStartPosition = vec2(6.0f * TILESIZE, 11.0f * TILESIZE);
 }
 
@@ -60,7 +56,7 @@ void OakLab::LoadContent()
 
 void OakLab::Update(float deltatime)
 {
-	m_MyTrainer->Update(deltatime);
+	m_pMyTrainer->Update(deltatime);
 	m_ProfOak->Update(deltatime);
 }
 
@@ -70,7 +66,7 @@ void OakLab::Draw(vec2 camPos, vec2 camProjection)
 
 	m_ProfOak->Draw(camPos, camProjection);
 
-	m_MyTrainer->Draw(camPos, camProjection);
+	m_pMyTrainer->Draw(camPos, camProjection);
 
 	m_OakLabWorkDesk->Draw(camPos, camProjection);
 	m_OakLabMachineTop->Draw(camPos, camProjection);
@@ -78,14 +74,9 @@ void OakLab::Draw(vec2 camPos, vec2 camProjection)
 	m_OakLabTableTop->Draw(camPos, camProjection);
 }
 
-TileMap* OakLab::GetMyTileMap()
-{
-	return m_MyTileMap;
-}
-
 void OakLab::OnIsActive()
 {
-	m_MyTrainer->SetPosition(m_pMyPlayerStart);
+	m_pMyTrainer->SetPosition(m_pMyPlayerStart);
 	m_ProfOak->SetPosition(m_OakStartPosition);
 	m_ProfOak->ResetPathFinder();
 }

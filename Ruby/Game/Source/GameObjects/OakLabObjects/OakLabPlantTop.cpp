@@ -1,15 +1,12 @@
 #include "GamePCH.h"
-
-#include "GameObjects/GameObject.h"
 #include "OakLabPlantTop.h"
-
-#include "Mesh/Mesh.h"
 
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/TileMap.h"
-#include "GameplayHelpers/TileMapPalletTown.h"
+#include "Mesh/Mesh.h"
 
-OakLabPlantTop::OakLabPlantTop(ResourceManager * myResourceManager, TileMap * myTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : GameObject(myGame, myMesh, aTexture)
+OakLabPlantTop::OakLabPlantTop(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
+	: GameObject(myGame, myMesh, aTexture)
 {
 	m_pMesh = myMesh;
 	m_pMyTexture = aTexture;
@@ -18,7 +15,6 @@ OakLabPlantTop::OakLabPlantTop(ResourceManager * myResourceManager, TileMap * my
 
 	for (int i = 0; i < OakLabPlant_NumTiles; i++)
 	{
-
 		TileInfo atile = m_MyTileMap->GetTileFromOakLabMap(Oak_Lab_Plant_);
 
 		Frame aframe = atile.MyVariant.at(OakLabPlantMap[i]);
@@ -36,6 +32,7 @@ OakLabPlantTop::OakLabPlantTop(ResourceManager * myResourceManager, TileMap * my
 		{
 			aframe.myWorldSpace -= vec2(2.05f, 0.0f);
 		}
+
 		m_MyFrames.push_back(aframe);
 	}
 }

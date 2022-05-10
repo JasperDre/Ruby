@@ -15,19 +15,16 @@
 #include "Scenes/Scene.h"
 
 PalletTown::PalletTown(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer* aPlayer, GLuint aTexture)
-	: Scene(myGame, myArea, aTileMap, aResourceManager, aMesh, aPlayer, aTexture)
+	: Scene(myGame, myArea, aTileMap, aResourceManager, aMesh, aPlayer, vec2(9.0f * TILESIZE, 20.0f * TILESIZE), aTexture)
 {
-	m_MyTileMap = aTileMap;
-	m_MyTrainer = aPlayer;
-	m_PalletTownMap = 0;
-	m_OakHouseTop = 0;
-	m_PlayerHouseTop = 0;
-	m_RivalHouseTop = 0;
-	m_GirlNPC = 0;
-	m_BoyNPC = 0;
-	m_MyGirlMesh = 0;
-	m_MyBoyMesh = 0;
-	m_pMyPlayerStart = vec2(9.0f * TILESIZE, 20.0f * TILESIZE);
+	m_PalletTownMap = nullptr;
+	m_OakHouseTop = nullptr;
+	m_PlayerHouseTop = nullptr;
+	m_RivalHouseTop = nullptr;
+	m_GirlNPC = nullptr;
+	m_BoyNPC = nullptr;
+	m_MyGirlMesh = nullptr;
+	m_MyBoyMesh = nullptr;
 	m_GirlNPCStart = vec2(16.0f * TILESIZE, 9.0f * TILESIZE);
 	m_BoyNPCStart = vec2(14.0f * TILESIZE, 19.0f * TILESIZE);
 	PlayerSavedPosition = vec2(0.0f, 0.0f);
@@ -53,7 +50,7 @@ PalletTown::~PalletTown()
 	m_MyGirlMesh = nullptr;
 	delete m_MyBoyMesh;
 	m_MyBoyMesh = nullptr;
-	m_MyTrainer = nullptr;
+	m_pMyTrainer = nullptr;
 }
 
 void PalletTown::LoadContent()
@@ -73,7 +70,7 @@ void PalletTown::LoadContent()
 
 void PalletTown::Update(float deltatime)
 {
-	m_MyTrainer->Update(deltatime);
+	m_pMyTrainer->Update(deltatime);
 	m_GirlNPC->Update(deltatime);
 	m_BoyNPC->Update(deltatime);
 }
@@ -85,16 +82,11 @@ void PalletTown::Draw(vec2 camPos, vec2 camProjection)
 	m_GirlNPC->Draw(camPos, camProjection);
 	m_BoyNPC->Draw(camPos, camProjection);
 
-	m_MyTrainer->Draw(camPos, camProjection);
+	m_pMyTrainer->Draw(camPos, camProjection);
 
 	m_OakHouseTop->Draw(camPos, camProjection);
 	m_PlayerHouseTop->Draw(camPos, camProjection);
 	m_RivalHouseTop->Draw(camPos, camProjection);
-}
-
-TileMap* PalletTown::GetMyTileMap()
-{
-	return m_MyTileMap;
 }
 
 void PalletTown::OnIsActive()
@@ -106,7 +98,7 @@ void PalletTown::OnIsActive()
 		m_BoyNPCStart = BoySavedPosition;
 	}
 
-	m_MyTrainer->SetPosition(m_pMyPlayerStart);
+	m_pMyTrainer->SetPosition(m_pMyPlayerStart);
 
 	m_GirlNPC->SetPosition(m_GirlNPCStart);
 	m_BoyNPC->SetPosition(m_BoyNPCStart);
@@ -122,7 +114,7 @@ void PalletTown::Reload()
 
 void PalletTown::Unload()
 {
-	PlayerSavedPosition = m_MyTrainer->GetPosition();
+	PlayerSavedPosition = m_pMyTrainer->GetPosition();
 	GirlSavedPosition = m_GirlNPC->GetPosition();
 	BoySavedPosition = m_BoyNPC->GetPosition();
 }

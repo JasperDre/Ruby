@@ -29,8 +29,8 @@ WildPokemonTile::WildPokemonTile(ResourceManager* aResourceManager, TileMap* aTi
 
 	m_MyNewDestination = ivec2(0, 0);
 
-	for (int i = 0; i < MAXPATHSIZE_TOWN_NPC; i++)
-		m_MyInputSet[i] = -1;
+	for (int& i : m_MyInputSet)
+		i = -1;
 
 	m_MyPathFinder = new AStarPathFinder(m_MyTileMap, this);
 
@@ -95,12 +95,12 @@ void WildPokemonTile::WalkingUpdate(float deltatime)
 		SetMyState(AI_States::PathingState);
 	}
 
-	vec2 PlayerPos = m_pGame->GetMyPlayer()->GetPosition();
+	const vec2 PlayerPos = m_pGame->GetMyPlayer()->GetPosition();
 
-	ivec2 aPlayerColumnRow = ivec2(PlayerPos.x / TILESIZE, PlayerPos.y / TILESIZE);
+	const ivec2 aPlayerColumnRow = ivec2(PlayerPos.x / TILESIZE, PlayerPos.y / TILESIZE);
 
-	ivec2 MinRange = m_MyTileMap->GetColumRowFromIndex(m_MyMinIndex);
-	ivec2 MaxRange = m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex);
+	const ivec2 MinRange = m_MyTileMap->GetColumRowFromIndex(m_MyMinIndex);
+	const ivec2 MaxRange = m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex);
 
 	if (aPlayerColumnRow.x > MinRange.x && aPlayerColumnRow.x < MaxRange.x && aPlayerColumnRow.y > MinRange.y && aPlayerColumnRow.y < MaxRange.y)
 		SetMyState(AI_States::TrackToPlayerState);
@@ -237,12 +237,12 @@ bool WildPokemonTile::GetNodeIsClearOnSpecial(int tx, int ty)
 	return false;
 }
 
-void WildPokemonTile::OnEvent(Event * anEvent)
+void WildPokemonTile::OnEvent(Event* anEvent)
 {
 
 }
 
-bool WildPokemonTile::CheckForCollision(vec2 NPCNewPosition)
+bool WildPokemonTile::CheckForCollision(vec2 NPCNewPosition) const
 {
 	//Get the location of each point of collision on the player and then truncate it to a row and column
 	const ivec2 OriginIndex = ivec2((NPCNewPosition.x / TILESIZE), ((NPCNewPosition.y - 0.3f) / TILESIZE));
@@ -267,7 +267,7 @@ int * WildPokemonTile::GetInputSet()
 	return m_MyPath;
 }
 
-void WildPokemonTile::SetInputSet(int * aPath)
+void WildPokemonTile::SetInputSet(int* aPath)
 {
 	m_MyPath = aPath;
 }

@@ -7,10 +7,10 @@ class Scene;
 class SceneManager
 {
 public:
-	SceneManager() : m_PlayerSavedPosition(0.0f) {}
+	SceneManager();
 	~SceneManager();
 
-	void GenerateScenes(GameCore * myGame, Areas myArea, TileMap* aTileMap, ResourceManager * aResourceManager, Mesh* aMesh, Trainer* aPlayer, GLuint aTexture);
+	void GenerateScenes(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer* aPlayer, GLuint aTexture);
 
 	void SetActiveScene(Areas aSceneHandle);
 

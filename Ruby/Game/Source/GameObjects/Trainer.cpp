@@ -9,14 +9,19 @@
 #include "Scenes/Scene.h"
 #include "Sprites/AnimatedSprite.h"
 
-Trainer::Trainer(ResourceManager * aResourceManager, GameCore * myGame, Mesh * myMesh, GLuint aTexture) :GameObject(myGame, myMesh, aTexture)
+Trainer::Trainer(ResourceManager* aResourceManager, GameCore* myGame, Mesh * myMesh, GLuint aTexture)
+	: GameObject(myGame, myMesh, aTexture)
+	, myController(nullptr)
 {
+	AnimationKeys[0] = "PlayerWalkDown_";
+	AnimationKeys[1] = "PlayerWalkRight_";
+	AnimationKeys[2] = "PlayerWalkLeft_";
+	AnimationKeys[3] = "PlayerWalkUp_";
 	myDirection = SpriteDirection::SpriteWalkDown;
 	myResourceManager = aResourceManager;
 	m_pMesh->GenerateFrameMesh();
 
-	//Initialize the animated sprites
-	for (int i = 0; i < NUM_DIRECTIONS; i++)
+	for (unsigned int i = 0; i < NUM_DIRECTIONS; i++)
 	{
 		m_Animations[i] = new AnimatedSprite(myResourceManager, myGame, myMesh, 2, aTexture);
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "1.png");
@@ -34,10 +39,10 @@ Trainer::Trainer(ResourceManager * aResourceManager, GameCore * myGame, Mesh * m
 
 Trainer::~Trainer()
 {
-	for (int i = 0; i < NUM_DIRECTIONS; i++)
+	for (auto& m_Animation : m_Animations)
 	{
-		delete m_Animations[i];
-		m_Animations[i] = nullptr;
+		delete m_Animation;
+		m_Animation = nullptr;
 	}
 
 	myResourceManager = nullptr;
@@ -46,11 +51,11 @@ Trainer::~Trainer()
 void Trainer::Update(float deltatime)
 {
 	Pause();
-	if (m_InTransition == false)
+	if (!m_InTransition)
 	{
 		if (myController)
 		{
-			if (m_Stop == false)
+			if (!m_Stop)
 			{
 				if (myController->IsForwardHeld())
 				{
@@ -70,17 +75,15 @@ void Trainer::Update(float deltatime)
 				}
 				if (myController->IsInputReleased())
 				{
-					for (int i = 0; i < NUM_DIRECTIONS; i++)
-					{
-						m_Animations[i]->SetFrameIndex(0);
-					}
+					for (const auto& m_Animation : m_Animations)
+						m_Animation->SetFrameIndex(0);
 				}
 
 			}
 		}
 	}
 
-	if (m_InTransition == true)
+	if (m_InTransition)
 	{
 		if (myDirection == SpriteDirection::SpriteWalkUp || myDirection == SpriteDirection::SpriteWalkRight)
 		{
@@ -114,10 +117,10 @@ void Trainer::Update(float deltatime)
 		}
 	}
 
-	for (int i = 0; i < NUM_DIRECTIONS; i++)
+	for (const auto& m_Animation : m_Animations)
 	{
-		m_Animations[i]->SetPosition(GetPosition());
-		m_Animations[i]->Update(deltatime);
+		m_Animation->SetPosition(GetPosition());
+		m_Animation->Update(deltatime);
 	}
 }
 
@@ -137,7 +140,7 @@ void Trainer::Move(SpriteDirection dir, float deltatime)
 		myDirection = dir;
 	}
 
-	vec2 velocity = DIRECTIONVECTOR[static_cast<int>(dir)] * PLAYER_SPEED;
+	const vec2 velocity = DIRECTIONVECTOR[static_cast<int>(dir)] * PLAYER_SPEED;
 
 	NewPosition += velocity * deltatime;
 	if (m_InTransition == false)
@@ -155,39 +158,32 @@ void Trainer::Move(SpriteDirection dir, float deltatime)
 
 void Trainer::Pause()
 {
-	for (int i = 0; i < NUM_DIRECTIONS; i++)
-	{
-		m_Animations[i]->Pause();
-	}
+	for (const auto& m_Animation : m_Animations)
+		m_Animation->Pause();
 }
 
-void Trainer::Resume()
+void Trainer::Resume() const
 {
-	for (int i = 0; i < NUM_DIRECTIONS; i++)
-	{
-		m_Animations[i]->Resume();
-	}
+	for (const auto m_Animation : m_Animations)
+		m_Animation->Resume();
 }
 
 void Trainer::SetStop(bool StopPlayer)
 {
 	if (m_Stop != StopPlayer)
-	{
 		m_Stop = StopPlayer;
-	}
 }
 
-void Trainer::OnEvent(Event * anEvent)
+void Trainer::OnEvent(Event* anEvent)
 {
-	DoorEvent* e = (DoorEvent*)anEvent;
-
-	if (e->GetDoorType() == 11)
+	const DoorEvent* doorEvent = dynamic_cast<DoorEvent*>(anEvent);
+	if (doorEvent->GetDoorType() == 11)
 	{
 		myDirection = SpriteDirection::SpriteWalkUp;
 		SetPosition(m_pGame->GetSceneManager()->GetActiveScene()->GetPlayerStart());
 		PlayerTransition();
 	}
-	if (e->GetDoorType() == 10)
+	if (doorEvent->GetDoorType() == 10)
 	{
 		myDirection = SpriteDirection::SpriteWalkDown;
 		SetPosition(m_pGame->GetSceneManager()->GetActiveScene()->GetPlayerStart());
@@ -198,31 +194,30 @@ void Trainer::OnEvent(Event * anEvent)
 void Trainer::PlayerTransition()
 {
 	m_InTransition = true;
-
 	aTransitionDestination = GetPosition() + vec2(DIRECTIONVECTOR[static_cast<int>(myDirection)] * (TILESIZE / 4));
 }
 
-SpriteDirection Trainer::GetMyDirection()
+SpriteDirection Trainer::GetMyDirection() const
 {
 	return myDirection;
 }
 
-bool Trainer::CheckForCollision(vec2 playerNewPosition)
+bool Trainer::CheckForCollision(vec2 aPosition) const
 {
 	//Get the location of each point of collision on the player and then truncate it to a row and column
-	ivec2 OriginIndex = ivec2((playerNewPosition.x / TILESIZE), ((playerNewPosition.y - 0.3f) / TILESIZE));
-	ivec2 TopLeftIndex = ivec2((playerNewPosition.x / TILESIZE), (((playerNewPosition.y - 0.5f) + (TILESIZE / 2)) / TILESIZE));
-	ivec2 TopRightIndex = ivec2(((playerNewPosition.x + (TILESIZE / 2)) / TILESIZE), (((playerNewPosition.y - 0.5f) + (TILESIZE / 2)) / TILESIZE));
-	ivec2 BottomRightIndex = ivec2(((playerNewPosition.x + (TILESIZE / 2)) / TILESIZE), ((playerNewPosition.y - 0.3f) / TILESIZE));
+	const ivec2 OriginIndex = ivec2((aPosition.x / TILESIZE), ((aPosition.y - 0.3f) / TILESIZE));
+	const ivec2 TopLeftIndex = ivec2((aPosition.x / TILESIZE), (((aPosition.y - 0.5f) + (TILESIZE / 2)) / TILESIZE));
+	const ivec2 TopRightIndex = ivec2(((aPosition.x + (TILESIZE / 2)) / TILESIZE), (((aPosition.y - 0.5f) + (TILESIZE / 2)) / TILESIZE));
+	const ivec2 BottomRightIndex = ivec2(((aPosition.x + (TILESIZE / 2)) / TILESIZE), ((aPosition.y - 0.3f) / TILESIZE));
 
 	//Check each index for whether the tile it lands on is walkable
-	bool CheckOrigin = m_pGame->GetTileMap()->GetTileAtPlayer(OriginIndex);
-	bool CheckTopLeft = m_pGame->GetTileMap()->GetTileAtPlayer(TopLeftIndex);
-	bool CheckTopRight = m_pGame->GetTileMap()->GetTileAtPlayer(TopRightIndex);
-	bool CheckBottomRight = m_pGame->GetTileMap()->GetTileAtPlayer(BottomRightIndex);
+	const bool CheckOrigin = m_pGame->GetTileMap()->GetTileAtPlayer(OriginIndex);
+	const bool CheckTopLeft = m_pGame->GetTileMap()->GetTileAtPlayer(TopLeftIndex);
+	const bool CheckTopRight = m_pGame->GetTileMap()->GetTileAtPlayer(TopRightIndex);
+	const bool CheckBottomRight = m_pGame->GetTileMap()->GetTileAtPlayer(BottomRightIndex);
 
 	//If all the point land on walkable tile return true else return false
-	bool Collision = (CheckOrigin && CheckTopLeft && CheckTopRight && CheckBottomRight);
-	
+	const bool Collision = (CheckOrigin && CheckTopLeft && CheckTopRight && CheckBottomRight);
+
 	return Collision;
 }

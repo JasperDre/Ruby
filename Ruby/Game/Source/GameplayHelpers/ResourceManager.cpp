@@ -7,9 +7,8 @@
 #include "Utility/FileUtility.h"
 
 ResourceManager::ResourceManager()
-{
-
-}
+	: m_MyTileMap(nullptr)
+{}
 
 ResourceManager::~ResourceManager()
 {
@@ -37,10 +36,10 @@ void ResourceManager::UnpackJson(const std::string& JSONfilename, TileMap* aTile
 	cJSON* root = cJSON_Parse(buffer);
 	if (root)
 	{
-		int TextureWidth = cJSON_GetObjectItem(root, "width")->valueint;
-		int TextureHeight = cJSON_GetObjectItem(root, "height")->valueint;
+		int textureWidth = cJSON_GetObjectItem(root, "width")->valueint;
+		int textureHeight = cJSON_GetObjectItem(root, "height")->valueint;
 
-		m_MyTextureSize.emplace_back(ivec2(TextureWidth, TextureHeight));
+		m_MyTextureSize.emplace_back(ivec2(textureWidth, textureHeight));
 
 		//Extract the Array of Frames from the root
 		cJSON* frames = cJSON_GetObjectItem(root, "Files");

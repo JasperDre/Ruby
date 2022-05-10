@@ -5,7 +5,8 @@
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 
-OakLabMachineTop::OakLabMachineTop(ResourceManager * myResourceManager, TileMap * myTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : GameObject(myGame, myMesh, aTexture)
+OakLabMachineTop::OakLabMachineTop(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
+	: GameObject(myGame, myMesh, aTexture)
 {
 	m_pMesh = myMesh;
 	m_pMyTexture = aTexture;
@@ -15,7 +16,6 @@ OakLabMachineTop::OakLabMachineTop(ResourceManager * myResourceManager, TileMap 
 
 	for (int i = 0; i < OakLabMachine_NumTiles; i++)
 	{
-
 		TileInfo atile = m_MyTileMap->GetTileFromOakLabMap(Oak_Lab_Machine_);
 
 		Frame aframe = atile.MyVariant.at(OakLabMachineMap[i]);
