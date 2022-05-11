@@ -1,7 +1,7 @@
 #include "GamePCH.h"
 #include "PalletTown.h"
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "GameObjects/Trainer.h"
 #include "GameObjects/PalletTownObjects/OakHouse.h"
 #include "GameObjects/PalletTownObjects/PalletTownMap.h"
@@ -15,7 +15,7 @@
 #include "Scenes/Scene.h"
 
 PalletTown::PalletTown(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer* aPlayer, GLuint aTexture)
-	: Scene(myGame, myArea, aTileMap, aResourceManager, aMesh, aPlayer, vec2(9.0f * TILESIZE, 20.0f * TILESIZE), aTexture)
+	: Scene(myGame, myArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(9.0f * TILESIZE, 20.0f * TILESIZE), aTexture)
 {
 	m_PalletTownMap = nullptr;
 	m_OakHouseTop = nullptr;
@@ -25,11 +25,11 @@ PalletTown::PalletTown(GameCore* myGame, Areas myArea, TileMap* aTileMap, Resour
 	m_BoyNPC = nullptr;
 	m_MyGirlMesh = nullptr;
 	m_MyBoyMesh = nullptr;
-	m_GirlNPCStart = vec2(16.0f * TILESIZE, 9.0f * TILESIZE);
-	m_BoyNPCStart = vec2(14.0f * TILESIZE, 19.0f * TILESIZE);
-	PlayerSavedPosition = vec2(0.0f, 0.0f);
-	GirlSavedPosition = vec2(0.0f, 0.0f);
-	BoySavedPosition = vec2(0.0f, 0.0f);
+	m_GirlNPCStart = Vector2Float(16.0f * TILESIZE, 9.0f * TILESIZE);
+	m_BoyNPCStart = Vector2Float(14.0f * TILESIZE, 19.0f * TILESIZE);
+	PlayerSavedPosition = Vector2Float(0.0f, 0.0f);
+	GirlSavedPosition = Vector2Float(0.0f, 0.0f);
+	BoySavedPosition = Vector2Float(0.0f, 0.0f);
 }
 
 PalletTown::~PalletTown()
@@ -75,7 +75,7 @@ void PalletTown::Update(float deltatime)
 	m_BoyNPC->Update(deltatime);
 }
 
-void PalletTown::Draw(vec2 camPos, vec2 camProjection)
+void PalletTown::Draw(Vector2Float camPos, Vector2Float camProjection)
 {
 	m_PalletTownMap->Draw(camPos, camProjection);
 
@@ -91,7 +91,7 @@ void PalletTown::Draw(vec2 camPos, vec2 camProjection)
 
 void PalletTown::OnIsActive()
 {
-	if (PlayerSavedPosition != vec2(0.0f, 0.0f))
+	if (PlayerSavedPosition != Vector2Float(0.0f, 0.0f))
 	{
 		m_pMyPlayerStart = PlayerSavedPosition;
 		m_GirlNPCStart = GirlSavedPosition;

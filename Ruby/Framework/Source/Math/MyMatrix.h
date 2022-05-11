@@ -15,9 +15,9 @@ public:
 public:
     MyMatrix() {}
     //MyMatrix(const Vector3& right, const Vector3& up, const Vector3& at, const Vector3& pos) // view axes(inverse)
-    //    : m11(right.x), m21(right.y), m31(right.z), m41(pos.x),
-    //    , m12(up.x),    m22(up.y),    m32(up.z),    m42(pos.y),
-    //    , m13(at.x),    m23(at.y),    m33(at.z),    m43(pos.z),
+    //    : m11(right.myX), m21(right.y), m31(right.z), m41(pos.myX),
+    //    , m12(up.myX),    m22(up.y),    m32(up.z),    m42(pos.y),
+    //    , m13(at.myX),    m23(at.y),    m33(at.z),    m43(pos.z),
     //    , m14(0),       m24(0),       m34(0),       m44(1)      {}
     MyMatrix(float v11, float v12, float v13, float v14,
              float v21, float v22, float v23, float v24,
@@ -100,16 +100,16 @@ public:
         return newmat;
     }
 
-    inline Vector2 operator *(const Vector2 o) const
+    inline Vector2Float operator *(const Vector2Float o) const
     {
-        Vector4 result = Vector4( m11 * o.x + m21 * o.y + 0 + m41 * 1,
-                                  m12 * o.x + m22 * o.y + 0 + m42 * 1,
-                                  m13 * o.x + m23 * o.y + 0 + m43 * 1,
-                                  m14 * o.x + m24 * o.y + 0 + m44 * 1 );
+        Vector4 result = Vector4( m11 * o.myX + m21 * o.myY + 0 + m41 * 1,
+                                  m12 * o.myX + m22 * o.myY + 0 + m42 * 1,
+                                  m13 * o.myX + m23 * o.myY + 0 + m43 * 1,
+                                  m14 * o.myX + m24 * o.myY + 0 + m44 * 1 );
         if( result.w )
-            return Vector2( result.x/result.w, result.y/result.w );
+            return Vector2Float( result.x/result.w, result.y/result.w );
         else
-            return Vector2( result.x, result.y );
+            return Vector2Float( result.x, result.y );
     }
 
     inline Vector3 operator *(const Vector3 o) const

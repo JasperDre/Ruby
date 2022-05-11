@@ -1,19 +1,19 @@
 #pragma once
 
-#include "GameObject.h"
+#include "Entity.h"
 
 class AnimatedSprite;
 class PlayerController;
 class ResourceManager;
 
-class Trainer : public GameObject
+class Trainer : public Entity
 {
 public:
 	Trainer(ResourceManager* aResourceManager, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
 	~Trainer() override;
 
 	void Update(float deltatime) override;
-	void Draw(vec2 camPos, vec2 projecScale) override;
+	void Draw(Vector2Float camPos, Vector2Float projecScale) override;
 
 	void SetPlayerController(PlayerController* aController) { myController = aController; }
 	void Move(SpriteDirection dir, float deltatime);
@@ -28,7 +28,7 @@ public:
 
 	[[nodiscard]] SpriteDirection GetMyDirection() const;
 
-	[[nodiscard]] bool CheckForCollision(vec2 aPosition) const;
+	[[nodiscard]] bool CheckForCollision(Vector2Float aPosition) const;
 
 protected:
 	PlayerController* myController;
@@ -36,8 +36,8 @@ protected:
 private:
 	std::string AnimationKeys[NUM_DIRECTIONS];
 	AnimatedSprite* m_Animations[NUM_DIRECTIONS];
-	vec2 NewPosition;
-	vec2 aTransitionDestination;
+	Vector2Float NewPosition;
+	Vector2Float aTransitionDestination;
 	ResourceManager* myResourceManager;
 	SpriteDirection myDirection;
 	bool m_InTransition;

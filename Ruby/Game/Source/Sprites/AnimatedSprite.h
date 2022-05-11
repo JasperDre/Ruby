@@ -1,20 +1,20 @@
 #pragma once
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "Constants.h"
 
 class GameCore;
 class ResourceManager;
 class Mesh;
 
-class AnimatedSprite : public GameObject
+class AnimatedSprite : public Entity
 {
 public:
 	AnimatedSprite(ResourceManager* aResourceManager, GameCore* myGame, Mesh* myMesh, int aTextureIndex, GLuint aTexture);
 	~AnimatedSprite() override;
 
 	void Update(float deltatime) override;
-	void Draw(vec2 camPos, vec2 projScale) override;
+	void Draw(Vector2Float camPos, Vector2Float projScale) override;
 
 	void AddFrame(const std::string& newframe);
 	void UseFrame(const std::string& aFrame);
@@ -35,8 +35,8 @@ public:
 
 private:
 	std::vector<Frame>m_ActiveFrames;
-	vec2 m_UVScale;
-	vec2 m_UVOffset;
+	Vector2Float m_UVScale;
+	Vector2Float m_UVOffset;
 	ResourceManager* m_MyResourceManager;
 	Mesh* m_MyMesh;
 	float m_FrameSpeed;

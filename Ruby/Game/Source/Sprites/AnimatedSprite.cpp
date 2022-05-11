@@ -4,10 +4,10 @@
 #include "GameplayHelpers/ResourceManager.h"
 #include "Mesh/Mesh.h"
 
-AnimatedSprite::AnimatedSprite(ResourceManager* aResourceManager, GameCore* myGame, Mesh * myMesh, int aTextureIndex, GLuint aTexture):GameObject(myGame, myMesh, aTexture)
+AnimatedSprite::AnimatedSprite(ResourceManager* aResourceManager, GameCore* myGame, Mesh * myMesh, int aTextureIndex, GLuint aTexture):Entity(myGame, myMesh, aTexture)
 {
 	m_MyMesh = myMesh;
-	m_pMyTexture = aTexture;
+	myTextureIdentifier = aTexture;
 	m_MyResourceManager = aResourceManager;
 
 	m_CurrentFrame = 0;
@@ -48,15 +48,15 @@ void AnimatedSprite::Update(float deltatime)
 		m_CurrentFrame = 0;
 	}
 
-	const vec2 frameorigin = m_ActiveFrames.at(m_CurrentFrame).myOrigin;
-	const vec2 framesize = m_ActiveFrames.at(m_CurrentFrame).mySize;
-	m_UVScale = vec2((framesize.x / m_MyResourceManager->GetTextureSize(m_MyTexutureIndex).x), (framesize.y / m_MyResourceManager->GetTextureSize(m_MyTexutureIndex).y));
-	m_UVOffset = vec2((frameorigin.x / m_MyResourceManager->GetTextureSize(m_MyTexutureIndex).x), (frameorigin.y / m_MyResourceManager->GetTextureSize(m_MyTexutureIndex).y));
+	const Vector2Float frameorigin = m_ActiveFrames.at(m_CurrentFrame).myOrigin;
+	const Vector2Float framesize = m_ActiveFrames.at(m_CurrentFrame).mySize;
+	m_UVScale = Vector2Float((framesize.myX / m_MyResourceManager->GetTextureSize(m_MyTexutureIndex).x), (framesize.myY / m_MyResourceManager->GetTextureSize(m_MyTexutureIndex).y));
+	m_UVOffset = Vector2Float((frameorigin.myX / m_MyResourceManager->GetTextureSize(m_MyTexutureIndex).x), (frameorigin.myY / m_MyResourceManager->GetTextureSize(m_MyTexutureIndex).y));
 }
 
-void AnimatedSprite::Draw(vec2 camPos, vec2 projScale)
+void AnimatedSprite::Draw(Vector2Float camPos, Vector2Float projScale)
 {
-	m_pMesh->Draw(m_Position, m_Angle, vec2((TILESIZE / 10.0f) * 5.5f, (TILESIZE / 10.0f) * 11.0f), camPos, projScale, m_pMyTexture, m_UVScale, m_UVOffset);
+	m_pMesh->Draw(m_Position, m_Angle, Vector2Float((TILESIZE / 10.0f) * 5.5f, (TILESIZE / 10.0f) * 11.0f), camPos, projScale, myTextureIdentifier, m_UVScale, m_UVOffset);
 }
 
 void AnimatedSprite::AddFrame(const std::string& newframe)

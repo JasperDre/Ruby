@@ -151,7 +151,7 @@
     <ClInclude Include="Source\Controllers\AStarPathFinder.h" />
     <ClInclude Include="Source\Controllers\PlayerController.h" />
     <ClInclude Include="Source\GameObjects\GameCamera.h" />
-    <ClInclude Include="Source\GameObjects\GameObject.h" />
+    <ClInclude Include="Source\GameObjects\Entity.h" />
     <ClInclude Include="Source\GameObjects\OakLabObjects\OakLabDeskTop.h" />
     <ClInclude Include="Source\GameObjects\OakLabObjects\OakLabMachineTop.h" />
     <ClInclude Include="Source\GameObjects\OakLabObjects\OakLabMap.h" />
@@ -192,7 +192,7 @@
     <ClCompile Include="Source\Controllers\AStarPathFinder.cpp" />
     <ClCompile Include="Source\Controllers\PlayerController.cpp" />
     <ClCompile Include="Source\GameObjects\GameCamera.cpp" />
-    <ClCompile Include="Source\GameObjects\GameObject.cpp" />
+    <ClCompile Include="Source\GameObjects\Entity.cpp" />
     <ClCompile Include="Source\GameObjects\OakLabObjects\OakLabDeskTop.cpp" />
     <ClCompile Include="Source\GameObjects\OakLabObjects\OakLabMachineTop.cpp" />
     <ClCompile Include="Source\GameObjects\OakLabObjects\OakLabMap.cpp" />

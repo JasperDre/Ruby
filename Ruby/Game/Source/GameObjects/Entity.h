@@ -3,21 +3,22 @@
 class Mesh;
 class AStarPathFinder;
 class GameCore;
+enum class AI_States;
 
-class GameObject
+class Entity
 {
 public:
-	GameObject(GameCore* pGame, Mesh* pMesh, GLuint atexture);
-	virtual ~GameObject() = default;
+	Entity(GameCore* pGame, Mesh* pMesh, unsigned int aTextureIdentifier);
+	virtual ~Entity() = default;
 
 	virtual void OnEvent(Event* pEvent) {}
 	virtual void Update(float deltatime) {}
-	virtual void Draw(vec2 camPos, vec2 projScale);
+	virtual void Draw(Vector2Float camPos, Vector2Float projScale);
 
-	virtual bool IsColliding(GameObject* pOtherGameObject);
-	virtual void OnCollision(GameObject* pOtherGameObject);
+	virtual bool IsColliding(Entity* pOtherGameObject) { return false; }
+	virtual void OnCollision(Entity* pOtherGameObject) {}
 
-	virtual AI_States GetMyState() { return AI_States::IdleState; }
+	virtual AI_States GetMyState();
 	virtual void SetMyState(AI_States aState) {}
 
 	virtual bool GetNodeIsClearOnSpecial(int tx, int ty) { return false; }
@@ -34,8 +35,8 @@ public:
 	virtual void NPCSeekStartPath() {}
 	virtual void ResetInputSet() {}
 
-	[[nodiscard]] vec2 GetPosition() const { return m_Position; }
-	[[nodiscard]] ivec2 GetMyIndex() const { return ivec2(static_cast<int>(m_Position.x / TILESIZE), static_cast<int>(m_Position.y / TILESIZE)); }
+	[[nodiscard]] Vector2Float GetPosition() const { return m_Position; }
+	[[nodiscard]] ivec2 GetMyIndex() const { return ivec2(static_cast<int>(m_Position.myX / TILESIZE), static_cast<int>(m_Position.myY / TILESIZE)); }
 	[[nodiscard]] float GetAngle() const { return m_Angle; }
 	[[nodiscard]] float GetRadius() const { return m_Radius; }
 	virtual ivec2 GetMyMinIndex() { return ivec2(); }
@@ -45,15 +46,15 @@ public:
 	virtual int GetMyMapWidth() { return 0; }
 	virtual int GetMaxPathSize() { return 0; }
 
-	void SetPosition(vec2 pos) { m_Position = pos; }
+	void SetPosition(Vector2Float pos) { m_Position = pos; }
 	void SetAngle(float angle) { m_Angle = angle; }
 	void SetRadius(float radius) { m_Radius = radius; }
 	virtual void SetMyDirection(SpriteDirection aDirection) {}
 
 protected:
-	vec2 m_Position;
-	vec2 my_UVOffset;
-	GLint m_pMyTexture;
+	Vector2Float m_Position;
+	Vector2Float my_UVOffset;
+	unsigned int myTextureIdentifier;
 	GameCore* m_pGame;
 	Mesh* m_pMesh;
 	AStarPathFinder* m_MyPathFinder;

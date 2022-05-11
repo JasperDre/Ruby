@@ -7,9 +7,9 @@
 #include "Mesh/Canvas.h"
 
 OakLabMap::OakLabMap(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
-	: GameObject(myGame, myMesh, aTexture)
+	: Entity(myGame, myMesh, aTexture)
 {
-	m_pMyTexture = aTexture;
+	myTextureIdentifier = aTexture;
 	m_MyTileMap = myTileMap;
 	m_MyResourceManager = myResourceManager;
 	m_MyCanvas = new Canvas(m_MyTileMap, m_MyResourceManager);
@@ -27,7 +27,7 @@ void OakLabMap::Update(float deltatime)
 {
 }
 
-void OakLabMap::Draw(vec2 camPos, vec2 projecScale)
+void OakLabMap::Draw(Vector2Float camPos, Vector2Float projecScale)
 {
-	m_MyCanvas->DrawCanvas(camPos, projecScale, m_pMyTexture);
+	m_MyCanvas->DrawCanvas(camPos, projecScale, myTextureIdentifier);
 }

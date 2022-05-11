@@ -2,23 +2,23 @@
 #include "GameCamera.h"
 
 #include "Game/Game.h"
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "GameObjects/Trainer.h"
 #include "GameplayHelpers/SceneManager.h"
 #include "Mesh/Mesh.h"
 #include "Scenes/Scene.h"
 
-GameCamera::GameCamera(GameCore* pGame, Mesh* pMesh, GLuint myTexture, Trainer* myTrainer) : GameObject(pGame, pMesh, myTexture)
+GameCamera::GameCamera(GameCore* pGame, Mesh* pMesh, GLuint myTexture, Trainer* myTrainer) : Entity(pGame, pMesh, myTexture)
 {
 	m_MyMesh = pMesh;
-	m_Position = vec2(myTrainer->GetPosition() + vec2(0.0f, 1.0f));
-	m_MyScreenSize = vec2(pGame->GetFramework()->GetWindowWidth(), pGame->GetFramework()->GetWindowHeight());
+	m_Position = Vector2Float(myTrainer->GetPosition() + Vector2Float(0.0f, 1.0f));
+	m_MyScreenSize = Vector2Float(pGame->GetFramework()->GetWindowWidth(), pGame->GetFramework()->GetWindowHeight());
 
-	CAMERAMIN = vec2(15.0f, 15.0f);
-	CAMERAMAX = vec2(48.0f, 48.0f);
+	CAMERAMIN = Vector2Float(15.0f, 15.0f);
+	CAMERAMAX = Vector2Float(48.0f, 48.0f);
 
 	m_InTransition = false;
-	newCamPos = vec2(0.0f, 0.0f);
+	newCamPos = Vector2Float(0.0f, 0.0f);
 }
 
 GameCamera::~GameCamera()
@@ -36,38 +36,38 @@ void GameCamera::Draw()
 
 }
 
-void GameCamera::ClampToPlayer(vec2 aPlayerPos)
+void GameCamera::ClampToPlayer(Vector2Float aPlayerPos)
 {
 	if (m_InTransition)
 	{
-		vec2 Target = m_pGame->GetSceneManager()->GetActiveScene()->GetPlayerStart() + CamOffset;
+		Vector2Float Target = m_pGame->GetSceneManager()->GetActiveScene()->GetPlayerStart() + CamOffset;
 
 		SpriteDirection aDirection = m_pGame->GetMyPlayer()->GetMyDirection();
 
 		if (aDirection == SpriteDirection::SpriteWalkDown)
 		{
-			if (Target.y > aPlayerPos.y)
+			if (Target.myY > aPlayerPos.myY)
 			{
 				m_InTransition = false;
 			}
 		}
 		else if (aDirection == SpriteDirection::SpriteWalkUp)
 		{
-			if (Target.y < aPlayerPos.y)
+			if (Target.myY < aPlayerPos.myY)
 			{
 				m_InTransition = false;
 			}
 		}
 		else if (aDirection == SpriteDirection::SpriteWalkLeft)
 		{
-			if (Target.x > aPlayerPos.x)
+			if (Target.myX > aPlayerPos.myX)
 			{
 				m_InTransition = false;
 			}
 		}
 		else if (aDirection == SpriteDirection::SpriteWalkRight)
 		{
-			if (Target.x < aPlayerPos.x)
+			if (Target.myX < aPlayerPos.myX)
 			{
 				m_InTransition = false;
 			}
@@ -76,39 +76,39 @@ void GameCamera::ClampToPlayer(vec2 aPlayerPos)
 	}
 	if (m_InTransition == false)
 	{
-		if (aPlayerPos.x < CAMERAMAX.x)
+		if (aPlayerPos.myX < CAMERAMAX.myX)
 		{
-			if (aPlayerPos.x > CAMERAMIN.x)
+			if (aPlayerPos.myX > CAMERAMIN.myX)
 			{
-				m_Position.x = aPlayerPos.x;
+				m_Position.myX = aPlayerPos.myX;
 			}
 		}
-		if (aPlayerPos.y < CAMERAMAX.y)
+		if (aPlayerPos.myY < CAMERAMAX.myY)
 		{
-			if (aPlayerPos.y > CAMERAMIN.y)
+			if (aPlayerPos.myY > CAMERAMIN.myY)
 			{
-				m_Position.y = aPlayerPos.y;
+				m_Position.myY = aPlayerPos.myY;
 			}
 		}
 	}
 }
 
-vec2 GameCamera::GetCameraPosition()
+Vector2Float GameCamera::GetCameraPosition()
 {
-	vec2 pos = m_Position;
+	Vector2Float pos = m_Position;
 
-	pos.x -= fmod(pos.x, (m_MyScreenSize.x/150) / m_MyScreenSize.x);
-	pos.y -= fmod(pos.y, (m_MyScreenSize.y/150) / m_MyScreenSize.y);
+	pos.myX -= fmod(pos.myX, (m_MyScreenSize.myX/150) / m_MyScreenSize.myX);
+	pos.myY -= fmod(pos.myY, (m_MyScreenSize.myY/150) / m_MyScreenSize.myY);
 
 	return pos;
 }
 
-void GameCamera::SetMyProjection(vec2 aProjection)
+void GameCamera::SetMyProjection(Vector2Float aProjection)
 {
 	m_MyProjection = aProjection;
 }
 
-vec2 GameCamera::GetCameraProjection()
+Vector2Float GameCamera::GetCameraProjection()
 {
 	return m_MyProjection;
 }
@@ -121,24 +121,24 @@ void GameCamera::OnEvent(Event * anEvent)
 		Areas newArea = m_pGame->GetSceneManager()->GetActiveScene()->GetMyArea();
 		if (newArea == Areas::Area_OakLab)
 		{
-			CAMERAMIN = vec2(-6.0f, -6.0f);
-			CAMERAMAX = vec2(32.0f, 32.0f);
+			CAMERAMIN = Vector2Float(-6.0f, -6.0f);
+			CAMERAMAX = Vector2Float(32.0f, 32.0f);
 		}
 		if (newArea == Areas::Area_PalletTown)
 		{
-			CAMERAMIN = vec2(15.0f, 15.0f);
-			CAMERAMAX = vec2(48.0f, 48.0f);
+			CAMERAMIN = Vector2Float(15.0f, 15.0f);
+			CAMERAMAX = Vector2Float(48.0f, 48.0f);
 		}
 		if (newArea == Areas::Area_Woods)
 		{
-			CAMERAMIN = vec2(16.0f, 18.0f);
-			CAMERAMAX = vec2(76.0f, 80.0f);
+			CAMERAMIN = Vector2Float(16.0f, 18.0f);
+			CAMERAMAX = Vector2Float(76.0f, 80.0f);
 		}
 		if (e->GetDoorType() != 11 && e->GetDoorType() != 10)
 		{
-			vec2 newpos = m_pGame->GetSceneManager()->GetActiveScene()->GetPlayerStart();
+			Vector2Float newpos = m_pGame->GetSceneManager()->GetActiveScene()->GetPlayerStart();
 
-			vec2 aDirection = DIRECTIONVECTOR[static_cast<int>(m_pGame->GetMyPlayer()->GetMyDirection())];
+			Vector2Float aDirection = DIRECTIONVECTOR[static_cast<int>(m_pGame->GetMyPlayer()->GetMyDirection())];
 
 			CamOffset = aDirection * (CAMERAMIN);
 
@@ -151,7 +151,7 @@ void GameCamera::OnEvent(Event * anEvent)
 	}
 }
 
-void GameCamera::SetScreenSize(vec2 awindowsize)
+void GameCamera::SetScreenSize(Vector2Float awindowsize)
 {
 	m_MyScreenSize = awindowsize;
 }

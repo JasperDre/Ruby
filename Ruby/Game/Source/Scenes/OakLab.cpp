@@ -2,7 +2,7 @@
 #include "OakLab.h"
 
 #include "Controllers/AIController.h"
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "GameObjects/Trainer.h"
 #include "GameObjects/OakLabObjects/OakLabDeskTop.h"
 #include "GameObjects/OakLabObjects/OakLabMachineTop.h"
@@ -16,7 +16,7 @@
 #include "Scenes/Scene.h"
 
 OakLab::OakLab(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer * aPlayer, GLuint aTexture)
-	: Scene(myGame, myArea, aTileMap, aResourceManager, aMesh, aPlayer, vec2(7.5f * TILESIZE, 2.0f * TILESIZE), aTexture)
+	: Scene(myGame, myArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(7.5f * TILESIZE, 2.0f * TILESIZE), aTexture)
 {
 	m_ProfOakMesh = nullptr;
 	m_ProfOak = nullptr;
@@ -26,7 +26,7 @@ OakLab::OakLab(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManage
 	m_OakLabMachineTop = nullptr;
 	m_OakLabPlantTops = nullptr;
 	m_OakLabTableTop = nullptr;
-	m_OakStartPosition = vec2(6.0f * TILESIZE, 11.0f * TILESIZE);
+	m_OakStartPosition = Vector2Float(6.0f * TILESIZE, 11.0f * TILESIZE);
 }
 
 OakLab::~OakLab()
@@ -60,7 +60,7 @@ void OakLab::Update(float deltatime)
 	m_ProfOak->Update(deltatime);
 }
 
-void OakLab::Draw(vec2 camPos, vec2 camProjection)
+void OakLab::Draw(Vector2Float camPos, Vector2Float camProjection)
 {
 	m_OakLabMap->Draw(camPos, camProjection);
 
@@ -87,5 +87,5 @@ void OakLab::Reload()
 
 void OakLab::Unload()
 {
-	m_pMyPlayerStart = vec2(7.5f * TILESIZE, TILESIZE + 0.3f);
+	m_pMyPlayerStart = Vector2Float(7.5f * TILESIZE, TILESIZE + 0.3f);
 }

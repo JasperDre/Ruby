@@ -1,13 +1,13 @@
 #pragma once
 
 class TileMap;
-class GameObject;
+class Entity;
 class AStarPathFinder;
 
 class AIController
 {
 public:
-	AIController(TileMap* aTileMap, int aMinIndex, int aMaxIndex, GameObject* aNPC);
+	AIController(TileMap* aTileMap, int aMinIndex, int aMaxIndex, Entity* aNPC);
 	~AIController();
 
 	bool GetNextPath();
@@ -17,9 +17,9 @@ public:
 
 	SpriteDirection CalculateNextInput();
 
-	ivec2 SetNPCCurrentPosition(vec2 aNPCPosition);
+	ivec2 SetNPCCurrentPosition(Vector2Float aNPCPosition);
 
-	ivec2 CalculatedDirection(ivec2 aCurrentIndex, vec2 aDirection);
+	ivec2 CalculatedDirection(ivec2 aCurrentIndex, Vector2Float aDirection);
 
 	int RangeRandomIntAlg(int min, int max);
 
@@ -29,7 +29,7 @@ private:
 	ivec2 m_NextTileColumnRow;
 	AStarPathFinder* m_MyPathFinder;
 	TileMap* m_MyTileMap;
-	GameObject* m_MyNPC;
+	Entity* m_MyNPC;
 	int* m_MyPath;
 	SpriteDirection m_CurrentDirection;
 	int m_MyMaxPathSize;

@@ -18,9 +18,9 @@ public:
 
 	void OnEvent(Event* anEvent);
 
-	void SetPlayerSavedPosition(vec2 aPosition) { m_PlayerSavedPosition = aPosition; }
+	void SetPlayerSavedPosition(Vector2Float aPosition) { m_PlayerSavedPosition = aPosition; }
 
 private:
 	std::map<Areas, Scene*> m_MyScenes;
-	vec2 m_PlayerSavedPosition;
+	Vector2Float m_PlayerSavedPosition;
 };

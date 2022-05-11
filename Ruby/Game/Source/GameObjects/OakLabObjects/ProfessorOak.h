@@ -1,13 +1,13 @@
 #pragma once
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 
 class AnimatedSprite;
 class AStarPathFinder;
 class ResourceManager;
 class TileMap;
 
-class ProfessorOak : public GameObject
+class ProfessorOak : public Entity
 {
 public:
 	ProfessorOak(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
@@ -17,7 +17,7 @@ public:
 	void PathingUpdate(float delatime);
 	void WalkingUpdate(float deltatime);
 
-	void Draw(vec2 camPos, vec2 projecScale) override;
+	void Draw(Vector2Float camPos, Vector2Float projecScale) override;
 
 	void SetAIController(AStarPathFinder* aController) {}
 	void Move(SpriteDirection dir, float deltatime);
@@ -36,7 +36,7 @@ public:
 
 	void OnEvent(Event* anEvent) override;
 
-	bool CheckForCollision(vec2 NPCNewPosition);
+	bool CheckForCollision(Vector2Float NPCNewPosition);
 
 	int* GetInputSet() override;
 	void SetInputSet(int* aPath) override;
@@ -60,7 +60,7 @@ public:
 private:
 	std::string AnimationKeys[NUM_DIRECTIONS] = { "OakWalkDown_", "OakWalkRight_", "OakWalkLeft_", "OakWalkUp_" };
 	int m_MyInputSet[OAKMAXPATHSIZE];
-	vec2 NewPosition;
+	Vector2Float NewPosition;
 	ivec2 m_MyNewDestination;
 	ivec2 m_MyIndex;
 	AnimatedSprite* m_Animations[NUM_DIRECTIONS];

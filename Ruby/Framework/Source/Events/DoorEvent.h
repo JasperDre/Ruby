@@ -19,6 +19,6 @@ public:
 	[[nodiscard]] int GetDoorType() const { return myDoorType; }
 
 protected:
-	vec2 myColliderPosition;
+	Vector2Float myColliderPosition;
 	int myDoorType;
 };

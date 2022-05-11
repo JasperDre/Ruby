@@ -34,14 +34,14 @@ public:
         , m_InputState(InputStates::InputState_Held)
     {}
 
-    InputEvent(InputDeviceTypes devicetype, InputStates state, int id, vec2 pos)
+    InputEvent(InputDeviceTypes devicetype, InputStates state, int id, Vector2Float pos)
         : m_ID(id)
         , m_Position(pos)
         , m_InputDeviceType(devicetype)
         , m_InputState(state)
     {}
 
-    InputEvent(InputDeviceTypes devicetype, InputStates state, GamepadIDs id, vec2 pos)
+    InputEvent(InputDeviceTypes devicetype, InputStates state, GamepadIDs id, Vector2Float pos)
         : m_GamepadID(id)
         , m_Position(pos)
         , m_InputDeviceType(devicetype)
@@ -53,7 +53,7 @@ public:
     [[nodiscard]] InputStates GetInputState() const { return m_InputState; }
     [[nodiscard]] int GetID() const { return m_ID; }
     [[nodiscard]] GamepadIDs GetGamepadID() const { return m_GamepadID; }
-    [[nodiscard]] vec2 GetPosition() const { return m_Position; }
+    [[nodiscard]] Vector2Float GetPosition() const { return m_Position; }
 
 protected:
     union
@@ -62,7 +62,7 @@ protected:
         GamepadIDs m_GamepadID;
     };
 
-    vec2 m_Position;
+    Vector2Float m_Position;
     InputDeviceTypes m_InputDeviceType;
     InputStates m_InputState;
 };

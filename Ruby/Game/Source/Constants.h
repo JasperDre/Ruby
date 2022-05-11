@@ -124,7 +124,7 @@ struct Frame
 		, myUVOffset(0.0f)
 	{}
 
-	Frame(vec2 anOrigin, vec2 aSize)
+	Frame(Vector2Float anOrigin, Vector2Float aSize)
 		: myOrigin(anOrigin)
 		, mySize(aSize)
 		, myWorldSpace(0.0f)
@@ -132,11 +132,11 @@ struct Frame
 		, myUVOffset(0.0f)
 	{}
 
-	vec2 myOrigin;
-	vec2 mySize;
-	vec2 myWorldSpace;
-	vec2 myUVScale;
-	vec2 myUVOffset;
+	Vector2Float myOrigin;
+	Vector2Float mySize;
+	Vector2Float myWorldSpace;
+	Vector2Float myUVScale;
+	Vector2Float myUVOffset;
 };
 
 //TileInfo definition
@@ -197,12 +197,12 @@ enum class SpriteDirection
 	SpriteDirectionStop
 };
 
-const vec2 DIRECTIONVECTOR[] = { vec2(0.0f, -1.0f), vec2(1.0f, 0.0f), vec2(-1.0f, 0.0f), vec2(0.0f, 1.0f) };
+const Vector2Float DIRECTIONVECTOR[] = { Vector2Float(0.0f, -1.0f), Vector2Float(1.0f, 0.0f), Vector2Float(-1.0f, 0.0f), Vector2Float(0.0f, 1.0f) };
 
 //Global AI State function declaration
-typedef bool (GameObject::*GetForNodeIsClearOnSpecial)(int tx, int ty);
-typedef int (GameObject::*GetRangeRandomIntAlg)(int min, int max);
-typedef void(*AIStateUpdate)(GameObject* aGameObject, float deltatime);
+typedef bool (Entity::*GetForNodeIsClearOnSpecial)(int tx, int ty);
+typedef int (Entity::*GetRangeRandomIntAlg)(int min, int max);
+typedef void(*AIStateUpdate)(Entity* aGameObject, float deltatime);
 
 //Const Enum of NPC States
 enum class AI_States
@@ -233,7 +233,7 @@ constexpr int MAXPATHSIZE_TOWN_NPC = 50;
 constexpr int FORESTMAPSIZE = 2112;
 constexpr int NUM_FOREST_ROWS = 44;
 constexpr int NUM_FOREST_COLUMNS = 48;
-const vec2 PLAYER_START = vec2(9.0f * TILESIZE, 20.0f * TILESIZE);
+const Vector2Float PLAYER_START = Vector2Float(9.0f * TILESIZE, 20.0f * TILESIZE);
 
 //Definition of short BitMaps for each Area are defined here
 const unsigned short PalletTownBitMap[MAPSIZE] =

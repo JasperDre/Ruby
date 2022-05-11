@@ -1,13 +1,13 @@
 #pragma once
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 
-class GameObject;
+class Entity;
 class Mesh;
 class ResourceManager;
 class TileMap;
 
-class OakLabMachineTop : public GameObject
+class OakLabMachineTop : public Entity
 {
 public:
 	OakLabMachineTop(ResourceManager * myResourceManager, TileMap * myTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture);
@@ -15,7 +15,7 @@ public:
 
 	virtual void Update(float deltatime) override;
 
-	virtual void Draw(vec2 camPos, vec2 camProject) override;
+	virtual void Draw(Vector2Float camPos, Vector2Float camProject) override;
 
 private:
 
@@ -27,9 +27,9 @@ private:
 	TileMap* m_MyTileMap;
 	std::vector<Frame> m_MyFrames;
 
-	vec2 m_MyTileUVOffset;
-	vec2 m_MyTileUVScale;
+	Vector2Float m_MyTileUVOffset;
+	Vector2Float m_MyTileUVScale;
 
-	vec2 OaklabMachinePosition;
+	Vector2Float OaklabMachinePosition;
 
 };

@@ -66,7 +66,7 @@ void ResourceManager::UnpackJson(const std::string& JSONfilename, TileMap* aTile
 				if (height == 21 && width == 14)
 				{
 					//create a frame with the attributes from the JSON file
-					Frame myNewFrame = Frame(vec2((float)x, (float)y), vec2((float)width, (float)height));
+					Frame myNewFrame = Frame(Vector2Float((float)x, (float)y), Vector2Float((float)width, (float)height));
 
 					m_AnimationsMap.insert(std::pair<std::string, Frame>(frameName, myNewFrame));
 				}
@@ -74,7 +74,7 @@ void ResourceManager::UnpackJson(const std::string& JSONfilename, TileMap* aTile
 				if (height == 16 && width == 16)
 				{
 					//create a frame with the attributes from the JSON file
-					Frame myNewFrame = Frame(vec2((float)x, (float)y), vec2((float)width, (float)height));
+					Frame myNewFrame = Frame(Vector2Float((float)x, (float)y), Vector2Float((float)width, (float)height));
 
 					//send the frame name and its attributes to the TileMap for processing
 					aTileMap->AddTile(frameName, myNewFrame);
@@ -83,7 +83,7 @@ void ResourceManager::UnpackJson(const std::string& JSONfilename, TileMap* aTile
 			else
 			{
 				//create a frame with the attributes from the JSON file
-				Frame myNewFrame = Frame(vec2((float)x, (float)y), vec2((float)width, (float)height));
+				Frame myNewFrame = Frame(Vector2Float((float)x, (float)y), Vector2Float((float)width, (float)height));
 
 				//send the frame name and its attributes to the TileMap for processing
 				aTileMap->AddTile(frameName, myNewFrame);

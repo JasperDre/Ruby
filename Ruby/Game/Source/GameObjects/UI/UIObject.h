@@ -1,19 +1,19 @@
 #pragma once
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 
 class TileMap;
 class PokeBall;
 class ScoreNumber;
 
-class UIObject : public GameObject
+class UIObject : public Entity
 {
 public:
 	UIObject(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
 	~UIObject() override;
 
 	void Update(float deltatime) override;
-	void Draw(vec2 camPos, vec2 camProjection) override;
+	void Draw(Vector2Float camPos, Vector2Float camProjection) override;
 
 	void SetScore(int aScore) const;
 private:

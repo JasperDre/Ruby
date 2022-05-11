@@ -43,13 +43,13 @@ void Canvas::GeneratePalletVertexData(const unsigned short BitMap[MAPSIZE])
 				Frame aframe = atile.MyVariant.at(VariantSelecter / 16 - 1);
 
 				//set the UV's of the tile at the index
-				vec2 aVOffset = vec2((aframe.myOrigin.x / m_MyResourceManager->GetTextureSize(0).x), (aframe.myOrigin.y / m_MyResourceManager->GetTextureSize(0).y));
-				vec2 aUVScale = vec2((aframe.mySize.x / m_MyResourceManager->GetTextureSize(0).x), (aframe.mySize.y / m_MyResourceManager->GetTextureSize(0).y));
+				Vector2Float aVOffset = Vector2Float((aframe.myOrigin.myX / m_MyResourceManager->GetTextureSize(0).x), (aframe.myOrigin.myY / m_MyResourceManager->GetTextureSize(0).y));
+				Vector2Float aUVScale = Vector2Float((aframe.mySize.myX / m_MyResourceManager->GetTextureSize(0).x), (aframe.mySize.myY / m_MyResourceManager->GetTextureSize(0).y));
 
 				//set up the position
-				vec2 aposition = vec2(((((i / NUM_COLUMNS) * NUM_COLUMNS) + j) % NUM_COLUMNS) * TILESIZE, ((((i / NUM_COLUMNS) * NUM_COLUMNS) + j) / NUM_COLUMNS) * TILESIZE);
+				Vector2Float aposition = Vector2Float(((((i / NUM_COLUMNS) * NUM_COLUMNS) + j) % NUM_COLUMNS) * TILESIZE, ((((i / NUM_COLUMNS) * NUM_COLUMNS) + j) / NUM_COLUMNS) * TILESIZE);
 
-				AddVert(aposition, 0, vec2(TILESIZE, TILESIZE), aUVScale, aVOffset);
+				AddVert(aposition, 0, Vector2Float(TILESIZE, TILESIZE), aUVScale, aVOffset);
 			}
 		}
 		else
@@ -69,13 +69,13 @@ void Canvas::GeneratePalletVertexData(const unsigned short BitMap[MAPSIZE])
 				Frame aframe = atile.MyVariant.at(VariantSelecter / 16 - 1);
 
 				//set the UV's of the tile at the index
-				vec2 aUVOffset = vec2((aframe.myOrigin.x / m_MyResourceManager->GetTextureSize(0).x), (aframe.myOrigin.y / m_MyResourceManager->GetTextureSize(0).y));
-				vec2 aUVScale = vec2((aframe.mySize.x / m_MyResourceManager->GetTextureSize(0).x), (aframe.mySize.y / m_MyResourceManager->GetTextureSize(0).y));
+				Vector2Float aUVOffset = Vector2Float((aframe.myOrigin.myX / m_MyResourceManager->GetTextureSize(0).x), (aframe.myOrigin.myY / m_MyResourceManager->GetTextureSize(0).y));
+				Vector2Float aUVScale = Vector2Float((aframe.mySize.myX / m_MyResourceManager->GetTextureSize(0).x), (aframe.mySize.myY / m_MyResourceManager->GetTextureSize(0).y));
 
 				//set up the position
-				vec2 aposition = vec2((i % NUM_COLUMNS) * TILESIZE, (i / NUM_COLUMNS) * TILESIZE);
+				Vector2Float aposition = Vector2Float((i % NUM_COLUMNS) * TILESIZE, (i / NUM_COLUMNS) * TILESIZE);
 
-				AddVert(aposition, 0, vec2(TILESIZE, TILESIZE), aUVScale, aUVOffset);
+				AddVert(aposition, 0, Vector2Float(TILESIZE, TILESIZE), aUVScale, aUVOffset);
 			}
 		}
 	}
@@ -108,13 +108,13 @@ void Canvas::GenerateLabVertexData(const unsigned short BitMap[LABSIZE])
 				Frame aframe = atile.MyVariant.at(VariantSelecter / 16 - 1);
 
 				//set the UV's of the tile at the index
-				vec2 aVOffset = vec2((aframe.myOrigin.x / m_MyResourceManager->GetTextureSize(1).x), (aframe.myOrigin.y / m_MyResourceManager->GetTextureSize(1).y));
-				vec2 aUVScale = vec2((aframe.mySize.x / m_MyResourceManager->GetTextureSize(1).x), (aframe.mySize.y / m_MyResourceManager->GetTextureSize(1).y));
+				Vector2Float aVOffset = Vector2Float((aframe.myOrigin.myX / m_MyResourceManager->GetTextureSize(1).x), (aframe.myOrigin.myY / m_MyResourceManager->GetTextureSize(1).y));
+				Vector2Float aUVScale = Vector2Float((aframe.mySize.myX / m_MyResourceManager->GetTextureSize(1).x), (aframe.mySize.myY / m_MyResourceManager->GetTextureSize(1).y));
 
 				//set up the position
-				vec2 aposition = vec2(((((i / NUM_LAB_COLUMNS) * NUM_LAB_COLUMNS) + j) % NUM_LAB_COLUMNS) * TILESIZE, ((((i / NUM_LAB_COLUMNS) * NUM_LAB_COLUMNS) + j) / NUM_LAB_COLUMNS) * TILESIZE);
+				Vector2Float aposition = Vector2Float(((((i / NUM_LAB_COLUMNS) * NUM_LAB_COLUMNS) + j) % NUM_LAB_COLUMNS) * TILESIZE, ((((i / NUM_LAB_COLUMNS) * NUM_LAB_COLUMNS) + j) / NUM_LAB_COLUMNS) * TILESIZE);
 
-				AddVert(aposition, 0, vec2(TILESIZE, TILESIZE), aUVScale, aVOffset);
+				AddVert(aposition, 0, Vector2Float(TILESIZE, TILESIZE), aUVScale, aVOffset);
 			}
 		}
 		else
@@ -134,13 +134,13 @@ void Canvas::GenerateLabVertexData(const unsigned short BitMap[LABSIZE])
 				Frame aframe = atile.MyVariant.at(VariantSelecter / 16 - 1);
 
 				//set the UV's of the tile at the index
-				vec2 aUVOffset = vec2((aframe.myOrigin.x / m_MyResourceManager->GetTextureSize(1).x), (aframe.myOrigin.y / m_MyResourceManager->GetTextureSize(1).y));
-				vec2 aUVScale = vec2((aframe.mySize.x / m_MyResourceManager->GetTextureSize(1).x), (aframe.mySize.y / m_MyResourceManager->GetTextureSize(1).y));
+				Vector2Float aUVOffset = Vector2Float((aframe.myOrigin.myX / m_MyResourceManager->GetTextureSize(1).x), (aframe.myOrigin.myY / m_MyResourceManager->GetTextureSize(1).y));
+				Vector2Float aUVScale = Vector2Float((aframe.mySize.myX / m_MyResourceManager->GetTextureSize(1).x), (aframe.mySize.myY / m_MyResourceManager->GetTextureSize(1).y));
 
 				//set up the position
-				vec2 aposition = vec2((i % NUM_LAB_COLUMNS) * TILESIZE, (i / NUM_LAB_COLUMNS) * TILESIZE);
+				Vector2Float aposition = Vector2Float((i % NUM_LAB_COLUMNS) * TILESIZE, (i / NUM_LAB_COLUMNS) * TILESIZE);
 
-				AddVert(aposition, 0, vec2(TILESIZE, TILESIZE), aUVScale, aUVOffset);
+				AddVert(aposition, 0, Vector2Float(TILESIZE, TILESIZE), aUVScale, aUVOffset);
 			}
 		}
 	}
@@ -173,13 +173,13 @@ void Canvas::GenerateForestVertexData(const unsigned short BitMap[FORESTMAPSIZE]
 				Frame aframe = atile.MyVariant.at(VariantSelecter / 16 - 1);
 
 				//set the UV's of the tile at the index
-				vec2 aVOffset = vec2((aframe.myOrigin.x / m_MyResourceManager->GetTextureSize(3).x), (aframe.myOrigin.y / m_MyResourceManager->GetTextureSize(3).y));
-				vec2 aUVScale = vec2((aframe.mySize.x / m_MyResourceManager->GetTextureSize(3).x), (aframe.mySize.y / m_MyResourceManager->GetTextureSize(3).y));
+				Vector2Float aVOffset = Vector2Float((aframe.myOrigin.myX / m_MyResourceManager->GetTextureSize(3).x), (aframe.myOrigin.myY / m_MyResourceManager->GetTextureSize(3).y));
+				Vector2Float aUVScale = Vector2Float((aframe.mySize.myX / m_MyResourceManager->GetTextureSize(3).x), (aframe.mySize.myY / m_MyResourceManager->GetTextureSize(3).y));
 
 				//set up the position
-				vec2 aposition = vec2(((((i / NUM_FOREST_COLUMNS) * NUM_FOREST_COLUMNS) + j) % NUM_FOREST_COLUMNS) * TILESIZE, ((((i / NUM_FOREST_COLUMNS) * NUM_FOREST_COLUMNS) + j) / NUM_FOREST_COLUMNS) * TILESIZE);
+				Vector2Float aposition = Vector2Float(((((i / NUM_FOREST_COLUMNS) * NUM_FOREST_COLUMNS) + j) % NUM_FOREST_COLUMNS) * TILESIZE, ((((i / NUM_FOREST_COLUMNS) * NUM_FOREST_COLUMNS) + j) / NUM_FOREST_COLUMNS) * TILESIZE);
 
-				AddVert(aposition, 0, vec2(TILESIZE, TILESIZE), aUVScale, aVOffset);
+				AddVert(aposition, 0, Vector2Float(TILESIZE, TILESIZE), aUVScale, aVOffset);
 			}
 		}
 		else
@@ -199,18 +199,18 @@ void Canvas::GenerateForestVertexData(const unsigned short BitMap[FORESTMAPSIZE]
 				Frame aframe = atile.MyVariant.at(VariantSelecter / 16 - 1);
 
 				//set the UV's of the tile at the index
-				vec2 aUVOffset = vec2((aframe.myOrigin.x / m_MyResourceManager->GetTextureSize(3).x), (aframe.myOrigin.y / m_MyResourceManager->GetTextureSize(3).y));
-				vec2 aUVScale = vec2((aframe.mySize.x / m_MyResourceManager->GetTextureSize(3).x), (aframe.mySize.y / m_MyResourceManager->GetTextureSize(3).y));
+				Vector2Float aUVOffset = Vector2Float((aframe.myOrigin.myX / m_MyResourceManager->GetTextureSize(3).x), (aframe.myOrigin.myY / m_MyResourceManager->GetTextureSize(3).y));
+				Vector2Float aUVScale = Vector2Float((aframe.mySize.myX / m_MyResourceManager->GetTextureSize(3).x), (aframe.mySize.myY / m_MyResourceManager->GetTextureSize(3).y));
 
 				//set up the position
-				vec2 aposition = vec2((i % NUM_FOREST_COLUMNS) * TILESIZE, (i / NUM_FOREST_COLUMNS) * TILESIZE);
+				Vector2Float aposition = Vector2Float((i % NUM_FOREST_COLUMNS) * TILESIZE, (i / NUM_FOREST_COLUMNS) * TILESIZE);
 
-				AddVert(aposition, 0, vec2(TILESIZE, TILESIZE), aUVScale, aUVOffset);
+				AddVert(aposition, 0, Vector2Float(TILESIZE, TILESIZE), aUVScale, aUVOffset);
 			}
 		}
 	}
 }
-void Canvas::AddVert(vec2 objectPos, float objectAngle, vec2 objectScale, vec2 aUVscale, vec2 aUVoffset)
+void Canvas::AddVert(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float aUVscale, Vector2Float aUVoffset)
 {
 	const float radians = objectAngle / 180.0f * PI;
 
@@ -218,43 +218,43 @@ void Canvas::AddVert(vec2 objectPos, float objectAngle, vec2 objectScale, vec2 a
 	{
 		if (IsReversed == true)
 		{
-			vec2 finalPos = m_BaseTileVertsReverse.at(i).m_Pos;
+			Vector2Float finalPos = m_BaseTileVertsReverse.at(i).m_Pos;
 
 			finalPos *= objectScale;
 
-			finalPos = vec2(finalPos.x * cos(radians) - finalPos.y * sin(radians),
-				finalPos.x * sin(radians) + finalPos.y * cos(radians));
+			finalPos = Vector2Float(finalPos.myX * cos(radians) - finalPos.myY * sin(radians),
+				finalPos.myX * sin(radians) + finalPos.myY * cos(radians));
 
 			finalPos += objectPos;
 
-			vec2 UVTemp = m_BaseTileVertsReverse.at(i).m_UV;
+			Vector2Float UVTemp = m_BaseTileVertsReverse.at(i).m_UV;
 
 			UVTemp *= aUVscale;
 
 			UVTemp += aUVoffset;
 
-			VertexFormat aVert = VertexFormat(vec2(finalPos), MyColor(m_BaseTileVertsReverse.at(i).m_Color), vec2(UVTemp));
+			VertexFormat aVert = VertexFormat(Vector2Float(finalPos), MyColor(m_BaseTileVertsReverse.at(i).m_Color), Vector2Float(UVTemp));
 
 			m_CanvasVerts.push_back(aVert);
 		}
 		else
 		{
-			vec2 finalPos = m_BaseTileVerts.at(i).m_Pos;
+			Vector2Float finalPos = m_BaseTileVerts.at(i).m_Pos;
 
 			finalPos *= objectScale;
 
-			finalPos = vec2(finalPos.x * cos(radians) - finalPos.y * sin(radians),
-				finalPos.x * sin(radians) + finalPos.y * cos(radians));
+			finalPos = Vector2Float(finalPos.myX * cos(radians) - finalPos.myY * sin(radians),
+				finalPos.myX * sin(radians) + finalPos.myY * cos(radians));
 
 			finalPos += objectPos;
 
-			vec2 UVTemp = m_BaseTileVerts.at(i).m_UV;
+			Vector2Float UVTemp = m_BaseTileVerts.at(i).m_UV;
 
 			UVTemp *= aUVscale;
 
 			UVTemp += aUVoffset;
 
-			VertexFormat aVert = VertexFormat(vec2(finalPos), MyColor(m_BaseTileVerts.at(i).m_Color), vec2(UVTemp));
+			VertexFormat aVert = VertexFormat(Vector2Float(finalPos), MyColor(m_BaseTileVerts.at(i).m_Color), Vector2Float(UVTemp));
 
 			m_CanvasVerts.push_back(aVert);
 		}

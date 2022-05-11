@@ -1,12 +1,12 @@
 #pragma once
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 
 class AStarPathFinder;
 class ResourceManager;
 class TileMap;
 
-class WildPokemonTile : public GameObject
+class WildPokemonTile : public Entity
 {
 public:
 	WildPokemonTile(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
@@ -17,7 +17,7 @@ public:
 	virtual void WalkingUpdate(float deltatime);
 	virtual void TrackToPlayerUpdate(float deltatime);
 
-	void Draw(vec2 camPos, vec2 projecScale) override;
+	void Draw(Vector2Float camPos, Vector2Float projecScale) override;
 	void Move(SpriteDirection dir, float deltatime);
 
 	void ResetPathFinder();
@@ -31,7 +31,7 @@ public:
 
 	void OnEvent(Event* anEvent) override;
 
-	[[nodiscard]] bool CheckForCollision(vec2 NPCNewPosition) const;
+	[[nodiscard]] bool CheckForCollision(Vector2Float NPCNewPosition) const;
 
 	int* GetInputSet() override;
 	void SetInputSet(int* aPath) override;
@@ -57,7 +57,7 @@ public:
 private:
 	int m_MyInputSet[MAXPATHSIZE_TOWN_NPC];
 	ResourceManager* myResourceManager;
-	vec2 NewPosition;
+	Vector2Float NewPosition;
 	ivec2 m_MyNewDestination;
 	ivec2 m_MyIndex;
 	TileMap* m_MyTileMap;

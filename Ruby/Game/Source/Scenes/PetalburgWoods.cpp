@@ -1,7 +1,7 @@
 #include "GamePCH.h"
 #include "PetalburgWoods.h"
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "GameObjects/Trainer.h"
 #include "GameObjects/WoodsObjects/PetalburgWoodsMap.h"
 #include "GameplayHelpers/ResourceManager.h"
@@ -9,10 +9,10 @@
 #include "Mesh/Mesh.h"
 
 PetalburgWoods::PetalburgWoods(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager * aResourceManager, Mesh* aMesh, Trainer* aPlayer, GLuint aTexture)
-	: Scene(myGame, myArea, aTileMap, aResourceManager, aMesh, aPlayer, vec2(37.0f * TILESIZE, TILESIZE), aTexture)
+	: Scene(myGame, myArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(37.0f * TILESIZE, TILESIZE), aTexture)
 	, m_MyPetalburg(nullptr)
 {
-	PlayerSavedPosition = vec2(0.0f, 0.0f);
+	PlayerSavedPosition = Vector2Float(0.0f, 0.0f);
 }
 
 PetalburgWoods::~PetalburgWoods()
@@ -33,7 +33,7 @@ void PetalburgWoods::Update(float deltatime)
 	m_pMyTrainer->Update(deltatime);
 }
 
-void PetalburgWoods::Draw(vec2 camPos, vec2 camProjection)
+void PetalburgWoods::Draw(Vector2Float camPos, Vector2Float camProjection)
 {
 	m_MyPetalburg->Draw(camPos, camProjection);
 	m_pMyTrainer->Draw(camPos, camProjection);
@@ -41,7 +41,7 @@ void PetalburgWoods::Draw(vec2 camPos, vec2 camProjection)
 
 void PetalburgWoods::OnIsActive()
 {
-	if (PlayerSavedPosition != vec2(0.0f, 0.0f))
+	if (PlayerSavedPosition != Vector2Float(0.0f, 0.0f))
 	{
 		m_pMyPlayerStart = PlayerSavedPosition;
 	}

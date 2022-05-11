@@ -87,7 +87,7 @@
     <ClInclude Include="Source\GameObjects\GameCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\GameObject.h">
+    <ClInclude Include="Source\GameObjects\Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameObjects\Trainer.h">
@@ -206,7 +206,7 @@
     <ClCompile Include="Source\GameObjects\GameCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\GameObject.cpp">
+    <ClCompile Include="Source\GameObjects\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameObjects\Trainer.cpp">

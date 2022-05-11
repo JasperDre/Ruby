@@ -1,12 +1,12 @@
 #pragma once
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 
 class Mesh;
 class ResourceManager;
 class TileMap;
 
-class PlayerHouse : public GameObject
+class PlayerHouse : public Entity
 {
 public:
 	PlayerHouse(ResourceManager* aResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
@@ -14,15 +14,15 @@ public:
 
 	void Update(float deltatime) override {}
 
-	void Draw(vec2 camPos, vec2 projecScale) override;
+	void Draw(Vector2Float camPos, Vector2Float projecScale) override;
 
 private:
 	std::vector<Frame>m_MyFrames;
 	const unsigned short PlayerHouseMap[5] = {	0, 1, 2, 3, 4};
 	const unsigned short PlayerHouse_NumTiles = 5;
-	vec2 m_MyTileUVOffset;
-	vec2 m_MyTileUVScale;
-	vec2 m_PlayerHousePosition;
+	Vector2Float m_MyTileUVOffset;
+	Vector2Float m_MyTileUVScale;
+	Vector2Float m_PlayerHousePosition;
 	TileMap* m_MyTileMap;
 	ResourceManager* m_MyResourceManager;
 };

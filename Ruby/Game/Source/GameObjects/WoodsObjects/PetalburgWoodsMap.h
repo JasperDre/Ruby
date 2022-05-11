@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 
 class ResourceManager;
 class TileMap;
@@ -8,14 +8,14 @@ class Mesh;
 class GameCore;
 class Canvas;
 
-class PetalburgWoodsMap : public GameObject
+class PetalburgWoodsMap : public Entity
 {
 public:
 	PetalburgWoodsMap(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
 	~PetalburgWoodsMap();
 
 	void Update(float deltatime);
-	void Draw(vec2 camPos, vec2 projecScale);
+	void Draw(Vector2Float camPos, Vector2Float projecScale);
 
 private:
 

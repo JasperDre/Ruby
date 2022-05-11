@@ -10,16 +10,16 @@ public:
 		, myObsticlePosition(0.0f)
 	{}
 
-	CollisionEvent(vec2 anObsticlePos, vec2 aColliderPos)
+	CollisionEvent(Vector2Float anObsticlePos, Vector2Float aColliderPos)
 		: myColliderPosition(aColliderPos)
 		, myObsticlePosition(anObsticlePos)
 	{}
 
 	[[nodiscard]] EventTypes GetEventType() const override { return EventTypes::EventType_Collision; }
-	[[nodiscard]] vec2 GetColliderPosition() const { return myColliderPosition; }
-	[[nodiscard]] vec2 GetObsticlePosition() const { return myObsticlePosition; }
+	[[nodiscard]] Vector2Float GetColliderPosition() const { return myColliderPosition; }
+	[[nodiscard]] Vector2Float GetObsticlePosition() const { return myObsticlePosition; }
 
 protected:
-	vec2 myColliderPosition;
-	vec2 myObsticlePosition;
+	Vector2Float myColliderPosition;
+	Vector2Float myObsticlePosition;
 };

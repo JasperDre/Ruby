@@ -30,16 +30,16 @@ void SetUniform1f(GLuint shader, const char* uniformName, float value)
 	}
 }
 
-void SetUniform2f(GLuint shader, const char* uniformName, vec2 value)
+void SetUniform2f(GLuint shader, const char* uniformName, Vector2Float value)
 {
 	GLint loc = glGetUniformLocation(shader, uniformName);
 	if (loc != -1)
 	{
-		glUniform2f(loc, value.x, value.y);
+		glUniform2f(loc, value.myX, value.myY);
 	}
 }
 
-void Mesh::Draw(vec2 objectPos, float objectAngle, vec2 objectScale, vec2 camPos, vec2 projScale, GLuint aTexture, vec2 aUVscale, vec2 aUVoffset)
+void Mesh::Draw(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float camPos, Vector2Float projScale, GLuint aTexture, Vector2Float aUVscale, Vector2Float aUVoffset)
 {
 	//TEXTURES ARE GLuint
 	assert(m_PrimitiveType != -1);
@@ -107,7 +107,7 @@ void Mesh::Draw(vec2 objectPos, float objectAngle, vec2 objectScale, vec2 camPos
 
 	GLHelpers::CheckForGLErrors();
 }
-void Mesh::DrawCanvas(vec2 cameraPos, vec2 projectionScale, GLuint aTexture)
+void Mesh::DrawCanvas(Vector2Float cameraPos, Vector2Float projectionScale, GLuint aTexture)
 {
 	//TEXTURES ARE GLuint
 	assert(m_PrimitiveType != -1);
@@ -147,7 +147,7 @@ void Mesh::DrawCanvas(vec2 cameraPos, vec2 projectionScale, GLuint aTexture)
 	// Set up uniforms.
 	SetUniform2f(shader, "u_ObjectScale", 1);
 	SetUniform1f(shader, "u_ObjectAngleRadians", 0 / 180.0f * PI);
-	SetUniform2f(shader, "u_ObjectPosition", vec2(0.0f, 0.0f));
+	SetUniform2f(shader, "u_ObjectPosition", Vector2Float(0.0f, 0.0f));
 	SetUniform2f(shader, "u_CameraTranslation", cameraPos * -1);
 	SetUniform2f(shader, "u_ProjectionScale", projectionScale);
 
@@ -159,8 +159,8 @@ void Mesh::DrawCanvas(vec2 cameraPos, vec2 projectionScale, GLuint aTexture)
 
 
 	glUniform1i(texture, 8);
-	SetUniform2f(shader, "u_UVScale", vec2(1.0f, 1.0f));
-	SetUniform2f(shader, "u_UVOffset", vec2(0.0f, 0.0f));
+	SetUniform2f(shader, "u_UVScale", Vector2Float(1.0f, 1.0f));
+	SetUniform2f(shader, "u_UVOffset", Vector2Float(0.0f, 0.0f));
 
 	GLHelpers::CheckForGLErrors();
 
@@ -170,12 +170,12 @@ void Mesh::DrawCanvas(vec2 cameraPos, vec2 projectionScale, GLuint aTexture)
 
 	if (IsDebug == true)
 	{
-		DebugDraw(vec2(0.0f, 0.0f), 0 / 180.0f * PI, 1, cameraPos, projectionScale);
+		DebugDraw(Vector2Float(0.0f, 0.0f), 0 / 180.0f * PI, 1, cameraPos, projectionScale);
 	}
 
 	GLHelpers::CheckForGLErrors();
 }
-void Mesh::DebugDraw(vec2 objectPos, float objectAngle, vec2 objectScale, vec2 camPos, vec2 projScale)
+void Mesh::DebugDraw(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float camPos, Vector2Float projScale)
 {
 	//TEXTURES ARE GLuint
 	assert(m_PrimitiveType != -1);
@@ -220,9 +220,9 @@ void Mesh::GenerateTriangle()
 
 	// Vertex info for a diamond.
 	VertexFormat vertexAttributes[] = {
-		VertexFormat(vec2(0.0f,  1.0f), MyColor(255, 255, 255, 255), vec2(0.5f, 1.0f)),
-		VertexFormat(vec2(-0.5f, -1.0f), MyColor(255, 255, 255, 255), vec2(0.25f, 0.0f)),
-		VertexFormat(vec2(0.5f, -1.0f), MyColor(255, 255, 255, 255), vec2(0.75f, 0.0f)),
+		VertexFormat(Vector2Float(0.0f,  1.0f), MyColor(255, 255, 255, 255), Vector2Float(0.5f, 1.0f)),
+		VertexFormat(Vector2Float(-0.5f, -1.0f), MyColor(255, 255, 255, 255), Vector2Float(0.25f, 0.0f)),
+		VertexFormat(Vector2Float(0.5f, -1.0f), MyColor(255, 255, 255, 255), Vector2Float(0.75f, 0.0f)),
 	};
 
 	// Gen and fill buffer with our attributes.
@@ -245,10 +245,10 @@ void Mesh::GenerateCircle()
 
 	// Vertex position info for a diamond.
 	VertexFormat vertexAttributes[] = {
-		VertexFormat(vec2(0.0f,  1.0f), MyColor(0, 255,   0, 255), vec2(0.5f, 1.0f)),
-		VertexFormat(vec2(-1.0f,  0.0f), MyColor(0, 255,   0, 255), vec2(0.0f, 0.5f)),
-		VertexFormat(vec2(1.0f,  0.0f), MyColor(0, 255,   0, 255), vec2(1.0f, 0.5f)),
-		VertexFormat(vec2(0.0f, -1.0f), MyColor(0, 255,   0, 255), vec2(0.5f, 0.0f)),
+		VertexFormat(Vector2Float(0.0f,  1.0f), MyColor(0, 255,   0, 255), Vector2Float(0.5f, 1.0f)),
+		VertexFormat(Vector2Float(-1.0f,  0.0f), MyColor(0, 255,   0, 255), Vector2Float(0.0f, 0.5f)),
+		VertexFormat(Vector2Float(1.0f,  0.0f), MyColor(0, 255,   0, 255), Vector2Float(1.0f, 0.5f)),
+		VertexFormat(Vector2Float(0.0f, -1.0f), MyColor(0, 255,   0, 255), Vector2Float(0.5f, 0.0f)),
 	};
 
 	// Gen and fill buffer with our attributes.
@@ -328,10 +328,10 @@ void Mesh::GenerateFrameMesh()
 	assert(m_VBO == 0);
 
 	VertexFormat vertexAttributes[] = {
-	VertexFormat(vec2(0.0f,  0.0f), MyColor(0, 255,   0, 255), vec2(0.0f, 0.0f)),
-	VertexFormat(vec2(0.0f, 1.0f), MyColor(0, 255,   0, 255), vec2(0.0f, 1.0f)),
-	VertexFormat(vec2(1.0f,  1.0f), MyColor(0, 255,   0, 255), vec2(1.0f, 1.0f)),
-	VertexFormat(vec2(1.0f, 0.0f), MyColor(0, 255,   0, 255), vec2(1.0f, 0.0f)),
+	VertexFormat(Vector2Float(0.0f,  0.0f), MyColor(0, 255,   0, 255), Vector2Float(0.0f, 0.0f)),
+	VertexFormat(Vector2Float(0.0f, 1.0f), MyColor(0, 255,   0, 255), Vector2Float(0.0f, 1.0f)),
+	VertexFormat(Vector2Float(1.0f,  1.0f), MyColor(0, 255,   0, 255), Vector2Float(1.0f, 1.0f)),
+	VertexFormat(Vector2Float(1.0f, 0.0f), MyColor(0, 255,   0, 255), Vector2Float(1.0f, 0.0f)),
 	};
 
 	// Gen and fill buffer with our attributes.
@@ -349,10 +349,10 @@ void Mesh::GenerateTileMesh()
 	assert(m_VBO == 0);
 
 	VertexFormat vertexAttributes[] = {
-	VertexFormat(vec2(0.0f,  0.0f), MyColor(255, 255, 255, 255), vec2(0.0f, 0.0f)),
-	VertexFormat(vec2(0.0f,  1.0f), MyColor(255, 255, 255, 255), vec2(0.0f, 1.0f)),
-	VertexFormat(vec2(1.0f,  1.0f), MyColor(255, 255, 255, 255), vec2(1.0f, 1.0f)),
-	VertexFormat(vec2(1.0f,  0.0f), MyColor(255, 255, 255, 255), vec2(1.0f, 0.0f)),
+	VertexFormat(Vector2Float(0.0f,  0.0f), MyColor(255, 255, 255, 255), Vector2Float(0.0f, 0.0f)),
+	VertexFormat(Vector2Float(0.0f,  1.0f), MyColor(255, 255, 255, 255), Vector2Float(0.0f, 1.0f)),
+	VertexFormat(Vector2Float(1.0f,  1.0f), MyColor(255, 255, 255, 255), Vector2Float(1.0f, 1.0f)),
+	VertexFormat(Vector2Float(1.0f,  0.0f), MyColor(255, 255, 255, 255), Vector2Float(1.0f, 0.0f)),
 	};
 
 	// Gen and fill buffer with our attributes.
@@ -371,10 +371,10 @@ void Mesh::GenerateWildTileMesh()
 	assert(m_VBO == 0);
 
 	VertexFormat vertexAttributes[] = {
-	VertexFormat(vec2(0.0f,  0.0f), MyColor(255, 0, 0, 255), vec2(0.0f, 0.0f)),
-	VertexFormat(vec2(0.0f,  1.0f), MyColor(255, 0, 0, 255), vec2(0.0f, 1.0f)),
-	VertexFormat(vec2(1.0f,  1.0f), MyColor(255, 0, 0, 255), vec2(1.0f, 1.0f)),
-	VertexFormat(vec2(1.0f,  0.0f), MyColor(255, 0, 0, 255), vec2(1.0f, 0.0f)),
+	VertexFormat(Vector2Float(0.0f,  0.0f), MyColor(255, 0, 0, 255), Vector2Float(0.0f, 0.0f)),
+	VertexFormat(Vector2Float(0.0f,  1.0f), MyColor(255, 0, 0, 255), Vector2Float(0.0f, 1.0f)),
+	VertexFormat(Vector2Float(1.0f,  1.0f), MyColor(255, 0, 0, 255), Vector2Float(1.0f, 1.0f)),
+	VertexFormat(Vector2Float(1.0f,  0.0f), MyColor(255, 0, 0, 255), Vector2Float(1.0f, 0.0f)),
 	};
 
 	// Gen and fill buffer with our attributes.
@@ -388,15 +388,15 @@ void Mesh::GenerateWildTileMesh()
 	m_NumVerts = 4;
 }
 
-void Mesh::GenerateTextureMesh(vec2 aSize)
+void Mesh::GenerateTextureMesh(Vector2Float aSize)
 {
 	assert(m_VBO == 0);
 
 	VertexFormat vertexAttributes[] = {
-	VertexFormat(vec2(0.0f,  0.0f), MyColor(255, 255, 255, 255), vec2(0.0f, 0.0f)),
-	VertexFormat(vec2(0.0f,  aSize.y), MyColor(255, 255, 255, 255), vec2(0.0f, 1.0f)),
-	VertexFormat(vec2(aSize.x,  aSize.y), MyColor(255, 255, 255, 255), vec2(1.0f, 1.0f)),
-	VertexFormat(vec2(aSize.x,  0.0f), MyColor(255, 255, 255, 255), vec2(1.0f, 0.0f)),
+	VertexFormat(Vector2Float(0.0f,  0.0f), MyColor(255, 255, 255, 255), Vector2Float(0.0f, 0.0f)),
+	VertexFormat(Vector2Float(0.0f,  aSize.myY), MyColor(255, 255, 255, 255), Vector2Float(0.0f, 1.0f)),
+	VertexFormat(Vector2Float(aSize.myX,  aSize.myY), MyColor(255, 255, 255, 255), Vector2Float(1.0f, 1.0f)),
+	VertexFormat(Vector2Float(aSize.myX,  0.0f), MyColor(255, 255, 255, 255), Vector2Float(1.0f, 0.0f)),
 	};
 
 	// Gen and fill buffer with our attributes.
@@ -415,10 +415,10 @@ void Mesh::GenerateDebugMesh()
 	assert(m_VBO == 0);
 
 	VertexFormat vertexAttributes[] = {
-	VertexFormat(vec2(0.0f,  1.0f), MyColor(255, 255,   255, 255), vec2(0.0f, 1.0f)),
-	VertexFormat(vec2(1.0f,  1.0f), MyColor(255, 255,   255, 255), vec2(1.0f, 1.0f)),
-	VertexFormat(vec2(1.0f,  0.0f), MyColor(255, 255,   255, 255), vec2(1.0f, 0.0f)),
-	VertexFormat(vec2(0.0f, 0.0f), MyColor(255, 255,   255, 255), vec2(0.0f, 0.0f)),
+	VertexFormat(Vector2Float(0.0f,  1.0f), MyColor(255, 255,   255, 255), Vector2Float(0.0f, 1.0f)),
+	VertexFormat(Vector2Float(1.0f,  1.0f), MyColor(255, 255,   255, 255), Vector2Float(1.0f, 1.0f)),
+	VertexFormat(Vector2Float(1.0f,  0.0f), MyColor(255, 255,   255, 255), Vector2Float(1.0f, 0.0f)),
+	VertexFormat(Vector2Float(0.0f, 0.0f), MyColor(255, 255,   255, 255), Vector2Float(0.0f, 0.0f)),
 	};
 
 	glGenBuffers(1, &m_VBO);

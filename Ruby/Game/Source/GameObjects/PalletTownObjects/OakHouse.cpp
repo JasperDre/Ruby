@@ -6,13 +6,13 @@
 #include "Mesh/Mesh.h"
 
 OakHouse::OakHouse(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture)
-	: GameObject(myGame, myMesh, aTexture)
+	: Entity(myGame, myMesh, aTexture)
 {
 	m_pMesh = myMesh;
-	m_pMyTexture = aTexture;
+	myTextureIdentifier = aTexture;
 	m_MyResourceManager = myResourceManager;
 	m_MyTileMap = myTileMap;
-	OakHousePosition = vec2(17.0f * TILESIZE, 18.0f * TILESIZE);
+	OakHousePosition = Vector2Float(17.0f * TILESIZE, 18.0f * TILESIZE);
 
 	for (int i = 0; i < OakHouse_NumTiles; i++)
 	{
@@ -20,10 +20,10 @@ OakHouse::OakHouse(ResourceManager* myResourceManager, TileMap* myTileMap, GameC
 
 		Frame aframe = atile.MyVariant.at(OakHouseMap[i]);
 
-		aframe.myUVOffset = vec2((aframe.myOrigin.x / m_MyResourceManager->GetTextureSize(0).x), (aframe.myOrigin.y / m_MyResourceManager->GetTextureSize(0).y));
-		aframe.myUVScale = vec2((aframe.mySize.x / m_MyResourceManager->GetTextureSize(0).x), (aframe.mySize.y / m_MyResourceManager->GetTextureSize(0).y));
+		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / m_MyResourceManager->GetTextureSize(0).x), (aframe.myOrigin.myY / m_MyResourceManager->GetTextureSize(0).y));
+		aframe.myUVScale = Vector2Float((aframe.mySize.myX / m_MyResourceManager->GetTextureSize(0).x), (aframe.mySize.myY / m_MyResourceManager->GetTextureSize(0).y));
 
-		aframe.myWorldSpace = vec2((((i % OakHouse_NumTiles) * TILESIZE) + OakHousePosition.x), (((i / OakHouse_NumTiles)* TILESIZE) + OakHousePosition.y));
+		aframe.myWorldSpace = Vector2Float((((i % OakHouse_NumTiles) * TILESIZE) + OakHousePosition.myX), (((i / OakHouse_NumTiles)* TILESIZE) + OakHousePosition.myY));
 
 		m_MyFrames.push_back(aframe);
 	}
@@ -34,11 +34,11 @@ OakHouse::~OakHouse()
 	m_MyFrames.clear();
 }
 
-void OakHouse::Draw(vec2 camPos, vec2 projecScale)
+void OakHouse::Draw(Vector2Float camPos, Vector2Float projecScale)
 {
 	for (int i = 0; i < OakHouse_NumTiles; i++)
 	{
-		m_pMesh->Draw(m_MyFrames.at(i).myWorldSpace, m_Angle, vec2(TILESIZE, TILESIZE), camPos, projecScale, m_pMyTexture, m_MyFrames.at(i).myUVScale, m_MyFrames.at(i).myUVOffset);
+		m_pMesh->Draw(m_MyFrames.at(i).myWorldSpace, m_Angle, Vector2Float(TILESIZE, TILESIZE), camPos, projecScale, myTextureIdentifier, m_MyFrames.at(i).myUVScale, m_MyFrames.at(i).myUVOffset);
 	}
 }
 

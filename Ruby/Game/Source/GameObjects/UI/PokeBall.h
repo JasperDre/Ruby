@@ -1,18 +1,18 @@
 #pragma once
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 
 class TileMap;
 class ResourceManager;
 
-class PokeBall : public GameObject
+class PokeBall : public Entity
 {
 public:
 	PokeBall(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
 
 	void Update(float deltatime) override {}
 
-	void Draw(vec2 camPos, vec2 camProjection) override;
+	void Draw(Vector2Float camPos, Vector2Float camProjection) override;
 
 private:
 	TileMap* m_MyExtrasTileMap;

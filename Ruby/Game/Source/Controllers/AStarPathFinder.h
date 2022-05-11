@@ -1,7 +1,7 @@
 #pragma once
 
 class TileMap;
-class GameObject;
+class Entity;
 
 enum class PathNodeStatus
 {
@@ -29,7 +29,7 @@ protected:
 	int m_MyMaxIndex;
 
 	TileMap* m_pMyTileMap;
-	GameObject* m_MyNPC;
+	Entity* m_MyNPC;
 
 	PathNode* m_Nodes;
 	int m_NumNodes;
@@ -49,7 +49,7 @@ protected:
 	int CalculateH(int nodeIndex, int endNodeIndex) const;
 
 public:
-	AStarPathFinder(TileMap* aTileMap, GameObject* aNPC);
+	AStarPathFinder(TileMap* aTileMap, Entity* aNPC);
 	virtual ~AStarPathFinder();
 
 	void Reset();

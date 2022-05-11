@@ -2,10 +2,10 @@
 #include "AIController.h"
 
 #include "Controllers/AStarPathFinder.h"
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "GameplayHelpers/TileMap.h"
 
-AIController::AIController(TileMap* aTileMap, int aMinIndex, int aMaxIndex, GameObject* aNPC)
+AIController::AIController(TileMap* aTileMap, int aMinIndex, int aMaxIndex, Entity* aNPC)
 {
 	m_MyTileMap = aTileMap;
 	m_MyNPC = aNPC;
@@ -140,14 +140,14 @@ SpriteDirection AIController::CalculateNextInput()
 	return SpriteDirection::SpriteDirectionStop;
 }
 
-ivec2 AIController::SetNPCCurrentPosition(vec2 aNPCPosition)
+ivec2 AIController::SetNPCCurrentPosition(Vector2Float aNPCPosition)
 {
-	return ivec2(aNPCPosition.x / TILESIZE, aNPCPosition.y / TILESIZE);
+	return ivec2(aNPCPosition.myX / TILESIZE, aNPCPosition.myY / TILESIZE);
 }
 
-ivec2 AIController::CalculatedDirection(ivec2 aCurrentIndex, vec2 aDirection)
+ivec2 AIController::CalculatedDirection(ivec2 aCurrentIndex, Vector2Float aDirection)
 {
-	return ivec2((aCurrentIndex.x + aDirection.x), (aCurrentIndex.y + aDirection.y));
+	return ivec2((aCurrentIndex.x + aDirection.myX), (aCurrentIndex.y + aDirection.myY));
 }
 
 int AIController::RangeRandomIntAlg(int min, int max)

@@ -3,7 +3,7 @@
 #include "GameCore/GameCore.h"
 
 class Mesh;
-class GameObject;
+class Entity;
 class ResourceManager;
 class TileMap;
 class TileMapPalletTown;
@@ -57,7 +57,7 @@ protected:
 	GameCamera* m_TrainerCamera;
 	PlayerController* m_pPlayerController;
 	SceneManager* m_MySceneManager;
-	vec2 aWindowSize;
+	Vector2Float aWindowSize;
 	GLuint m_Tileset;
 	GLuint m_OakLabTileset;
 	GLuint m_Sprites;

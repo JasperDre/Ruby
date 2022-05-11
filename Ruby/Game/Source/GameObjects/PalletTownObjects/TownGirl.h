@@ -1,20 +1,20 @@
 #pragma once
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 
 class AnimatedSprite;
 class AStarPathFinder;
 class ResourceManager;
 class TileMap;
 
-class TownGirl : public GameObject
+class TownGirl : public Entity
 {
 public:
 	TownGirl(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
 	~TownGirl() override;
 
 	void Update(float deltatime) override;
-	void Draw(vec2 camPos, vec2 projecScale) override;
+	void Draw(Vector2Float camPos, Vector2Float projecScale) override;
 	void Move(SpriteDirection dir, float deltatime);
 	void Pause();
 	void Resume();
@@ -25,7 +25,7 @@ public:
 	void OnEvent(Event* anEvent) override;
 	int RangeRandomIntAlg(int min, int max) override;
 
-	[[nodiscard]] bool CheckForCollision(vec2 NPCNewPosition) const;
+	[[nodiscard]] bool CheckForCollision(Vector2Float NPCNewPosition) const;
 	int* GetInputSet() override;
 	bool GetNodeIsClearOnSpecial(int tx, int ty) override;
 	int GetMyMapWidth() override;
@@ -35,7 +35,7 @@ private:
 	std::string AnimationKeys[NUM_DIRECTIONS];
 	int m_MyInputSet[MAXPATHSIZE_TOWN_NPC];
 	AnimatedSprite* m_Animations[NUM_DIRECTIONS];
-	vec2 NewPosition;
+	Vector2Float NewPosition;
 	ivec2 m_MyNewDestination;
 	ivec2 m_MyIndex;
 	TileMap* m_MyTileMap;

@@ -1,10 +1,10 @@
 #include "GamePCH.h"
 #include "AStarPathFinder.h"
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "GameplayHelpers/TileMap.h"
 
-AStarPathFinder::AStarPathFinder(TileMap* aTileMap, GameObject* aNPC)
+AStarPathFinder::AStarPathFinder(TileMap* aTileMap, Entity* aNPC)
 {
 	m_pMyTileMap = aTileMap;
 	m_MapWidth = m_pMyTileMap->GetMapWidth();
@@ -197,7 +197,7 @@ void AStarPathFinder::AddNeighboursToOpenList(int nodeIndex, int endNodeIndex)
 	int NeighbourNodes[4];
 
 	for (int i = 0; i < 4; i++)
-		NeighbourNodes[i] = CheckIfNodeIsClearAndReturnNodeIndex(TileColumn + DIRECTIONVECTOR[i].x, TileRow + DIRECTIONVECTOR[i].y);
+		NeighbourNodes[i] = CheckIfNodeIsClearAndReturnNodeIndex(TileColumn + DIRECTIONVECTOR[i].myX, TileRow + DIRECTIONVECTOR[i].myY);
 
 	// Loop through the array.
 	for (int i = 0; i < 4; i++)

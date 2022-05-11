@@ -6,13 +6,13 @@
 #include "Mesh/Mesh.h"
 
 OakLabMachineTop::OakLabMachineTop(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
-	: GameObject(myGame, myMesh, aTexture)
+	: Entity(myGame, myMesh, aTexture)
 {
 	m_pMesh = myMesh;
-	m_pMyTexture = aTexture;
+	myTextureIdentifier = aTexture;
 	m_MyResourceManager = myResourceManager;
 	m_MyTileMap = myTileMap;
-	OaklabMachinePosition = vec2(3.0f * TILESIZE, 10.0f * TILESIZE);
+	OaklabMachinePosition = Vector2Float(3.0f * TILESIZE, 10.0f * TILESIZE);
 
 	for (int i = 0; i < OakLabMachine_NumTiles; i++)
 	{
@@ -20,10 +20,10 @@ OakLabMachineTop::OakLabMachineTop(ResourceManager* myResourceManager, TileMap* 
 
 		Frame aframe = atile.MyVariant.at(OakLabMachineMap[i]);
 
-		aframe.myUVOffset = vec2((aframe.myOrigin.x / m_MyResourceManager->GetTextureSize(1).x), (aframe.myOrigin.y / m_MyResourceManager->GetTextureSize(1).y));
-		aframe.myUVScale = vec2((aframe.mySize.x / m_MyResourceManager->GetTextureSize(1).x), (aframe.mySize.y / m_MyResourceManager->GetTextureSize(1).y));
+		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / m_MyResourceManager->GetTextureSize(1).x), (aframe.myOrigin.myY / m_MyResourceManager->GetTextureSize(1).y));
+		aframe.myUVScale = Vector2Float((aframe.mySize.myX / m_MyResourceManager->GetTextureSize(1).x), (aframe.mySize.myY / m_MyResourceManager->GetTextureSize(1).y));
 
-		aframe.myWorldSpace = vec2((((i % OakLabMachine_NumTiles) * TILESIZE) + OaklabMachinePosition.x), (((i / OakLabMachine_NumTiles)* TILESIZE) + OaklabMachinePosition.y));
+		aframe.myWorldSpace = Vector2Float((((i % OakLabMachine_NumTiles) * TILESIZE) + OaklabMachinePosition.myX), (((i / OakLabMachine_NumTiles)* TILESIZE) + OaklabMachinePosition.myY));
 
 		m_MyFrames.push_back(aframe);
 	}
@@ -38,10 +38,10 @@ void OakLabMachineTop::Update(float deltatime)
 {
 }
 
-void OakLabMachineTop::Draw(vec2 camPos, vec2 camProject)
+void OakLabMachineTop::Draw(Vector2Float camPos, Vector2Float camProject)
 {
 	for (int i = 0; i < OakLabMachine_NumTiles; i++)
 	{
-		m_pMesh->Draw(m_MyFrames.at(i).myWorldSpace, m_Angle, vec2(TILESIZE, TILESIZE), camPos, camProject, m_pMyTexture, m_MyFrames.at(i).myUVScale, m_MyFrames.at(i).myUVOffset);
+		m_pMesh->Draw(m_MyFrames.at(i).myWorldSpace, m_Angle, Vector2Float(TILESIZE, TILESIZE), camPos, camProject, myTextureIdentifier, m_MyFrames.at(i).myUVScale, m_MyFrames.at(i).myUVOffset);
 	}
 }

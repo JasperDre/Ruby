@@ -7,7 +7,7 @@
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 
-Scene::Scene(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer* aPlayer, vec2 aPlayerStartPosition, GLuint aTexture)
+Scene::Scene(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer* aPlayer, Vector2Float aPlayerStartPosition, GLuint aTexture)
 	: m_MyArea(myArea)
 	, m_pMyPlayerStart(aPlayerStartPosition)
 	, m_MyTileMap(aTileMap)

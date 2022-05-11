@@ -10,7 +10,7 @@
 #include "Sprites/AnimatedSprite.h"
 
 Trainer::Trainer(ResourceManager* aResourceManager, GameCore* myGame, Mesh * myMesh, GLuint aTexture)
-	: GameObject(myGame, myMesh, aTexture)
+	: Entity(myGame, myMesh, aTexture)
 	, myController(nullptr)
 {
 	AnimationKeys[0] = "PlayerWalkDown_";
@@ -87,11 +87,11 @@ void Trainer::Update(float deltatime)
 	{
 		if (myDirection == SpriteDirection::SpriteWalkUp || myDirection == SpriteDirection::SpriteWalkRight)
 		{
-			if (m_Position.y < aTransitionDestination.y)
+			if (m_Position.myY < aTransitionDestination.myY)
 			{
 				Move(myDirection, deltatime);
 			}
-			else if (m_Position.x < aTransitionDestination.x)
+			else if (m_Position.myX < aTransitionDestination.myX)
 			{
 				Move(myDirection, deltatime);
 			}
@@ -102,11 +102,11 @@ void Trainer::Update(float deltatime)
 		}
 		if (myDirection == SpriteDirection::SpriteWalkDown || myDirection == SpriteDirection::SpriteWalkLeft)
 		{
-			if (m_Position.y > aTransitionDestination.y)
+			if (m_Position.myY > aTransitionDestination.myY)
 			{
 				Move(myDirection, deltatime);
 			}
-			else if (m_Position.x > aTransitionDestination.x)
+			else if (m_Position.myX > aTransitionDestination.myX)
 			{
 				Move(myDirection, deltatime);
 			}
@@ -124,7 +124,7 @@ void Trainer::Update(float deltatime)
 	}
 }
 
-void Trainer::Draw(vec2 camPos, vec2 projecScale)
+void Trainer::Draw(Vector2Float camPos, Vector2Float projecScale)
 {
 	m_Animations[static_cast<int>(myDirection)]->Draw(camPos, projecScale);
 }
@@ -140,7 +140,7 @@ void Trainer::Move(SpriteDirection dir, float deltatime)
 		myDirection = dir;
 	}
 
-	const vec2 velocity = DIRECTIONVECTOR[static_cast<int>(dir)] * PLAYER_SPEED;
+	const Vector2Float velocity = DIRECTIONVECTOR[static_cast<int>(dir)] * PLAYER_SPEED;
 
 	NewPosition += velocity * deltatime;
 	if (m_InTransition == false)
@@ -194,7 +194,7 @@ void Trainer::OnEvent(Event* anEvent)
 void Trainer::PlayerTransition()
 {
 	m_InTransition = true;
-	aTransitionDestination = GetPosition() + vec2(DIRECTIONVECTOR[static_cast<int>(myDirection)] * (TILESIZE / 4));
+	aTransitionDestination = GetPosition() + Vector2Float(DIRECTIONVECTOR[static_cast<int>(myDirection)] * (TILESIZE / 4));
 }
 
 SpriteDirection Trainer::GetMyDirection() const
@@ -202,13 +202,13 @@ SpriteDirection Trainer::GetMyDirection() const
 	return myDirection;
 }
 
-bool Trainer::CheckForCollision(vec2 aPosition) const
+bool Trainer::CheckForCollision(Vector2Float aPosition) const
 {
 	//Get the location of each point of collision on the player and then truncate it to a row and column
-	const ivec2 OriginIndex = ivec2((aPosition.x / TILESIZE), ((aPosition.y - 0.3f) / TILESIZE));
-	const ivec2 TopLeftIndex = ivec2((aPosition.x / TILESIZE), (((aPosition.y - 0.5f) + (TILESIZE / 2)) / TILESIZE));
-	const ivec2 TopRightIndex = ivec2(((aPosition.x + (TILESIZE / 2)) / TILESIZE), (((aPosition.y - 0.5f) + (TILESIZE / 2)) / TILESIZE));
-	const ivec2 BottomRightIndex = ivec2(((aPosition.x + (TILESIZE / 2)) / TILESIZE), ((aPosition.y - 0.3f) / TILESIZE));
+	const ivec2 OriginIndex = ivec2((aPosition.myX / TILESIZE), ((aPosition.myY - 0.3f) / TILESIZE));
+	const ivec2 TopLeftIndex = ivec2((aPosition.myX / TILESIZE), (((aPosition.myY - 0.5f) + (TILESIZE / 2)) / TILESIZE));
+	const ivec2 TopRightIndex = ivec2(((aPosition.myX + (TILESIZE / 2)) / TILESIZE), (((aPosition.myY - 0.5f) + (TILESIZE / 2)) / TILESIZE));
+	const ivec2 BottomRightIndex = ivec2(((aPosition.myX + (TILESIZE / 2)) / TILESIZE), ((aPosition.myY - 0.3f) / TILESIZE));
 
 	//Check each index for whether the tile it lands on is walkable
 	const bool CheckOrigin = m_pGame->GetTileMap()->GetTileAtPlayer(OriginIndex);

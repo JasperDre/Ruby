@@ -6,9 +6,9 @@
 #include "Mesh/Canvas.h"
 #include "Mesh/Mesh.h"
 
-PetalburgWoodsMap::PetalburgWoodsMap(ResourceManager * myResourceManager, TileMap * myTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : GameObject(myGame, myMesh, aTexture)
+PetalburgWoodsMap::PetalburgWoodsMap(ResourceManager * myResourceManager, TileMap * myTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : Entity(myGame, myMesh, aTexture)
 {
-	m_pMyTexture = aTexture;
+	myTextureIdentifier = aTexture;
 	m_MyTileMap = myTileMap;
 	m_MyResourceManager = myResourceManager;
 
@@ -30,7 +30,7 @@ void PetalburgWoodsMap::Update(float deltatime)
 
 }
 
-void PetalburgWoodsMap::Draw(vec2 camPos, vec2 projecScale)
+void PetalburgWoodsMap::Draw(Vector2Float camPos, Vector2Float projecScale)
 {
-	m_MyCanvas->DrawCanvas(camPos, projecScale, m_pMyTexture);
+	m_MyCanvas->DrawCanvas(camPos, projecScale, myTextureIdentifier);
 }

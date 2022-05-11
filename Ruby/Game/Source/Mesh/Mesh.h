@@ -7,12 +7,12 @@ class Mesh
 protected:
 	struct VertexFormat
 	{
-		vec2 m_Pos;
+		Vector2Float m_Pos;
 		MyColor m_Color;
-		vec2 m_UV;
+		Vector2Float m_UV;
 
 		VertexFormat() : m_Pos(0.0f), m_UV(0.0f) {}
-		VertexFormat(vec2 pos, MyColor color, vec2 UV)
+		VertexFormat(Vector2Float pos, MyColor color, Vector2Float UV)
 		{
 			m_Pos = pos;
 			m_Color = color;
@@ -36,16 +36,16 @@ public:
 	Mesh();
 	virtual ~Mesh();
 
-	void Draw(vec2 objectPos, float objectAngle, vec2 objectScale, vec2 camPos, vec2 projScale, GLuint aTexture, vec2 aUVscale, vec2 aUVoffset);
-	void DrawCanvas(vec2 cameraPos, vec2 projectionScale, GLuint aTexture);
-	void DebugDraw(vec2 objectPos, float objectAngle, vec2 objectScale, vec2 camPos, vec2 projScale);
+	void Draw(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float camPos, Vector2Float projScale, GLuint aTexture, Vector2Float aUVscale, Vector2Float aUVoffset);
+	void DrawCanvas(Vector2Float cameraPos, Vector2Float projectionScale, GLuint aTexture);
+	void DebugDraw(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float camPos, Vector2Float projScale);
 	void GenerateTriangle();
 	void GenerateCircle();
 	void GeneratePolygon(float radius, int vertices, char r, char g, char b, char a);
 	void GenerateFrameMesh();
 	void GenerateTileMesh();
 	void GenerateWildTileMesh();
-	void GenerateTextureMesh(vec2 aSize);
+	void GenerateTextureMesh(Vector2Float aSize);
 	void GenerateDebugMesh();
 	void GenterateCanvasMesh(int aSize);
 

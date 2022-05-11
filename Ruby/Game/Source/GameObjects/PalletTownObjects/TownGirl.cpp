@@ -2,13 +2,13 @@
 #include "TownGirl.h"
 
 #include "Controllers/AStarPathFinder.h"
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 #include "Sprites/AnimatedSprite.h"
 
-TownGirl::TownGirl(ResourceManager * aResourceManager, TileMap* aTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : GameObject(myGame, myMesh, aTexture)
+TownGirl::TownGirl(ResourceManager * aResourceManager, TileMap* aTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : Entity(myGame, myMesh, aTexture)
 {
 	myDirection = SpriteDirection::SpriteWalkDown;
 	myNewDirection = SpriteDirection::SpriteWalkDown;
@@ -49,7 +49,7 @@ TownGirl::TownGirl(ResourceManager * aResourceManager, TileMap* aTileMap, GameCo
 	m_MyPathFinder = new AStarPathFinder(m_MyTileMap, this);
 
 	m_PathingComplete = false;
-	m_MyIndex = ivec2(m_Position.x / TILESIZE, m_Position.y / TILESIZE);
+	m_MyIndex = ivec2(m_Position.myX / TILESIZE, m_Position.myY / TILESIZE);
 }
 
 TownGirl::~TownGirl()
@@ -68,7 +68,7 @@ TownGirl::~TownGirl()
 void TownGirl::Update(float deltatime)
 {
 	Pause();
-	m_MyIndex = ivec2(m_Position.x / TILESIZE, m_Position.y / TILESIZE);
+	m_MyIndex = ivec2(m_Position.myX / TILESIZE, m_Position.myY / TILESIZE);
 	if (m_Stop == true)
 	{
 		if (GetNextPath(m_MyIndex))
@@ -113,7 +113,7 @@ void TownGirl::Update(float deltatime)
 	}
 }
 
-void TownGirl::Draw(vec2 camPos, vec2 projecScale)
+void TownGirl::Draw(Vector2Float camPos, Vector2Float projecScale)
 {
 	m_Animations[static_cast<int>(myDirection)]->Draw(camPos, projecScale);
 }
@@ -127,7 +127,7 @@ void TownGirl::Move(SpriteDirection dir, float deltatime)
 	if (myDirection != dir)
 		myDirection = dir;
 
-	const vec2 velocity = DIRECTIONVECTOR[static_cast<int>(dir)] * NPC_SPEED;
+	const Vector2Float velocity = DIRECTIONVECTOR[static_cast<int>(dir)] * NPC_SPEED;
 
 	NewPosition += velocity * deltatime;
 
@@ -235,13 +235,13 @@ void TownGirl::OnEvent(Event* anEvent)
 {
 }
 
-bool TownGirl::CheckForCollision(vec2 NPCNewPosition) const
+bool TownGirl::CheckForCollision(Vector2Float NPCNewPosition) const
 {
 	//Get the location of each point of collision on the player and then truncate it to a row and column
-	const ivec2 OriginIndex = ivec2((NPCNewPosition.x / TILESIZE), ((NPCNewPosition.y - 0.3f) / TILESIZE));
-	const ivec2 TopLeftIndex = ivec2((NPCNewPosition.x / TILESIZE), (((NPCNewPosition.y - 0.5f) + (TILESIZE / 2)) / TILESIZE));
-	const ivec2 TopRightIndex = ivec2(((NPCNewPosition.x + (TILESIZE / 2)) / TILESIZE), (((NPCNewPosition.y - 0.5f) + (TILESIZE / 2)) / TILESIZE));
-	const ivec2 BottomRightIndex = ivec2(((NPCNewPosition.x + (TILESIZE / 2)) / TILESIZE), ((NPCNewPosition.y - 0.3f) / TILESIZE));
+	const ivec2 OriginIndex = ivec2((NPCNewPosition.myX / TILESIZE), ((NPCNewPosition.myY - 0.3f) / TILESIZE));
+	const ivec2 TopLeftIndex = ivec2((NPCNewPosition.myX / TILESIZE), (((NPCNewPosition.myY - 0.5f) + (TILESIZE / 2)) / TILESIZE));
+	const ivec2 TopRightIndex = ivec2(((NPCNewPosition.myX + (TILESIZE / 2)) / TILESIZE), (((NPCNewPosition.myY - 0.5f) + (TILESIZE / 2)) / TILESIZE));
+	const ivec2 BottomRightIndex = ivec2(((NPCNewPosition.myX + (TILESIZE / 2)) / TILESIZE), ((NPCNewPosition.myY - 0.3f) / TILESIZE));
 
 	//Check each index for whether the tile it lands on is walkable
 	const bool CheckOrigin = m_pGame->GetTileMap()->GetTileAtNPC(OriginIndex);

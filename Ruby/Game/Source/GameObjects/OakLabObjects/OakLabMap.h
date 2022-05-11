@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 
 class ResourceManager;
 class TileMap;
@@ -8,14 +8,14 @@ class Mesh;
 class GameCore;
 class Canvas;
 
-class OakLabMap : public GameObject
+class OakLabMap : public Entity
 {
 public:
 	OakLabMap(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
 	~OakLabMap() override;
 
 	void Update(float deltatime) override;
-	void Draw(vec2 camPos, vec2 projecScale) override;
+	void Draw(Vector2Float camPos, Vector2Float projecScale) override;
 
 private:
 	TileMap* m_MyTileMap;

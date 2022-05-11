@@ -320,27 +320,27 @@ Vector3 MyMatrix::GetEulerAngles()
     //{
     //    if( m32 > -1 )
     //    {
-    //        float x = asin( m32 );
+    //        float myX = asin( m32 );
     //        float y = atan2( -m31, m33 );
     //        float z = atan2( -m12, m22 );
-    //        return vector3( x, y, z );
+    //        return vector3( myX, y, z );
     //    }
     //    else // m32 = -1
     //    {
     //        // not a unique solution: thetaz - thetay = atan2(-m21,m11)
-    //        float x = pi/2;
+    //        float myX = pi/2;
     //        float y = atan2( m21, m11 );
     //        float z = 0;
-    //        return vector3( x, y, z );
+    //        return vector3( myX, y, z );
     //    }
     //}
     //else // m32 = +1
     //{
     //    // not a unique solution: thetaz + thetay = atan2(-m21,m11)
-    //    float x = -pi/2;
+    //    float myX = -pi/2;
     //    float y = -atan2( m21, m11 );
     //    float z = 0;
-    //    return vector3( x, y, z );
+    //    return vector3( myX, y, z );
     //}
 
     // rearranged from above and using FEQUALEPSILON to give special cases more chance of hitting

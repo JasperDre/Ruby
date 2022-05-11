@@ -5,7 +5,7 @@
 
 #include "Controllers/PlayerController.h"
 #include "GameObjects/GameCamera.h"
-#include "GameObjects/GameObject.h"
+#include "GameObjects/Entity.h"
 #include "GameObjects/Trainer.h"
 #include "GameObjects/UI/UIObject.h"
 #include "GameplayHelpers/ResourceManager.h"
@@ -173,7 +173,7 @@ void Game::LoadContent()
 
 	//Create our player camera
 	m_TrainerCamera = new GameCamera(this, m_CameraMesh, 0, m_Trainer);
-	m_TrainerCamera->SetMyProjection(1 / (aWindowSize.x / 40));
+	m_TrainerCamera->SetMyProjection(1 / (aWindowSize.myX / 40));
 
 	//Finally Create our SceneManager and Scenes
 	m_MySceneManager = new SceneManager();
@@ -281,7 +281,7 @@ Trainer * Game::GetMyPlayer()
 
 void Game::SetCameraScreenSize(float width, float height)
 {
-	aWindowSize = vec2(width, height);
+	aWindowSize = Vector2Float(width, height);
 
 	if (m_TrainerCamera != nullptr)
 	{
