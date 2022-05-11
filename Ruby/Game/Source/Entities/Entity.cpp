@@ -1,5 +1,5 @@
 #include "GamePCH.h"
-#include "GameObjects/Entity.h"
+#include "Entities/Entity.h"
 
 #include "Mesh/Mesh.h"
 

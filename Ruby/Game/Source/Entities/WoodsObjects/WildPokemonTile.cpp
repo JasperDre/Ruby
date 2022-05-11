@@ -1,33 +1,20 @@
 #include "GamePCH.h"
-#include "ProfessorOak.h"
+#include "WildPokemonTile.h"
 
 #include "Controllers/AStarPathFinder.h"
-#include "GameObjects/Entity.h"
-#include "GameplayHelpers/ResourceManager.h"
+#include "Game/Game.h"
+#include "Entities/Trainer.h"
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
-#include "Sprites/AnimatedSprite.h"
 
-ProfessorOak::ProfessorOak(ResourceManager * aResourceManager, TileMap* aTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : Entity(myGame, myMesh, aTexture)
+WildPokemonTile::WildPokemonTile(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
+	: Entity(myGame, myMesh, aTexture)
+	, m_PathingComplete(false)
 {
 	myDirection = SpriteDirection::SpriteWalkDown;
 	myNewDirection = SpriteDirection::SpriteWalkDown;
 	myResourceManager = aResourceManager;
 	m_MyTileMap = aTileMap;
-	m_pMesh->GenerateFrameMesh();
-
-	//Initialize the animated sprites
-	for (int i = 0; i < NUM_DIRECTIONS; i++)
-	{
-		m_Animations[i] = new AnimatedSprite(myResourceManager, myGame, myMesh, 1, aTexture);
-		m_Animations[i]->AddFrame(AnimationKeys[i] + "1.png");
-		m_Animations[i]->AddFrame(AnimationKeys[i] + "2.png");
-		m_Animations[i]->AddFrame(AnimationKeys[i] + "1.png");
-		m_Animations[i]->AddFrame(AnimationKeys[i] + "3.png");
-		m_Animations[i]->SetFrameSpeed(6.0f);
-		m_Animations[i]->SetLoop(true);
-		m_Animations[i]->SetPosition(m_Position);
-	}
 
 	m_IsFirstInput = true;
 
@@ -35,38 +22,30 @@ ProfessorOak::ProfessorOak(ResourceManager * aResourceManager, TileMap* aTileMap
 
 	m_CurrentInput = 0;
 
-	m_MyMinIndex = 97;
-	m_MyMaxIndex = 239;
+	m_MyMinIndex = 0;
+	m_MyMaxIndex = 0;
 
 	m_MyPath = &m_MyInputSet[0];
 
 	m_MyNewDestination = ivec2(0, 0);
 
-	for (int i = 0; i < OAKMAXPATHSIZE; i++)
-		m_MyInputSet[i] = -1;
+	for (int& i : m_MyInputSet)
+		i = -1;
 
 	m_MyPathFinder = new AStarPathFinder(m_MyTileMap, this);
 
 	m_MyIndex = ivec2(m_Position.myX / TILESIZE, m_Position.myY / TILESIZE);
 }
 
-ProfessorOak::~ProfessorOak()
+WildPokemonTile::~WildPokemonTile()
 {
-	for (int i = 0; i < NUM_DIRECTIONS; i++)
-	{
-		delete m_Animations[i];
-		m_Animations[i] = nullptr;
-	}
-
 	delete m_MyPathFinder;
 	m_MyPathFinder = nullptr;
 	myResourceManager = nullptr;
 }
 
-void ProfessorOak::Update(float deltatime)
+void WildPokemonTile::Update(float deltatime)
 {
-	Pause();
-
 	switch (m_MyState)
 	{
 		case AI_States::PathingState:
@@ -75,22 +54,21 @@ void ProfessorOak::Update(float deltatime)
 		case AI_States::WalkingState:
 			WalkingUpdate(deltatime);
 			break;
-	}
-
-	for (int i = 0; i < NUM_DIRECTIONS; i++)
-	{
-		m_Animations[i]->SetPosition(GetPosition());
-		m_Animations[i]->Update(deltatime);
+		case AI_States::TrackToPlayerState:
+			TrackToPlayerUpdate(deltatime);
+			break;
+		case AI_States::IdleState:
+			break;
 	}
 }
 
-void ProfessorOak::PathingUpdate(float delatime)
+void WildPokemonTile::PathingUpdate(float delatime)
 {
 	if (GetNextPath(GetMyIndex()))
 		SetMyState(AI_States::WalkingState);
 }
 
-void ProfessorOak::WalkingUpdate(float deltatime)
+void WildPokemonTile::WalkingUpdate(float deltatime)
 {
 	const int TargetTile = GetNextTileFromSet(m_CurrentInput);
 
@@ -113,29 +91,38 @@ void ProfessorOak::WalkingUpdate(float deltatime)
 	}
 	else
 	{
-		for (int i = 0; i < NUM_DIRECTIONS; i++)
-			m_Animations[i]->SetFrameIndex(0);
-
 		m_IsFirstInput = true;
 		SetMyState(AI_States::PathingState);
 	}
+
+	const Vector2Float PlayerPos = m_pGame->GetMyPlayer()->GetPosition();
+
+	const ivec2 aPlayerColumnRow = ivec2(PlayerPos.myX / TILESIZE, PlayerPos.myY / TILESIZE);
+
+	const ivec2 MinRange = m_MyTileMap->GetColumRowFromIndex(m_MyMinIndex);
+	const ivec2 MaxRange = m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex);
+
+	if (aPlayerColumnRow.x > MinRange.x && aPlayerColumnRow.x < MaxRange.x && aPlayerColumnRow.y > MinRange.y && aPlayerColumnRow.y < MaxRange.y)
+		SetMyState(AI_States::TrackToPlayerState);
 }
 
-void ProfessorOak::Draw(Vector2Float camPos, Vector2Float projecScale)
+void WildPokemonTile::TrackToPlayerUpdate(float deltatime)
 {
-	m_Animations[static_cast<int>(myDirection)]->Draw(camPos, projecScale);
 }
 
-void ProfessorOak::Move(SpriteDirection dir, float deltatime)
+void WildPokemonTile::Draw(Vector2Float camPos, Vector2Float projecScale)
+{
+	m_pMesh->DebugDraw(m_Position, 0, TILESIZE, camPos, projecScale);
+}
+
+void WildPokemonTile::Move(SpriteDirection dir, float deltatime)
 {
 	NewPosition = m_Position;
-
-	Resume();
 
 	if (myDirection != dir)
 		myDirection = dir;
 
-	Vector2Float velocity = DIRECTIONVECTOR[static_cast<int>(dir)] * NPC_SPEED;
+	const Vector2Float velocity = DIRECTIONVECTOR[static_cast<int>(dir)] * NPC_SPEED;
 
 	NewPosition += velocity * deltatime;
 
@@ -149,24 +136,12 @@ void ProfessorOak::Move(SpriteDirection dir, float deltatime)
 	}
 }
 
-void ProfessorOak::Pause()
-{
-	for (int i = 0; i < NUM_DIRECTIONS; i++)
-		m_Animations[i]->Pause();
-}
-
-void ProfessorOak::Resume()
-{
-	for (int i = 0; i < NUM_DIRECTIONS; i++)
-		m_Animations[i]->Resume();
-}
-
-void ProfessorOak::ResetPathFinder()
+void WildPokemonTile::ResetPathFinder()
 {
 	m_MyPathFinder->Reset();
 }
 
-bool ProfessorOak::GetNextPath(ivec2 anIndex)
+bool WildPokemonTile::GetNextPath(ivec2 anIndex)
 {
 	ResetInputSet();
 
@@ -203,14 +178,15 @@ bool ProfessorOak::GetNextPath(ivec2 anIndex)
 	return m_PathingComplete;
 }
 
-SpriteDirection ProfessorOak::CalculateNextInput(ivec2 anIndex)
+SpriteDirection WildPokemonTile::CalculateNextInput(ivec2 anIndex)
 {
 	m_CurrentInput--;
 
 	if (m_CurrentInput != -1)
 	{
-		int NextTileIndex = GetNextTileFromSet(m_CurrentInput);
-		ivec2 m_NextTileColumnRow = ivec2(NextTileIndex % GetMyMapWidth(), NextTileIndex / GetMyMapWidth());
+		const int NextTileIndex = GetNextTileFromSet(m_CurrentInput);
+
+		const ivec2 m_NextTileColumnRow = ivec2(NextTileIndex % GetMyMapWidth(), NextTileIndex / GetMyMapWidth());
 
 		if (m_NextTileColumnRow.x != anIndex.x)
 		{
@@ -237,32 +213,36 @@ SpriteDirection ProfessorOak::CalculateNextInput(ivec2 anIndex)
 	return SpriteDirection::SpriteDirectionStop;
 }
 
-AI_States ProfessorOak::GetMyState()
+AI_States WildPokemonTile::GetMyState()
 {
 	return m_MyState;
 }
 
-void ProfessorOak::SetMyState(AI_States aState)
+void WildPokemonTile::SetMyState(AI_States aState)
 {
 	m_MyState = aState;
 }
 
-bool ProfessorOak::GetNodeIsClearOnSpecial(int tx, int ty)
+bool WildPokemonTile::GetNodeIsClearOnSpecial(int tx, int ty)
 {
 	const ivec2 MinColumnRow = m_MyTileMap->GetColumRowFromIndex(m_MyMinIndex);
 	const ivec2 MaxColumnRow = m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex);
 	if (tx > MinColumnRow.x && tx < MaxColumnRow.x && ty > MinColumnRow.y && ty < MaxColumnRow.y)
-		return true;
+	{
+		const int CheckTileIndex = m_MyTileMap->GetIndexFromColumnRow(tx, ty);
+		if (m_MyTileMap->GetTileAtIndex(CheckTileIndex).MyForestType == Forest_Wild_Grass_)
+			return true;
+	}
 
 	return false;
 }
 
-void ProfessorOak::OnEvent(Event * anEvent)
+void WildPokemonTile::OnEvent(Event* anEvent)
 {
 
 }
 
-bool ProfessorOak::CheckForCollision(Vector2Float NPCNewPosition)
+bool WildPokemonTile::CheckForCollision(Vector2Float NPCNewPosition) const
 {
 	//Get the location of each point of collision on the player and then truncate it to a row and column
 	const ivec2 OriginIndex = ivec2((NPCNewPosition.myX / TILESIZE), ((NPCNewPosition.myY - 0.3f) / TILESIZE));
@@ -282,72 +262,73 @@ bool ProfessorOak::CheckForCollision(Vector2Float NPCNewPosition)
 	return Collision;
 }
 
-int* ProfessorOak::GetInputSet()
+int * WildPokemonTile::GetInputSet()
 {
 	return m_MyPath;
 }
 
-void ProfessorOak::SetInputSet(int * aPath)
+void WildPokemonTile::SetInputSet(int* aPath)
 {
 	m_MyPath = aPath;
 }
 
-int ProfessorOak::GetCurrentInput()
+int WildPokemonTile::GetCurrentInput()
 {
 	return m_CurrentInput;
 }
 
-void ProfessorOak::SetCurrentInput(int aCurrentInput)
+void WildPokemonTile::SetCurrentInput(int aCurrentInput)
 {
 	m_CurrentInput = aCurrentInput;
 }
 
-int ProfessorOak::GetNextTileFromSet(int aCurrentInput)
+int WildPokemonTile::GetNextTileFromSet(int aCurrentInput)
 {
 	return m_MyInputSet[aCurrentInput];
 }
 
-void ProfessorOak::ResetInputSet()
+void WildPokemonTile::ResetInputSet()
 {
-	for (int i = 0; i < OAKMAXPATHSIZE; i++)
+	for (int i = 0; i < MAXPATHSIZE_TOWN_NPC; i++)
 		m_MyInputSet[i] = -1;
 
 	m_CurrentInput = 0;
 }
 
-void ProfessorOak::NPCSeekStartPath()
+void WildPokemonTile::NPCSeekStartPath()
 {
 	while (m_MyInputSet[m_CurrentInput] != -1)
 		m_CurrentInput++;
 
 	m_CurrentInput--;
 }
-ivec2 ProfessorOak::GetMyMinIndex()
+
+ivec2 WildPokemonTile::GetMyMinIndex()
 {
 	return ivec2(m_MyTileMap->GetColumRowFromIndex(m_MyMinIndex));
 }
 
-ivec2 ProfessorOak::GetMyMaxIndex()
+ivec2 WildPokemonTile::GetMyMaxIndex()
 {
 	return ivec2(m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex));
 }
 
-int ProfessorOak::GetMyMapWidth()
+int WildPokemonTile::GetMyMapWidth()
 {
 	return m_MyTileMap->GetMapWidth();
 }
 
-int ProfessorOak::GetMaxPathSize()
+int WildPokemonTile::GetMaxPathSize()
 {
-	return OAKMAXPATHSIZE;
+	return MAXPATHSIZE_TOWN_NPC;
 }
 
-void ProfessorOak::SetMyDirection(SpriteDirection aDirection)
+void WildPokemonTile::SetMyDirection(SpriteDirection aDirection)
 {
 	myNewDirection = aDirection;
 }
 
-int ProfessorOak::RangeRandomIntAlg(int min, int max)
+int WildPokemonTile::RangeRandomIntAlg(int min, int max)
 {
 	return rand() % (max - min + 1) + min;
 }

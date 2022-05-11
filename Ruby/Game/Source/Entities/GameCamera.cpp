@@ -2,8 +2,8 @@
 #include "GameCamera.h"
 
 #include "Game/Game.h"
-#include "GameObjects/Entity.h"
-#include "GameObjects/Trainer.h"
+#include "Entities/Entity.h"
+#include "Entities/Trainer.h"
 #include "GameplayHelpers/SceneManager.h"
 #include "Mesh/Mesh.h"
 #include "Scenes/Scene.h"

@@ -1,5 +1,5 @@
 #include "GamePCH.h"
-#include "GameObjects/UI/ScoreNumber.h"
+#include "Entities/UI/ScoreNumber.h"
 
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/TileMap.h"

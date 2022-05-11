@@ -2,7 +2,7 @@
 #include "TownGirl.h"
 
 #include "Controllers/AStarPathFinder.h"
-#include "GameObjects/Entity.h"
+#include "Entities/Entity.h"
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"

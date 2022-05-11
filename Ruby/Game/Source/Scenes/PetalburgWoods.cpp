@@ -1,9 +1,9 @@
 #include "GamePCH.h"
 #include "PetalburgWoods.h"
 
-#include "GameObjects/Entity.h"
-#include "GameObjects/Trainer.h"
-#include "GameObjects/WoodsObjects/PetalburgWoodsMap.h"
+#include "Entities/Entity.h"
+#include "Entities/Trainer.h"
+#include "Entities/WoodsObjects/PetalburgWoodsMap.h"
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"

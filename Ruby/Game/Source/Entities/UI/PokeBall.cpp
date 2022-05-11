@@ -1,7 +1,7 @@
 #include "GamePCH.h"
 #include "PokeBall.h"
 
-#include "GameObjects/Entity.h"
+#include "Entities/Entity.h"
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"

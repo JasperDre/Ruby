@@ -4,10 +4,10 @@
 #include <filesystem>
 
 #include "Controllers/PlayerController.h"
-#include "GameObjects/GameCamera.h"
-#include "GameObjects/Entity.h"
-#include "GameObjects/Trainer.h"
-#include "GameObjects/UI/UIObject.h"
+#include "Entities/GameCamera.h"
+#include "Entities/Entity.h"
+#include "Entities/Trainer.h"
+#include "Entities/UI/UIObject.h"
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/SceneManager.h"
 #include "GameplayHelpers/TileMap.h"

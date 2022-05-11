@@ -33,7 +33,7 @@ public:
 	[[nodiscard]] virtual Vector2Float GetPlayerStart() const { return m_pMyPlayerStart; }
 
 protected:
-	std::vector<Entity*> m_MyGameObjects;
+	std::vector<Entity*> m_MyEntities;
 	Areas m_MyArea;
 	Vector2Float m_pMyPlayerStart;
 	TileMap* m_MyTileMap;

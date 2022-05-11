@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameObjects/Entity.h"
+#include "Entities/Entity.h"
 
 class AStarPathFinder;
 class ResourceManager;

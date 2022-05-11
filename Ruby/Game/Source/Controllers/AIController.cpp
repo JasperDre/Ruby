@@ -2,7 +2,7 @@
 #include "AIController.h"
 
 #include "Controllers/AStarPathFinder.h"
-#include "GameObjects/Entity.h"
+#include "Entities/Entity.h"
 #include "GameplayHelpers/TileMap.h"
 
 AIController::AIController(TileMap* aTileMap, int aMinIndex, int aMaxIndex, Entity* aNPC)

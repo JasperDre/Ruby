@@ -2,8 +2,8 @@
 #include "UIObject.h"
 
 #include "Game/Game.h"
-#include "GameObjects/UI/PokeBall.h"
-#include "GameObjects/UI/ScoreNumber.h"
+#include "Entities/UI/PokeBall.h"
+#include "Entities/UI/ScoreNumber.h"
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 

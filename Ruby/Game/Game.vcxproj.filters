@@ -33,64 +33,64 @@
     <ClInclude Include="Source\Game\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\OakLabObjects\OakLabDeskTop.h">
+    <ClInclude Include="Source\Entities\OakLabObjects\OakLabDeskTop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\OakLabObjects\OakLabMachineTop.h">
+    <ClInclude Include="Source\Entities\OakLabObjects\OakLabMachineTop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\OakLabObjects\OakLabMap.h">
+    <ClInclude Include="Source\Entities\OakLabObjects\OakLabMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\OakLabObjects\OakLabPlantTop.h">
+    <ClInclude Include="Source\Entities\OakLabObjects\OakLabPlantTop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\OakLabObjects\OakLabTableTop.h">
+    <ClInclude Include="Source\Entities\OakLabObjects\OakLabTableTop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\OakLabObjects\ProfessorOak.h">
+    <ClInclude Include="Source\Entities\OakLabObjects\ProfessorOak.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\PalletTownObjects\OakHouse.h">
+    <ClInclude Include="Source\Entities\PalletTownObjects\OakHouse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\PalletTownObjects\PalletTownMap.h">
+    <ClInclude Include="Source\Entities\PalletTownObjects\PalletTownMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\PalletTownObjects\PlayerHouse.h">
+    <ClInclude Include="Source\Entities\PalletTownObjects\PlayerHouse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\PalletTownObjects\RivalHouse.h">
+    <ClInclude Include="Source\Entities\PalletTownObjects\RivalHouse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\PalletTownObjects\TownBoy.h">
+    <ClInclude Include="Source\Entities\PalletTownObjects\TownBoy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\PalletTownObjects\TownGirl.h">
+    <ClInclude Include="Source\Entities\PalletTownObjects\TownGirl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\UI\PokeBall.h">
+    <ClInclude Include="Source\Entities\UI\PokeBall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\UI\ScoreNumber.h">
+    <ClInclude Include="Source\Entities\UI\ScoreNumber.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\UI\UIObject.h">
+    <ClInclude Include="Source\Entities\UI\UIObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\WoodsObjects\PetalburgWoodsMap.h">
+    <ClInclude Include="Source\Entities\WoodsObjects\PetalburgWoodsMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\WoodsObjects\WildPokemonTile.h">
+    <ClInclude Include="Source\Entities\WoodsObjects\WildPokemonTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\GameCamera.h">
+    <ClInclude Include="Source\Entities\GameCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\Entity.h">
+    <ClInclude Include="Source\Entities\Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\Trainer.h">
+    <ClInclude Include="Source\Entities\Trainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameplayHelpers\ResourceManager.h">
@@ -152,64 +152,64 @@
     <ClCompile Include="Source\Game\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\OakLabObjects\OakLabDeskTop.cpp">
+    <ClCompile Include="Source\Entities\OakLabObjects\OakLabDeskTop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\OakLabObjects\OakLabMachineTop.cpp">
+    <ClCompile Include="Source\Entities\OakLabObjects\OakLabMachineTop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\OakLabObjects\OakLabMap.cpp">
+    <ClCompile Include="Source\Entities\OakLabObjects\OakLabMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\OakLabObjects\OakLabPlantTop.cpp">
+    <ClCompile Include="Source\Entities\OakLabObjects\OakLabPlantTop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\OakLabObjects\OakLabTableTop.cpp">
+    <ClCompile Include="Source\Entities\OakLabObjects\OakLabTableTop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\OakLabObjects\ProfessorOak.cpp">
+    <ClCompile Include="Source\Entities\OakLabObjects\ProfessorOak.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\PalletTownObjects\OakHouse.cpp">
+    <ClCompile Include="Source\Entities\PalletTownObjects\OakHouse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\PalletTownObjects\PalletTownMap.cpp">
+    <ClCompile Include="Source\Entities\PalletTownObjects\PalletTownMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\PalletTownObjects\PlayerHouse.cpp">
+    <ClCompile Include="Source\Entities\PalletTownObjects\PlayerHouse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\PalletTownObjects\RivalHouse.cpp">
+    <ClCompile Include="Source\Entities\PalletTownObjects\RivalHouse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\PalletTownObjects\TownBoy.cpp">
+    <ClCompile Include="Source\Entities\PalletTownObjects\TownBoy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\PalletTownObjects\TownGirl.cpp">
+    <ClCompile Include="Source\Entities\PalletTownObjects\TownGirl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\UI\PokeBall.cpp">
+    <ClCompile Include="Source\Entities\UI\PokeBall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\UI\ScoreNumber.cpp">
+    <ClCompile Include="Source\Entities\UI\ScoreNumber.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\UI\UIObject.cpp">
+    <ClCompile Include="Source\Entities\UI\UIObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\WoodsObjects\PetalburgWoodsMap.cpp">
+    <ClCompile Include="Source\Entities\WoodsObjects\PetalburgWoodsMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\WoodsObjects\WildPokemonTile.cpp">
+    <ClCompile Include="Source\Entities\WoodsObjects\WildPokemonTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\GameCamera.cpp">
+    <ClCompile Include="Source\Entities\GameCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\Entity.cpp">
+    <ClCompile Include="Source\Entities\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\Trainer.cpp">
+    <ClCompile Include="Source\Entities\Trainer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameplayHelpers\ResourceManager.cpp">

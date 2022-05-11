@@ -2,7 +2,7 @@
 #include "Scene.h"
 
 #include "Game/Game.h"
-#include "GameObjects/Trainer.h"
+#include "Entities/Trainer.h"
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"

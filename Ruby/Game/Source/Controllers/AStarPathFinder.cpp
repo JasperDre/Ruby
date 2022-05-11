@@ -1,7 +1,7 @@
 #include "GamePCH.h"
 #include "AStarPathFinder.h"
 
-#include "GameObjects/Entity.h"
+#include "Entities/Entity.h"
 #include "GameplayHelpers/TileMap.h"
 
 AStarPathFinder::AStarPathFinder(TileMap* aTileMap, Entity* aNPC)
