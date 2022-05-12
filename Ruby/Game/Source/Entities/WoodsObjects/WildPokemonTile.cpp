@@ -22,8 +22,8 @@ WildPokemonTile::WildPokemonTile(ResourceManager* aResourceManager, TileMap* aTi
 
 	m_CurrentInput = 0;
 
-	m_MyMinIndex = 0;
-	m_MyMaxIndex = 0;
+	myMinIndex = 0;
+	myMaxIndex = 0;
 
 	m_MyPath = &m_MyInputSet[0];
 
@@ -32,15 +32,15 @@ WildPokemonTile::WildPokemonTile(ResourceManager* aResourceManager, TileMap* aTi
 	for (int& i : m_MyInputSet)
 		i = -1;
 
-	m_MyPathFinder = new AStarPathFinder(m_MyTileMap, this);
+	myPathFinder = new AStarPathFinder(m_MyTileMap, this);
 
-	m_MyIndex = ivec2(m_Position.myX / TILESIZE, m_Position.myY / TILESIZE);
+	m_MyIndex = ivec2(myPosition.myX / TILESIZE, myPosition.myY / TILESIZE);
 }
 
 WildPokemonTile::~WildPokemonTile()
 {
-	delete m_MyPathFinder;
-	m_MyPathFinder = nullptr;
+	delete myPathFinder;
+	myPathFinder = nullptr;
 	myResourceManager = nullptr;
 }
 
@@ -95,12 +95,12 @@ void WildPokemonTile::WalkingUpdate(float deltatime)
 		SetMyState(AI_States::PathingState);
 	}
 
-	const Vector2Float PlayerPos = m_pGame->GetMyPlayer()->GetPosition();
+	const Vector2Float PlayerPos = myGameCore->GetMyPlayer()->GetPosition();
 
 	const ivec2 aPlayerColumnRow = ivec2(PlayerPos.myX / TILESIZE, PlayerPos.myY / TILESIZE);
 
-	const ivec2 MinRange = m_MyTileMap->GetColumRowFromIndex(m_MyMinIndex);
-	const ivec2 MaxRange = m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex);
+	const ivec2 MinRange = m_MyTileMap->GetColumRowFromIndex(myMinIndex);
+	const ivec2 MaxRange = m_MyTileMap->GetColumRowFromIndex(myMaxIndex);
 
 	if (aPlayerColumnRow.x > MinRange.x && aPlayerColumnRow.x < MaxRange.x && aPlayerColumnRow.y > MinRange.y && aPlayerColumnRow.y < MaxRange.y)
 		SetMyState(AI_States::TrackToPlayerState);
@@ -112,12 +112,12 @@ void WildPokemonTile::TrackToPlayerUpdate(float deltatime)
 
 void WildPokemonTile::Draw(Vector2Float camPos, Vector2Float projecScale)
 {
-	m_pMesh->DebugDraw(m_Position, 0, TILESIZE, camPos, projecScale);
+	myMesh->DebugDraw(myPosition, 0, TILESIZE, camPos, projecScale);
 }
 
 void WildPokemonTile::Move(SpriteDirection dir, float deltatime)
 {
-	NewPosition = m_Position;
+	NewPosition = myPosition;
 
 	if (myDirection != dir)
 		myDirection = dir;
@@ -136,9 +136,9 @@ void WildPokemonTile::Move(SpriteDirection dir, float deltatime)
 	}
 }
 
-void WildPokemonTile::ResetPathFinder()
+void WildPokemonTile::ResetPathFinder() const
 {
-	m_MyPathFinder->Reset();
+	myPathFinder->Reset();
 }
 
 bool WildPokemonTile::GetNextPath(ivec2 anIndex)
@@ -149,18 +149,18 @@ bool WildPokemonTile::GetNextPath(ivec2 anIndex)
 
 	m_PathingComplete = false;
 
-	const ivec2 aMin = m_MyTileMap->GetColumRowFromIndex(m_MyMinIndex);
-	const ivec2 aMax = m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex);
+	const ivec2 aMin = m_MyTileMap->GetColumRowFromIndex(myMinIndex);
+	const ivec2 aMax = m_MyTileMap->GetColumRowFromIndex(myMaxIndex);
 
 	m_MyNewDestination.x = RangeRandomIntAlg(aMin.x, aMax.x);
 	m_MyNewDestination.y = RangeRandomIntAlg(aMin.y, aMax.y);
 
 	while (!m_PathingComplete)
 	{
-		m_PathingComplete = m_MyPathFinder->FindPath(anIndex.x, anIndex.y, m_MyNewDestination.x, m_MyNewDestination.y);
+		m_PathingComplete = myPathFinder->FindPath(anIndex.x, anIndex.y, m_MyNewDestination.x, m_MyNewDestination.y);
 
 		if (m_PathingComplete)
-			m_MyPathFinder->GetPath(m_MyPath, GetMaxPathSize(), m_MyNewDestination.x, m_MyNewDestination.y);
+			myPathFinder->GetPath(m_MyPath, GetMaxPathSize(), m_MyNewDestination.x, m_MyNewDestination.y);
 
 		if (!m_MyPath)
 			m_PathingComplete = false;
@@ -213,7 +213,7 @@ SpriteDirection WildPokemonTile::CalculateNextInput(ivec2 anIndex)
 	return SpriteDirection::SpriteDirectionStop;
 }
 
-AI_States WildPokemonTile::GetMyState()
+AI_States WildPokemonTile::GetMyState() const
 {
 	return m_MyState;
 }
@@ -223,10 +223,10 @@ void WildPokemonTile::SetMyState(AI_States aState)
 	m_MyState = aState;
 }
 
-bool WildPokemonTile::GetNodeIsClearOnSpecial(int tx, int ty)
+bool WildPokemonTile::GetNodeIsClearOnSpecial(int tx, int ty) const
 {
-	const ivec2 MinColumnRow = m_MyTileMap->GetColumRowFromIndex(m_MyMinIndex);
-	const ivec2 MaxColumnRow = m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex);
+	const ivec2 MinColumnRow = m_MyTileMap->GetColumRowFromIndex(myMinIndex);
+	const ivec2 MaxColumnRow = m_MyTileMap->GetColumRowFromIndex(myMaxIndex);
 	if (tx > MinColumnRow.x && tx < MaxColumnRow.x && ty > MinColumnRow.y && ty < MaxColumnRow.y)
 	{
 		const int CheckTileIndex = m_MyTileMap->GetIndexFromColumnRow(tx, ty);
@@ -235,11 +235,6 @@ bool WildPokemonTile::GetNodeIsClearOnSpecial(int tx, int ty)
 	}
 
 	return false;
-}
-
-void WildPokemonTile::OnEvent(Event* anEvent)
-{
-
 }
 
 bool WildPokemonTile::CheckForCollision(Vector2Float NPCNewPosition) const
@@ -251,10 +246,10 @@ bool WildPokemonTile::CheckForCollision(Vector2Float NPCNewPosition) const
 	const ivec2 BottomRightIndex = ivec2(((NPCNewPosition.myX + (TILESIZE / 2)) / TILESIZE), ((NPCNewPosition.myY - 0.3f) / TILESIZE));
 
 	//Check each index for whether the tile it lands on is walkable
-	const bool CheckOrigin = m_pGame->GetTileMap()->GetTileAtNPC(OriginIndex);
-	const bool CheckTopLeft = m_pGame->GetTileMap()->GetTileAtNPC(TopLeftIndex);
-	const bool CheckTopRight = m_pGame->GetTileMap()->GetTileAtNPC(TopRightIndex);
-	const bool CheckBottomRight = m_pGame->GetTileMap()->GetTileAtNPC(BottomRightIndex);
+	const bool CheckOrigin = myGameCore->GetTileMap()->GetTileAtNPC(OriginIndex);
+	const bool CheckTopLeft = myGameCore->GetTileMap()->GetTileAtNPC(TopLeftIndex);
+	const bool CheckTopRight = myGameCore->GetTileMap()->GetTileAtNPC(TopRightIndex);
+	const bool CheckBottomRight = myGameCore->GetTileMap()->GetTileAtNPC(BottomRightIndex);
 
 	//If all the point land on walkable tile return true else return false
 	const bool Collision = (CheckOrigin && CheckTopLeft && CheckTopRight && CheckBottomRight);
@@ -262,7 +257,7 @@ bool WildPokemonTile::CheckForCollision(Vector2Float NPCNewPosition) const
 	return Collision;
 }
 
-int * WildPokemonTile::GetInputSet()
+int * WildPokemonTile::GetInputSet() const
 {
 	return m_MyPath;
 }
@@ -272,7 +267,7 @@ void WildPokemonTile::SetInputSet(int* aPath)
 	m_MyPath = aPath;
 }
 
-int WildPokemonTile::GetCurrentInput()
+int WildPokemonTile::GetCurrentInput() const
 {
 	return m_CurrentInput;
 }
@@ -282,7 +277,7 @@ void WildPokemonTile::SetCurrentInput(int aCurrentInput)
 	m_CurrentInput = aCurrentInput;
 }
 
-int WildPokemonTile::GetNextTileFromSet(int aCurrentInput)
+int WildPokemonTile::GetNextTileFromSet(int aCurrentInput) const
 {
 	return m_MyInputSet[aCurrentInput];
 }
@@ -303,22 +298,22 @@ void WildPokemonTile::NPCSeekStartPath()
 	m_CurrentInput--;
 }
 
-ivec2 WildPokemonTile::GetMyMinIndex()
+ivec2 WildPokemonTile::GetMyMinIndex() const
 {
-	return ivec2(m_MyTileMap->GetColumRowFromIndex(m_MyMinIndex));
+	return ivec2(m_MyTileMap->GetColumRowFromIndex(myMinIndex));
 }
 
-ivec2 WildPokemonTile::GetMyMaxIndex()
+ivec2 WildPokemonTile::GetMyMaxIndex() const
 {
-	return ivec2(m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex));
+	return ivec2(m_MyTileMap->GetColumRowFromIndex(myMaxIndex));
 }
 
-int WildPokemonTile::GetMyMapWidth()
+int WildPokemonTile::GetMyMapWidth() const
 {
 	return m_MyTileMap->GetMapWidth();
 }
 
-int WildPokemonTile::GetMaxPathSize()
+int WildPokemonTile::GetMaxPathSize() const
 {
 	return MAXPATHSIZE_TOWN_NPC;
 }
@@ -328,7 +323,7 @@ void WildPokemonTile::SetMyDirection(SpriteDirection aDirection)
 	myNewDirection = aDirection;
 }
 
-int WildPokemonTile::RangeRandomIntAlg(int min, int max)
+int WildPokemonTile::RangeRandomIntAlg(int min, int max) const
 {
 	return rand() % (max - min + 1) + min;
 }

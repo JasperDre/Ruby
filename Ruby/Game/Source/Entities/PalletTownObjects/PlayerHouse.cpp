@@ -9,7 +9,7 @@
 PlayerHouse::PlayerHouse(ResourceManager* aResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
 	: Entity(myGame, myMesh, aTexture)
 {
-	m_pMesh = myMesh;
+	myMesh = myMesh;
 	myTextureIdentifier = aTexture;
 	m_MyResourceManager = aResourceManager;
 	m_MyTileMap = myTileMap;
@@ -41,7 +41,7 @@ void PlayerHouse::Draw(Vector2Float camPos, Vector2Float projecScale)
 {
 	for (int i = 0; i < PlayerHouse_NumTiles; i++)
 	{
-		m_pMesh->Draw(m_MyFrames.at(i).myWorldSpace, m_Angle, Vector2Float(TILESIZE, TILESIZE), camPos, projecScale, myTextureIdentifier, m_MyFrames.at(i).myUVScale, m_MyFrames.at(i).myUVOffset);
+		myMesh->Draw(m_MyFrames.at(i).myWorldSpace, myAngle, Vector2Float(TILESIZE, TILESIZE), camPos, projecScale, myTextureIdentifier, m_MyFrames.at(i).myUVScale, m_MyFrames.at(i).myUVOffset);
 	}
 }
 

@@ -80,34 +80,34 @@ public:
 
     Vector2Float operator *(const Vector2Float o) const
     {
-        const Vector4 result = Vector4(m11 * o.myX + m21 * o.myY + 0.0f + m41 * 1.0f,
+        const Vector4Float result = Vector4Float(m11 * o.myX + m21 * o.myY + 0.0f + m41 * 1.0f,
                                         m12 * o.myX + m22 * o.myY + 0.0f + m42 * 1.0f,
                                         m13 * o.myX + m23 * o.myY + 0.0f + m43 * 1.0f,
                                         m14 * o.myX + m24 * o.myY + 0.0f + m44 * 1.0f);
-        if (result.w > 0.0f)
-            return Vector2Float(result.x / result.w, result.y / result.w);
+        if (result.myW > 0.0f)
+            return Vector2Float(result.myX / result.myW, result.myY / result.myW);
 
-        return Vector2Float(result.x, result.y);
+        return Vector2Float(result.myX, result.myY);
     }
 
     Vector3Float operator *(const Vector3Float o) const
     {
-        const Vector4 result = Vector4(m11 * o.myX + m21 * o.myY + m31 * o.myZ + m41 * 1.0f,
+        const Vector4Float result = Vector4Float(m11 * o.myX + m21 * o.myY + m31 * o.myZ + m41 * 1.0f,
                                         m12 * o.myX + m22 * o.myY + m32 * o.myZ + m42 * 1.0f,
                                         m13 * o.myX + m23 * o.myY + m33 * o.myZ + m43 * 1.0f,
                                         m14 * o.myX + m24 * o.myY + m34 * o.myZ + m44 * 1.0f);
-        if (result.w > 0.0f)
-            return Vector3Float(result.x / result.w, result.y / result.w, result.z / result.w);
+        if (result.myW > 0.0f)
+            return Vector3Float(result.myX / result.myW, result.myY / result.myW, result.myZ / result.myW);
 
-        return Vector3Float(result.x, result.y, result.z);
+        return Vector3Float(result.myX, result.myY, result.myZ);
     }
 
-    Vector4 operator *(const Vector4 o) const
+    Vector4Float operator *(const Vector4Float o) const
     {
-        return Vector4(m11 * o.x + m21 * o.y + m31 * o.z + m41 * o.w,
-                        m12 * o.x + m22 * o.y + m32 * o.z + m42 * o.w,
-                        m13 * o.x + m23 * o.y + m33 * o.z + m43 * o.w,
-                        m14 * o.x + m24 * o.y + m34 * o.z + m44 * o.w);
+        return Vector4Float(m11 * o.myX + m21 * o.myY + m31 * o.myZ + m41 * o.myW,
+                        m12 * o.myX + m22 * o.myY + m32 * o.myZ + m42 * o.myW,
+                        m13 * o.myX + m23 * o.myY + m33 * o.myZ + m43 * o.myW,
+                        m14 * o.myX + m24 * o.myY + m34 * o.myZ + m44 * o.myW);
     }
 
     MyMatrix operator *(const MyMatrix o) const

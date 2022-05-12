@@ -8,7 +8,7 @@
 OakLabDeskTop::OakLabDeskTop(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
 	: Entity(myGame, myMesh, aTexture)
 {
-	m_pMesh = myMesh;
+	myMesh = myMesh;
 	myTextureIdentifier = aTexture;
 	m_MyResourceManager = myResourceManager;
 	m_MyTileMap = myTileMap;
@@ -42,6 +42,6 @@ void OakLabDeskTop::Draw(Vector2Float camPos, Vector2Float camProject)
 {
 	for (int i = 0; i < OakLabDesk_NumTiles; i++)
 	{
-		m_pMesh->Draw(m_MyFrames.at(i).myWorldSpace, m_Angle, Vector2Float(TILESIZE, TILESIZE), camPos, camProject, myTextureIdentifier, m_MyFrames.at(i).myUVScale, m_MyFrames.at(i).myUVOffset);
+		myMesh->Draw(m_MyFrames.at(i).myWorldSpace, myAngle, Vector2Float(TILESIZE, TILESIZE), camPos, camProject, myTextureIdentifier, m_MyFrames.at(i).myUVScale, m_MyFrames.at(i).myUVOffset);
 	}
 }

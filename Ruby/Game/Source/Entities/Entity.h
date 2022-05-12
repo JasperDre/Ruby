@@ -1,65 +1,60 @@
 #pragma once
 
 class Mesh;
+class Event;
 class AStarPathFinder;
 class GameCore;
+class Vector2Float;
 enum class AI_States;
 
 class Entity
 {
 public:
-	Entity(GameCore* pGame, Mesh* pMesh, unsigned int aTextureIdentifier);
+	Entity(GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier);
 	virtual ~Entity() = default;
 
 	virtual void OnEvent(Event* pEvent) {}
 	virtual void Update(float deltatime) {}
 	virtual void Draw(Vector2Float camPos, Vector2Float projScale);
-
-	virtual bool IsColliding(Entity* pOtherGameObject) { return false; }
 	virtual void OnCollision(Entity* pOtherGameObject) {}
-
-	virtual AI_States GetMyState();
-	virtual void SetMyState(AI_States aState) {}
-
-	virtual bool GetNodeIsClearOnSpecial(int tx, int ty) { return false; }
-	virtual int RangeRandomIntAlg(int min, int max) { return 0; }
-
-	virtual int* GetInputSet() { return nullptr; }
-	virtual void SetInputSet(int* aPath) {}
-
-	virtual int GetCurrentInput() { return 0; }
-	virtual void SetCurrentInput(int aCurrentInput) {}
-
-	virtual int GetNextTileFromSet(int aCurrentInput) { return 0; }
-
 	virtual void NPCSeekStartPath() {}
 	virtual void ResetInputSet() {}
 
-	[[nodiscard]] Vector2Float GetPosition() const { return m_Position; }
-	[[nodiscard]] ivec2 GetMyIndex() const { return ivec2(static_cast<int>(m_Position.myX / TILESIZE), static_cast<int>(m_Position.myY / TILESIZE)); }
-	[[nodiscard]] float GetAngle() const { return m_Angle; }
-	[[nodiscard]] float GetRadius() const { return m_Radius; }
-	virtual ivec2 GetMyMinIndex() { return ivec2(); }
-	virtual ivec2 GetMyMaxIndex() { return ivec2(); }
-	virtual int GetMyNodeOffset() { return m_MyMinIndex; }
-	virtual AStarPathFinder* GetPathFinder() { if (m_MyPathFinder) { return m_MyPathFinder; } else { return nullptr; } }
-	virtual int GetMyMapWidth() { return 0; }
-	virtual int GetMaxPathSize() { return 0; }
-
-	void SetPosition(Vector2Float pos) { m_Position = pos; }
-	void SetAngle(float angle) { m_Angle = angle; }
-	void SetRadius(float radius) { m_Radius = radius; }
+	virtual void SetInputSet(int* aPath) {}
+	virtual void SetCurrentInput(int aCurrentInput) {}
+	virtual void SetMyState(AI_States aState) {}
 	virtual void SetMyDirection(SpriteDirection aDirection) {}
+	void SetPosition(Vector2Float pos) { myPosition = pos; }
+	void SetAngle(float angle) { myAngle = angle; }
+	void SetRadius(float radius) { myRadius = radius; }
+
+	[[nodiscard]] virtual bool IsColliding(Entity* pOtherGameObject) const { return false; }
+	[[nodiscard]] virtual AI_States GetMyState() const;
+	[[nodiscard]] virtual bool GetNodeIsClearOnSpecial(int tx, int ty) const { return false; }
+	[[nodiscard]] virtual int RangeRandomIntAlg(int min, int max) const { return 0; }
+	[[nodiscard]] virtual int* GetInputSet() const { return nullptr; }
+	[[nodiscard]] virtual int GetCurrentInput() const { return 0; }
+	[[nodiscard]] virtual int GetNextTileFromSet(int aCurrentInput) const { return 0; }
+	[[nodiscard]] Vector2Float GetPosition() const { return myPosition; }
+	[[nodiscard]] ivec2 GetMyIndex() const;
+	[[nodiscard]] float GetAngle() const { return myAngle; }
+	[[nodiscard]] float GetRadius() const { return myRadius; }
+	[[nodiscard]] virtual ivec2 GetMyMinIndex() const { return ivec2(); }
+	[[nodiscard]] virtual ivec2 GetMyMaxIndex() const { return ivec2(); }
+	[[nodiscard]] virtual int GetMyNodeOffset() const { return myMinIndex; }
+	[[nodiscard]] virtual AStarPathFinder* GetPathFinder() const { return myPathFinder; }
+	[[nodiscard]] virtual int GetMyMapWidth() const { return 0; }
+	[[nodiscard]] virtual int GetMaxPathSize() const { return 0; }
 
 protected:
-	Vector2Float m_Position;
-	Vector2Float my_UVOffset;
+	Vector2Float myPosition;
+	Vector2Float myUVOffset;
+	GameCore* myGameCore;
+	Mesh* myMesh;
+	AStarPathFinder* myPathFinder;
 	unsigned int myTextureIdentifier;
-	GameCore* m_pGame;
-	Mesh* m_pMesh;
-	AStarPathFinder* m_MyPathFinder;
-	float m_Angle;
-	float m_Radius;
-	int m_MyMinIndex;
-	int m_MyMaxIndex;
+	float myAngle;
+	float myRadius;
+	int myMinIndex;
+	int myMaxIndex;
 };

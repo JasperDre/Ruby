@@ -13,46 +13,36 @@ public:
 	~WildPokemonTile() override;
 
 	void Update(float deltatime) override;
+	void OnEvent(Event* anEvent) override {}
+	void Draw(Vector2Float camPos, Vector2Float projecScale) override;
 	virtual void PathingUpdate(float delatime);
 	virtual void WalkingUpdate(float deltatime);
 	virtual void TrackToPlayerUpdate(float deltatime);
-
-	void Draw(Vector2Float camPos, Vector2Float projecScale) override;
 	void Move(SpriteDirection dir, float deltatime);
-
-	void ResetPathFinder();
-	bool GetNextPath(ivec2 anIndex);
-	SpriteDirection CalculateNextInput(ivec2 anIndex);
-
-	AI_States GetMyState() override;
-	void SetMyState(AI_States aState) override;
-
-	bool GetNodeIsClearOnSpecial(int tx, int ty) override;
-
-	void OnEvent(Event* anEvent) override;
-
-	[[nodiscard]] bool CheckForCollision(Vector2Float NPCNewPosition) const;
-
-	int* GetInputSet() override;
-	void SetInputSet(int* aPath) override;
-	int GetCurrentInput() override;
-	void SetCurrentInput(int aCurrentInput) override;
-	int GetNextTileFromSet(int aCurrentInput) override;
+	void ResetPathFinder() const;
 	void ResetInputSet() override;
-
 	void NPCSeekStartPath() override;
 
-	ivec2 GetMyMinIndex() override;
-	ivec2 GetMyMaxIndex() override;
-
-	int GetMyMapWidth() override;
-	int GetMaxPathSize() override;
-
-	virtual void SetMaxIndex(int anIndex) { m_MyMaxIndex = anIndex; }
-	virtual void SetMinIndex(int anIndex) { m_MyMinIndex = anIndex; }
-
+	void SetMyState(AI_States aState) override;
+	void SetInputSet(int* aPath) override;
+	void SetCurrentInput(int aCurrentInput) override;
 	void SetMyDirection(SpriteDirection aDirection) override;
-	int RangeRandomIntAlg(int min, int max) override;
+	virtual void SetMaxIndex(int anIndex) { myMaxIndex = anIndex; }
+	virtual void SetMinIndex(int anIndex) { myMinIndex = anIndex; }
+
+	[[nodiscard]] AI_States GetMyState() const override;
+	[[nodiscard]] bool GetNodeIsClearOnSpecial(int tx, int ty) const override;
+	[[nodiscard]] bool CheckForCollision(Vector2Float NPCNewPosition) const;
+	[[nodiscard]] int* GetInputSet() const override;
+	[[nodiscard]] int GetCurrentInput() const override;
+	[[nodiscard]] int GetNextTileFromSet(int aCurrentInput) const override;
+	[[nodiscard]] ivec2 GetMyMinIndex() const override;
+	[[nodiscard]] ivec2 GetMyMaxIndex() const override;
+	[[nodiscard]] int GetMyMapWidth() const override;
+	[[nodiscard]] int GetMaxPathSize() const override;
+	[[nodiscard]] int RangeRandomIntAlg(int min, int max) const override;
+	SpriteDirection CalculateNextInput(ivec2 anIndex);
+	bool GetNextPath(ivec2 anIndex);
 
 private:
 	int m_MyInputSet[MAXPATHSIZE_TOWN_NPC];

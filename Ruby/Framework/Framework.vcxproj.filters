@@ -60,7 +60,7 @@
     <ClInclude Include="Source\Math\MathHelpers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Math\MyMatrix.h">
+    <ClInclude Include="Source\Math\Matrix4Float.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Math\Vector.h">
@@ -110,7 +110,7 @@
     <ClCompile Include="Source\GL\GLHelpers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Math\MyMatrix.cpp">
+    <ClCompile Include="Source\Math\Matrix4Float.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Utility\ShaderProgram.cpp">

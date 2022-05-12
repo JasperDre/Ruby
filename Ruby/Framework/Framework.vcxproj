@@ -28,7 +28,7 @@
     <ClInclude Include="Source\GameCore\GameCore.h" />
     <ClInclude Include="Source\GL\GLHelpers.h" />
     <ClInclude Include="Source\Math\MathHelpers.h" />
-    <ClInclude Include="Source\Math\MyMatrix.h" />
+    <ClInclude Include="Source\Math\Matrix4Float.h" />
     <ClInclude Include="Source\Math\Vector.h" />
     <ClInclude Include="Source\Math\Vector2Float.h" />
     <ClInclude Include="Source\Math\Vector3Float.h" />
@@ -48,7 +48,7 @@
     <ClCompile Include="Source\FrameworkPCH.cpp" />
     <ClCompile Include="Source\GameCore\GameCore.cpp" />
     <ClCompile Include="Source\GL\GLHelpers.cpp" />
-    <ClCompile Include="Source\Math\MyMatrix.cpp" />
+    <ClCompile Include="Source\Math\Matrix4Float.cpp" />
     <ClCompile Include="Source\Math\Vector2Float.cpp" />
     <ClCompile Include="Source\Math\Vector3Float.cpp" />
     <ClCompile Include="Source\Math\Vector4Float.cpp" />

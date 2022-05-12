@@ -2,6 +2,8 @@
 
 #include "Entities/Entity.h"
 
+#include <array>
+
 class AnimatedSprite;
 class AStarPathFinder;
 class ResourceManager;
@@ -16,54 +18,41 @@ public:
 	void Update(float deltatime) override;
 	void PathingUpdate(float delatime);
 	void WalkingUpdate(float deltatime);
-
 	void Draw(Vector2Float camPos, Vector2Float projecScale) override;
-
-	void SetAIController(AStarPathFinder* aController) {}
 	void Move(SpriteDirection dir, float deltatime);
-
-	void Pause();
-	void Resume();
-
-	void ResetPathFinder();
-	bool GetNextPath(ivec2 anIndex);
-	SpriteDirection CalculateNextInput(ivec2 anIndex);
-
-	AI_States GetMyState() override;
-	void SetMyState(AI_States aState) override;
-
-	bool GetNodeIsClearOnSpecial(int tx, int ty) override;
-
-	void OnEvent(Event* anEvent) override;
-
-	bool CheckForCollision(Vector2Float NPCNewPosition);
-
-	int* GetInputSet() override;
-	void SetInputSet(int* aPath) override;
-	int GetCurrentInput() override;
-	void SetCurrentInput(int aCurrentInput) override;
-	int GetNextTileFromSet(int aCurrentInput) override;
+	void Pause() const;
+	void Resume() const;
+	void ResetPathFinder() const;
+	void OnEvent(Event* anEvent) override {}
 	void ResetInputSet() override;
-
 	void NPCSeekStartPath() override;
 
-	ivec2 GetMyMinIndex() override;
-	ivec2 GetMyMaxIndex() override;
-
-	int GetMyMapWidth() override;
-	int GetMaxPathSize() override;
-
+	void SetMyState(AI_States aState) override;
+	void SetInputSet(int* aPath) override;
+	void SetCurrentInput(int aCurrentInput) override;
 	void SetMyDirection(SpriteDirection aDirection) override;
 
-	int RangeRandomIntAlg(int min, int max) override;
+	bool GetNextPath(ivec2 anIndex);
+	SpriteDirection CalculateNextInput(ivec2 anIndex);
+	[[nodiscard]] AI_States GetMyState() const override { return m_MyState; }
+	[[nodiscard]] bool GetNodeIsClearOnSpecial(int tx, int ty) const override;
+	[[nodiscard]] bool CheckForCollision(Vector2Float NPCNewPosition) const;
+	[[nodiscard]] int* GetInputSet() const override { return m_MyPath; }
+	[[nodiscard]] int GetCurrentInput() const override { return m_CurrentInput; }
+	[[nodiscard]] int GetNextTileFromSet(int aCurrentInput) const override { return m_MyInputSet[aCurrentInput]; }
+	[[nodiscard]] ivec2 GetMyMinIndex() const override;
+	[[nodiscard]] ivec2 GetMyMaxIndex() const override;
+	[[nodiscard]] int GetMyMapWidth() const override;
+	[[nodiscard]] int GetMaxPathSize() const override;
+	[[nodiscard]] int RangeRandomIntAlg(int min, int max) const override;
 
 private:
-	std::string AnimationKeys[NUM_DIRECTIONS] = { "OakWalkDown_", "OakWalkRight_", "OakWalkLeft_", "OakWalkUp_" };
-	int m_MyInputSet[OAKMAXPATHSIZE];
+	std::array<std::string, NUM_DIRECTIONS> AnimationKeys;
+	std::array<int, OAKMAXPATHSIZE> m_MyInputSet;
+	std::array<AnimatedSprite*, NUM_DIRECTIONS> m_Animations;
 	Vector2Float NewPosition;
 	ivec2 m_MyNewDestination;
 	ivec2 m_MyIndex;
-	AnimatedSprite* m_Animations[NUM_DIRECTIONS];
 	TileMap* m_MyTileMap;
 	ResourceManager* myResourceManager;
 	int* m_MyPath;

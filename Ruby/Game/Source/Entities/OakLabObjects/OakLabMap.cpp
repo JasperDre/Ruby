@@ -13,7 +13,7 @@ OakLabMap::OakLabMap(ResourceManager* myResourceManager, TileMap* myTileMap, Gam
 	m_MyTileMap = myTileMap;
 	m_MyResourceManager = myResourceManager;
 	m_MyCanvas = new Canvas(m_MyTileMap, m_MyResourceManager);
-	m_MyCanvas->SetShader(m_pGame->GetShader(), m_pGame->GetDebugShader());
+	m_MyCanvas->SetShader(myGameCore->GetShader(), myGameCore->GetDebugShader());
 	m_MyCanvas->GenerateLabVertexData(OakLabBitMap);
 	m_MyCanvas->GenterateCanvasMesh((LABSIZE * 4) - (NUM_LAB_COLUMNS * 11));
 }

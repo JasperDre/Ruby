@@ -18,8 +18,8 @@ AnimatedSprite::AnimatedSprite(ResourceManager* aResourceManager, GameCore* myGa
 AnimatedSprite::~AnimatedSprite()
 {
 	m_MyResourceManager = nullptr;
-	m_pMesh = nullptr;
-	m_pGame = nullptr;
+	myMesh = nullptr;
+	myGameCore = nullptr;
 }
 
 void AnimatedSprite::Update(float deltatime)
@@ -56,7 +56,7 @@ void AnimatedSprite::Update(float deltatime)
 
 void AnimatedSprite::Draw(Vector2Float camPos, Vector2Float projScale)
 {
-	m_pMesh->Draw(m_Position, m_Angle, Vector2Float((TILESIZE / 10.0f) * 5.5f, (TILESIZE / 10.0f) * 11.0f), camPos, projScale, myTextureIdentifier, m_UVScale, m_UVOffset);
+	myMesh->Draw(myPosition, myAngle, Vector2Float((TILESIZE / 10.0f) * 5.5f, (TILESIZE / 10.0f) * 11.0f), camPos, projScale, myTextureIdentifier, m_UVScale, m_UVOffset);
 }
 
 void AnimatedSprite::AddFrame(const std::string& newframe)

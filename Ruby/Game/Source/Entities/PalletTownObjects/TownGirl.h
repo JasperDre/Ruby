@@ -15,21 +15,22 @@ public:
 
 	void Update(float deltatime) override;
 	void Draw(Vector2Float camPos, Vector2Float projecScale) override;
+	void OnEvent(Event* anEvent) override {}
 	void Move(SpriteDirection dir, float deltatime);
 	void Pause();
 	void Resume();
-	void SetStop(bool StopNPC);
 	void ResetPathFinder() const;
-	bool GetNextPath(ivec2 anIndex);
-	SpriteDirection CalculateNextInput(ivec2 anIndex);
-	void OnEvent(Event* anEvent) override;
-	int RangeRandomIntAlg(int min, int max) override;
 
+	void SetStop(bool StopNPC);
+
+	[[nodiscard]] int RangeRandomIntAlg(int min, int max) const override;
 	[[nodiscard]] bool CheckForCollision(Vector2Float NPCNewPosition) const;
-	int* GetInputSet() override;
-	bool GetNodeIsClearOnSpecial(int tx, int ty) override;
-	int GetMyMapWidth() override;
-	int GetMaxPathSize() override;
+	[[nodiscard]] int* GetInputSet() const override;
+	[[nodiscard]] bool GetNodeIsClearOnSpecial(int tx, int ty) const override;
+	[[nodiscard]] int GetMyMapWidth() const override;
+	[[nodiscard]] int GetMaxPathSize() const override;
+	SpriteDirection CalculateNextInput(ivec2 anIndex);
+	bool GetNextPath(ivec2 anIndex);
 
 private:
 	std::string AnimationKeys[NUM_DIRECTIONS];

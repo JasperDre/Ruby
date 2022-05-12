@@ -11,7 +11,7 @@
 GameCamera::GameCamera(GameCore* pGame, Mesh* pMesh, GLuint myTexture, Trainer* myTrainer) : Entity(pGame, pMesh, myTexture)
 {
 	m_MyMesh = pMesh;
-	m_Position = Vector2Float(myTrainer->GetPosition() + Vector2Float(0.0f, 1.0f));
+	myPosition = Vector2Float(myTrainer->GetPosition() + Vector2Float(0.0f, 1.0f));
 	m_MyScreenSize = Vector2Float(pGame->GetFramework()->GetWindowWidth(), pGame->GetFramework()->GetWindowHeight());
 
 	CAMERAMIN = Vector2Float(15.0f, 15.0f);
@@ -21,28 +21,13 @@ GameCamera::GameCamera(GameCore* pGame, Mesh* pMesh, GLuint myTexture, Trainer* 
 	newCamPos = Vector2Float(0.0f, 0.0f);
 }
 
-GameCamera::~GameCamera()
-{
-
-}
-
-void GameCamera::Update(float deltatime)
-{
-
-}
-
-void GameCamera::Draw()
-{
-
-}
-
 void GameCamera::ClampToPlayer(Vector2Float aPlayerPos)
 {
 	if (m_InTransition)
 	{
-		Vector2Float Target = m_pGame->GetSceneManager()->GetActiveScene()->GetPlayerStart() + CamOffset;
+		const Vector2Float Target = myGameCore->GetSceneManager()->GetActiveScene()->GetPlayerStart() + CamOffset;
 
-		SpriteDirection aDirection = m_pGame->GetMyPlayer()->GetMyDirection();
+		const SpriteDirection aDirection = myGameCore->GetMyPlayer()->GetMyDirection();
 
 		if (aDirection == SpriteDirection::SpriteWalkDown)
 		{
@@ -80,22 +65,22 @@ void GameCamera::ClampToPlayer(Vector2Float aPlayerPos)
 		{
 			if (aPlayerPos.myX > CAMERAMIN.myX)
 			{
-				m_Position.myX = aPlayerPos.myX;
+				myPosition.myX = aPlayerPos.myX;
 			}
 		}
 		if (aPlayerPos.myY < CAMERAMAX.myY)
 		{
 			if (aPlayerPos.myY > CAMERAMIN.myY)
 			{
-				m_Position.myY = aPlayerPos.myY;
+				myPosition.myY = aPlayerPos.myY;
 			}
 		}
 	}
 }
 
-Vector2Float GameCamera::GetCameraPosition()
+Vector2Float GameCamera::GetCameraPosition() const
 {
-	Vector2Float pos = m_Position;
+	Vector2Float pos = myPosition;
 
 	pos.myX -= fmod(pos.myX, (m_MyScreenSize.myX/150) / m_MyScreenSize.myX);
 	pos.myY -= fmod(pos.myY, (m_MyScreenSize.myY/150) / m_MyScreenSize.myY);
@@ -108,17 +93,17 @@ void GameCamera::SetMyProjection(Vector2Float aProjection)
 	m_MyProjection = aProjection;
 }
 
-Vector2Float GameCamera::GetCameraProjection()
+Vector2Float GameCamera::GetCameraProjection() const
 {
 	return m_MyProjection;
 }
 
 void GameCamera::OnEvent(Event * anEvent)
 {
-	DoorEvent* e = (DoorEvent*)anEvent;
-	if (e->GetEventType() == EventTypes::EventType_Door)
+	const DoorEvent* doorEvent = dynamic_cast<DoorEvent*>(anEvent);
+	if (doorEvent->GetEventType() == EventTypes::EventType_Door)
 	{
-		Areas newArea = m_pGame->GetSceneManager()->GetActiveScene()->GetMyArea();
+		const Areas newArea = myGameCore->GetSceneManager()->GetActiveScene()->GetMyArea();
 		if (newArea == Areas::Area_OakLab)
 		{
 			CAMERAMIN = Vector2Float(-6.0f, -6.0f);
@@ -134,11 +119,11 @@ void GameCamera::OnEvent(Event * anEvent)
 			CAMERAMIN = Vector2Float(16.0f, 18.0f);
 			CAMERAMAX = Vector2Float(76.0f, 80.0f);
 		}
-		if (e->GetDoorType() != 11 && e->GetDoorType() != 10)
+		if (doorEvent->GetDoorType() != 11 && doorEvent->GetDoorType() != 10)
 		{
-			Vector2Float newpos = m_pGame->GetSceneManager()->GetActiveScene()->GetPlayerStart();
+			const Vector2Float newpos = myGameCore->GetSceneManager()->GetActiveScene()->GetPlayerStart();
 
-			Vector2Float aDirection = DIRECTIONVECTOR[static_cast<int>(m_pGame->GetMyPlayer()->GetMyDirection())];
+			const Vector2Float aDirection = DIRECTIONVECTOR[static_cast<int>(myGameCore->GetMyPlayer()->GetMyDirection())];
 
 			CamOffset = aDirection * (CAMERAMIN);
 
@@ -151,7 +136,7 @@ void GameCamera::OnEvent(Event * anEvent)
 	}
 }
 
-void GameCamera::SetScreenSize(Vector2Float awindowsize)
+void GameCamera::SetScreenSize(Vector2Float aSize)
 {
-	m_MyScreenSize = awindowsize;
+	m_MyScreenSize = aSize;
 }

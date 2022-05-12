@@ -1,5 +1,5 @@
 #include "FrameworkPCH.h"
-#include "MyMatrix.h"
+#include "Matrix4Float.h"
 
 #include "MathHelpers.h"
 #include "Vector.h"
@@ -42,14 +42,14 @@ void MyMatrix::SetTranslation(float x, float y, float z)
 
 void MyMatrix::CreateScale(float scale)
 {
-    m12 = m13 = m14 = m21 = m23 = m24 = m31 = m32 = m34 = m41 = m42 = m43 = 0;
+    m12 = m13 = m14 = m21 = m23 = m24 = m31 = m32 = m34 = m41 = m42 = m43 = 0.0f;
     m11 = m22 = m33 = scale;
-    m44 = 1;
+    m44 = 1.0f;
 }
 
 void MyMatrix::CreateScale(float x, float y, float z)
 {
-    m12 = m13 = m14 = m21 = m23 = m24 = m31 = m32 = m34 = m41 = m42 = m43 = 0;
+    m12 = m13 = m14 = m21 = m23 = m24 = m31 = m32 = m34 = m41 = m42 = m43 = 0.0f;
     m11 = x;
     m22 = y;
     m33 = z;
@@ -58,17 +58,17 @@ void MyMatrix::CreateScale(float x, float y, float z)
 
 void MyMatrix::CreateScale(Vector3Float scale)
 {
-    m12 = m13 = m14 = m21 = m23 = m24 = m31 = m32 = m34 = m41 = m42 = m43 = 0;
+    m12 = m13 = m14 = m21 = m23 = m24 = m31 = m32 = m34 = m41 = m42 = m43 = 0.0f;
     m11 = scale.myX;
     m22 = scale.myY;
     m33 = scale.myZ;
-    m44 = 1;
+    m44 = 1.0f;
 }
 
 void MyMatrix::CreateTranslation(float x, float y, float z)
 {
-    m12 = m13 = m14 = m21 = m23 = m24 = m31 = m32 = m34 = 0;
-    m11 = m22 = m33 = m44 = 1;
+    m12 = m13 = m14 = m21 = m23 = m24 = m31 = m32 = m34 = 0.0f;
+    m11 = m22 = m33 = m44 = 1.0f;
     m41 = x;
     m42 = y;
     m43 = z;
@@ -76,8 +76,8 @@ void MyMatrix::CreateTranslation(float x, float y, float z)
 
 void MyMatrix::CreateTranslation(Vector3Float pos)
 {
-    m12 = m13 = m14 = m21 = m23 = m24 = m31 = m32 = m34 = 0;
-    m11 = m22 = m33 = m44 = 1;
+    m12 = m13 = m14 = m21 = m23 = m24 = m31 = m32 = m34 = 0.0f;
+    m11 = m22 = m33 = m44 = 1.0f;
     m41 = pos.myX;
     m42 = pos.myY;
     m43 = pos.myZ;
@@ -87,18 +87,18 @@ void MyMatrix::CreateSRT(float scale, Vector3Float rot, Vector3Float pos)
 {
     SetIdentity();
     Scale(scale);
-    Rotate(rot.myZ, 0, 0, 1); // roll
-    Rotate(rot.myX, 1, 0, 0); // pitch
-    Rotate(rot.myY, 0, 1, 0); // yaw
+    Rotate(rot.myZ, 0.0f, 0.0f, 1.0f); // roll
+    Rotate(rot.myX, 1.0f, 0.0f, 0.0f); // pitch
+    Rotate(rot.myY, 0.0f, 1.0f, 0.0f); // yaw
     Translate(pos.myX, pos.myY, pos.myZ);
 }
 
 void MyMatrix::CreateSRT(Vector3Float scale, Vector3Float rot, Vector3Float pos)
 {
     CreateScale(scale.myX, scale.myY, scale.myZ);
-    Rotate(rot.myZ, 0, 0, 1); // roll
-    Rotate(rot.myX, 1, 0, 0); // pitch
-    Rotate(rot.myY, 0, 1, 0); // yaw
+    Rotate(rot.myZ, 0.0f, 0.0f, 1.0f); // roll
+    Rotate(rot.myX, 1.0f, 0.0f, 0.0f); // pitch
+    Rotate(rot.myY, 0.0f, 1.0f, 0.0f); // yaw
     Translate(pos.myX, pos.myY, pos.myZ);
 }
 
@@ -239,13 +239,13 @@ void MyMatrix::CreateOrtho(float left, float right, float bottom, float top, flo
     assert((deltaX != 0.0f) && (deltaY != 0.0f) && (deltaZ != 0.0f));
 
     m11 = 2.0f / deltaX;
-    m12 = m13 = m14 = 0;
+    m12 = m13 = m14 = 0.0f;
 
     m22 = 2.0f / deltaY;
-    m21 = m23 = m24 = 0;
+    m21 = m23 = m24 = 0.0f;
 
     m33 = -2.0f / deltaZ;
-    m31 = m32 = m34 = 0;
+    m31 = m32 = m34 = 0.0f;
 
     m41 = -(right + left) / deltaX;
     m42 = -(top + bottom) / deltaY;

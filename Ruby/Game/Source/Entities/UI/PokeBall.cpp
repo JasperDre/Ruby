@@ -10,7 +10,7 @@ PokeBall::PokeBall(ResourceManager * aResourceManager, TileMap* aTileMap, GameCo
 {
 	m_MyResourceManager = aResourceManager;
 	m_MyExtrasTileMap = aTileMap;
-	m_pMesh = myMesh;
+	myMesh = myMesh;
 	myTextureIdentifier = aTexture;
 
 	m_MyFrame = m_MyExtrasTileMap->GetFrameFromExtrasMap("PokeBall_UIScore.png");
@@ -20,6 +20,6 @@ PokeBall::PokeBall(ResourceManager * aResourceManager, TileMap* aTileMap, GameCo
 
 void PokeBall::Draw(Vector2Float camPos, Vector2Float camProjection)
 {
-	m_MyFrame.myWorldSpace = m_Position;
-	m_pMesh->Draw(m_MyFrame.myWorldSpace, 0, TILESIZE, 0, camProjection, myTextureIdentifier, m_MyFrame.myUVScale, m_MyFrame.myUVOffset);
+	m_MyFrame.myWorldSpace = myPosition;
+	myMesh->Draw(m_MyFrame.myWorldSpace, 0, TILESIZE, 0, camProjection, myTextureIdentifier, m_MyFrame.myUVScale, m_MyFrame.myUVOffset);
 }

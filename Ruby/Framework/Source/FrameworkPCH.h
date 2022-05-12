@@ -30,7 +30,7 @@
 #endif
 #include "GL/GLHelpers.h"
 #include "Math/MathHelpers.h"
-#include "Math/MyMatrix.h"
+#include "Math/Matrix4Float.h"
 #include "Math/Vector.h"
 #include "Utility/FileUtility.h"
 #include "Utility/Helpers.h"
@@ -44,7 +44,6 @@
 typedef Vector2Int ivec2;
 typedef Vector3Int ivec3;
 typedef Vector4Int ivec4;
-typedef MyMatrix mat4;
 
 #include "Events/CollisionEvent.h"
 #include "Events/DoorEvent.h"

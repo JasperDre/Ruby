@@ -11,8 +11,8 @@ UIObject::UIObject(ResourceManager* aResourceManager, TileMap* aTileMap, GameCor
 {
 	m_PokeBall = new PokeBall(aResourceManager, aTileMap, myGame, myMesh, aTexture);
 	m_ScoreNumber = new ScoreNumber(aResourceManager, aTileMap, myGame, myMesh, aTexture);
-	m_PokeBall->SetPosition(Vector2Float(m_Position.myX - 14.0f, m_Position.myY + 12.5f));
-	m_ScoreNumber->SetPosition(Vector2Float(m_Position.myX - 12.5f, m_Position.myY + 12.5f));
+	m_PokeBall->SetPosition(Vector2Float(myPosition.myX - 14.0f, myPosition.myY + 12.5f));
+	m_ScoreNumber->SetPosition(Vector2Float(myPosition.myX - 12.5f, myPosition.myY + 12.5f));
 }
 
 UIObject::~UIObject()

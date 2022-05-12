@@ -14,7 +14,7 @@ TownGirl::TownGirl(ResourceManager * aResourceManager, TileMap* aTileMap, GameCo
 	myNewDirection = SpriteDirection::SpriteWalkDown;
 	myResourceManager = aResourceManager;
 	m_MyTileMap = aTileMap;
-	m_pMesh->GenerateFrameMesh();
+	myMesh->GenerateFrameMesh();
 
 	AnimationKeys[0] = "TownGirlWalkDown_";
 	AnimationKeys[1] = "TownGirlWalkRight_";
@@ -30,7 +30,7 @@ TownGirl::TownGirl(ResourceManager * aResourceManager, TileMap* aTileMap, GameCo
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "3.png");
 		m_Animations[i]->SetFrameSpeed(6.0f);
 		m_Animations[i]->SetLoop(true);
-		m_Animations[i]->SetPosition(m_Position);
+		m_Animations[i]->SetPosition(myPosition);
 	}
 
 	m_Stop = true;
@@ -38,18 +38,18 @@ TownGirl::TownGirl(ResourceManager * aResourceManager, TileMap* aTileMap, GameCo
 
 	m_CurrentInput = 0;
 
-	m_MyMinIndex = 303;
-	m_MyMaxIndex = 667;
+	myMinIndex = 303;
+	myMaxIndex = 667;
 
 	m_MyPath = &m_MyInputSet[0];
 
 	for (int& i : m_MyInputSet)
 		i = -1;
 
-	m_MyPathFinder = new AStarPathFinder(m_MyTileMap, this);
+	myPathFinder = new AStarPathFinder(m_MyTileMap, this);
 
 	m_PathingComplete = false;
-	m_MyIndex = ivec2(m_Position.myX / TILESIZE, m_Position.myY / TILESIZE);
+	m_MyIndex = ivec2(myPosition.myX / TILESIZE, myPosition.myY / TILESIZE);
 }
 
 TownGirl::~TownGirl()
@@ -61,14 +61,14 @@ TownGirl::~TownGirl()
 	}
 
 	myResourceManager = nullptr;
-	delete m_MyPathFinder;
+	delete myPathFinder;
 	m_MyPath = nullptr;
 }
 
 void TownGirl::Update(float deltatime)
 {
 	Pause();
-	m_MyIndex = ivec2(m_Position.myX / TILESIZE, m_Position.myY / TILESIZE);
+	m_MyIndex = ivec2(myPosition.myX / TILESIZE, myPosition.myY / TILESIZE);
 	if (m_Stop == true)
 	{
 		if (GetNextPath(m_MyIndex))
@@ -120,7 +120,7 @@ void TownGirl::Draw(Vector2Float camPos, Vector2Float projecScale)
 
 void TownGirl::Move(SpriteDirection dir, float deltatime)
 {
-	NewPosition = m_Position;
+	NewPosition = myPosition;
 
 	Resume();
 
@@ -161,7 +161,7 @@ void TownGirl::SetStop(bool StopNPC)
 
 void TownGirl::ResetPathFinder() const
 {
-	m_MyPathFinder->Reset();
+	myPathFinder->Reset();
 }
 
 bool TownGirl::GetNextPath(ivec2 anIndex)
@@ -177,13 +177,13 @@ bool TownGirl::GetNextPath(ivec2 anIndex)
 
 	while (!m_PathingComplete)
 	{
-		m_MyNewDestination.x = RangeRandomIntAlg(m_MyMinIndex % NUM_COLUMNS, m_MyMaxIndex % NUM_COLUMNS);
-		m_MyNewDestination.y = RangeRandomIntAlg(m_MyMinIndex / NUM_COLUMNS, m_MyMaxIndex / NUM_COLUMNS);
+		m_MyNewDestination.x = RangeRandomIntAlg(myMinIndex % NUM_COLUMNS, myMaxIndex % NUM_COLUMNS);
+		m_MyNewDestination.y = RangeRandomIntAlg(myMinIndex / NUM_COLUMNS, myMaxIndex / NUM_COLUMNS);
 
-		m_PathingComplete = m_MyPathFinder->FindPath(GirlIndex.x, GirlIndex.y, m_MyNewDestination.x, m_MyNewDestination.y);
+		m_PathingComplete = myPathFinder->FindPath(GirlIndex.x, GirlIndex.y, m_MyNewDestination.x, m_MyNewDestination.y);
 
 		if (m_PathingComplete)
-			m_MyPathFinder->GetPath(m_MyPath, MAXPATHSIZE_TOWN_NPC, m_MyNewDestination.x, m_MyNewDestination.y);
+			myPathFinder->GetPath(m_MyPath, MAXPATHSIZE_TOWN_NPC, m_MyNewDestination.x, m_MyNewDestination.y);
 
 		if (!m_MyPath)
 			m_PathingComplete = false;
@@ -231,9 +231,6 @@ SpriteDirection TownGirl::CalculateNextInput(ivec2 anIndex)
 	return SpriteDirection::SpriteDirectionStop;
 
 }
-void TownGirl::OnEvent(Event* anEvent)
-{
-}
 
 bool TownGirl::CheckForCollision(Vector2Float NPCNewPosition) const
 {
@@ -244,42 +241,42 @@ bool TownGirl::CheckForCollision(Vector2Float NPCNewPosition) const
 	const ivec2 BottomRightIndex = ivec2(((NPCNewPosition.myX + (TILESIZE / 2)) / TILESIZE), ((NPCNewPosition.myY - 0.3f) / TILESIZE));
 
 	//Check each index for whether the tile it lands on is walkable
-	const bool CheckOrigin = m_pGame->GetTileMap()->GetTileAtNPC(OriginIndex);
-	const bool CheckTopLeft = m_pGame->GetTileMap()->GetTileAtNPC(TopLeftIndex);
-	const bool CheckTopRight = m_pGame->GetTileMap()->GetTileAtNPC(TopRightIndex);
-	const bool CheckBottomRight = m_pGame->GetTileMap()->GetTileAtNPC(BottomRightIndex);
+	const bool CheckOrigin = myGameCore->GetTileMap()->GetTileAtNPC(OriginIndex);
+	const bool CheckTopLeft = myGameCore->GetTileMap()->GetTileAtNPC(TopLeftIndex);
+	const bool CheckTopRight = myGameCore->GetTileMap()->GetTileAtNPC(TopRightIndex);
+	const bool CheckBottomRight = myGameCore->GetTileMap()->GetTileAtNPC(BottomRightIndex);
 
 	//If all the point land on walkable tile return true else return false
 	const bool Collision = (CheckOrigin && CheckTopLeft && CheckTopRight && CheckBottomRight);
 
 	return Collision;
 }
-int* TownGirl::GetInputSet()
+int* TownGirl::GetInputSet() const
 {
 	return m_MyPath;
 }
 
-bool TownGirl::GetNodeIsClearOnSpecial(int tx, int ty)
+bool TownGirl::GetNodeIsClearOnSpecial(int tx, int ty) const
 {
-	const ivec2 MinColumnRow = m_MyTileMap->GetColumRowFromIndex(m_MyMinIndex);
-	const ivec2 MaxColumnRow = m_MyTileMap->GetColumRowFromIndex(m_MyMaxIndex);
+	const ivec2 MinColumnRow = m_MyTileMap->GetColumRowFromIndex(myMinIndex);
+	const ivec2 MaxColumnRow = m_MyTileMap->GetColumRowFromIndex(myMaxIndex);
 	if (tx > MinColumnRow.x && tx < MaxColumnRow.x && ty > MinColumnRow.y && ty < MaxColumnRow.y)
 		return true;
 
 	return false;
 }
 
-int TownGirl::GetMyMapWidth()
+int TownGirl::GetMyMapWidth() const
 {
 	return m_MyTileMap->GetMapWidth();
 }
 
-int TownGirl::GetMaxPathSize()
+int TownGirl::GetMaxPathSize() const
 {
 	return MAXPATHSIZE_TOWN_NPC;
 }
 
-int TownGirl::RangeRandomIntAlg(int min, int max)
+int TownGirl::RangeRandomIntAlg(int min, int max) const
 {
 	return rand() % (max - min + 1) + min;
 }

@@ -19,7 +19,7 @@ Trainer::Trainer(ResourceManager* aResourceManager, GameCore* myGame, Mesh * myM
 	AnimationKeys[3] = "PlayerWalkUp_";
 	myDirection = SpriteDirection::SpriteWalkDown;
 	myResourceManager = aResourceManager;
-	m_pMesh->GenerateFrameMesh();
+	myMesh->GenerateFrameMesh();
 
 	for (unsigned int i = 0; i < NUM_DIRECTIONS; i++)
 	{
@@ -30,7 +30,7 @@ Trainer::Trainer(ResourceManager* aResourceManager, GameCore* myGame, Mesh * myM
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "3.png");
 		m_Animations[i]->SetFrameSpeed(6.0f);
 		m_Animations[i]->SetLoop(true);
-		m_Animations[i]->SetPosition(m_Position);
+		m_Animations[i]->SetPosition(myPosition);
 	}
 
 	m_Stop = false;
@@ -87,11 +87,11 @@ void Trainer::Update(float deltatime)
 	{
 		if (myDirection == SpriteDirection::SpriteWalkUp || myDirection == SpriteDirection::SpriteWalkRight)
 		{
-			if (m_Position.myY < aTransitionDestination.myY)
+			if (myPosition.myY < aTransitionDestination.myY)
 			{
 				Move(myDirection, deltatime);
 			}
-			else if (m_Position.myX < aTransitionDestination.myX)
+			else if (myPosition.myX < aTransitionDestination.myX)
 			{
 				Move(myDirection, deltatime);
 			}
@@ -102,11 +102,11 @@ void Trainer::Update(float deltatime)
 		}
 		if (myDirection == SpriteDirection::SpriteWalkDown || myDirection == SpriteDirection::SpriteWalkLeft)
 		{
-			if (m_Position.myY > aTransitionDestination.myY)
+			if (myPosition.myY > aTransitionDestination.myY)
 			{
 				Move(myDirection, deltatime);
 			}
-			else if (m_Position.myX > aTransitionDestination.myX)
+			else if (myPosition.myX > aTransitionDestination.myX)
 			{
 				Move(myDirection, deltatime);
 			}
@@ -131,7 +131,7 @@ void Trainer::Draw(Vector2Float camPos, Vector2Float projecScale)
 
 void Trainer::Move(SpriteDirection dir, float deltatime)
 {
-	NewPosition = m_Position;
+	NewPosition = myPosition;
 
 	Resume();
 
@@ -180,13 +180,13 @@ void Trainer::OnEvent(Event* anEvent)
 	if (doorEvent->GetDoorType() == 11)
 	{
 		myDirection = SpriteDirection::SpriteWalkUp;
-		SetPosition(m_pGame->GetSceneManager()->GetActiveScene()->GetPlayerStart());
+		SetPosition(myGameCore->GetSceneManager()->GetActiveScene()->GetPlayerStart());
 		PlayerTransition();
 	}
 	if (doorEvent->GetDoorType() == 10)
 	{
 		myDirection = SpriteDirection::SpriteWalkDown;
-		SetPosition(m_pGame->GetSceneManager()->GetActiveScene()->GetPlayerStart());
+		SetPosition(myGameCore->GetSceneManager()->GetActiveScene()->GetPlayerStart());
 		PlayerTransition();
 	}
 }
@@ -211,10 +211,10 @@ bool Trainer::CheckForCollision(Vector2Float aPosition) const
 	const ivec2 BottomRightIndex = ivec2(((aPosition.myX + (TILESIZE / 2)) / TILESIZE), ((aPosition.myY - 0.3f) / TILESIZE));
 
 	//Check each index for whether the tile it lands on is walkable
-	const bool CheckOrigin = m_pGame->GetTileMap()->GetTileAtPlayer(OriginIndex);
-	const bool CheckTopLeft = m_pGame->GetTileMap()->GetTileAtPlayer(TopLeftIndex);
-	const bool CheckTopRight = m_pGame->GetTileMap()->GetTileAtPlayer(TopRightIndex);
-	const bool CheckBottomRight = m_pGame->GetTileMap()->GetTileAtPlayer(BottomRightIndex);
+	const bool CheckOrigin = myGameCore->GetTileMap()->GetTileAtPlayer(OriginIndex);
+	const bool CheckTopLeft = myGameCore->GetTileMap()->GetTileAtPlayer(TopLeftIndex);
+	const bool CheckTopRight = myGameCore->GetTileMap()->GetTileAtPlayer(TopRightIndex);
+	const bool CheckBottomRight = myGameCore->GetTileMap()->GetTileAtPlayer(BottomRightIndex);
 
 	//If all the point land on walkable tile return true else return false
 	const bool Collision = (CheckOrigin && CheckTopLeft && CheckTopRight && CheckBottomRight);

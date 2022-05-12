@@ -7,7 +7,7 @@
 
 ScoreNumber::ScoreNumber(ResourceManager * aResourceManager, TileMap* aTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : Entity(myGame, myMesh, aTexture)
 {
-	m_pMesh = myMesh;
+	myMesh = myMesh;
 	myTextureIdentifier = aTexture;
 	m_MyResourceManager = aResourceManager;
 
@@ -32,9 +32,9 @@ void ScoreNumber::Draw(Vector2Float camPos, Vector2Float camProjection)
 {
 	for (int i = 0; i < 7; i++)
 	{
-		MyScoreFrames.at(i).myWorldSpace = Vector2Float((((i % 7) * TILESIZE) + m_Position.myX), m_Position.myY);
+		MyScoreFrames.at(i).myWorldSpace = Vector2Float((((i % 7) * TILESIZE) + myPosition.myX), myPosition.myY);
 
-		m_pMesh->Draw(MyScoreFrames.at(i).myWorldSpace, 0, TILESIZE, 0, camProjection, myTextureIdentifier, MyScoreFrames.at(i).myUVScale, MyScoreFrames.at(i).myUVOffset);
+		myMesh->Draw(MyScoreFrames.at(i).myWorldSpace, 0, TILESIZE, 0, camProjection, myTextureIdentifier, MyScoreFrames.at(i).myUVScale, MyScoreFrames.at(i).myUVOffset);
 	}
 }
 

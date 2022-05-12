@@ -13,7 +13,7 @@ PetalburgWoodsMap::PetalburgWoodsMap(ResourceManager * myResourceManager, TileMa
 	m_MyResourceManager = myResourceManager;
 
 	m_MyCanvas = new Canvas(m_MyTileMap, m_MyResourceManager);
-	m_MyCanvas->SetShader(m_pGame->GetShader(), m_pGame->GetDebugShader());
+	m_MyCanvas->SetShader(myGameCore->GetShader(), myGameCore->GetDebugShader());
 
 	m_MyCanvas->GenerateForestVertexData(ForestBitMap);
 
