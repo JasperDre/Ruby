@@ -2,6 +2,8 @@
 
 #include "Entities/Entity.h"
 
+#include <array>
+
 class Mesh;
 class ResourceManager;
 class TileMap;
@@ -17,8 +19,7 @@ public:
 
 private:
 	std::vector<Frame> m_MyFrames;
-	const unsigned short OakLabTableTopMap[3] = { 3, 4, 5 };
-	const unsigned short OakLabTableTop_NumTiles = 3;
+	std::array<unsigned short, 3> OakLabTableTopMap;
 	Vector2Float m_MyTileUVOffset;
 	Vector2Float m_MyTileUVScale;
 	Vector2Float OakLabTableTopPosition;

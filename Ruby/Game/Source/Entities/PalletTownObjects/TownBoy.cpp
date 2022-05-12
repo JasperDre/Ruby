@@ -7,18 +7,17 @@
 #include "Mesh/Mesh.h"
 #include "Sprites/AnimatedSprite.h"
 
-TownBoy::TownBoy(ResourceManager * aResourceManager, TileMap* aTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : Entity(myGame, myMesh, aTexture)
+TownBoy::TownBoy(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
+	: Entity(myGame, myMesh, aTexture)
 {
-	myDirection = SpriteDirection::SpriteWalkDown;
-	myNewDirection = SpriteDirection::SpriteWalkDown;
-	myResourceManager = aResourceManager;
-	m_MyTileMap = aTileMap;
-	myMesh->GenerateFrameMesh();
+	AnimationKeys = { "TownBoyWalkDown_", "TownBoyWalkRight_", "TownBoyWalkLeft_", "TownBoyWalkUp_" };
 
-	//Initialize the animated sprites
-	for (int i = 0; i < NUM_DIRECTIONS; i++)
+	for (int& i : m_MyInputSet)
+		i = -1;
+
+	for (unsigned int i = 0; i < m_Animations.size(); i++)
 	{
-		m_Animations[i] = new AnimatedSprite(myResourceManager, myGame, myMesh, 1, aTexture);
+		m_Animations[i] = new AnimatedSprite(aResourceManager, myGame, myMesh, 1, aTexture);
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "1.png");
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "2.png");
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "1.png");
@@ -28,9 +27,14 @@ TownBoy::TownBoy(ResourceManager * aResourceManager, TileMap* aTileMap, GameCore
 		m_Animations[i]->SetPosition(myPosition);
 	}
 
+	myDirection = SpriteDirection::SpriteWalkDown;
+	myNewDirection = SpriteDirection::SpriteWalkDown;
+	myResourceManager = aResourceManager;
+	m_MyTileMap = aTileMap;
+	myMesh->GenerateFrameMesh();
+
 	m_Stop = true;
 	m_IsFirstInput = false;
-
 
 	m_CurrentInput = 0;
 
@@ -38,9 +42,6 @@ TownBoy::TownBoy(ResourceManager * aResourceManager, TileMap* aTileMap, GameCore
 	myMaxIndex = 816;
 
 	m_MyPath = &m_MyInputSet[0];
-
-	for (int i = 0; i < MAXPATHSIZE_TOWN_NPC; i++)
-		m_MyInputSet[i] = -1;
 
 	myPathFinder = new AStarPathFinder(m_MyTileMap, this);
 

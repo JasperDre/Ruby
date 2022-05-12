@@ -2,6 +2,8 @@
 
 #include "Entities/Entity.h"
 
+#include <array>
+
 class AStarPathFinder;
 class ResourceManager;
 class TileMap;
@@ -45,7 +47,7 @@ public:
 	bool GetNextPath(ivec2 anIndex);
 
 private:
-	int m_MyInputSet[MAXPATHSIZE_TOWN_NPC];
+	std::array<int, MAXPATHSIZE_TOWN_NPC> m_MyInputSet;
 	ResourceManager* myResourceManager;
 	Vector2Float NewPosition;
 	ivec2 m_MyNewDestination;

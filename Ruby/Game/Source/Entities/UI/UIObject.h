@@ -12,7 +12,7 @@ public:
 	UIObject(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
 	~UIObject() override;
 
-	void Update(float deltatime) override;
+	void Update(float deltatime) override {}
 	void Draw(Vector2Float camPos, Vector2Float camProjection) override;
 
 	void SetScore(int aScore) const;

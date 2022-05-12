@@ -17,7 +17,7 @@ public:
 	void SetScore(int aScore);
 
 private:
-	std::vector<Frame>MyScoreFrames;
+	std::vector<Frame> MyScoreFrames;
 	TileMap* m_MyExtrasTileMap;
 	ResourceManager* m_MyResourceManager;
 };

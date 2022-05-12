@@ -2,6 +2,8 @@
 
 #include "Entities/Entity.h"
 
+#include <array>
+
 class Mesh;
 class ResourceManager;
 class TileMap;
@@ -17,9 +19,8 @@ public:
 	void Draw(Vector2Float camPos, Vector2Float projecScale) override;
 
 private:
-	std::vector<Frame>m_MyFrames;
-	const unsigned short PlayerHouseMap[5] = {	0, 1, 2, 3, 4};
-	const unsigned short PlayerHouse_NumTiles = 5;
+	std::vector<Frame> m_MyFrames;
+	std::array<unsigned short, 5> PlayerHouseMap;
 	Vector2Float m_MyTileUVOffset;
 	Vector2Float m_MyTileUVScale;
 	Vector2Float m_PlayerHousePosition;

@@ -2,7 +2,7 @@
 
 #include "Entities/Entity.h"
 
-#include <vector>
+#include <array>
 
 class Mesh;
 class ResourceManager;
@@ -14,13 +14,12 @@ public:
 	OakLabPlantTop(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
 	~OakLabPlantTop() override;
 
-	void Update(float deltatime) override;
+	void Update(float deltatime) override {}
 	void Draw(Vector2Float camPos, Vector2Float camProject) override;
 
 private:
 	std::vector<Frame> m_MyFrames;
-	const unsigned short OakLabPlantMap[2]{ 2, 3 };
-	const unsigned short OakLabPlant_NumTiles = 2;
+	std::array<unsigned short, 2> OakLabPlantMap;
 	Vector2Float m_MyTileUVOffset;
 	Vector2Float m_MyTileUVScale;
 	Vector2Float OaklabPlantPosition;

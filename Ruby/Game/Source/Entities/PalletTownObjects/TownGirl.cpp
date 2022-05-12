@@ -8,22 +8,17 @@
 #include "Mesh/Mesh.h"
 #include "Sprites/AnimatedSprite.h"
 
-TownGirl::TownGirl(ResourceManager * aResourceManager, TileMap* aTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : Entity(myGame, myMesh, aTexture)
+TownGirl::TownGirl(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
+	: Entity(myGame, myMesh, aTexture)
 {
-	myDirection = SpriteDirection::SpriteWalkDown;
-	myNewDirection = SpriteDirection::SpriteWalkDown;
-	myResourceManager = aResourceManager;
-	m_MyTileMap = aTileMap;
-	myMesh->GenerateFrameMesh();
+	AnimationKeys = { "TownGirlWalkDown_", "TownGirlWalkRight_", "TownGirlWalkLeft_", "TownGirlWalkUp_" };
 
-	AnimationKeys[0] = "TownGirlWalkDown_";
-	AnimationKeys[1] = "TownGirlWalkRight_";
-	AnimationKeys[2] = "TownGirlWalkLeft_";
-	AnimationKeys[3] = "TownGirlWalkUp_";
+	for (int& i : m_MyInputSet)
+		i = -1;
 
-	for (unsigned int i = 0; i < NUM_DIRECTIONS; i++)
+	for (unsigned int i = 0; i < m_Animations.size(); i++)
 	{
-		m_Animations[i] = new AnimatedSprite(myResourceManager, myGame, myMesh, 1, aTexture);
+		m_Animations[i] = new AnimatedSprite(aResourceManager, myGame, myMesh, 1, aTexture);
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "1.png");
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "2.png");
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "1.png");
@@ -32,6 +27,12 @@ TownGirl::TownGirl(ResourceManager * aResourceManager, TileMap* aTileMap, GameCo
 		m_Animations[i]->SetLoop(true);
 		m_Animations[i]->SetPosition(myPosition);
 	}
+
+	myDirection = SpriteDirection::SpriteWalkDown;
+	myNewDirection = SpriteDirection::SpriteWalkDown;
+	myResourceManager = aResourceManager;
+	m_MyTileMap = aTileMap;
+	myMesh->GenerateFrameMesh();
 
 	m_Stop = true;
 	m_IsFirstInput = false;
@@ -42,9 +43,6 @@ TownGirl::TownGirl(ResourceManager * aResourceManager, TileMap* aTileMap, GameCo
 	myMaxIndex = 667;
 
 	m_MyPath = &m_MyInputSet[0];
-
-	for (int& i : m_MyInputSet)
-		i = -1;
 
 	myPathFinder = new AStarPathFinder(m_MyTileMap, this);
 

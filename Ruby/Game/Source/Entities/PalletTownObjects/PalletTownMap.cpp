@@ -23,10 +23,6 @@ PalletTownMap::~PalletTownMap()
 	delete m_MyCanvas;
 }
 
-void PalletTownMap::Update(float deltatime)
-{
-}
-
 void PalletTownMap::Draw(Vector2Float camPos, Vector2Float projecScale)
 {
 	m_MyCanvas->DrawCanvas(camPos, projecScale, myTextureIdentifier);

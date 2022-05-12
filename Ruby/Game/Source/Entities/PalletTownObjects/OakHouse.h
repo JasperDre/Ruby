@@ -2,6 +2,8 @@
 
 #include "Entities/Entity.h"
 
+#include <array>
+
 class Mesh;
 class ResourceManager;
 class TileMap;
@@ -17,8 +19,7 @@ public:
 
 private:
 	std::vector<Frame> m_MyFrames;
-	const unsigned short OakHouseMap[7]{ 0, 1, 2, 3, 4, 5, 6 };
-	const unsigned short OakHouse_NumTiles = 7;
+	std::array<unsigned short, 7> OakHouseMap;
 	Vector2Float m_MyTileUVOffset;
 	Vector2Float m_MyTileUVScale;
 	Vector2Float OakHousePosition;

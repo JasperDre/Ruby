@@ -5,9 +5,9 @@
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 
-ScoreNumber::ScoreNumber(ResourceManager * aResourceManager, TileMap* aTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : Entity(myGame, myMesh, aTexture)
+ScoreNumber::ScoreNumber(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
+	: Entity(myGame, myMesh, aTexture)
 {
-	myMesh = myMesh;
 	myTextureIdentifier = aTexture;
 	m_MyResourceManager = aResourceManager;
 

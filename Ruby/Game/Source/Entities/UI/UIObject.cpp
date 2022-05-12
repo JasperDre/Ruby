@@ -21,10 +21,6 @@ UIObject::~UIObject()
 	delete m_ScoreNumber;
 }
 
-void UIObject::Update(float deltatime)
-{
-}
-
 void UIObject::Draw(Vector2Float camPos, Vector2Float camProjection)
 {
 	m_PokeBall->Draw(camPos, camProjection);

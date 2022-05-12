@@ -14,7 +14,7 @@ public:
 	OakLabMap(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
 	~OakLabMap() override;
 
-	void Update(float deltatime) override;
+	void Update(float deltatime) override {}
 	void Draw(Vector2Float camPos, Vector2Float projecScale) override;
 
 private:

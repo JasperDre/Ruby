@@ -25,11 +25,6 @@ PetalburgWoodsMap::~PetalburgWoodsMap()
 	delete m_MyCanvas;
 }
 
-void PetalburgWoodsMap::Update(float deltatime)
-{
-
-}
-
 void PetalburgWoodsMap::Draw(Vector2Float camPos, Vector2Float projecScale)
 {
 	m_MyCanvas->DrawCanvas(camPos, projecScale, myTextureIdentifier);

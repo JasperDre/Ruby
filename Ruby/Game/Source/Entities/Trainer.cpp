@@ -9,21 +9,15 @@
 #include "Scenes/Scene.h"
 #include "Sprites/AnimatedSprite.h"
 
-Trainer::Trainer(ResourceManager* aResourceManager, GameCore* myGame, Mesh * myMesh, GLuint aTexture)
+Trainer::Trainer(ResourceManager* aResourceManager, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
 	: Entity(myGame, myMesh, aTexture)
 	, myController(nullptr)
 {
-	AnimationKeys[0] = "PlayerWalkDown_";
-	AnimationKeys[1] = "PlayerWalkRight_";
-	AnimationKeys[2] = "PlayerWalkLeft_";
-	AnimationKeys[3] = "PlayerWalkUp_";
-	myDirection = SpriteDirection::SpriteWalkDown;
-	myResourceManager = aResourceManager;
-	myMesh->GenerateFrameMesh();
+	AnimationKeys = { "PlayerWalkDown_", "PlayerWalkRight_", "PlayerWalkLeft_", "PlayerWalkUp_" };
 
-	for (unsigned int i = 0; i < NUM_DIRECTIONS; i++)
+	for (unsigned int i = 0; i < m_Animations.size(); i++)
 	{
-		m_Animations[i] = new AnimatedSprite(myResourceManager, myGame, myMesh, 2, aTexture);
+		m_Animations[i] = new AnimatedSprite(aResourceManager, myGame, myMesh, 2, aTexture);
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "1.png");
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "2.png");
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "1.png");
@@ -32,6 +26,10 @@ Trainer::Trainer(ResourceManager* aResourceManager, GameCore* myGame, Mesh * myM
 		m_Animations[i]->SetLoop(true);
 		m_Animations[i]->SetPosition(myPosition);
 	}
+
+	myDirection = SpriteDirection::SpriteWalkDown;
+	myResourceManager = aResourceManager;
+	myMesh->GenerateFrameMesh();
 
 	m_Stop = false;
 	m_InTransition = false;

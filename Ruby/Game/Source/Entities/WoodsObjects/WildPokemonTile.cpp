@@ -11,6 +11,9 @@ WildPokemonTile::WildPokemonTile(ResourceManager* aResourceManager, TileMap* aTi
 	: Entity(myGame, myMesh, aTexture)
 	, m_PathingComplete(false)
 {
+	for (int& i : m_MyInputSet)
+		i = -1;
+
 	myDirection = SpriteDirection::SpriteWalkDown;
 	myNewDirection = SpriteDirection::SpriteWalkDown;
 	myResourceManager = aResourceManager;
@@ -28,9 +31,6 @@ WildPokemonTile::WildPokemonTile(ResourceManager* aResourceManager, TileMap* aTi
 	m_MyPath = &m_MyInputSet[0];
 
 	m_MyNewDestination = ivec2(0, 0);
-
-	for (int& i : m_MyInputSet)
-		i = -1;
 
 	myPathFinder = new AStarPathFinder(m_MyTileMap, this);
 

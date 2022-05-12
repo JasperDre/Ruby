@@ -23,10 +23,6 @@ OakLabMap::~OakLabMap()
 	delete m_MyCanvas;
 }
 
-void OakLabMap::Update(float deltatime)
-{
-}
-
 void OakLabMap::Draw(Vector2Float camPos, Vector2Float projecScale)
 {
 	m_MyCanvas->DrawCanvas(camPos, projecScale, myTextureIdentifier);

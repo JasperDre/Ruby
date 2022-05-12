@@ -10,7 +10,6 @@ PokeBall::PokeBall(ResourceManager * aResourceManager, TileMap* aTileMap, GameCo
 {
 	m_MyResourceManager = aResourceManager;
 	m_MyExtrasTileMap = aTileMap;
-	myMesh = myMesh;
 	myTextureIdentifier = aTexture;
 
 	m_MyFrame = m_MyExtrasTileMap->GetFrameFromExtrasMap("PokeBall_UIScore.png");

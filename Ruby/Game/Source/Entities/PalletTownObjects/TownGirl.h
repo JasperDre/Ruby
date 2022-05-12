@@ -2,6 +2,8 @@
 
 #include "Entities/Entity.h"
 
+#include <array>
+
 class AnimatedSprite;
 class AStarPathFinder;
 class ResourceManager;
@@ -33,9 +35,9 @@ public:
 	bool GetNextPath(ivec2 anIndex);
 
 private:
-	std::string AnimationKeys[NUM_DIRECTIONS];
-	int m_MyInputSet[MAXPATHSIZE_TOWN_NPC];
-	AnimatedSprite* m_Animations[NUM_DIRECTIONS];
+	std::array<std::string, NUM_DIRECTIONS> AnimationKeys;
+	std::array<int, MAXPATHSIZE_TOWN_NPC> m_MyInputSet;
+	std::array<AnimatedSprite*, NUM_DIRECTIONS> m_Animations;
 	Vector2Float NewPosition;
 	ivec2 m_MyNewDestination;
 	ivec2 m_MyIndex;
