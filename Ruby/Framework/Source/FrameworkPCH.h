@@ -41,8 +41,6 @@
 #include "Win32/GL/WGLExtensions.h"
 #endif
 
-typedef Vector3 Vector3Float;
-typedef Vector4 Vector4Float;
 typedef Vector2Int ivec2;
 typedef Vector3Int ivec3;
 typedef Vector4Int ivec4;

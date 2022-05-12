@@ -1,44 +1,36 @@
-//
-// Copyright (c) 2012-2015 Jimmy Lord http://www.flatheadgames.com
-//
-// This software is provided 'as-is', without any express or implied warranty.  In no event will the authors be held liable for any damages arising from the use of this software.
-// Permission is granted to anyone to use this software for any purpose, including commercial applications, and to alter it and redistribute it freely, subject to the following restrictions:
-// 1. The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a product, an acknowledgment in the product documentation would be appreciated but is not required.
-// 2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
-// 3. This notice may not be removed or altered from any source distribution.
-
 #include "FrameworkPCH.h"
+#include "MyMatrix.h"
+
 #include "MathHelpers.h"
 #include "Vector.h"
-#include "MyMatrix.h"
 
 void MyMatrix::SetIdentity()
 {
-    m12 = m13 = m14 = m21 = m23 = m24 = m31 = m32 = m34 = m41 = m42 = m43 = 0;
-    m11 = m22 = m33 = m44 = 1;
+    m12 = m13 = m14 = m21 = m23 = m24 = m31 = m32 = m34 = m41 = m42 = m43 = 0.0f;
+    m11 = m22 = m33 = m44 = 1.0f;
 }
 
-void MyMatrix::SetAxesView(const Vector3& right, const Vector3& up, const Vector3& at, const Vector3& pos)
+void MyMatrix::SetAxesView(const Vector3Float& right, const Vector3Float& up, const Vector3Float& at, const Vector3Float& pos)
 {
-    m11 = right.x; m21 = right.y; m31 = right.z; m41 = pos.x;
-    m12 = up.x;    m22 = up.y;    m32 = up.z;    m42 = pos.y;
-    m13 = at.x;    m23 = at.y;    m33 = at.z;    m43 = pos.z;
-    m14 = 0;       m24 = 0;       m34 = 0;       m44 = 1;
+    m11 = right.myX; m21 = right.myY; m31 = right.myZ; m41 = pos.myX;
+    m12 = up.myX; m22 = up.myY; m32 = up.myZ; m42 = pos.myY;
+    m13 = at.myX; m23 = at.myY; m33 = at.myZ; m43 = pos.myZ;
+    m14 = 0.0f; m24 = 0.0f; m34 = 0.0f; m44 = 1.0f;
 }
 
-void MyMatrix::SetAxesWorld(const Vector3& right, const Vector3& up, const Vector3& at, const Vector3& pos)
+void MyMatrix::SetAxesWorld(const Vector3Float& right, const Vector3Float& up, const Vector3Float& at, const Vector3Float& pos)
 {
-    m11 = right.x; m21 = up.x; m31 = at.x; m41 = pos.x;
-    m12 = right.y; m22 = up.y; m32 = at.y; m42 = pos.y;
-    m13 = right.z; m23 = up.z; m33 = at.z; m43 = pos.z;
-    m14 = 0;       m24 = 0;    m34 = 0;    m44 = 1;
+    m11 = right.myX; m21 = up.myX; m31 = at.myX; m41 = pos.myX;
+    m12 = right.myY; m22 = up.myY; m32 = at.myY; m42 = pos.myY;
+    m13 = right.myZ; m23 = up.myZ; m33 = at.myZ; m43 = pos.myZ;
+    m14 = 0.0f; m24 = 0.0f; m34 = 0.0f; m44 = 1.0f;
 }
 
-void MyMatrix::SetTranslation(Vector3 pos)
+void MyMatrix::SetTranslation(Vector3Float pos)
 {
-    m41 = pos.x;
-    m42 = pos.y;
-    m43 = pos.z;
+    m41 = pos.myX;
+    m42 = pos.myY;
+    m43 = pos.myZ;
 }
 
 void MyMatrix::SetTranslation(float x, float y, float z)
@@ -64,12 +56,12 @@ void MyMatrix::CreateScale(float x, float y, float z)
     m44 = 1;
 }
 
-void MyMatrix::CreateScale(Vector3 scale)
+void MyMatrix::CreateScale(Vector3Float scale)
 {
     m12 = m13 = m14 = m21 = m23 = m24 = m31 = m32 = m34 = m41 = m42 = m43 = 0;
-    m11 = scale.x;
-    m22 = scale.y;
-    m33 = scale.z;
+    m11 = scale.myX;
+    m22 = scale.myY;
+    m33 = scale.myZ;
     m44 = 1;
 }
 
@@ -82,32 +74,32 @@ void MyMatrix::CreateTranslation(float x, float y, float z)
     m43 = z;
 }
 
-void MyMatrix::CreateTranslation(Vector3 pos)
+void MyMatrix::CreateTranslation(Vector3Float pos)
 {
     m12 = m13 = m14 = m21 = m23 = m24 = m31 = m32 = m34 = 0;
     m11 = m22 = m33 = m44 = 1;
-    m41 = pos.x;
-    m42 = pos.y;
-    m43 = pos.z;
+    m41 = pos.myX;
+    m42 = pos.myY;
+    m43 = pos.myZ;
 }
 
-void MyMatrix::CreateSRT(float scale, Vector3 rot, Vector3 pos)
+void MyMatrix::CreateSRT(float scale, Vector3Float rot, Vector3Float pos)
 {
     SetIdentity();
-    Scale( scale );
-    Rotate( rot.z, 0, 0, 1 ); // roll
-    Rotate( rot.x, 1, 0, 0 ); // pitch
-    Rotate( rot.y, 0, 1, 0 ); // yaw
-    Translate( pos.x, pos.y, pos.z );
+    Scale(scale);
+    Rotate(rot.myZ, 0, 0, 1); // roll
+    Rotate(rot.myX, 1, 0, 0); // pitch
+    Rotate(rot.myY, 0, 1, 0); // yaw
+    Translate(pos.myX, pos.myY, pos.myZ);
 }
 
-void MyMatrix::CreateSRT(Vector3 scale, Vector3 rot, Vector3 pos)
+void MyMatrix::CreateSRT(Vector3Float scale, Vector3Float rot, Vector3Float pos)
 {
-    CreateScale( scale.x, scale.y, scale.z );
-    Rotate( rot.z, 0, 0, 1 ); // roll
-    Rotate( rot.x, 1, 0, 0 ); // pitch
-    Rotate( rot.y, 0, 1, 0 ); // yaw
-    Translate( pos.x, pos.y, pos.z );
+    CreateScale(scale.myX, scale.myY, scale.myZ);
+    Rotate(rot.myZ, 0, 0, 1); // roll
+    Rotate(rot.myX, 1, 0, 0); // pitch
+    Rotate(rot.myY, 0, 1, 0); // yaw
+    Translate(pos.myX, pos.myY, pos.myZ);
 }
 
 void MyMatrix::Scale(float scale)
@@ -126,36 +118,31 @@ void MyMatrix::Scale(float sx, float sy, float sz)
 
 void MyMatrix::Rotate(float angle, float x, float y, float z)
 {
-    float sinAngle, cosAngle;
-    float mag = sqrtf(x * x + y * y + z * z);
-      
-    sinAngle = sinf( angle * PI / 180.0f );
-    cosAngle = cosf( angle * PI / 180.0f );
-    if( mag > 0.0f )
+    const float mag = sqrtf(x * x + y * y + z * z);
+    const float sinAngle = sinf(angle * PI / 180.0f);
+    const float cosAngle = cosf(angle * PI / 180.0f);
+    if (mag > 0.0f)
     {
-        float xx, yy, zz, xy, yz, zx, xs, ys, zs;
-        float oneMinusCos;
-   
         x /= mag;
         y /= mag;
         z /= mag;
 
-        xx = x * x;
-        yy = y * y;
-        zz = z * z;
-        xy = x * y;
-        yz = y * z;
-        zx = z * x;
-        xs = x * sinAngle;
-        ys = y * sinAngle;
-        zs = z * sinAngle;
-        oneMinusCos = 1.0f - cosAngle;
+        const float xx = x * x;
+        const float yy = y * y;
+        const float zz = z * z;
+        const float xy = x * y;
+        const float yz = y * z;
+        const float zx = z * x;
+        const float xs = x * sinAngle;
+        const float ys = y * sinAngle;
+        const float zs = z * sinAngle;
+        const float oneMinusCos = 1.0f - cosAngle;
 
         MyMatrix rotMat;
         rotMat.m11 = (oneMinusCos * xx) + cosAngle;
         rotMat.m12 = (oneMinusCos * xy) - zs;
         rotMat.m13 = (oneMinusCos * zx) + ys;
-        rotMat.m14 = 0.0f; 
+        rotMat.m14 = 0.0f;
 
         rotMat.m21 = (oneMinusCos * xy) + zs;
         rotMat.m22 = (oneMinusCos * yy) + cosAngle;
@@ -165,7 +152,7 @@ void MyMatrix::Rotate(float angle, float x, float y, float z)
         rotMat.m31 = (oneMinusCos * zx) - ys;
         rotMat.m32 = (oneMinusCos * yz) + xs;
         rotMat.m33 = (oneMinusCos * zz) + cosAngle;
-        rotMat.m34 = 0.0f; 
+        rotMat.m34 = 0.0f;
 
         rotMat.m41 = 0.0f;
         rotMat.m42 = 0.0f;
@@ -176,27 +163,27 @@ void MyMatrix::Rotate(float angle, float x, float y, float z)
     }
 }
 
-void MyMatrix::TranslatePreRotScale(Vector3 translate)
+void MyMatrix::TranslatePreRotScale(Vector3Float translate)
 {
-    m41 += m11 * translate.x  +  m21 * translate.y  +  m31 * translate.z;
-    m42 += m12 * translate.x  +  m22 * translate.y  +  m32 * translate.z;
-    m43 += m13 * translate.x  +  m23 * translate.y  +  m33 * translate.z;
-    m44 += m14 * translate.x  +  m24 * translate.y  +  m34 * translate.z;
+    m41 += m11 * translate.myX + m21 * translate.myY + m31 * translate.myZ;
+    m42 += m12 * translate.myX + m22 * translate.myY + m32 * translate.myZ;
+    m43 += m13 * translate.myX + m23 * translate.myY + m33 * translate.myZ;
+    m44 += m14 * translate.myX + m24 * translate.myY + m34 * translate.myZ;
 }
 
 void MyMatrix::TranslatePreRotScale(float tx, float ty, float tz)
 {
-    m41 += m11 * tx  +  m21 * ty  +  m31 * tz;
-    m42 += m12 * tx  +  m22 * ty  +  m32 * tz;
-    m43 += m13 * tx  +  m23 * ty  +  m33 * tz;
-    m44 += m14 * tx  +  m24 * ty  +  m34 * tz;
+    m41 += m11 * tx + m21 * ty + m31 * tz;
+    m42 += m12 * tx + m22 * ty + m32 * tz;
+    m43 += m13 * tx + m23 * ty + m33 * tz;
+    m44 += m14 * tx + m24 * ty + m34 * tz;
 }
 
-void MyMatrix::Translate(Vector3 pos)
+void MyMatrix::Translate(Vector3Float pos)
 {
-    m41 += pos.x;
-    m42 += pos.y;
-    m43 += pos.z;
+    m41 += pos.myX;
+    m42 += pos.myY;
+    m43 += pos.myZ;
 }
 
 void MyMatrix::Translate(float x, float y, float z)
@@ -208,11 +195,11 @@ void MyMatrix::Translate(float x, float y, float z)
 
 void MyMatrix::CreateFrustum(float left, float right, float bottom, float top, float nearZ, float farZ)
 {
-    float deltaX = right - left;
-    float deltaY = top - bottom;
-    float deltaZ = farZ - nearZ;
+    const float deltaX = right - left;
+    const float deltaY = top - bottom;
+    const float deltaZ = farZ - nearZ;
 
-    assert( nearZ > 0.0f && farZ > 0.0f && deltaX > 0.0f && deltaY > 0.0f && deltaZ > 0.0f );
+    assert(nearZ > 0.0f && farZ > 0.0f && deltaX > 0.0f && deltaY > 0.0f && deltaZ > 0.0f);
 
     m11 = 2.0f * nearZ / deltaX;
     m12 = m13 = m14 = 0.0f;
@@ -222,13 +209,8 @@ void MyMatrix::CreateFrustum(float left, float right, float bottom, float top, f
 
     m31 = (right + left) / deltaX;
     m32 = (top + bottom) / deltaY;
-#if MYFW_RIGHTHANDED
-    m33 = -(nearZ + farZ) / deltaZ;
-    m34 = -1.0f;
-#else
     m33 = (nearZ + farZ) / deltaZ;
     m34 = 1.0f;
-#endif
 
     m43 = -2.0f * nearZ * farZ / deltaZ;
     m41 = m42 = m44 = 0.0f;
@@ -236,31 +218,25 @@ void MyMatrix::CreateFrustum(float left, float right, float bottom, float top, f
 
 void MyMatrix::CreatePerspectiveVFoV(float halfvertfovdegrees, float aspect, float nearZ, float farZ)
 {
-    GLfloat frustumRight, frustumTop;
-   
-    frustumTop = tanf( halfvertfovdegrees / 360.0f * PI ) * nearZ;
-    frustumRight = frustumTop * aspect;
-
-    CreateFrustum( -frustumRight, frustumRight, -frustumTop, frustumTop, nearZ, farZ );
+    const GLfloat frustumTop = tanf(halfvertfovdegrees / 360.0f * PI) * nearZ;
+    const GLfloat frustumRight = frustumTop * aspect;
+    CreateFrustum(-frustumRight, frustumRight, -frustumTop, frustumTop, nearZ, farZ);
 }
 
 void MyMatrix::CreatePerspectiveHFoV(float halfhorfovdegrees, float aspect, float nearZ, float farZ)
 {
-    GLfloat frustumRight, frustumTop;
-   
-    frustumRight = tanf( halfhorfovdegrees / 360.0f * PI ) * nearZ;
-    frustumTop = frustumRight / aspect;
-
-    CreateFrustum( -frustumRight, frustumRight, -frustumTop, frustumTop, nearZ, farZ );
+    const GLfloat frustumRight = tanf(halfhorfovdegrees / 360.0f * PI) * nearZ;
+    const GLfloat frustumTop = frustumRight / aspect;
+    CreateFrustum(-frustumRight, frustumRight, -frustumTop, frustumTop, nearZ, farZ);
 }
 
 void MyMatrix::CreateOrtho(float left, float right, float bottom, float top, float nearZ, float farZ)
 {
-    float deltaX = (right - left);
-    float deltaY = (top - bottom);
-    float deltaZ = (farZ - nearZ);
+    const float deltaX = (right - left);
+    const float deltaY = (top - bottom);
+    const float deltaZ = (farZ - nearZ);
 
-    assert( (deltaX != 0.0f) && (deltaY != 0.0f) && (deltaZ != 0.0f) );
+    assert((deltaX != 0.0f) && (deltaY != 0.0f) && (deltaZ != 0.0f));
 
     m11 = 2.0f / deltaX;
     m12 = m13 = m14 = 0;
@@ -268,11 +244,7 @@ void MyMatrix::CreateOrtho(float left, float right, float bottom, float top, flo
     m22 = 2.0f / deltaY;
     m21 = m23 = m24 = 0;
 
-#if MYFW_RIGHTHANDED
     m33 = -2.0f / deltaZ;
-#else
-    m33 = -2.0f / deltaZ;
-#endif
     m31 = m32 = m34 = 0;
 
     m41 = -(right + left) / deltaX;
@@ -281,112 +253,83 @@ void MyMatrix::CreateOrtho(float left, float right, float bottom, float top, flo
     m44 = 1;
 }
 
-void MyMatrix::CreateLookAtViewLeftHanded(const Vector3 &eye, const Vector3 &up, const Vector3 &at)
+void MyMatrix::CreateLookAtViewLeftHanded(const Vector3Float& eye, const Vector3Float& up, const Vector3Float& at)
 {
-    Vector3 zaxis = (at - eye).Normalize();
-    Vector3 xaxis = (up.Cross(zaxis)).Normalize();
-    Vector3 yaxis = zaxis.Cross(xaxis);
-
-    Vector3 pos = Vector3( -xaxis.Dot( eye ), -yaxis.Dot( eye ), -zaxis.Dot( eye ) );
-
-    SetAxesView( xaxis, yaxis, zaxis, pos );
+    const Vector3Float zaxis = (at - eye).Normalize();
+    const Vector3Float xaxis = (up.Cross(zaxis)).Normalize();
+    const Vector3Float yaxis = zaxis.Cross(xaxis);
+    const Vector3Float pos = Vector3Float(-xaxis.Dot(eye), -yaxis.Dot(eye), -zaxis.Dot(eye));
+    SetAxesView(xaxis, yaxis, zaxis, pos);
 }
 
-void MyMatrix::CreateLookAtView(const Vector3 &eye, const Vector3 &up, const Vector3 &at)
+void MyMatrix::CreateLookAtView(const Vector3Float& eye, const Vector3Float& up, const Vector3Float& at)
 {
-    Vector3 zaxis = (eye - at).Normalize();
-    Vector3 xaxis = (up.Cross(zaxis)).Normalize();
-    Vector3 yaxis = zaxis.Cross(xaxis);
-
-    Vector3 pos = Vector3( -xaxis.Dot( eye ), -yaxis.Dot( eye ), -zaxis.Dot( eye ) );
-
-    SetAxesView( xaxis, yaxis, zaxis, pos );
+    const Vector3Float zaxis = (eye - at).Normalize();
+    const Vector3Float xaxis = (up.Cross(zaxis)).Normalize();
+    const Vector3Float yaxis = zaxis.Cross(xaxis);
+    const Vector3Float pos = Vector3Float(-xaxis.Dot(eye), -yaxis.Dot(eye), -zaxis.Dot(eye));
+    SetAxesView(xaxis, yaxis, zaxis, pos);
 }
 
-void MyMatrix::CreateLookAtWorld(const Vector3& objpos, const Vector3& up, const Vector3& at)
+void MyMatrix::CreateLookAtWorld(const Vector3Float& anObjectPosition, const Vector3Float& up, const Vector3Float& at)
 {
-    Vector3 zaxis = (at - objpos).Normalize();
-    Vector3 xaxis = (up.Cross(zaxis)).Normalize();
-    Vector3 yaxis = zaxis.Cross(xaxis);
-
-    SetAxesWorld( xaxis, yaxis, zaxis, objpos );
+    const Vector3Float zaxis = (at - anObjectPosition).Normalize();
+    const Vector3Float xaxis = (up.Cross(zaxis)).Normalize();
+    const Vector3Float yaxis = zaxis.Cross(xaxis);
+    SetAxesWorld(xaxis, yaxis, zaxis, anObjectPosition);
 }
 
-Vector3 MyMatrix::GetEulerAngles()
+Vector3Float MyMatrix::GetEulerAngles() const
 {
-    // from http://www.geometrictools.com/Documentation/EulerAngles.pdf and adapted to fit
-
-    //if( m32 < +1 )
-    //{
-    //    if( m32 > -1 )
-    //    {
-    //        float myX = asin( m32 );
-    //        float y = atan2( -m31, m33 );
-    //        float z = atan2( -m12, m22 );
-    //        return vector3( myX, y, z );
-    //    }
-    //    else // m32 = -1
-    //    {
-    //        // not a unique solution: thetaz - thetay = atan2(-m21,m11)
-    //        float myX = pi/2;
-    //        float y = atan2( m21, m11 );
-    //        float z = 0;
-    //        return vector3( myX, y, z );
-    //    }
-    //}
-    //else // m32 = +1
-    //{
-    //    // not a unique solution: thetaz + thetay = atan2(-m21,m11)
-    //    float myX = -pi/2;
-    //    float y = -atan2( m21, m11 );
-    //    float z = 0;
-    //    return vector3( myX, y, z );
-    //}
-
-    // rearranged from above and using FEQUALEPSILON to give special cases more chance of hitting
-    if(m32 > 1.0f - epsilonFloat) // Not a unique solution: thetaZ - thetaY = atan2( -m21, m11 )
+    if (m32 > 1.0f - epsilonFloat) // Not a unique solution: thetaZ - thetaY = atan2( -m21, m11 )
     {
-        float x = PI/2;
-        float y = atan2f( m21, m11 );
-        float z = 0.0f;
-        return Vector3( x, y, z );
+        constexpr float x = PI / 2.0f;
+        const float y = atan2f(m21, m11);
+        constexpr float z = 0.0f;
+        return Vector3Float(x, y, z);
     }
-    else if(m32 < -1.0f + epsilonFloat) // Not a unique solution: thetaZ + thetaY = atan2( -m21, m11 )
+
+    if (m32 < -1.0f + epsilonFloat) // Not a unique solution: thetaZ + thetaY = atan2( -m21, m11 )
     {
-        float x = -PI/2;
-        float y = -atan2f( m21, m11 );
-        float z = 0.0f;
-        return Vector3( x, y, z );
+        constexpr float x = -PI / 2.0f;
+        const float y = -atan2f(m21, m11);
+        constexpr float z = 0.0f;
+        return Vector3Float(x, y, z);
     }
-    else
-    {
-        float x = asinf( m32 );
-        float y = atan2f( -m31, m33 );
-        float z = atan2f( -m12, m22 );
-        return Vector3( x, y, z );
-    }
+
+    const float x = asinf(m32);
+    const float y = atan2f(-m31, m33);
+    const float z = atan2f(-m12, m22);
+    return Vector3Float(x, y, z);
 }
 
-Vector3 MyMatrix::GetScale()
+Vector3Float MyMatrix::GetScale() const
 {
-    Vector3 scale;
-    scale.x = Vector3( m11, m12, m13 ).Length();
-    scale.y = Vector3( m21, m22, m23 ).Length();
-    scale.z = Vector3( m31, m32, m33 ).Length();
+    Vector3Float scale;
+    scale.myX = Vector3Float(m11, m12, m13).Length();
+    scale.myY = Vector3Float(m21, m22, m23).Length();
+    scale.myZ = Vector3Float(m31, m32, m33).Length();
     return scale;
 }
 
-Vector3 MyMatrix::GetUp()
+Vector3Float MyMatrix::GetUp() const
 {
-    return Vector3( m21, m22, m23 );
+    return Vector3Float(m21, m22, m23);
 }
 
-Vector3 MyMatrix::GetRight()
+Vector3Float MyMatrix::GetRight() const
 {
-    return Vector3( m11, m12, m13 );
+    return Vector3Float(m11, m12, m13);
 }
 
-Vector3 MyMatrix::GetAt()
+Vector3Float MyMatrix::GetAt() const
 {
-    return Vector3( m31, m32, m33 );
+    return Vector3Float(m31, m32, m33);
+}
+
+MyMatrix MyMatrix::GetInverse(float tolerance) const
+{
+    MyMatrix invmat = *this;
+    invmat.Inverse(tolerance);
+    return invmat;
 }

@@ -31,6 +31,8 @@
     <ClInclude Include="Source\Math\MyMatrix.h" />
     <ClInclude Include="Source\Math\Vector.h" />
     <ClInclude Include="Source\Math\Vector2Float.h" />
+    <ClInclude Include="Source\Math\Vector3Float.h" />
+    <ClInclude Include="Source\Math\Vector4Float.h" />
     <ClInclude Include="Source\Utility\FileUtility.h" />
     <ClInclude Include="Source\Utility\Helpers.h" />
     <ClInclude Include="Source\Utility\ShaderProgram.h" />
@@ -48,6 +50,8 @@
     <ClCompile Include="Source\GL\GLHelpers.cpp" />
     <ClCompile Include="Source\Math\MyMatrix.cpp" />
     <ClCompile Include="Source\Math\Vector2Float.cpp" />
+    <ClCompile Include="Source\Math\Vector3Float.cpp" />
+    <ClCompile Include="Source\Math\Vector4Float.cpp" />
     <ClCompile Include="Source\Utility\ShaderProgram.cpp" />
     <ClCompile Include="Source\Win32\FrameworkMain.cpp" />
     <ClCompile Include="Source\Win32\GL\GLExtensions.cpp" />

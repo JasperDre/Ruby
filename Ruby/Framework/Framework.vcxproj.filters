@@ -78,6 +78,12 @@
     <ClInclude Include="Source\Math\Vector2Float.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Math\Vector3Float.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Math\Vector4Float.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\FrameworkPCH.cpp">
@@ -111,6 +117,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Math\Vector2Float.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Math\Vector3Float.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Math\Vector4Float.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

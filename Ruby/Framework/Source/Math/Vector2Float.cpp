@@ -13,6 +13,7 @@ Vector2Float Vector2Float::GetNormalized() const
 		return Vector2Float(myX, myY);
 
 	length = 1.0f / length;
+
 	return Vector2Float(myX * length, myY * length);
 }
 
