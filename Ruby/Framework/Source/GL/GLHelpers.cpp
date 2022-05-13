@@ -7,15 +7,56 @@ namespace GLHelpers
 {
     void CheckForGLErrors()
     {
-        GLenum error = glGetError();
+        const GLenum error = glGetError();
+        if (error == GL_NO_ERROR)
+            return;
 
-        if( error != 0 )
+        const char* errorString;
+        switch (error)
         {
-            WindowsUtility::OutputMessage( "glGetError\n" );
-#if _WIN32
-            assert( false );
-#endif
+            case GL_NO_ERROR:
+            {
+                errorString = "No error";
+                break;
+            }
+            case GL_INVALID_ENUM:
+            {
+                errorString = "Invalid enum";
+                break;
+            }
+            case GL_INVALID_VALUE:
+            {
+                errorString = "Invalid value";
+                break;
+            }
+            case GL_INVALID_OPERATION:
+            {
+                errorString = "Invalid operation";
+                break;
+            }
+            case GL_STACK_OVERFLOW:
+            {
+                errorString = "Stack overflow";
+                break;
+            }
+            case GL_STACK_UNDERFLOW:
+            {
+                errorString = "Stack underflow";
+                break;
+            }
+            case GL_OUT_OF_MEMORY:
+            {
+                errorString = "Out of memory";
+                break;
+            }
+            default:
+            {
+                errorString = "Unknown error";
+                break;
+            }
         }
+
+        WindowsUtility::OutputMessage("%s", errorString);
     }
 
     GLuint LoadTexture(const std::string& filename)
@@ -105,22 +146,5 @@ namespace GLHelpers
 
             delete[] temp;
         }
-
-        // slower but one less memory allocation.
-        //{
-        //    unsigned int* pngbuffer32 = buffer;
-        //    for( unsigned int y=0; y<height/2; y++ )
-        //    {
-        //        int LineOffsetY = y*width;
-        //        int LineOffsetHminusY = (height-1-y)*width;
-
-        //        for( unsigned int x=0; x<width; x++ )
-        //        {
-        //            int tempcolor = pngbuffer32[LineOffsetY + x];
-        //            pngbuffer32[LineOffsetY + x] = pngbuffer32[LineOffsetHminusY + x];
-        //            pngbuffer32[LineOffsetHminusY + x] = tempcolor;
-        //        }
-        //    }
-        //}
     }
 }
