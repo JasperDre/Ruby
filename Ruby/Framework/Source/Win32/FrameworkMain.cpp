@@ -42,11 +42,8 @@ void Framework::Init(int width, int height)
 #endif
 
     if (!CreateGLWindow(title.c_str(), width, height, 32, 31, 1, false))
-        return;
+        WindowsUtility::OutputMessage("Failed to initialize OpenGL window");
 
-    // Initialize OpenGL Extensions, must be done after OpenGL Context is created
-    OpenGL_InitExtensions();
-    WGL_InitExtensions();
 }
 
 int Framework::Run(GameCore* pGameCore)
@@ -334,6 +331,15 @@ bool Framework::CreateGLWindow(const char* title, int width, int height, char co
     SetForegroundWindow(m_hWnd);   // Slightly higher priority.
     SetFocus(m_hWnd);              // Sets keyboard focus to the window.
     ResizeWindow(width, height);   // Tells our GameCore object the window size.
+
+     if (!gladLoadGL())
+        return false;
+
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     return true;
 }

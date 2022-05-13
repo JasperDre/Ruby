@@ -16,14 +16,8 @@
 #include <queue>
 #include <vector>
 
-#if WIN32
-#include <gl/GL.h>
-
-#include "Win32/GL/glext.h"
-#include "Win32/GL/wglext.h"
-#endif
-
 #include "cJSON/cJSON.h"
+#include "glad/glad.h"
 
 #if WIN32
 #include "Win32/Utility/WindowsUtility.h"
@@ -35,11 +29,6 @@
 #include "Math/Vector.h"
 #include "Utility/FileUtility.h"
 #include "Utility/ShaderProgram.h"
-
-#if WIN32
-#include "Win32/GL/GLExtensions.h"
-#include "Win32/GL/WGLExtensions.h"
-#endif
 
 typedef Vector2Int ivec2;
 typedef Vector3Int ivec3;

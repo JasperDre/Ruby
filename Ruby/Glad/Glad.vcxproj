@@ -19,44 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Events\CollisionEvent.h" />
-    <ClInclude Include="Source\Events\DoorEvent.h" />
-    <ClInclude Include="Source\Events\Event.h" />
-    <ClInclude Include="Source\Events\EventManager.h" />
-    <ClInclude Include="Source\Events\InputEvent.h" />
-    <ClInclude Include="Source\FrameworkPCH.h" />
-    <ClInclude Include="Source\GameCore\GameCore.h" />
-    <ClInclude Include="Source\GL\GLHelpers.h" />
-    <ClInclude Include="Source\Math\Color.h" />
-    <ClInclude Include="Source\Math\MathHelpers.h" />
-    <ClInclude Include="Source\Math\Matrix4Float.h" />
-    <ClInclude Include="Source\Math\Vector.h" />
-    <ClInclude Include="Source\Math\Vector2Float.h" />
-    <ClInclude Include="Source\Math\Vector3Float.h" />
-    <ClInclude Include="Source\Math\Vector4Float.h" />
-    <ClInclude Include="Source\Utility\FileUtility.h" />
-    <ClInclude Include="Source\Utility\ShaderProgram.h" />
-    <ClInclude Include="Source\Win32\FrameworkMain.h" />
-    <ClInclude Include="Source\Win32\Utility\WindowsUtility.h" />
+    <ClCompile Include="src\glad.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Events\EventManager.cpp" />
-    <ClCompile Include="Source\FrameworkPCH.cpp" />
-    <ClCompile Include="Source\GameCore\GameCore.cpp" />
-    <ClCompile Include="Source\GL\GLHelpers.cpp" />
-    <ClCompile Include="Source\Math\Matrix4Float.cpp" />
-    <ClCompile Include="Source\Math\Vector2Float.cpp" />
-    <ClCompile Include="Source\Math\Vector3Float.cpp" />
-    <ClCompile Include="Source\Math\Vector4Float.cpp" />
-    <ClCompile Include="Source\Utility\ShaderProgram.cpp" />
-    <ClCompile Include="Source\Win32\FrameworkMain.cpp" />
-    <ClCompile Include="Source\Win32\Utility\WindowsUtility.cpp" />
+    <ClInclude Include="include\glad\glad.h" />
+    <ClInclude Include="include\KHR\khrplatform.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{a51b2ad9-eabb-4bc4-ac88-eff4a587b53d}</ProjectGuid>
-    <RootNamespace>Framework</RootNamespace>
+    <ProjectGuid>{1bbacc4b-96df-43f9-a4f4-74eba2e4af68}</ProjectGuid>
+    <RootNamespace>Glad</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -64,7 +37,7 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -104,38 +77,22 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Create</PrecompiledHeader>
-      <PrecompiledHeaderFile>FrameworkPCH.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Framework\Libraries;$(SolutionDir)Framework\Source;$(SolutionDir)Glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
       </SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Lib>
-      <AdditionalDependencies>CJson.lib;LodePNG.lib;Glad.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -163,7 +120,7 @@
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>FrameworkPCH.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>

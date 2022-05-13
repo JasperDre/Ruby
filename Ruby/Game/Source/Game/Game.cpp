@@ -91,20 +91,7 @@ void Game::OnSurfaceChanged(int width, int height)
 
 void Game::LoadContent()
 {
-#if WIN32
-	// Turn on v-sync.
-	wglSwapInterval(1);
-#endif
-
 	srand(static_cast<unsigned int>(WindowsUtility::GetSystemTime()));
-
-	// Turn on depth buffer testing.
-	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LEQUAL);
-
-	// Turn on alpha blending.
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	std::string rootDirectory = std::filesystem::current_path().generic_string();
 	rootDirectory += "/../";

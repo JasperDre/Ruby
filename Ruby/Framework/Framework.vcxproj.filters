@@ -18,18 +18,6 @@
     <ClInclude Include="Source\FrameworkPCH.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Win32\GL\glext.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Win32\GL\GLExtensions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Win32\GL\wglext.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Win32\GL\WGLExtensions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Win32\Utility\WindowsUtility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -87,12 +75,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\FrameworkPCH.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Win32\GL\GLExtensions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Win32\GL\WGLExtensions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Win32\Utility\WindowsUtility.cpp">
