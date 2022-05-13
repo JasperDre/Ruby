@@ -1,4 +1,5 @@
-#version 120
+#version 460
+
 attribute vec2 a_Position;
 attribute vec4 a_Color;
 attribute vec2 a_UVCoord;

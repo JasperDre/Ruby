@@ -1,4 +1,4 @@
-#version 120
+#version 460
 
 attribute vec2 a_Position;
 attribute vec4 a_Color;
@@ -33,7 +33,7 @@ void main()
 
     v_Color = a_Color;
 	vec2 UVTemp = a_UVCoord;
-	
+
 	UVTemp *= u_UVScale;
 
 	UVTemp += u_UVOffset;
