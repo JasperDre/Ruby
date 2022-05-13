@@ -9,7 +9,7 @@ OakHouse::OakHouse(ResourceManager* aResourceManager, TileMap* aTileMap, GameCor
 	: Sprite(aTileMap, aGameCore, aMesh, aTexture)
 {
 	OakHouseMap = { 0, 1, 2, 3, 4, 5, 6 };
-	OakHousePosition = Vector2Float(17.0f * TILESIZE, 18.0f * TILESIZE);
+	myPosition = Vector2Float(17.0f * TILESIZE, 18.0f * TILESIZE);
 
 	for (unsigned int i = 0; i < OakHouseMap.size(); i++)
 	{
@@ -17,7 +17,7 @@ OakHouse::OakHouse(ResourceManager* aResourceManager, TileMap* aTileMap, GameCor
 		Frame aframe = atile.MyVariant.at(OakHouseMap[i]);
 		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / aResourceManager->GetTextureSize(0).x), (aframe.myOrigin.myY / aResourceManager->GetTextureSize(0).y));
 		aframe.myUVScale = Vector2Float((aframe.mySize.myX / aResourceManager->GetTextureSize(0).x), (aframe.mySize.myY / aResourceManager->GetTextureSize(0).y));
-		aframe.myWorldSpace = Vector2Float((((i % OakHouseMap.size()) * TILESIZE) + OakHousePosition.myX), (((i / OakHouseMap.size())* TILESIZE) + OakHousePosition.myY));
+		aframe.myWorldSpace = Vector2Float((((i % OakHouseMap.size()) * TILESIZE) + myPosition.myX), (((i / OakHouseMap.size())* TILESIZE) + myPosition.myY));
 
 		myFrames.push_back(aframe);
 	}

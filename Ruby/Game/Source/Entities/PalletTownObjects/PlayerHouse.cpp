@@ -11,7 +11,7 @@ PlayerHouse::PlayerHouse(ResourceManager* aResourceManager, TileMap* aTileMap, G
 {
 	PlayerHouseMap = { 0, 1, 2, 3, 4 };
 
-	m_PlayerHousePosition = Vector2Float(8.0f * TILESIZE, 24.0f * TILESIZE);
+	myPosition = Vector2Float(8.0f * TILESIZE, 24.0f * TILESIZE);
 
 	for (unsigned int i = 0; i < PlayerHouseMap.size(); i++)
 	{
@@ -19,7 +19,7 @@ PlayerHouse::PlayerHouse(ResourceManager* aResourceManager, TileMap* aTileMap, G
 		Frame aframe = atile.MyVariant.at(PlayerHouseMap[i]);
 		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / aResourceManager->GetTextureSize(0).x), (aframe.myOrigin.myY / aResourceManager->GetTextureSize(0).y));
 		aframe.myUVScale = Vector2Float((aframe.mySize.myX / aResourceManager->GetTextureSize(0).x), (aframe.mySize.myY / aResourceManager->GetTextureSize(0).y));
-		aframe.myWorldSpace = Vector2Float((((i % PlayerHouseMap.size()) * TILESIZE) + m_PlayerHousePosition.myX), (((i / PlayerHouseMap.size())* TILESIZE) + m_PlayerHousePosition.myY));
+		aframe.myWorldSpace = Vector2Float((((i % PlayerHouseMap.size()) * TILESIZE) + myPosition.myX), (((i / PlayerHouseMap.size())* TILESIZE) + myPosition.myY));
 
 		myFrames.push_back(aframe);
 	}

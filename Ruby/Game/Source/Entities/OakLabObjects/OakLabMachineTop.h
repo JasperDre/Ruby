@@ -15,5 +15,4 @@ public:
 
 private:
 	std::array<unsigned short, 2> OakLabMachineMap;
-	Vector2Float OaklabMachinePosition;
 };

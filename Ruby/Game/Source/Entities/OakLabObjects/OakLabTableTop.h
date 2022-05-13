@@ -15,5 +15,4 @@ public:
 
 private:
 	std::array<unsigned short, 3> OakLabTableTopMap;
-	Vector2Float OakLabTableTopPosition;
 };

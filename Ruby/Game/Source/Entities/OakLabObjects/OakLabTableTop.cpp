@@ -10,7 +10,7 @@ OakLabTableTop::OakLabTableTop(ResourceManager* aResourceManager, TileMap* aTile
 {
 	OakLabTableTopMap = { 3, 4, 5 };
 
-	OakLabTableTopPosition = Vector2Float(10.0f * TILESIZE, 9.0f * TILESIZE);
+	myPosition = Vector2Float(10.0f * TILESIZE, 9.0f * TILESIZE);
 
 	for (unsigned int i = 0; i < OakLabTableTopMap.size(); i++)
 	{
@@ -18,7 +18,7 @@ OakLabTableTop::OakLabTableTop(ResourceManager* aResourceManager, TileMap* aTile
 		Frame aframe = atile.MyVariant.at(OakLabTableTopMap[i]);
 		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / aResourceManager->GetTextureSize(1).x), (aframe.myOrigin.myY / aResourceManager->GetTextureSize(1).y));
 		aframe.myUVScale = Vector2Float((aframe.mySize.myX / aResourceManager->GetTextureSize(1).x), (aframe.mySize.myY / aResourceManager->GetTextureSize(1).y));
-		aframe.myWorldSpace = Vector2Float((((i % OakLabTableTopMap.size()) * TILESIZE) + OakLabTableTopPosition.myX), (((i / OakLabTableTopMap.size())* TILESIZE) + OakLabTableTopPosition.myY));
+		aframe.myWorldSpace = Vector2Float((((i % OakLabTableTopMap.size()) * TILESIZE) + myPosition.myX), (((i / OakLabTableTopMap.size())* TILESIZE) + myPosition.myY));
 
 		myFrames.push_back(aframe);
 	}

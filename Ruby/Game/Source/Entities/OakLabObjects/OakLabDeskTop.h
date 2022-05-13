@@ -15,5 +15,4 @@ public:
 
 private:
 	std::array<unsigned short, 6> myOakLabDeskTopMap;
-	Vector2Float myOaklabDeskPosition;
 };

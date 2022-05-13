@@ -10,7 +10,7 @@ RivalHouse::RivalHouse(ResourceManager* aResourceManager, TileMap* aTileMap, Gam
 {
 	RivalHouseMap = { 0, 1, 2, 3, 4 };
 
-	m_RivalHousePosition = Vector2Float(18.0f * TILESIZE, 24.0f * TILESIZE);
+	myPosition = Vector2Float(18.0f * TILESIZE, 24.0f * TILESIZE);
 
 	for (unsigned int i = 0; i < RivalHouseMap.size(); i++)
 	{
@@ -18,7 +18,7 @@ RivalHouse::RivalHouse(ResourceManager* aResourceManager, TileMap* aTileMap, Gam
 		Frame aframe = atile.MyVariant.at(RivalHouseMap[i]);
 		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / aResourceManager->GetTextureSize(0).x), (aframe.myOrigin.myY / aResourceManager->GetTextureSize(0).y));
 		aframe.myUVScale = Vector2Float((aframe.mySize.myX / aResourceManager->GetTextureSize(0).x), (aframe.mySize.myY / aResourceManager->GetTextureSize(0).y));
-		aframe.myWorldSpace = Vector2Float((((i % RivalHouseMap.size()) * TILESIZE) + m_RivalHousePosition.myX), (((i / RivalHouseMap.size()) * TILESIZE) + m_RivalHousePosition.myY));
+		aframe.myWorldSpace = Vector2Float((((i % RivalHouseMap.size()) * TILESIZE) + myPosition.myX), (((i / RivalHouseMap.size()) * TILESIZE) + myPosition.myY));
 
 		myFrames.push_back(aframe);
 	}

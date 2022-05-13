@@ -15,5 +15,4 @@ public:
 
 private:
 	std::array<unsigned short, 5> RivalHouseMap;
-	Vector2Float m_RivalHousePosition;
 };

@@ -9,7 +9,7 @@ OakLabMachineTop::OakLabMachineTop(ResourceManager* aResourceManager, TileMap* a
 	: Sprite(aTileMap, aGameCore, aMesh, aTextureIdentifier)
 {
 	OakLabMachineMap = { 4, 5 };
-	OaklabMachinePosition = Vector2Float(3.0f * TILESIZE, 10.0f * TILESIZE);
+	myPosition = Vector2Float(3.0f * TILESIZE, 10.0f * TILESIZE);
 
 	for (unsigned int i = 0; i < OakLabMachineMap.size(); i++)
 	{
@@ -17,7 +17,7 @@ OakLabMachineTop::OakLabMachineTop(ResourceManager* aResourceManager, TileMap* a
 		Frame aframe = atile.MyVariant.at(OakLabMachineMap[i]);
 		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / aResourceManager->GetTextureSize(1).x), (aframe.myOrigin.myY / aResourceManager->GetTextureSize(1).y));
 		aframe.myUVScale = Vector2Float((aframe.mySize.myX / aResourceManager->GetTextureSize(1).x), (aframe.mySize.myY / aResourceManager->GetTextureSize(1).y));
-		aframe.myWorldSpace = Vector2Float((((i % OakLabMachineMap.size()) * TILESIZE) + OaklabMachinePosition.myX), (((i / OakLabMachineMap.size())* TILESIZE) + OaklabMachinePosition.myY));
+		aframe.myWorldSpace = Vector2Float((((i % OakLabMachineMap.size()) * TILESIZE) + myPosition.myX), (((i / OakLabMachineMap.size()) * TILESIZE) + myPosition.myY));
 
 		myFrames.push_back(aframe);
 	}

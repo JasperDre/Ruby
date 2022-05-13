@@ -15,5 +15,4 @@ public:
 
 private:
 	std::array<unsigned short, 7> OakHouseMap;
-	Vector2Float OakHousePosition;
 };
