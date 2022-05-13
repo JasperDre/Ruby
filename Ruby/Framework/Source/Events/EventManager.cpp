@@ -2,7 +2,7 @@
 
 EventManager::~EventManager()
 {
-    while (myEvents.empty() == false)
+    while (!myEvents.empty())
     {
         delete myEvents.front();
         myEvents.pop();

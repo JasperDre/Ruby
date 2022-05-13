@@ -22,32 +22,6 @@ struct PathNode
 
 class AStarPathFinder
 {
-protected:
-	int m_MapWidth;
-	int m_MapHeight;
-	int m_MyMinIndex;
-	int m_MyMaxIndex;
-
-	TileMap* m_pMyTileMap;
-	Entity* m_MyNPC;
-
-	PathNode* m_Nodes;
-	int m_NumNodes;
-
-	int* m_OpenNodes;
-	int m_NumOpen;
-
-	// Internal methods.
-	void AddToOpen(int nodeindex);
-	void RemoveFromOpen(int nodeindex);
-	int FindNodeIndexWithLowestFInOpen();
-
-	int CalculateNodeIndex(int tx, int ty);
-	int CheckIfNodeIsClearAndReturnNodeIndex(int tx, int ty);
-	void AddNeighboursToOpenList(int nodeIndex, int endNodeIndex);
-
-	int CalculateH(int nodeIndex, int endNodeIndex) const;
-
 public:
 	AStarPathFinder(TileMap* aTileMap, Entity* aNPC);
 	virtual ~AStarPathFinder();
@@ -57,9 +31,24 @@ public:
 	// Start a search, supply the starting tile x,y and ending tile x,y.
 	// Returns true if path found, false otherwise.
 	bool FindPath(int sx, int sy, int ex, int ey);
-
 	// Retrieve the final path, pass a nullptr for "path" to just get length of the path.
-	int* GetPath(int* path, int maxdistance, int ex, int ey);
+	int* GetPath(int* path, int maxdistance, int ex, int ey) const;
+	[[nodiscard]] int FindNodeIndexWithLowestFInOpen() const;
+	[[nodiscard]] int CalculateNodeIndex(int tx, int ty) const;
+	[[nodiscard]] int CheckIfNodeIsClearAndReturnNodeIndex(int tx, int ty) const;
+	[[nodiscard]] int CalculateH(int nodeIndex, int endNodeIndex) const;
 
-	GetForNodeIsClearOnSpecial m_GetNodeIsClearSpecial;
+private:
+	void AddToOpen(int nodeindex);
+	void RemoveFromOpen(int nodeindex);
+	void AddNeighboursToOpenList(int nodeIndex, int endNodeIndex);
+
+	TileMap* m_pMyTileMap;
+	Entity* m_MyNPC;
+	PathNode* m_Nodes;
+	int* m_OpenNodes;
+	int m_MapWidth;
+	int m_MapHeight;
+	int m_NumNodes;
+	int m_NumOpen;
 };

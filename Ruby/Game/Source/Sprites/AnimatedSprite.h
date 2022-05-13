@@ -34,7 +34,7 @@ public:
 	[[nodiscard]] bool IsAnimating() const;
 
 private:
-	std::vector<Frame>m_ActiveFrames;
+	std::vector<Frame> m_ActiveFrames;
 	Vector2Float m_UVScale;
 	Vector2Float m_UVOffset;
 	ResourceManager* m_MyResourceManager;

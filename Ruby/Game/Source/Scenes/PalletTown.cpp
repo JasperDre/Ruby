@@ -34,23 +34,14 @@ PalletTown::PalletTown(GameCore* myGame, Areas myArea, TileMap* aTileMap, Resour
 
 PalletTown::~PalletTown()
 {
-	delete m_RivalHouseTop;
-	m_RivalHouseTop = nullptr;
-	delete m_OakHouseTop;
-	m_OakHouseTop = nullptr;
-	delete m_PlayerHouseTop;
-	m_PlayerHouseTop = nullptr;
-	delete m_PalletTownMap;
-	m_PalletTownMap = nullptr;
-	delete m_GirlNPC;
-	m_GirlNPC = nullptr;
-	delete m_BoyNPC;
-	m_BoyNPC = nullptr;
-	delete m_MyGirlMesh;
-	m_MyGirlMesh = nullptr;
 	delete m_MyBoyMesh;
-	m_MyBoyMesh = nullptr;
-	m_pMyTrainer = nullptr;
+	delete m_MyGirlMesh;
+	delete m_BoyNPC;
+	delete m_GirlNPC;
+	delete m_RivalHouseTop;
+	delete m_PlayerHouseTop;
+	delete m_OakHouseTop;
+	delete m_PalletTownMap;
 }
 
 void PalletTown::LoadContent()

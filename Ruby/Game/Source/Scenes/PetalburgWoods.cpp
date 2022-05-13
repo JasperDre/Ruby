@@ -18,9 +18,6 @@ PetalburgWoods::PetalburgWoods(GameCore* myGame, Areas myArea, TileMap* aTileMap
 PetalburgWoods::~PetalburgWoods()
 {
 	delete m_MyPetalburg;
-	m_MyPetalburg = nullptr;
-	m_pMyTrainer = nullptr;
-	m_MyTileMap = nullptr;
 }
 
 void PetalburgWoods::LoadContent()

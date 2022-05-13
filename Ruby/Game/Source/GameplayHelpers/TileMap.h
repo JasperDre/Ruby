@@ -62,6 +62,7 @@ protected:
 
 public:
 	TileMap(GameCore* myGame, Areas aArea);
+	virtual ~TileMap() = default;
 
 	virtual void AddTile(const std::string& anIndex, Frame aFrame) = 0;
 

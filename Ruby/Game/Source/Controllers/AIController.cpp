@@ -33,8 +33,8 @@ AIController::AIController(TileMap* aTileMap, int aMinIndex, int aMaxIndex, Enti
 
 AIController::~AIController()
 {
-	delete m_MyPathFinder;
 	delete[] m_MyPath;
+	delete m_MyPathFinder;
 }
 
 bool AIController::GetNextPath()
@@ -142,12 +142,12 @@ SpriteDirection AIController::CalculateNextInput()
 
 ivec2 AIController::SetNPCCurrentPosition(Vector2Float aNPCPosition)
 {
-	return ivec2(aNPCPosition.myX / TILESIZE, aNPCPosition.myY / TILESIZE);
+	return ivec2(static_cast<int>(aNPCPosition.myX / TILESIZE), static_cast<int>(aNPCPosition.myY / TILESIZE));
 }
 
 ivec2 AIController::CalculatedDirection(ivec2 aCurrentIndex, Vector2Float aDirection)
 {
-	return ivec2((aCurrentIndex.x + aDirection.myX), (aCurrentIndex.y + aDirection.myY));
+	return ivec2(aCurrentIndex.x + static_cast<int>(aDirection.myX), aCurrentIndex.y + static_cast<int>(aDirection.myY));
 }
 
 int AIController::RangeRandomIntAlg(int min, int max)
@@ -157,7 +157,6 @@ int AIController::RangeRandomIntAlg(int min, int max)
 	int x;
 	do
 	{
-
 		x = rand();
 
 	}

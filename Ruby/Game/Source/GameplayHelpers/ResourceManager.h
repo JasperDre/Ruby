@@ -11,14 +11,11 @@ public:
 	~ResourceManager();
 
 	void UnpackJson(const std::string& JSONfilename, TileMap* aTileMap);
-	 
-	Frame GetFrameat(const std::string& anIndex) const;
-
-	ivec2 GetTextureSize(int anIndex) const;
-
-	GLuint GetaTexture(TextureHandle aTextureName) const;
-
 	void HoldTexture(TextureHandle aTextureName, GLuint aTexture);
+
+	[[nodiscard]] Frame GetFrameAtIndex(const std::string& anIndex) const;
+	[[nodiscard]] ivec2 GetTextureSize(int anIndex) const;
+	[[nodiscard]] GLuint GetaTexture(TextureHandle aTextureName) const;
 
 protected:
 	std::map<std::string, Frame> m_AnimationsMap;

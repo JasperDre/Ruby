@@ -14,7 +14,7 @@ public:
 	GameCore(Framework* pFramework, EventManager* pEventManager);
 	virtual ~GameCore();
 
-	virtual void OnSurfaceChanged(unsigned int width, unsigned int height) = 0;
+	virtual void OnSurfaceChanged(int width, int height) = 0;
 	virtual void LoadContent() = 0;
 
 	virtual void OnEvent(Event* pEvent) = 0;

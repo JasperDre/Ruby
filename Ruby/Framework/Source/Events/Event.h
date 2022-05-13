@@ -10,5 +10,7 @@ enum class EventTypes
 class Event
 {
 public:
+	virtual ~Event() = default;
+
 	[[nodiscard]] virtual EventTypes GetEventType() const = 0;
 };

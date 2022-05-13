@@ -51,14 +51,10 @@ TownGirl::TownGirl(ResourceManager* aResourceManager, TileMap* aTileMap, GameCor
 
 TownGirl::~TownGirl()
 {
-	for (auto& m_Animation : m_Animations)
-	{
-		delete m_Animation;
-		m_Animation = nullptr;
-	}
-
 	delete myPathFinder;
-	m_MyPath = nullptr;
+
+	for (const auto& m_Animation : m_Animations)
+		delete m_Animation;
 }
 
 void TownGirl::Update(float deltatime)

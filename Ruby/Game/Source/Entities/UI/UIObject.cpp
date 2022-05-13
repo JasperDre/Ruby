@@ -17,8 +17,8 @@ UIObject::UIObject(ResourceManager* aResourceManager, TileMap* aTileMap, GameCor
 
 UIObject::~UIObject()
 {
-	delete m_PokeBall;
 	delete m_ScoreNumber;
+	delete m_PokeBall;
 }
 
 void UIObject::Draw(Vector2Float camPos, Vector2Float camProjection)

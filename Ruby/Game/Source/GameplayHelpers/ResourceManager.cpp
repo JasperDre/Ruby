@@ -96,7 +96,7 @@ void ResourceManager::UnpackJson(const std::string& JSONfilename, TileMap* aTile
 	delete[] buffer;
 }
 
-Frame ResourceManager::GetFrameat(const std::string & anIndex) const
+Frame ResourceManager::GetFrameAtIndex(const std::string& anIndex) const
 {
 	return m_AnimationsMap.find(anIndex)->second;
 }

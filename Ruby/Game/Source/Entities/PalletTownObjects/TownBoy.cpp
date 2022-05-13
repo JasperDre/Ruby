@@ -50,14 +50,10 @@ TownBoy::TownBoy(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore*
 
 TownBoy::~TownBoy()
 {
-	for (int i = 0; i < NUM_DIRECTIONS; i++)
-	{
-		delete m_Animations[i];
-		m_Animations[i] = nullptr;
-	}
-
 	delete myPathFinder;
-	m_MyPath = nullptr;
+
+	for (const auto& m_Animation : m_Animations)
+		delete m_Animation;
 }
 
 void TownBoy::Update(float deltatime)

@@ -27,64 +27,57 @@ static std::string GetFilePath(const std::string& aRootDirectory, const char* aF
 
 Game::Game(Framework* pFramework)
 	: GameCore(pFramework, new EventManager())
-{
-	m_pShader = 0;
-	m_pDebugShader = 0;
-
-	m_TileMesh = 0;
-	m_CameraMesh = 0;
-
-	m_MyResourceManager = 0;
-	m_MySceneManager = 0;
-
-	m_PalletTileMap = 0;
-	m_OakLabTileMap = 0;
-	m_WoodsTileMap = 0;
-
-	myPlayer = 0;
-
-	m_OakLabTileset = 0;
-	m_Tileset = 0;
-	m_Sprites = 0;
-	m_WoodsTileset = 0;
-	m_BattleScene = 0;
-	m_ExtrasSet = 0;
-
-	m_TrainerCamera = 0;
-	m_pPlayerController = 0;
-}
+	, m_pShader(nullptr)
+	, m_pDebugShader(nullptr)
+	, m_TrainerMesh(nullptr)
+	, m_TileMesh(nullptr)
+	, m_CameraMesh(nullptr)
+	, m_UIMesh(nullptr)
+	, m_MyResourceManager(nullptr)
+	, m_PalletTileMap(nullptr)
+	, m_OakLabTileMap(nullptr)
+	, m_WoodsTileMap(nullptr)
+	, m_ExtrasTileMap(nullptr)
+	, myPlayer(nullptr)
+	, m_UICanvas(nullptr)
+	, m_TrainerCamera(nullptr)
+	, m_pPlayerController(nullptr)
+	, m_MySceneManager(nullptr)
+	, m_Tileset(0)
+	, m_OakLabTileset(0)
+	, m_Sprites(0)
+	, m_WoodsTileset(0)
+	, m_ExtrasSet(0)
+	, m_BattleScene(0)
+{}
 
 Game::~Game()
 {
+	delete m_MySceneManager;
 	delete m_pPlayerController;
 	delete m_TrainerCamera;
-
-	delete m_MyResourceManager;
-	delete m_MySceneManager;
-	delete m_PalletTileMap;
-	delete m_OakLabTileMap;
-	delete m_WoodsTileMap;
-	delete m_ExtrasTileMap;
-
-	delete myPlayer;
 	delete m_UICanvas;
-
-	delete m_TrainerMesh;
-	delete m_TileMesh;
-	delete m_CameraMesh;
+	delete myPlayer;
+	delete m_ExtrasTileMap;
+	delete m_WoodsTileMap;
+	delete m_OakLabTileMap;
+	delete m_PalletTileMap;
+	delete m_MyResourceManager;
 	delete m_UIMesh;
-
+	delete m_CameraMesh;
+	delete m_TileMesh;
+	delete m_TrainerMesh;
 	delete m_pDebugShader;
 	delete m_pShader;
 }
 
-void Game::OnSurfaceChanged(unsigned int width, unsigned int height)
+void Game::OnSurfaceChanged(int width, int height)
 {
 	//Keep ratio of 1:1
 	if (width > height)
 	{
-		GLint newWidth = height;
-		GLint centerOffset = width / 4;
+		const GLint newWidth = height;
+		const GLint centerOffset = width / 4;
 		glViewport(centerOffset, 0, newWidth, height);
 	}
 	else
@@ -92,8 +85,8 @@ void Game::OnSurfaceChanged(unsigned int width, unsigned int height)
 		//open viewport of size if aspect ratio is already 1:1
 		glViewport(0, 0, width, height);
 	}
-	SetCameraScreenSize(width, height);
 
+	SetCameraScreenSize(static_cast<float>(width), static_cast<float>(height));
 }
 
 void Game::LoadContent()
@@ -231,8 +224,6 @@ void Game::Update(float deltatime)
 	int arange = RAND_MAX % 2;
 
 	//OutputMessage("arange = %d \n", arange);
-
-	CheckForCollisions();
 }
 
 void Game::Draw()
@@ -259,22 +250,22 @@ TileMap* Game::GetTileMap()
 	return m_MySceneManager->GetActiveScene()->GetMyTileMap();
 }
 
-SceneManager * Game::GetSceneManager()
+SceneManager* Game::GetSceneManager()
 {
 	return m_MySceneManager;
 }
 
-ShaderProgram * Game::GetShader()
+ShaderProgram* Game::GetShader()
 {
 	return m_pShader;
 }
 
-ShaderProgram * Game::GetDebugShader()
+ShaderProgram* Game::GetDebugShader()
 {
 	return m_pDebugShader;
 }
 
-Player * Game::GetMyPlayer()
+Player* Game::GetMyPlayer()
 {
 	return myPlayer;
 }
@@ -283,13 +274,6 @@ void Game::SetCameraScreenSize(float width, float height)
 {
 	aWindowSize = Vector2Float(width, height);
 
-	if (m_TrainerCamera != nullptr)
-	{
+	if (m_TrainerCamera)
 		m_TrainerCamera->SetScreenSize(aWindowSize);
-	}
-}
-
-void Game::CheckForCollisions()
-{
-
 }

@@ -29,7 +29,7 @@ Player::Player(ResourceManager* aResourceManager, GameCore* myGame, Mesh* aMesh,
 
 	myDirection = SpriteDirection::SpriteWalkDown;
 	myResourceManager = aResourceManager;
-	aMesh->GenerateFrameMesh();
+	myMesh->GenerateFrameMesh();
 
 	m_Stop = false;
 	m_InTransition = false;
@@ -37,13 +37,8 @@ Player::Player(ResourceManager* aResourceManager, GameCore* myGame, Mesh* aMesh,
 
 Player::~Player()
 {
-	for (auto& m_Animation : m_Animations)
-	{
+	for (const auto& m_Animation : m_Animations)
 		delete m_Animation;
-		m_Animation = nullptr;
-	}
-
-	myResourceManager = nullptr;
 }
 
 void Player::Update(float deltatime)

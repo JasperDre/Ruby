@@ -30,8 +30,8 @@ AStarPathFinder::AStarPathFinder(TileMap* aTileMap, Entity* aNPC)
 
 AStarPathFinder::~AStarPathFinder()
 {
-	delete[] m_Nodes;
 	delete[] m_OpenNodes;
+	delete[] m_Nodes;
 }
 
 void AStarPathFinder::Reset()
@@ -85,7 +85,7 @@ bool AStarPathFinder::FindPath(int sx, int sy, int ex, int ey)
 	}
 }
 
-int* AStarPathFinder::GetPath(int* path, int maxdistance, int ex, int ey)
+int* AStarPathFinder::GetPath(int* path, int maxdistance, int ex, int ey) const
 {
 	int nodeIndex = CalculateNodeIndex(ex, ey);
 
@@ -134,7 +134,7 @@ void AStarPathFinder::RemoveFromOpen(int nodeindex)
 	}
 }
 
-int AStarPathFinder::FindNodeIndexWithLowestFInOpen()
+int AStarPathFinder::FindNodeIndexWithLowestFInOpen() const
 {
 	float LowestF = FLT_MAX;
 	int IndexofLowest = 0;
@@ -142,7 +142,7 @@ int AStarPathFinder::FindNodeIndexWithLowestFInOpen()
 	// Loop through the nodes in the open list, then find and return the node with the lowest F score.
 	for (int i = 0; i < m_NumOpen; i++)
 	{
-		int anIndex = m_OpenNodes[i];
+		const int anIndex = m_OpenNodes[i];
 		if (m_Nodes[anIndex].F < LowestF)
 		{
 			LowestF = m_Nodes[anIndex].F;
@@ -153,7 +153,7 @@ int AStarPathFinder::FindNodeIndexWithLowestFInOpen()
 	return IndexofLowest;
 }
 
-int AStarPathFinder::CalculateNodeIndex(int tx, int ty)
+int AStarPathFinder::CalculateNodeIndex(int tx, int ty) const
 {
 	assert(ty >= 0 && ty <= m_MapHeight && tx >= 0 && tx <= m_MapWidth);
 
@@ -161,27 +161,22 @@ int AStarPathFinder::CalculateNodeIndex(int tx, int ty)
 	return (m_MapWidth * ty) + tx;
 }
 
-int AStarPathFinder::CheckIfNodeIsClearAndReturnNodeIndex(int tx, int ty)
+int AStarPathFinder::CheckIfNodeIsClearAndReturnNodeIndex(int tx, int ty) const
 {
 	// If the node is out of bounds, return -1 (an invalid tile index).
-
 	if (!m_MyNPC->GetNodeIsClearOnSpecial(tx, ty))
 		return -1;
 
 	//If the node is already closed, return -1 (an invalid tile index).
-	int anIndex = CalculateNodeIndex(tx, ty);
+	const int anIndex = CalculateNodeIndex(tx, ty);
 
 	if (m_Nodes[anIndex].Status == PathNodeStatus::Closed)
 		return -1;
 
 	// If the node can't be walked on, return -1 (an invalid tile index).
-
-	TileInfo aNodeTile = m_pMyTileMap->GetTileAtIndex(ty * m_MapWidth + tx);
-
-	if (aNodeTile.IsWalkable == false)
-	{
+	const TileInfo aNodeTile = m_pMyTileMap->GetTileAtIndex(ty * m_MapWidth + tx);
+	if (!aNodeTile.IsWalkable)
 		return -1;
-	}
 
 	// Return a valid tile index.
 	return CalculateNodeIndex(tx, ty);
@@ -190,37 +185,37 @@ int AStarPathFinder::CheckIfNodeIsClearAndReturnNodeIndex(int tx, int ty)
 void AStarPathFinder::AddNeighboursToOpenList(int nodeIndex, int endNodeIndex)
 {
 	// Calculate the tile x/y based on the nodeIndex.
-	int TileColumn = nodeIndex % m_MapWidth;
-	int TileRow = nodeIndex / m_MapWidth;
+	const int TileColumn = nodeIndex % m_MapWidth;
+	const int TileRow = nodeIndex / m_MapWidth;
 
 	// Fill an array with the four neighbour tile indices. (use CheckIfNodeIsClearAndReturnNodeIndex() for each to see if it's valid).
 	int NeighbourNodes[4];
 
 	for (int i = 0; i < 4; i++)
-		NeighbourNodes[i] = CheckIfNodeIsClearAndReturnNodeIndex(TileColumn + DIRECTIONVECTOR[i].myX, TileRow + DIRECTIONVECTOR[i].myY);
+		NeighbourNodes[i] = CheckIfNodeIsClearAndReturnNodeIndex(TileColumn + static_cast<int>(DIRECTIONVECTOR[i].myX), TileRow + static_cast<int>(DIRECTIONVECTOR[i].myY));
 
 	// Loop through the array.
-	for (int i = 0; i < 4; i++)
+	for (const int NeighbourNode : NeighbourNodes)
 	{
 		// Check if the node to add has a valid node index.
-		if (NeighbourNodes[i] != -1)
+		if (NeighbourNode != -1)
 		{
-			int cost = 1; // Assume a travel cost of 1 for each tile.
+			constexpr int cost = 1; // Assume a travel cost of 1 for each tile.
 
 			// Add the node to the open list.
-			AddToOpen(NeighbourNodes[i]);
+			AddToOpen(NeighbourNode);
 
 			// If the cost to get there from here (new G) is less than the previous cost (old G) to get there, then overwrite the values.
-			if (m_Nodes[NeighbourNodes[i]].G > m_Nodes[nodeIndex].G)
+			if (m_Nodes[NeighbourNode].G > m_Nodes[nodeIndex].G)
 			{
 				// Set the parent node.
-				(m_Nodes + NeighbourNodes[i])->parentNodeIndex = nodeIndex;
+				(m_Nodes + NeighbourNode)->parentNodeIndex = nodeIndex;
 				// Set the new cost to travel to that node.
-				(m_Nodes + NeighbourNodes[i])->G = (m_Nodes + nodeIndex)->G + cost;
+				(m_Nodes + NeighbourNode)->G = (m_Nodes + nodeIndex)->G + cost;
 				// If we haven't already calculated the heuristic, calculate it.
-				(m_Nodes + NeighbourNodes[i])->H = CalculateH(NeighbourNodes[i], endNodeIndex);
+				(m_Nodes + NeighbourNode)->H = static_cast<float>(CalculateH(NeighbourNode, endNodeIndex));
 				// Calculate the final value.
-				(m_Nodes + NeighbourNodes[i])->F = m_Nodes[NeighbourNodes[i]].G + m_Nodes[NeighbourNodes[i]].H;
+				(m_Nodes + NeighbourNode)->F = m_Nodes[NeighbourNode].G + m_Nodes[NeighbourNode].H;
 			}
 		}
 	}

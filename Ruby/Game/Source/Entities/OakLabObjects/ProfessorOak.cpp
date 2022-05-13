@@ -54,14 +54,10 @@ ProfessorOak::ProfessorOak(ResourceManager* aResourceManager, TileMap* aTileMap,
 
 ProfessorOak::~ProfessorOak()
 {
-	for (auto& m_Animation : m_Animations)
-	{
-		delete m_Animation;
-		m_Animation = nullptr;
-	}
-
 	delete myPathFinder;
-	myPathFinder = nullptr;
+
+	for (const auto& m_Animation : m_Animations)
+		delete m_Animation;
 }
 
 void ProfessorOak::Update(float deltatime)

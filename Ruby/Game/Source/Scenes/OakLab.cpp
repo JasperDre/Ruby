@@ -31,13 +31,13 @@ OakLab::OakLab(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManage
 
 OakLab::~OakLab()
 {
+	delete m_OakLabTableTop;
+	delete m_OakLabPlantTops;
+	delete m_OakLabMachineTop;
+	delete m_OakLabWorkDesk;
+	delete m_OakLabMap;
 	delete m_OakAIController;
 	delete m_ProfOak;
-	delete m_OakLabMap;
-	delete m_OakLabWorkDesk;
-	delete m_OakLabMachineTop;
-	delete m_OakLabPlantTops;
-	delete m_OakLabTableTop;
 	delete m_ProfOakMesh;
 }
 

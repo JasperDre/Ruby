@@ -39,7 +39,6 @@ WildPokemonTile::WildPokemonTile(TileMap* aTileMap, GameCore* aGameCore, Mesh* a
 WildPokemonTile::~WildPokemonTile()
 {
 	delete myPathFinder;
-	myPathFinder = nullptr;
 }
 
 void WildPokemonTile::Update(float deltatime)

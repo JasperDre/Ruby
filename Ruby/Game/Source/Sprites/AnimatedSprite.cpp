@@ -61,13 +61,13 @@ void AnimatedSprite::Draw(Vector2Float camPos, Vector2Float projScale)
 
 void AnimatedSprite::AddFrame(const std::string& newframe)
 {
-	m_ActiveFrames.push_back(m_MyResourceManager->GetFrameat(newframe));
+	m_ActiveFrames.push_back(m_MyResourceManager->GetFrameAtIndex(newframe));
 }
 
 void AnimatedSprite::UseFrame(const std::string& aFrame)
 {
 	m_ActiveFrames.clear();
-	m_ActiveFrames.push_back(m_MyResourceManager->GetFrameat(aFrame));
+	m_ActiveFrames.push_back(m_MyResourceManager->GetFrameAtIndex(aFrame));
 }
 
 unsigned int AnimatedSprite::GetFrameCount() const

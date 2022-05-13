@@ -18,13 +18,10 @@ class SceneManager;
 class Game : public GameCore
 {
 public:
-	static constexpr int Game_WORLD_SIZE_X = 50;
-	static constexpr int Game_WORLD_SIZE_Y = 50;
-
 	Game(Framework* pFramework);
 	~Game() override;
 
-	void OnSurfaceChanged(unsigned int width, unsigned int height) override;
+	void OnSurfaceChanged(int width, int height) override;
 	void LoadContent() override;
 
 	void OnEvent(Event* pEvent) override;
@@ -38,9 +35,9 @@ public:
 	Player* GetMyPlayer() override;
 
 	void SetCameraScreenSize(float width, float height);
-	void CheckForCollisions();
 
 protected:
+	Vector2Float aWindowSize;
 	ShaderProgram* m_pShader;
 	ShaderProgram* m_pDebugShader;
 	Mesh* m_TrainerMesh;
@@ -57,7 +54,6 @@ protected:
 	GameCamera* m_TrainerCamera;
 	PlayerController* m_pPlayerController;
 	SceneManager* m_MySceneManager;
-	Vector2Float aWindowSize;
 	GLuint m_Tileset;
 	GLuint m_OakLabTileset;
 	GLuint m_Sprites;

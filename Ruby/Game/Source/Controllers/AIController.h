@@ -14,10 +14,10 @@ public:
 
 	SpriteDirection MoveNPC();
 	SpriteDirection CalculateNextInput();
-	ivec2 SetNPCCurrentPosition(Vector2Float aNPCPosition);
-	ivec2 CalculatedDirection(ivec2 aCurrentIndex, Vector2Float aDirection);
+	static ivec2 SetNPCCurrentPosition(Vector2Float aNPCPosition);
+	static ivec2 CalculatedDirection(ivec2 aCurrentIndex, Vector2Float aDirection);
 	bool GetNextPath();
-	int RangeRandomIntAlg(int min, int max);
+	static int RangeRandomIntAlg(int min, int max);
 
 private:
 	ivec2 m_MyNPCindex;
