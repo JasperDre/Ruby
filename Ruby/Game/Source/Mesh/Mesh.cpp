@@ -4,8 +4,8 @@
 Mesh::Mesh()
 {
 	m_VBO = 0;
-	m_pShader = 0;
-	m_DebugShader = 0;
+	m_pShader = nullptr;
+	m_DebugShader = nullptr;
 
 	m_MyTexture = 0;
 
@@ -23,28 +23,21 @@ Mesh::~Mesh()
 
 void SetUniform1f(GLuint shader, const char* uniformName, float value)
 {
-	GLint loc = glGetUniformLocation(shader, uniformName);
-	if (loc != -1)
-	{
+	if (const GLint loc = glGetUniformLocation(shader, uniformName); loc != -1)
 		glUniform1f(loc, value);
-	}
 }
 
 void SetUniform2f(GLuint shader, const char* uniformName, Vector2Float value)
 {
-	GLint loc = glGetUniformLocation(shader, uniformName);
-	if (loc != -1)
-	{
+	if (const GLint loc = glGetUniformLocation(shader, uniformName); loc != -1)
 		glUniform2f(loc, value.myX, value.myY);
-	}
 }
 
 void Mesh::Draw(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float camPos, Vector2Float projScale, GLuint aTexture, Vector2Float aUVscale, Vector2Float aUVoffset)
 {
-	//TEXTURES ARE GLuint
 	assert(m_PrimitiveType != -1);
 	assert(m_NumVerts != 0);
-	assert(m_pShader != 0);
+	assert(m_pShader);
 	assert(m_pShader->GetProgram() != 0);
 
 	// Bind buffer and set up attributes.
@@ -71,51 +64,41 @@ void Mesh::Draw(Vector2Float objectPos, float objectAngle, Vector2Float objectSc
 		glEnableVertexAttribArray(loc);
 	}
 
-
-	// Set up shader.
-	GLuint shader = m_pShader->GetProgram();
+	const GLuint shader = m_pShader->GetProgram();
 	glUseProgram(shader);
 
-	// Set up uniforms.
 	SetUniform2f(shader, "u_ObjectScale", objectScale);
 	SetUniform1f(shader, "u_ObjectAngleRadians", objectAngle / 180.0f * PI);
 	SetUniform2f(shader, "u_ObjectPosition", objectPos);
 	SetUniform2f(shader, "u_CameraTranslation", camPos * -1);
 	SetUniform2f(shader, "u_ProjectionScale", projScale);
 
-
-
 	glActiveTexture(GL_TEXTURE0 + 8);
 	glBindTexture(GL_TEXTURE_2D, aTexture);
-	GLuint texture = glGetUniformLocation(m_pShader->GetProgram(), "u_TextureSampler");
+	const int texture = glGetUniformLocation(m_pShader->GetProgram(), "u_TextureSampler");
 
-	
 	glUniform1i(texture, 8);
 	SetUniform2f(shader, "u_UVScale", aUVscale);
 	SetUniform2f(shader, "u_UVOffset", aUVoffset);
 
 	GLHelpers::CheckForGLErrors();
 
-	// Draw.
 	glDrawArrays(m_PrimitiveType, 0, m_NumVerts);
 
+	GLHelpers::CheckForGLErrors();
 
-	if (IsDebug == true)
-	{
+	if (IsDebug)
 		DebugDraw(objectPos, objectAngle, objectScale, camPos, projScale);
-	}
 
 	GLHelpers::CheckForGLErrors();
 }
 void Mesh::DrawCanvas(Vector2Float cameraPos, Vector2Float projectionScale, GLuint aTexture)
 {
-	//TEXTURES ARE GLuint
 	assert(m_PrimitiveType != -1);
 	assert(m_NumVerts != 0);
-	assert(m_pShader != 0);
+	assert(m_pShader);
 	assert(m_pShader->GetProgram() != 0);
 
-	// Bind buffer and set up attributes.
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 
 	GLint loc = glGetAttribLocation(m_pShader->GetProgram(), "a_Position");
@@ -139,24 +122,18 @@ void Mesh::DrawCanvas(Vector2Float cameraPos, Vector2Float projectionScale, GLui
 		glEnableVertexAttribArray(loc);
 	}
 
-
-	// Set up shader.
-	GLuint shader = m_pShader->GetProgram();
+	const GLuint shader = m_pShader->GetProgram();
 	glUseProgram(shader);
 
-	// Set up uniforms.
 	SetUniform2f(shader, "u_ObjectScale", 1);
 	SetUniform1f(shader, "u_ObjectAngleRadians", 0 / 180.0f * PI);
 	SetUniform2f(shader, "u_ObjectPosition", Vector2Float(0.0f, 0.0f));
 	SetUniform2f(shader, "u_CameraTranslation", cameraPos * -1);
 	SetUniform2f(shader, "u_ProjectionScale", projectionScale);
 
-
-
 	glActiveTexture(GL_TEXTURE0 + 8);
 	glBindTexture(GL_TEXTURE_2D, aTexture);
-	GLuint texture = glGetUniformLocation(m_pShader->GetProgram(), "u_TextureSampler");
-
+	const GLuint texture = glGetUniformLocation(m_pShader->GetProgram(), "u_TextureSampler");
 
 	glUniform1i(texture, 8);
 	SetUniform2f(shader, "u_UVScale", Vector2Float(1.0f, 1.0f));
@@ -164,23 +141,20 @@ void Mesh::DrawCanvas(Vector2Float cameraPos, Vector2Float projectionScale, GLui
 
 	GLHelpers::CheckForGLErrors();
 
-	// Draw.
 	glDrawArrays(m_PrimitiveType, 0, m_NumVerts);
 
+	GLHelpers::CheckForGLErrors();
 
-	if (IsDebug == true)
-	{
+	if (IsDebug)
 		DebugDraw(Vector2Float(0.0f, 0.0f), 0 / 180.0f * PI, 1, cameraPos, projectionScale);
-	}
 
 	GLHelpers::CheckForGLErrors();
 }
 void Mesh::DebugDraw(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float camPos, Vector2Float projScale)
 {
-	//TEXTURES ARE GLuint
 	assert(m_PrimitiveType != -1);
 	assert(m_NumVerts != 0);
-	assert(m_DebugShader != 0);
+	assert(m_DebugShader);
 	assert(m_DebugShader->GetProgram() != 0);
 
 	// Bind buffer and set up attributes.
@@ -200,7 +174,7 @@ void Mesh::DebugDraw(Vector2Float objectPos, float objectAngle, Vector2Float obj
 		glEnableVertexAttribArray(loc);
 	}
 	// Set up shader.
-	GLuint shader = m_DebugShader->GetProgram();
+	const GLuint shader = m_DebugShader->GetProgram();
 	glUseProgram(shader);
 
 	// Set up uniforms.
@@ -361,7 +335,6 @@ void Mesh::GenerateTileMesh()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexFormat) * 4, vertexAttributes, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-
 	m_PrimitiveType = GL_TRIANGLE_FAN;
 	m_NumVerts = 4;
 }
@@ -383,7 +356,6 @@ void Mesh::GenerateWildTileMesh()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexFormat) * 4, vertexAttributes, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-
 	m_PrimitiveType = GL_LINE_LOOP;
 	m_NumVerts = 4;
 }
@@ -404,7 +376,6 @@ void Mesh::GenerateTextureMesh(Vector2Float aSize)
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexFormat) * 4, vertexAttributes, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
 
 	m_PrimitiveType = GL_TRIANGLE_FAN;
 	m_NumVerts = 4;

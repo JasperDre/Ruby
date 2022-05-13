@@ -25,7 +25,7 @@ protected:
 	ShaderProgram* m_DebugShader;
 	GLuint m_VBO;
 	GLuint m_MyTexture;
-	unsigned int m_NumVerts;
+	int m_NumVerts;
 	float p_MyRadius;
 	float p_MyWidth;
 	float p_MyHeight;
