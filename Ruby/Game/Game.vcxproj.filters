@@ -138,6 +138,9 @@
     <ClInclude Include="Source\Entities\Level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Entities\Sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GamePCH.cpp">
@@ -261,6 +264,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Entities\Level.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entities\Sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -8,8 +8,8 @@
 #include "Mesh/Mesh.h"
 #include "Sprites/AnimatedSprite.h"
 
-TownGirl::TownGirl(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
-	: Entity(myGame, myMesh, aTexture)
+TownGirl::TownGirl(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTexture)
+	: Entity(aGameCore, aMesh, aTexture)
 {
 	AnimationKeys = { "TownGirlWalkDown_", "TownGirlWalkRight_", "TownGirlWalkLeft_", "TownGirlWalkUp_" };
 
@@ -18,7 +18,7 @@ TownGirl::TownGirl(ResourceManager* aResourceManager, TileMap* aTileMap, GameCor
 
 	for (unsigned int i = 0; i < m_Animations.size(); i++)
 	{
-		m_Animations[i] = new AnimatedSprite(aResourceManager, myGame, myMesh, 1, aTexture);
+		m_Animations[i] = new AnimatedSprite(aResourceManager, aGameCore, aMesh, 1, aTexture);
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "1.png");
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "2.png");
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "1.png");

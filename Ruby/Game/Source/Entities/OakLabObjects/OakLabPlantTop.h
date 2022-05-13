@@ -1,27 +1,19 @@
 #pragma once
 
-#include "Entities/Entity.h"
+#include "Entities/Sprite.h"
 
 #include <array>
 
-class Mesh;
-class ResourceManager;
-class TileMap;
-
-class OakLabPlantTop : public Entity
+class OakLabPlantTop : public Sprite
 {
 public:
-	OakLabPlantTop(ResourceManager* aResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
+	OakLabPlantTop(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier);
 	~OakLabPlantTop() override;
 
 	void Update(float deltatime) override {}
 	void Draw(Vector2Float camPos, Vector2Float camProject) override;
 
 private:
-	std::vector<Frame> m_MyFrames;
 	std::array<unsigned short, 2> OakLabPlantMap;
-	Vector2Float m_MyTileUVOffset;
-	Vector2Float m_MyTileUVScale;
 	Vector2Float OaklabPlantPosition;
-	TileMap* m_MyTileMap;
 };

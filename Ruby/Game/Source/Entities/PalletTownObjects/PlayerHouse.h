@@ -1,27 +1,19 @@
 #pragma once
 
-#include "Entities/Entity.h"
+#include "Entities/Sprite.h"
 
 #include <array>
 
-class Mesh;
-class ResourceManager;
-class TileMap;
-
-class PlayerHouse : public Entity
+class PlayerHouse : public Sprite
 {
 public:
-	PlayerHouse(ResourceManager* aResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
+	PlayerHouse(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTexture);
 	~PlayerHouse() override;
 
 	void Update(float deltatime) override {}
 	void Draw(Vector2Float camPos, Vector2Float projecScale) override;
 
 private:
-	std::vector<Frame> m_MyFrames;
 	std::array<unsigned short, 5> PlayerHouseMap;
-	Vector2Float m_MyTileUVOffset;
-	Vector2Float m_MyTileUVScale;
 	Vector2Float m_PlayerHousePosition;
-	TileMap* m_MyTileMap;
 };

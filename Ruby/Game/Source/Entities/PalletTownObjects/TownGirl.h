@@ -12,7 +12,7 @@ class TileMap;
 class TownGirl : public Entity
 {
 public:
-	TownGirl(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
+	TownGirl(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTexture);
 	~TownGirl() override;
 
 	void Update(float deltatime) override;

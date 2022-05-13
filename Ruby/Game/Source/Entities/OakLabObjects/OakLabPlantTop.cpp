@@ -5,16 +5,14 @@
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 
-OakLabPlantTop::OakLabPlantTop(ResourceManager* aResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
-	: Entity(myGame, myMesh, aTexture)
+OakLabPlantTop::OakLabPlantTop(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier)
+	: Sprite(aTileMap, aGameCore, aMesh, aTextureIdentifier)
 {
 	OakLabPlantMap = { 2, 3 };
-	myTextureIdentifier = aTexture;
-	m_MyTileMap = myTileMap;
 
 	for (unsigned int i = 0; i < OakLabPlantMap.size(); i++)
 	{
-		TileInfo atile = m_MyTileMap->GetTileFromOakLabMap(Oak_Lab_Plant_);
+		TileInfo atile = aTileMap->GetTileFromOakLabMap(Oak_Lab_Plant_);
 		Frame aframe = atile.MyVariant.at(OakLabPlantMap[i]);
 		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / aResourceManager->GetTextureSize(1).x), (aframe.myOrigin.myY / aResourceManager->GetTextureSize(1).y));
 		aframe.myUVScale = Vector2Float((aframe.mySize.myX / aResourceManager->GetTextureSize(1).x), (aframe.mySize.myY / aResourceManager->GetTextureSize(1).y));
@@ -29,19 +27,19 @@ OakLabPlantTop::OakLabPlantTop(ResourceManager* aResourceManager, TileMap* myTil
 			aframe.myWorldSpace -= Vector2Float(2.05f, 0.0f);
 		}
 
-		m_MyFrames.push_back(aframe);
+		myFrames.push_back(aframe);
 	}
 }
 
 OakLabPlantTop::~OakLabPlantTop()
 {
-	m_MyFrames.clear();
+	myFrames.clear();
 }
 
 void OakLabPlantTop::Draw(Vector2Float camPos, Vector2Float camProject)
 {
 	for (unsigned int i = 0; i < OakLabPlantMap.size(); i++)
 	{
-		myMesh->Draw(m_MyFrames.at(i).myWorldSpace, myAngle, Vector2Float(TILESIZE, TILESIZE), camPos, camProject, myTextureIdentifier, m_MyFrames.at(i).myUVScale, m_MyFrames.at(i).myUVOffset);
+		myMesh->Draw(myFrames.at(i).myWorldSpace, myAngle, Vector2Float(TILESIZE, TILESIZE), camPos, camProject, myTextureIdentifier, myFrames.at(i).myUVScale, myFrames.at(i).myUVOffset);
 	}
 }

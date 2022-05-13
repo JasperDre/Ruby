@@ -8,7 +8,7 @@
 #include "Mesh/Mesh.h"
 #include "Sprites/AnimatedSprite.h"
 
-ProfessorOak::ProfessorOak(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, GLuint aTexture)
+ProfessorOak::ProfessorOak(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTexture)
 	: Entity(aGameCore, aMesh, aTexture)
 	, m_PathingComplete(false)
 {

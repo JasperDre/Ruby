@@ -12,7 +12,7 @@ class TileMap;
 class ProfessorOak : public Entity
 {
 public:
-	ProfessorOak(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, GLuint aTexture);
+	ProfessorOak(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTexture);
 	~ProfessorOak() override;
 
 	void Update(float deltatime) override;

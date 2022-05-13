@@ -11,7 +11,7 @@ class TileMap;
 class WildPokemonTile : public Entity
 {
 public:
-	WildPokemonTile(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
+	WildPokemonTile(TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTexture);
 	~WildPokemonTile() override;
 
 	void Update(float deltatime) override;

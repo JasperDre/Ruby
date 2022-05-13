@@ -166,6 +166,7 @@
     <ClInclude Include="Source\Entities\PalletTownObjects\TownBoy.h" />
     <ClInclude Include="Source\Entities\PalletTownObjects\TownGirl.h" />
     <ClInclude Include="Source\Entities\Player.h" />
+    <ClInclude Include="Source\Entities\Sprite.h" />
     <ClInclude Include="Source\Entities\UI\PokeBall.h" />
     <ClInclude Include="Source\Entities\UI\ScoreNumber.h" />
     <ClInclude Include="Source\Entities\UI\UIObject.h" />
@@ -208,6 +209,7 @@
     <ClCompile Include="Source\Entities\PalletTownObjects\TownBoy.cpp" />
     <ClCompile Include="Source\Entities\PalletTownObjects\TownGirl.cpp" />
     <ClCompile Include="Source\Entities\Player.cpp" />
+    <ClCompile Include="Source\Entities\Sprite.cpp" />
     <ClCompile Include="Source\Entities\UI\PokeBall.cpp" />
     <ClCompile Include="Source\Entities\UI\ScoreNumber.cpp" />
     <ClCompile Include="Source\Entities\UI\UIObject.cpp" />

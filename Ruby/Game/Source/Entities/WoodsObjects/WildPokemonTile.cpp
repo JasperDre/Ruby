@@ -7,8 +7,8 @@
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 
-WildPokemonTile::WildPokemonTile(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
-	: Entity(myGame, myMesh, aTexture)
+WildPokemonTile::WildPokemonTile(TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTexture)
+	: Entity(aGameCore, aMesh, aTexture)
 	, m_PathingComplete(false)
 {
 	for (int& i : m_MyInputSet)
