@@ -11,10 +11,10 @@ class TileMap;
 class OakLabTableTop : public Entity
 {
 public:
-	OakLabTableTop(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
+	OakLabTableTop(ResourceManager* aResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
 	~OakLabTableTop() override;
 
-	void Update(float deltatime) override;
+	void Update(float deltatime) override {}
 	void Draw(Vector2Float camPos, Vector2Float camProject) override;
 
 private:
@@ -23,6 +23,5 @@ private:
 	Vector2Float m_MyTileUVOffset;
 	Vector2Float m_MyTileUVScale;
 	Vector2Float OakLabTableTopPosition;
-	ResourceManager* m_MyResourceManager;
 	TileMap* m_MyTileMap;
 };

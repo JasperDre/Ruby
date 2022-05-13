@@ -29,7 +29,6 @@ TownBoy::TownBoy(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore*
 
 	myDirection = SpriteDirection::SpriteWalkDown;
 	myNewDirection = SpriteDirection::SpriteWalkDown;
-	myResourceManager = aResourceManager;
 	m_MyTileMap = aTileMap;
 	myMesh->GenerateFrameMesh();
 
@@ -57,7 +56,6 @@ TownBoy::~TownBoy()
 		m_Animations[i] = nullptr;
 	}
 
-	myResourceManager = nullptr;
 	delete myPathFinder;
 	m_MyPath = nullptr;
 }

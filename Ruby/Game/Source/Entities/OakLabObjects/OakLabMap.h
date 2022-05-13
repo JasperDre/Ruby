@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Entities/Entity.h"
+#include "Entities/Level.h"
 
 class ResourceManager;
 class TileMap;
@@ -8,17 +8,12 @@ class Mesh;
 class GameCore;
 class Canvas;
 
-class OakLabMap : public Entity
+class OakLabMap : public Level
 {
 public:
-	OakLabMap(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
+	OakLabMap(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier);
 	~OakLabMap() override;
 
 	void Update(float deltatime) override {}
 	void Draw(Vector2Float camPos, Vector2Float projecScale) override;
-
-private:
-	TileMap* m_MyTileMap;
-	ResourceManager* m_MyResourceManager;
-	Canvas* m_MyCanvas;
 };

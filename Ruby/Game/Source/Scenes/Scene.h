@@ -7,12 +7,12 @@ class Mesh;
 class ResourceManager;
 class TileMap;
 class Entity;
-class Trainer;
+class Player;
 
 class Scene
 {
 public:
-	Scene(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer* aPlayer, Vector2Float aPlayerStartPosition, GLuint aTexture);
+	Scene(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, Vector2Float aPlayerStartPosition, GLuint aTexture);
 	virtual ~Scene() = default;
 
 	virtual void LoadContent() = 0;
@@ -28,7 +28,7 @@ public:
 
 	[[nodiscard]] virtual bool GetIsActive() const { return m_Active; }
 	[[nodiscard]] virtual Areas GetMyArea() const { return m_MyArea; }
-	[[nodiscard]] virtual Trainer* GetMyPlayer() const { return m_pMyTrainer; }
+	[[nodiscard]] virtual Player* GetMyPlayer() const { return m_pMyTrainer; }
 	[[nodiscard]] virtual TileMap* GetMyTileMap() const { return m_MyTileMap;}
 	[[nodiscard]] virtual Vector2Float GetPlayerStart() const { return m_pMyPlayerStart; }
 
@@ -40,7 +40,7 @@ protected:
 	GameCore* m_pMyGame;
 	ResourceManager* m_pMyResourceManager;
 	Mesh* m_pMyMesh;
-	Trainer* m_pMyTrainer;
+	Player* m_pMyTrainer;
 	GLuint m_pMyTexture;
 	bool m_Active;
 };

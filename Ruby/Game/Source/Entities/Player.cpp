@@ -1,5 +1,5 @@
 #include "GamePCH.h"
-#include "Trainer.h"
+#include "Player.h"
 
 #include "Controllers/PlayerController.h"
 #include "GameplayHelpers/ResourceManager.h"
@@ -9,15 +9,15 @@
 #include "Scenes/Scene.h"
 #include "Sprites/AnimatedSprite.h"
 
-Trainer::Trainer(ResourceManager* aResourceManager, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
-	: Entity(myGame, myMesh, aTexture)
+Player::Player(ResourceManager* aResourceManager, GameCore* myGame, Mesh* aMesh, GLuint aTexture)
+	: Entity(myGame, aMesh, aTexture)
 	, myController(nullptr)
 {
 	AnimationKeys = { "PlayerWalkDown_", "PlayerWalkRight_", "PlayerWalkLeft_", "PlayerWalkUp_" };
 
 	for (unsigned int i = 0; i < m_Animations.size(); i++)
 	{
-		m_Animations[i] = new AnimatedSprite(aResourceManager, myGame, myMesh, 2, aTexture);
+		m_Animations[i] = new AnimatedSprite(aResourceManager, myGame, aMesh, 2, aTexture);
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "1.png");
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "2.png");
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "1.png");
@@ -29,13 +29,13 @@ Trainer::Trainer(ResourceManager* aResourceManager, GameCore* myGame, Mesh* myMe
 
 	myDirection = SpriteDirection::SpriteWalkDown;
 	myResourceManager = aResourceManager;
-	myMesh->GenerateFrameMesh();
+	aMesh->GenerateFrameMesh();
 
 	m_Stop = false;
 	m_InTransition = false;
 }
 
-Trainer::~Trainer()
+Player::~Player()
 {
 	for (auto& m_Animation : m_Animations)
 	{
@@ -46,7 +46,7 @@ Trainer::~Trainer()
 	myResourceManager = nullptr;
 }
 
-void Trainer::Update(float deltatime)
+void Player::Update(float deltatime)
 {
 	Pause();
 	if (!m_InTransition)
@@ -122,12 +122,12 @@ void Trainer::Update(float deltatime)
 	}
 }
 
-void Trainer::Draw(Vector2Float camPos, Vector2Float projecScale)
+void Player::Draw(Vector2Float camPos, Vector2Float projecScale)
 {
 	m_Animations[static_cast<int>(myDirection)]->Draw(camPos, projecScale);
 }
 
-void Trainer::Move(SpriteDirection dir, float deltatime)
+void Player::Move(SpriteDirection dir, float deltatime)
 {
 	NewPosition = myPosition;
 
@@ -154,25 +154,25 @@ void Trainer::Move(SpriteDirection dir, float deltatime)
 	}
 }
 
-void Trainer::Pause()
+void Player::Pause()
 {
 	for (const auto& m_Animation : m_Animations)
 		m_Animation->Pause();
 }
 
-void Trainer::Resume() const
+void Player::Resume() const
 {
 	for (const auto m_Animation : m_Animations)
 		m_Animation->Resume();
 }
 
-void Trainer::SetStop(bool StopPlayer)
+void Player::SetStop(bool StopPlayer)
 {
 	if (m_Stop != StopPlayer)
 		m_Stop = StopPlayer;
 }
 
-void Trainer::OnEvent(Event* anEvent)
+void Player::OnEvent(Event* anEvent)
 {
 	const DoorEvent* doorEvent = dynamic_cast<DoorEvent*>(anEvent);
 	if (doorEvent->GetDoorType() == 11)
@@ -189,18 +189,18 @@ void Trainer::OnEvent(Event* anEvent)
 	}
 }
 
-void Trainer::PlayerTransition()
+void Player::PlayerTransition()
 {
 	m_InTransition = true;
 	aTransitionDestination = GetPosition() + Vector2Float(DIRECTIONVECTOR[static_cast<int>(myDirection)] * (TILESIZE / 4));
 }
 
-SpriteDirection Trainer::GetMyDirection() const
+SpriteDirection Player::GetMyDirection() const
 {
 	return myDirection;
 }
 
-bool Trainer::CheckForCollision(Vector2Float aPosition) const
+bool Player::CheckForCollision(Vector2Float aPosition) const
 {
 	//Get the location of each point of collision on the player and then truncate it to a row and column
 	const ivec2 OriginIndex = ivec2((aPosition.myX / TILESIZE), ((aPosition.myY - 0.3f) / TILESIZE));

@@ -6,7 +6,7 @@
 #include "Controllers/PlayerController.h"
 #include "Entities/GameCamera.h"
 #include "Entities/Entity.h"
-#include "Entities/Trainer.h"
+#include "Entities/Player.h"
 #include "Entities/UI/UIObject.h"
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/SceneManager.h"
@@ -41,7 +41,7 @@ Game::Game(Framework* pFramework)
 	m_OakLabTileMap = 0;
 	m_WoodsTileMap = 0;
 
-	m_Trainer = 0;
+	myPlayer = 0;
 
 	m_OakLabTileset = 0;
 	m_Tileset = 0;
@@ -66,7 +66,7 @@ Game::~Game()
 	delete m_WoodsTileMap;
 	delete m_ExtrasTileMap;
 
-	delete m_Trainer;
+	delete myPlayer;
 	delete m_UICanvas;
 
 	delete m_TrainerMesh;
@@ -163,23 +163,23 @@ void Game::LoadContent()
 	m_MyResourceManager->HoldTexture(TextureHandle::ForestTileSet, m_WoodsTileset);
 
 	//Create our game objects
-	m_Trainer = new Trainer(m_MyResourceManager, this, m_TrainerMesh, m_Sprites);
+	myPlayer = new Player(m_MyResourceManager, this, m_TrainerMesh, m_Sprites);
 	m_UICanvas = new UIObject(m_MyResourceManager, m_ExtrasTileMap, this, m_UIMesh, m_ExtrasSet);
 
 
 	// Assign our controllers.
 	m_pPlayerController = new PlayerController();
-	m_Trainer->SetPlayerController(m_pPlayerController);
+	myPlayer->SetPlayerController(m_pPlayerController);
 
 	//Create our player camera
-	m_TrainerCamera = new GameCamera(this, m_CameraMesh, 0, m_Trainer);
+	m_TrainerCamera = new GameCamera(this, m_CameraMesh, 0, myPlayer);
 	m_TrainerCamera->SetMyProjection(1 / (aWindowSize.myX / 40));
 
 	//Finally Create our SceneManager and Scenes
 	m_MySceneManager = new SceneManager();
-	m_MySceneManager->GenerateScenes(this, Areas::Area_PalletTown, m_PalletTileMap, m_MyResourceManager, m_TileMesh, m_Trainer, m_Tileset);
-	m_MySceneManager->GenerateScenes(this, Areas::Area_OakLab, m_OakLabTileMap, m_MyResourceManager, m_TileMesh, m_Trainer, m_OakLabTileset);
-	m_MySceneManager->GenerateScenes(this, Areas::Area_Woods, m_WoodsTileMap, m_MyResourceManager, m_TileMesh, m_Trainer, m_WoodsTileset);
+	m_MySceneManager->GenerateScenes(this, Areas::Area_PalletTown, m_PalletTileMap, m_MyResourceManager, m_TileMesh, myPlayer, m_Tileset);
+	m_MySceneManager->GenerateScenes(this, Areas::Area_OakLab, m_OakLabTileMap, m_MyResourceManager, m_TileMesh, myPlayer, m_OakLabTileset);
+	m_MySceneManager->GenerateScenes(this, Areas::Area_Woods, m_WoodsTileMap, m_MyResourceManager, m_TileMesh, myPlayer, m_WoodsTileset);
 	m_MySceneManager->SetActiveScene(Areas::Area_PalletTown);
 
 	m_UICanvas->SetPosition(m_TrainerCamera->GetPosition());
@@ -198,7 +198,7 @@ void Game::OnEvent(Event* pEvent)
 		}
 		case EventTypes::EventType_Collision:
 		{
-			m_Trainer->OnEvent(pEvent);
+			myPlayer->OnEvent(pEvent);
 			break;
 		}
 		case EventTypes::EventType_Door:
@@ -206,7 +206,7 @@ void Game::OnEvent(Event* pEvent)
 			m_MySceneManager->OnEvent(pEvent);
 			if (pEvent->GetEventType() != EventTypes::EventType_Input)
 			{
-				m_Trainer->OnEvent(pEvent);
+				myPlayer->OnEvent(pEvent);
 				m_TrainerCamera->OnEvent(pEvent);
 			}
 
@@ -226,7 +226,7 @@ void Game::Update(float deltatime)
 	aActiveScene->Update(deltatime);
 
 	m_TrainerCamera->Update(deltatime);
-	m_TrainerCamera->ClampToPlayer(m_Trainer->GetPosition());
+	m_TrainerCamera->ClampToPlayer(myPlayer->GetPosition());
 	m_UICanvas->SetPosition(m_TrainerCamera->GetCameraPosition());
 	int arange = RAND_MAX % 2;
 
@@ -274,9 +274,9 @@ ShaderProgram * Game::GetDebugShader()
 	return m_pDebugShader;
 }
 
-Trainer * Game::GetMyPlayer()
+Player * Game::GetMyPlayer()
 {
-	return m_Trainer;
+	return myPlayer;
 }
 
 void Game::SetCameraScreenSize(float width, float height)

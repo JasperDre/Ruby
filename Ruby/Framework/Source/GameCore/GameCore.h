@@ -6,7 +6,7 @@ class EventManager;
 class TileMap;
 class SceneManager;
 class ShaderProgram;
-class Trainer;
+class Player;
 
 class GameCore
 {
@@ -26,7 +26,7 @@ public:
 	virtual ShaderProgram* GetShader() = 0;
 	virtual ShaderProgram* GetDebugShader() = 0;
 
-	virtual Trainer* GetMyPlayer() = 0;
+	virtual Player* GetMyPlayer() = 0;
 
 	[[nodiscard]] Framework* GetFramework() const { return m_pFramework; }
 	[[nodiscard]] EventManager* GetEventManager() const { return m_pEventManager; }

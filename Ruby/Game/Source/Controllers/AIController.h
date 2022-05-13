@@ -10,17 +10,13 @@ public:
 	AIController(TileMap* aTileMap, int aMinIndex, int aMaxIndex, Entity* aNPC);
 	~AIController();
 
-	bool GetNextPath();
-	void ResetPathFinder();
+	void ResetPathFinder() const;
 
 	SpriteDirection MoveNPC();
-
 	SpriteDirection CalculateNextInput();
-
 	ivec2 SetNPCCurrentPosition(Vector2Float aNPCPosition);
-
 	ivec2 CalculatedDirection(ivec2 aCurrentIndex, Vector2Float aDirection);
-
+	bool GetNextPath();
 	int RangeRandomIntAlg(int min, int max);
 
 private:

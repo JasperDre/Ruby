@@ -3,7 +3,7 @@
 
 #include "Controllers/AIController.h"
 #include "Entities/Entity.h"
-#include "Entities/Trainer.h"
+#include "Entities/Player.h"
 #include "Entities/OakLabObjects/OakLabDeskTop.h"
 #include "Entities/OakLabObjects/OakLabMachineTop.h"
 #include "Entities/OakLabObjects/OakLabMap.h"
@@ -15,7 +15,7 @@
 #include "Mesh/Mesh.h"
 #include "Scenes/Scene.h"
 
-OakLab::OakLab(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer * aPlayer, GLuint aTexture)
+OakLab::OakLab(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player * aPlayer, GLuint aTexture)
 	: Scene(myGame, myArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(7.5f * TILESIZE, 2.0f * TILESIZE), aTexture)
 {
 	m_ProfOakMesh = nullptr;

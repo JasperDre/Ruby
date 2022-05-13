@@ -19,5 +19,5 @@ public:
 private:
 	std::vector<Frame> MyScoreFrames;
 	TileMap* m_MyExtrasTileMap;
-	ResourceManager* m_MyResourceManager;
+	ResourceManager* myResourceManager;
 };

@@ -3,7 +3,7 @@
 #include "Scene.h"
 
 class Mesh;
-class Trainer;
+class Player;
 class TileMap;
 class TileMapOakLab;
 class OakLabMap;
@@ -17,7 +17,7 @@ class AIController;
 class OakLab : public Scene
 {
 public:
-	OakLab(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer* aPlayer, GLuint aTexture);
+	OakLab(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, GLuint aTexture);
 	~OakLab() override;
 
 	void LoadContent() override;

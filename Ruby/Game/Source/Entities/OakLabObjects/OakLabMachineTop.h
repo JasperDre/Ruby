@@ -12,7 +12,7 @@ class TileMap;
 class OakLabMachineTop : public Entity
 {
 public:
-	OakLabMachineTop(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
+	OakLabMachineTop(ResourceManager* aResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
 	~OakLabMachineTop() override;
 
 	void Update(float deltatime) override {}
@@ -24,6 +24,5 @@ private:
 	Vector2Float m_MyTileUVOffset;
 	Vector2Float m_MyTileUVScale;
 	Vector2Float OaklabMachinePosition;
-	ResourceManager* m_MyResourceManager;
 	TileMap* m_MyTileMap;
 };

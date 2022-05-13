@@ -12,7 +12,7 @@ class TileMap;
 class ProfessorOak : public Entity
 {
 public:
-	ProfessorOak(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
+	ProfessorOak(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* aMesh, GLuint aTexture);
 	~ProfessorOak() override;
 
 	void Update(float deltatime) override;
@@ -54,7 +54,6 @@ private:
 	ivec2 m_MyNewDestination;
 	ivec2 m_MyIndex;
 	TileMap* m_MyTileMap;
-	ResourceManager* myResourceManager;
 	int* m_MyPath;
 	SpriteDirection myDirection;
 	SpriteDirection myNewDirection;

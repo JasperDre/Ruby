@@ -2,7 +2,7 @@
 #include "PalletTown.h"
 
 #include "Entities/Entity.h"
-#include "Entities/Trainer.h"
+#include "Entities/Player.h"
 #include "Entities/PalletTownObjects/OakHouse.h"
 #include "Entities/PalletTownObjects/PalletTownMap.h"
 #include "Entities/PalletTownObjects/PlayerHouse.h"
@@ -14,7 +14,7 @@
 #include "Mesh/Mesh.h"
 #include "Scenes/Scene.h"
 
-PalletTown::PalletTown(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer* aPlayer, GLuint aTexture)
+PalletTown::PalletTown(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, GLuint aTexture)
 	: Scene(myGame, myArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(9.0f * TILESIZE, 20.0f * TILESIZE), aTexture)
 {
 	m_PalletTownMap = nullptr;

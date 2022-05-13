@@ -9,9 +9,8 @@
 PlayerHouse::PlayerHouse(ResourceManager* aResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
 	: Entity(myGame, myMesh, aTexture)
 {
-	PlayerHouseMap = {	0, 1, 2, 3, 4};
+	PlayerHouseMap = { 0, 1, 2, 3, 4 };
 	myTextureIdentifier = aTexture;
-	m_MyResourceManager = aResourceManager;
 	m_MyTileMap = myTileMap;
 
 	m_PlayerHousePosition = Vector2Float(8.0f * TILESIZE, 24.0f * TILESIZE);
@@ -20,8 +19,8 @@ PlayerHouse::PlayerHouse(ResourceManager* aResourceManager, TileMap* myTileMap, 
 	{
 		TileInfo atile = m_MyTileMap->GetTileFromPalletMap(Trainer_House_);
 		Frame aframe = atile.MyVariant.at(PlayerHouseMap[i]);
-		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / m_MyResourceManager->GetTextureSize(0).x), (aframe.myOrigin.myY / m_MyResourceManager->GetTextureSize(0).y));
-		aframe.myUVScale = Vector2Float((aframe.mySize.myX / m_MyResourceManager->GetTextureSize(0).x), (aframe.mySize.myY / m_MyResourceManager->GetTextureSize(0).y));
+		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / aResourceManager->GetTextureSize(0).x), (aframe.myOrigin.myY / aResourceManager->GetTextureSize(0).y));
+		aframe.myUVScale = Vector2Float((aframe.mySize.myX / aResourceManager->GetTextureSize(0).x), (aframe.mySize.myY / aResourceManager->GetTextureSize(0).y));
 		aframe.myWorldSpace = Vector2Float((((i % PlayerHouseMap.size()) * TILESIZE) + m_PlayerHousePosition.myX), (((i / PlayerHouseMap.size())* TILESIZE) + m_PlayerHousePosition.myY));
 
 		m_MyFrames.push_back(aframe);

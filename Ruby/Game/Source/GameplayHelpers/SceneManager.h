@@ -10,7 +10,7 @@ public:
 	SceneManager();
 	~SceneManager();
 
-	void GenerateScenes(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer* aPlayer, GLuint aTexture);
+	void GenerateScenes(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, GLuint aTexture);
 
 	void SetActiveScene(Areas aSceneHandle);
 

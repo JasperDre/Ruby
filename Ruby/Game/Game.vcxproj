@@ -152,6 +152,7 @@
     <ClInclude Include="Source\Controllers\PlayerController.h" />
     <ClInclude Include="Source\Entities\GameCamera.h" />
     <ClInclude Include="Source\Entities\Entity.h" />
+    <ClInclude Include="Source\Entities\Level.h" />
     <ClInclude Include="Source\Entities\OakLabObjects\OakLabDeskTop.h" />
     <ClInclude Include="Source\Entities\OakLabObjects\OakLabMachineTop.h" />
     <ClInclude Include="Source\Entities\OakLabObjects\OakLabMap.h" />
@@ -164,7 +165,7 @@
     <ClInclude Include="Source\Entities\PalletTownObjects\RivalHouse.h" />
     <ClInclude Include="Source\Entities\PalletTownObjects\TownBoy.h" />
     <ClInclude Include="Source\Entities\PalletTownObjects\TownGirl.h" />
-    <ClInclude Include="Source\Entities\Trainer.h" />
+    <ClInclude Include="Source\Entities\Player.h" />
     <ClInclude Include="Source\Entities\UI\PokeBall.h" />
     <ClInclude Include="Source\Entities\UI\ScoreNumber.h" />
     <ClInclude Include="Source\Entities\UI\UIObject.h" />
@@ -193,6 +194,7 @@
     <ClCompile Include="Source\Controllers\PlayerController.cpp" />
     <ClCompile Include="Source\Entities\GameCamera.cpp" />
     <ClCompile Include="Source\Entities\Entity.cpp" />
+    <ClCompile Include="Source\Entities\Level.cpp" />
     <ClCompile Include="Source\Entities\OakLabObjects\OakLabDeskTop.cpp" />
     <ClCompile Include="Source\Entities\OakLabObjects\OakLabMachineTop.cpp" />
     <ClCompile Include="Source\Entities\OakLabObjects\OakLabMap.cpp" />
@@ -205,7 +207,7 @@
     <ClCompile Include="Source\Entities\PalletTownObjects\RivalHouse.cpp" />
     <ClCompile Include="Source\Entities\PalletTownObjects\TownBoy.cpp" />
     <ClCompile Include="Source\Entities\PalletTownObjects\TownGirl.cpp" />
-    <ClCompile Include="Source\Entities\Trainer.cpp" />
+    <ClCompile Include="Source\Entities\Player.cpp" />
     <ClCompile Include="Source\Entities\UI\PokeBall.cpp" />
     <ClCompile Include="Source\Entities\UI\ScoreNumber.cpp" />
     <ClCompile Include="Source\Entities\UI\UIObject.cpp" />

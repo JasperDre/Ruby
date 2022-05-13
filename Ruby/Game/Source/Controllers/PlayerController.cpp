@@ -1,12 +1,20 @@
 #include "GamePCH.h"
 #include "PlayerController.h"
 
+PlayerController::PlayerController()
+	: m_Up(false)
+	, m_Down(false)
+	, m_Left(false)
+	, m_Right(false)
+	, m_InputReleased(false)
+{}
+
 void PlayerController::OnEvent(Event* pEvent)
 {
 	if (pEvent->GetEventType() == EventTypes::EventType_Input)
 	{
 #if WIN32
-		const InputEvent* pInput = static_cast<InputEvent*>(pEvent);
+		const InputEvent* pInput = dynamic_cast<InputEvent*>(pEvent);
 
 		if (pInput->GetInputDeviceType() == InputDeviceTypes::InputDeviceType_Keyboard)
 		{
@@ -17,9 +25,9 @@ void PlayerController::OnEvent(Event* pEvent)
 				m_InputReleased = false;
 
 				if (keyID == VK_UP || keyID == 'W') { ClearInput(); m_Up = true; }
-				if (keyID == VK_DOWN || keyID == 'S' ) { ClearInput(); m_Down = true; }
-				if (keyID == VK_LEFT || keyID == 'A' ) { ClearInput(); m_Left = true; }
-				if (keyID == VK_RIGHT || keyID == 'D' ) { ClearInput(); m_Right = true; }
+				if (keyID == VK_DOWN || keyID == 'S') { ClearInput(); m_Down = true; }
+				if (keyID == VK_LEFT || keyID == 'A') { ClearInput(); m_Left = true; }
+				if (keyID == VK_RIGHT || keyID == 'D') { ClearInput(); m_Right = true; }
 			}
 
 			if (pInput->GetInputState() == InputStates::InputState_Released)

@@ -30,7 +30,6 @@ TownGirl::TownGirl(ResourceManager* aResourceManager, TileMap* aTileMap, GameCor
 
 	myDirection = SpriteDirection::SpriteWalkDown;
 	myNewDirection = SpriteDirection::SpriteWalkDown;
-	myResourceManager = aResourceManager;
 	m_MyTileMap = aTileMap;
 	myMesh->GenerateFrameMesh();
 
@@ -58,7 +57,6 @@ TownGirl::~TownGirl()
 		m_Animation = nullptr;
 	}
 
-	myResourceManager = nullptr;
 	delete myPathFinder;
 	m_MyPath = nullptr;
 }

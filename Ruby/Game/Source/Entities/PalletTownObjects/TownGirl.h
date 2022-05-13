@@ -42,7 +42,6 @@ private:
 	ivec2 m_MyNewDestination;
 	ivec2 m_MyIndex;
 	TileMap* m_MyTileMap;
-	ResourceManager* myResourceManager;
 	int* m_MyPath;
 	int m_CurrentInput;
 	SpriteDirection myDirection;

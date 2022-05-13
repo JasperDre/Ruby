@@ -11,7 +11,7 @@ class TileMap;
 class OakLabPlantTop : public Entity
 {
 public:
-	OakLabPlantTop(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
+	OakLabPlantTop(ResourceManager* aResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
 	~OakLabPlantTop() override;
 
 	void Update(float deltatime) override {}
@@ -23,6 +23,5 @@ private:
 	Vector2Float m_MyTileUVOffset;
 	Vector2Float m_MyTileUVScale;
 	Vector2Float OaklabPlantPosition;
-	ResourceManager* m_MyResourceManager;
 	TileMap* m_MyTileMap;
 };

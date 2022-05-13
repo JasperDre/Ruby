@@ -48,7 +48,6 @@ public:
 
 private:
 	std::array<int, MAXPATHSIZE_TOWN_NPC> m_MyInputSet;
-	ResourceManager* myResourceManager;
 	Vector2Float NewPosition;
 	ivec2 m_MyNewDestination;
 	ivec2 m_MyIndex;

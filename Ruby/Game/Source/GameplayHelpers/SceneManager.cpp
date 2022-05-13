@@ -17,7 +17,7 @@ SceneManager::~SceneManager()
 	delete m_MyScenes.at(Areas::Area_Woods);
 }
 
-void SceneManager::GenerateScenes(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer* aPlayer, GLuint aTexture)
+void SceneManager::GenerateScenes(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, GLuint aTexture)
 {
 	switch (myArea)
 	{

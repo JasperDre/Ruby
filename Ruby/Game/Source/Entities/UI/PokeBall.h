@@ -16,5 +16,4 @@ public:
 private:
 	Frame m_MyFrame;
 	TileMap* m_MyExtrasTileMap;
-	ResourceManager* m_MyResourceManager;
 };

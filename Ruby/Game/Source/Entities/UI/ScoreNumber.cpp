@@ -7,17 +7,17 @@
 
 ScoreNumber::ScoreNumber(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
 	: Entity(myGame, myMesh, aTexture)
+	 , myResourceManager(aResourceManager)
 {
 	myTextureIdentifier = aTexture;
-	m_MyResourceManager = aResourceManager;
 
 	m_MyExtrasTileMap = aTileMap;
 
 	for (int i = 0; i < 7; i++)
 	{
 		Frame myNewScore = m_MyExtrasTileMap->GetFrameFromExtrasMap(std::to_string(0) + ".png");
-		myNewScore.myUVOffset = Vector2Float((myNewScore.myOrigin.myX / m_MyResourceManager->GetTextureSize(4).x), (myNewScore.myOrigin.myY / m_MyResourceManager->GetTextureSize(4).y));
-		myNewScore.myUVScale = Vector2Float((myNewScore.mySize.myX / m_MyResourceManager->GetTextureSize(4).x), (myNewScore.mySize.myY / m_MyResourceManager->GetTextureSize(4).y));
+		myNewScore.myUVOffset = Vector2Float((myNewScore.myOrigin.myX / myResourceManager->GetTextureSize(4).x), (myNewScore.myOrigin.myY / myResourceManager->GetTextureSize(4).y));
+		myNewScore.myUVScale = Vector2Float((myNewScore.mySize.myX / myResourceManager->GetTextureSize(4).x), (myNewScore.mySize.myY / myResourceManager->GetTextureSize(4).y));
 
 		MyScoreFrames.push_back(myNewScore);
 	}
@@ -54,8 +54,8 @@ void ScoreNumber::SetScore(int aScore)
 		MyScoreFrames.pop_back();
 		Frame aNewScoreFrame = m_MyExtrasTileMap->GetFrameFromExtrasMap(std::to_string(DigitsOnScore[i]) + ".png");
 
-		aNewScoreFrame.myUVOffset = Vector2Float((aNewScoreFrame.myOrigin.myX / m_MyResourceManager->GetTextureSize(4).x), (aNewScoreFrame.myOrigin.myY / m_MyResourceManager->GetTextureSize(4).y));
-		aNewScoreFrame.myUVScale = Vector2Float((aNewScoreFrame.mySize.myX / m_MyResourceManager->GetTextureSize(4).x), (aNewScoreFrame.mySize.myY / m_MyResourceManager->GetTextureSize(4).y));
+		aNewScoreFrame.myUVOffset = Vector2Float((aNewScoreFrame.myOrigin.myX / myResourceManager->GetTextureSize(4).x), (aNewScoreFrame.myOrigin.myY / myResourceManager->GetTextureSize(4).y));
+		aNewScoreFrame.myUVScale = Vector2Float((aNewScoreFrame.mySize.myX / myResourceManager->GetTextureSize(4).x), (aNewScoreFrame.mySize.myY / myResourceManager->GetTextureSize(4).y));
 
 		MyScoreFrames.push_back(aNewScoreFrame);
 	}

@@ -3,7 +3,7 @@
 
 #include "Controllers/AStarPathFinder.h"
 #include "Game/Game.h"
-#include "Entities/Trainer.h"
+#include "Entities/Player.h"
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 
@@ -16,7 +16,6 @@ WildPokemonTile::WildPokemonTile(ResourceManager* aResourceManager, TileMap* aTi
 
 	myDirection = SpriteDirection::SpriteWalkDown;
 	myNewDirection = SpriteDirection::SpriteWalkDown;
-	myResourceManager = aResourceManager;
 	m_MyTileMap = aTileMap;
 
 	m_IsFirstInput = true;
@@ -41,7 +40,6 @@ WildPokemonTile::~WildPokemonTile()
 {
 	delete myPathFinder;
 	myPathFinder = nullptr;
-	myResourceManager = nullptr;
 }
 
 void WildPokemonTile::Update(float deltatime)

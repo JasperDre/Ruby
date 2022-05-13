@@ -5,6 +5,8 @@ class Event;
 class PlayerController
 {
 public:
+	PlayerController();
+
     void OnEvent(Event* pEvent);
 
 	void ClearInput() { m_Up = false; m_Down = false; m_Left = false; m_Right = false; }

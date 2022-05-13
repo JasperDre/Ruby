@@ -11,7 +11,7 @@ class TileMap;
 class OakLabDeskTop : public Entity
 {
 public:
-	OakLabDeskTop(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
+	OakLabDeskTop(ResourceManager* aResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
 	~OakLabDeskTop() override;
 
 	void Update(float deltatime) override {}
@@ -23,6 +23,5 @@ private:
 	Vector2Float m_MyTileUVOffset;
 	Vector2Float m_MyTileUVScale;
 	Vector2Float OaklabDeskPosition;
-	ResourceManager* m_MyResourceManager;
 	TileMap* m_MyTileMap;
 };

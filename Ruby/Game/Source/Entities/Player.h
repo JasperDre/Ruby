@@ -8,11 +8,11 @@ class AnimatedSprite;
 class PlayerController;
 class ResourceManager;
 
-class Trainer : public Entity
+class Player : public Entity
 {
 public:
-	Trainer(ResourceManager* aResourceManager, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
-	~Trainer() override;
+	Player(ResourceManager* aResourceManager, GameCore* myGame, Mesh* aMesh, GLuint aTexture);
+	~Player() override;
 
 	void Update(float deltatime) override;
 	void Draw(Vector2Float camPos, Vector2Float projecScale) override;

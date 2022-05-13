@@ -2,7 +2,7 @@
 
 #include "Entity.h"
 
-class Trainer;
+class Player;
 class GameCore;
 class Mesh;
 class Vector2Float;
@@ -10,7 +10,7 @@ class Vector2Float;
 class GameCamera : public Entity
 {
 public:
-	GameCamera(GameCore* pGame, Mesh* pMesh, GLuint myTexture, Trainer* myTrainer);
+	GameCamera(GameCore* pGame, Mesh* pMesh, GLuint myTexture, Player* aPlayer);
 	~GameCamera() override = default;
 
 	void Update(float deltatime) override {}
@@ -30,6 +30,5 @@ private:
 	Vector2Float CAMERAMIN;
 	Vector2Float newCamPos;
 	Vector2Float CamOffset;
-	Mesh* m_MyMesh;
 	bool m_InTransition;
 };

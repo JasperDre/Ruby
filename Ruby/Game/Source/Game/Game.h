@@ -9,7 +9,7 @@ class TileMap;
 class TileMapPalletTown;
 class TileMapOakLab;
 class TileMapExtras;
-class Trainer;
+class Player;
 class UIObject;
 class PlayerController;
 class GameCamera;
@@ -35,7 +35,7 @@ public:
 	SceneManager* GetSceneManager() override;
 	ShaderProgram* GetShader() override;
 	ShaderProgram* GetDebugShader() override;
-	Trainer* GetMyPlayer() override;
+	Player* GetMyPlayer() override;
 
 	void SetCameraScreenSize(float width, float height);
 	void CheckForCollisions();
@@ -52,7 +52,7 @@ protected:
 	TileMap* m_OakLabTileMap;
 	TileMap* m_WoodsTileMap;
 	TileMap* m_ExtrasTileMap;
-	Trainer* m_Trainer;
+	Player* myPlayer;
 	UIObject* m_UICanvas;
 	GameCamera* m_TrainerCamera;
 	PlayerController* m_pPlayerController;

@@ -5,20 +5,19 @@
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 
-OakLabPlantTop::OakLabPlantTop(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
+OakLabPlantTop::OakLabPlantTop(ResourceManager* aResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
 	: Entity(myGame, myMesh, aTexture)
 {
 	OakLabPlantMap = { 2, 3 };
 	myTextureIdentifier = aTexture;
-	m_MyResourceManager = myResourceManager;
 	m_MyTileMap = myTileMap;
 
 	for (unsigned int i = 0; i < OakLabPlantMap.size(); i++)
 	{
 		TileInfo atile = m_MyTileMap->GetTileFromOakLabMap(Oak_Lab_Plant_);
 		Frame aframe = atile.MyVariant.at(OakLabPlantMap[i]);
-		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / m_MyResourceManager->GetTextureSize(1).x), (aframe.myOrigin.myY / m_MyResourceManager->GetTextureSize(1).y));
-		aframe.myUVScale = Vector2Float((aframe.mySize.myX / m_MyResourceManager->GetTextureSize(1).x), (aframe.mySize.myY / m_MyResourceManager->GetTextureSize(1).y));
+		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / aResourceManager->GetTextureSize(1).x), (aframe.myOrigin.myY / aResourceManager->GetTextureSize(1).y));
+		aframe.myUVScale = Vector2Float((aframe.mySize.myX / aResourceManager->GetTextureSize(1).x), (aframe.mySize.myY / aResourceManager->GetTextureSize(1).y));
 		aframe.myWorldSpace = Vector2Float((((i % OakLabPlantMap.size()) * (NUM_LAB_COLUMNS - 1)) * TILESIZE), (2.0f * TILESIZE));
 
 		if (i % 2 == 0)

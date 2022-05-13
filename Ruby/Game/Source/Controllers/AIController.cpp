@@ -68,7 +68,7 @@ bool AIController::GetNextPath()
 	return m_PathingComplete;
 }
 
-void AIController::ResetPathFinder()
+void AIController::ResetPathFinder() const
 {
 	m_MyPathFinder->Reset();
 }

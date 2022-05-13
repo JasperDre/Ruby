@@ -2,13 +2,13 @@
 #include "PetalburgWoods.h"
 
 #include "Entities/Entity.h"
-#include "Entities/Trainer.h"
+#include "Entities/Player.h"
 #include "Entities/WoodsObjects/PetalburgWoodsMap.h"
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 
-PetalburgWoods::PetalburgWoods(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager * aResourceManager, Mesh* aMesh, Trainer* aPlayer, GLuint aTexture)
+PetalburgWoods::PetalburgWoods(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager * aResourceManager, Mesh* aMesh, Player* aPlayer, GLuint aTexture)
 	: Scene(myGame, myArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(37.0f * TILESIZE, TILESIZE), aTexture)
 	, m_MyPetalburg(nullptr)
 {

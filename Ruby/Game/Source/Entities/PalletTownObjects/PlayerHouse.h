@@ -15,7 +15,6 @@ public:
 	~PlayerHouse() override;
 
 	void Update(float deltatime) override {}
-
 	void Draw(Vector2Float camPos, Vector2Float projecScale) override;
 
 private:
@@ -25,5 +24,4 @@ private:
 	Vector2Float m_MyTileUVScale;
 	Vector2Float m_PlayerHousePosition;
 	TileMap* m_MyTileMap;
-	ResourceManager* m_MyResourceManager;
 };

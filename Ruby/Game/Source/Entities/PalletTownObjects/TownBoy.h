@@ -41,7 +41,6 @@ private:
 	Vector2Float NewPosition;
 	ivec2 m_MyNewDestination;
 	ivec2 m_MyIndex;
-	ResourceManager* myResourceManager;
 	TileMap* m_MyTileMap;
 	int* m_MyPath;
 	SpriteDirection myNewDirection;

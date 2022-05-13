@@ -5,13 +5,13 @@
 class Mesh;
 class TileMap;
 class TileMapWoods;
-class Trainer;
+class Player;
 class PetalburgWoodsMap;
 
 class PetalburgWoods : public Scene
 {
 public:
-	PetalburgWoods(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer* aPlayer, GLuint aTexture);
+	PetalburgWoods(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, GLuint aTexture);
 	~PetalburgWoods() override;
 
 	void LoadContent() override;

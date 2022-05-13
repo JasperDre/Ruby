@@ -3,15 +3,15 @@
 
 #include "Game/Game.h"
 #include "Entities/Entity.h"
-#include "Entities/Trainer.h"
+#include "Entities/Player.h"
 #include "GameplayHelpers/SceneManager.h"
 #include "Mesh/Mesh.h"
 #include "Scenes/Scene.h"
 
-GameCamera::GameCamera(GameCore* pGame, Mesh* pMesh, GLuint myTexture, Trainer* myTrainer) : Entity(pGame, pMesh, myTexture)
+GameCamera::GameCamera(GameCore* pGame, Mesh* pMesh, GLuint myTexture, Player* aPlayer)
+	: Entity(pGame, pMesh, myTexture)
 {
-	m_MyMesh = pMesh;
-	myPosition = Vector2Float(myTrainer->GetPosition() + Vector2Float(0.0f, 1.0f));
+	myPosition = Vector2Float(aPlayer->GetPosition() + Vector2Float(0.0f, 1.0f));
 	m_MyScreenSize = Vector2Float(pGame->GetFramework()->GetWindowWidth(), pGame->GetFramework()->GetWindowHeight());
 
 	CAMERAMIN = Vector2Float(15.0f, 15.0f);

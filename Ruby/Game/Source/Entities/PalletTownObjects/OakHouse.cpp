@@ -5,12 +5,11 @@
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 
-OakHouse::OakHouse(ResourceManager* myResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
+OakHouse::OakHouse(ResourceManager* aResourceManager, TileMap* myTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
 	: Entity(myGame, myMesh, aTexture)
 {
 	OakHouseMap = { 0, 1, 2, 3, 4, 5, 6 };
 	myTextureIdentifier = aTexture;
-	m_MyResourceManager = myResourceManager;
 	m_MyTileMap = myTileMap;
 	OakHousePosition = Vector2Float(17.0f * TILESIZE, 18.0f * TILESIZE);
 
@@ -18,8 +17,8 @@ OakHouse::OakHouse(ResourceManager* myResourceManager, TileMap* myTileMap, GameC
 	{
 		TileInfo atile = m_MyTileMap->GetTileFromPalletMap(Oak_House_);
 		Frame aframe = atile.MyVariant.at(OakHouseMap[i]);
-		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / m_MyResourceManager->GetTextureSize(0).x), (aframe.myOrigin.myY / m_MyResourceManager->GetTextureSize(0).y));
-		aframe.myUVScale = Vector2Float((aframe.mySize.myX / m_MyResourceManager->GetTextureSize(0).x), (aframe.mySize.myY / m_MyResourceManager->GetTextureSize(0).y));
+		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / aResourceManager->GetTextureSize(0).x), (aframe.myOrigin.myY / aResourceManager->GetTextureSize(0).y));
+		aframe.myUVScale = Vector2Float((aframe.mySize.myX / aResourceManager->GetTextureSize(0).x), (aframe.mySize.myY / aResourceManager->GetTextureSize(0).y));
 		aframe.myWorldSpace = Vector2Float((((i % OakHouseMap.size()) * TILESIZE) + OakHousePosition.myX), (((i / OakHouseMap.size())* TILESIZE) + OakHousePosition.myY));
 
 		m_MyFrames.push_back(aframe);

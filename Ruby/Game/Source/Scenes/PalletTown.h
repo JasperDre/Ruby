@@ -9,7 +9,7 @@ class PalletTownMap;
 class OakHouse;
 class PlayerHouse;
 class RivalHouse;
-class Trainer;
+class Player;
 class TownGirl;
 class TownBoy;
 
@@ -17,7 +17,7 @@ class PalletTown : public Scene
 {
 
 public:
-	PalletTown(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Trainer* aPlayer, GLuint aTexture);
+	PalletTown(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, GLuint aTexture);
 	~PalletTown() override;
 
 	void LoadContent() override;

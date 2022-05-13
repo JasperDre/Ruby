@@ -6,15 +6,15 @@
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 
-PokeBall::PokeBall(ResourceManager * aResourceManager, TileMap* aTileMap, GameCore * myGame, Mesh * myMesh, GLuint aTexture) : Entity(myGame, myMesh, aTexture)
+PokeBall::PokeBall(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
+	: Entity(myGame, myMesh, aTexture)
 {
-	m_MyResourceManager = aResourceManager;
 	m_MyExtrasTileMap = aTileMap;
 	myTextureIdentifier = aTexture;
 
 	m_MyFrame = m_MyExtrasTileMap->GetFrameFromExtrasMap("PokeBall_UIScore.png");
-	m_MyFrame.myUVOffset = Vector2Float((m_MyFrame.myOrigin.myX / m_MyResourceManager->GetTextureSize(4).x), (m_MyFrame.myOrigin.myY / m_MyResourceManager->GetTextureSize(4).y));
-	m_MyFrame.myUVScale = Vector2Float((m_MyFrame.mySize.myX / m_MyResourceManager->GetTextureSize(4).x), (m_MyFrame.mySize.myY / m_MyResourceManager->GetTextureSize(4).y));
+	m_MyFrame.myUVOffset = Vector2Float((m_MyFrame.myOrigin.myX / aResourceManager->GetTextureSize(4).x), (m_MyFrame.myOrigin.myY / aResourceManager->GetTextureSize(4).y));
+	m_MyFrame.myUVScale = Vector2Float((m_MyFrame.mySize.myX / aResourceManager->GetTextureSize(4).x), (m_MyFrame.mySize.myY / aResourceManager->GetTextureSize(4).y));
 }
 
 void PokeBall::Draw(Vector2Float camPos, Vector2Float camProjection)
