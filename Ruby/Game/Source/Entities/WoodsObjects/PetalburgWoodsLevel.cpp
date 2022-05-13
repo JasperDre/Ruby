@@ -1,12 +1,12 @@
 #include "GamePCH.h"
-#include "PetalburgWoodsMap.h"
+#include "PetalburgWoodsLevel.h"
 
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Canvas.h"
 #include "Mesh/Mesh.h"
 
-PetalburgWoodsMap::PetalburgWoodsMap(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier)
+PetalburgWoodsLevel::PetalburgWoodsLevel(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier)
 	: Level(aTileMap, aGameCore, aMesh, aTextureIdentifier)
 {
 	myCanvas = new Canvas(myTileMap, aResourceManager);
@@ -15,12 +15,12 @@ PetalburgWoodsMap::PetalburgWoodsMap(ResourceManager* aResourceManager, TileMap*
 	myCanvas->GenterateCanvasMesh((FORESTMAPSIZE * 4) - (NUM_FOREST_COLUMNS));
 }
 
-PetalburgWoodsMap::~PetalburgWoodsMap()
+PetalburgWoodsLevel::~PetalburgWoodsLevel()
 {
 	delete myCanvas;
 }
 
-void PetalburgWoodsMap::Draw(Vector2Float camPos, Vector2Float projecScale)
+void PetalburgWoodsLevel::Draw(Vector2Float camPos, Vector2Float projecScale)
 {
 	myCanvas->DrawCanvas(camPos, projecScale, myTextureIdentifier);
 }

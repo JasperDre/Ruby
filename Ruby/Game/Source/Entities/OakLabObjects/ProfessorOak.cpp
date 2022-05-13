@@ -8,8 +8,8 @@
 #include "Mesh/Mesh.h"
 #include "Sprites/AnimatedSprite.h"
 
-ProfessorOak::ProfessorOak(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* aMesh, GLuint aTexture)
-	: Entity(myGame, aMesh, aTexture)
+ProfessorOak::ProfessorOak(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, GLuint aTexture)
+	: Entity(aGameCore, aMesh, aTexture)
 	, m_PathingComplete(false)
 {
 	AnimationKeys = { "OakWalkDown_", "OakWalkRight_", "OakWalkLeft_", "OakWalkUp_" };
@@ -19,7 +19,7 @@ ProfessorOak::ProfessorOak(ResourceManager* aResourceManager, TileMap* aTileMap,
 
 	for (unsigned int i = 0; i < m_Animations.size(); i++)
 	{
-		m_Animations[i] = new AnimatedSprite(aResourceManager, myGame, aMesh, 1, aTexture);
+		m_Animations[i] = new AnimatedSprite(aResourceManager, aGameCore, aMesh, 1, aTexture);
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "1.png");
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "2.png");
 		m_Animations[i]->AddFrame(AnimationKeys[i] + "1.png");

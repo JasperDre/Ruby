@@ -8,11 +8,11 @@ class Mesh;
 class GameCore;
 class Canvas;
 
-class PetalburgWoodsMap : public Level
+class PetalburgWoodsLevel : public Level
 {
 public:
-	PetalburgWoodsMap(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier);
-	~PetalburgWoodsMap() override;
+	PetalburgWoodsLevel(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier);
+	~PetalburgWoodsLevel() override;
 
 	void Update(float deltatime) override {}
 	void Draw(Vector2Float camPos, Vector2Float projecScale) override;

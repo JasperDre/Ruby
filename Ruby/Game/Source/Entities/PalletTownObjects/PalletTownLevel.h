@@ -8,11 +8,11 @@ class Mesh;
 class GameCore;
 class Canvas;
 
-class PalletTownMap : public Level
+class PalletTownLevel : public Level
 {
 public:
-	PalletTownMap(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier);
-	~PalletTownMap() override;
+	PalletTownLevel(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier);
+	~PalletTownLevel() override;
 
 	void Update(float deltatime) override {}
 	void Draw(Vector2Float camPos, Vector2Float projecScale) override;

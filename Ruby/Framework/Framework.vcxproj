@@ -27,6 +27,7 @@
     <ClInclude Include="Source\FrameworkPCH.h" />
     <ClInclude Include="Source\GameCore\GameCore.h" />
     <ClInclude Include="Source\GL\GLHelpers.h" />
+    <ClInclude Include="Source\Math\Color.h" />
     <ClInclude Include="Source\Math\MathHelpers.h" />
     <ClInclude Include="Source\Math\Matrix4Float.h" />
     <ClInclude Include="Source\Math\Vector.h" />
@@ -34,7 +35,6 @@
     <ClInclude Include="Source\Math\Vector3Float.h" />
     <ClInclude Include="Source\Math\Vector4Float.h" />
     <ClInclude Include="Source\Utility\FileUtility.h" />
-    <ClInclude Include="Source\Utility\Helpers.h" />
     <ClInclude Include="Source\Utility\ShaderProgram.h" />
     <ClInclude Include="Source\Win32\FrameworkMain.h" />
     <ClInclude Include="Source\Win32\GL\glext.h" />

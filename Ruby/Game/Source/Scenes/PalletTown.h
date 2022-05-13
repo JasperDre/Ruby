@@ -5,7 +5,7 @@
 class Mesh;
 class TileMap;
 class TileMapPalletTown;
-class PalletTownMap;
+class PalletTownLevel;
 class OakHouse;
 class PlayerHouse;
 class RivalHouse;
@@ -34,7 +34,7 @@ private:
 	Vector2Float BoySavedPosition;
 	Vector2Float m_GirlNPCStart;
 	Vector2Float m_BoyNPCStart;
-	PalletTownMap* m_PalletTownMap;
+	PalletTownLevel* m_PalletTownMap;
 	OakHouse* m_OakHouseTop;
 	PlayerHouse* m_PlayerHouseTop;
 	RivalHouse* m_RivalHouseTop;

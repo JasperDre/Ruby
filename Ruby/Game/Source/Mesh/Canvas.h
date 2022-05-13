@@ -27,17 +27,17 @@ private:
 
 	std::vector<VertexFormat> m_BaseTileVerts =
 	{
-		VertexFormat(Vector2Float(0.0f,  0.0f), MyColor(255, 255, 255, 255), Vector2Float(0.0f, 0.0f)),
-		VertexFormat(Vector2Float(0.0f,  1.0f), MyColor(255, 255, 255, 255), Vector2Float(0.0f, 1.0f)),
-		VertexFormat(Vector2Float(1.0f,  0.0f), MyColor(255, 255, 255, 255), Vector2Float(1.0f, 0.0f)),
-		VertexFormat(Vector2Float(1.0f,  1.0f), MyColor(255, 255, 255, 255), Vector2Float(1.0f, 1.0f))
+		VertexFormat(Vector2Float(0.0f,  0.0f), Color(255, 255, 255, 255), Vector2Float(0.0f, 0.0f)),
+		VertexFormat(Vector2Float(0.0f,  1.0f), Color(255, 255, 255, 255), Vector2Float(0.0f, 1.0f)),
+		VertexFormat(Vector2Float(1.0f,  0.0f), Color(255, 255, 255, 255), Vector2Float(1.0f, 0.0f)),
+		VertexFormat(Vector2Float(1.0f,  1.0f), Color(255, 255, 255, 255), Vector2Float(1.0f, 1.0f))
 	};
 
 	std::vector<VertexFormat> m_BaseTileVertsReverse =
 	{
-		VertexFormat(Vector2Float(1.0f,  0.0f), MyColor(255, 255, 255, 255), Vector2Float(1.0f, 0.0f)),
-		VertexFormat(Vector2Float(1.0f,  1.0f), MyColor(255, 255, 255, 255), Vector2Float(1.0f, 1.0f)),
-		VertexFormat(Vector2Float(0.0f,  0.0f), MyColor(255, 255, 255, 255), Vector2Float(0.0f, 0.0f)),
-		VertexFormat(Vector2Float(0.0f,  1.0f), MyColor(255, 255, 255, 255), Vector2Float(0.0f, 1.0f))
+		VertexFormat(Vector2Float(1.0f,  0.0f), Color(255, 255, 255, 255), Vector2Float(1.0f, 0.0f)),
+		VertexFormat(Vector2Float(1.0f,  1.0f), Color(255, 255, 255, 255), Vector2Float(1.0f, 1.0f)),
+		VertexFormat(Vector2Float(0.0f,  0.0f), Color(255, 255, 255, 255), Vector2Float(0.0f, 0.0f)),
+		VertexFormat(Vector2Float(0.0f,  1.0f), Color(255, 255, 255, 255), Vector2Float(0.0f, 1.0f))
 	};
 };

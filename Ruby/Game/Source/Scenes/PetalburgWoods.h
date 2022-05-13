@@ -6,7 +6,7 @@ class Mesh;
 class TileMap;
 class TileMapWoods;
 class Player;
-class PetalburgWoodsMap;
+class PetalburgWoodsLevel;
 
 class PetalburgWoods : public Scene
 {
@@ -24,5 +24,5 @@ public:
 
 private:
 	Vector2Float PlayerSavedPosition;
-	PetalburgWoodsMap* m_MyPetalburg;
+	PetalburgWoodsLevel* m_MyPetalburg;
 };

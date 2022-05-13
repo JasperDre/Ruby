@@ -4,14 +4,6 @@
 
 class ShaderProgram
 {
-protected:
-    char* m_VertShaderString;
-    char* m_FragShaderString;
-
-    GLuint m_VertShader;
-    GLuint m_FragShader;
-    GLuint m_Program;
-
 public:
     ShaderProgram();
     ShaderProgram(const char* vertfilename, const char* fragfilename);
@@ -24,4 +16,11 @@ public:
     bool Reload();
 
     [[nodiscard]] GLuint GetProgram() const { return m_Program; }
+
+private:
+    char* m_VertShaderString;
+    char* m_FragShaderString;
+    GLuint m_VertShader;
+    GLuint m_FragShader;
+    GLuint m_Program;
 };

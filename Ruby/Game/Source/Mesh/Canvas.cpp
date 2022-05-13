@@ -233,7 +233,7 @@ void Canvas::AddVert(Vector2Float objectPos, float objectAngle, Vector2Float obj
 
 			UVTemp += aUVoffset;
 
-			VertexFormat aVert = VertexFormat(Vector2Float(finalPos), MyColor(m_BaseTileVertsReverse.at(i).m_Color), Vector2Float(UVTemp));
+			VertexFormat aVert = VertexFormat(Vector2Float(finalPos), Color(m_BaseTileVertsReverse.at(i).m_Color), Vector2Float(UVTemp));
 
 			m_CanvasVerts.push_back(aVert);
 		}
@@ -254,7 +254,7 @@ void Canvas::AddVert(Vector2Float objectPos, float objectAngle, Vector2Float obj
 
 			UVTemp += aUVoffset;
 
-			VertexFormat aVert = VertexFormat(Vector2Float(finalPos), MyColor(m_BaseTileVerts.at(i).m_Color), Vector2Float(UVTemp));
+			VertexFormat aVert = VertexFormat(Vector2Float(finalPos), Color(m_BaseTileVerts.at(i).m_Color), Vector2Float(UVTemp));
 
 			m_CanvasVerts.push_back(aVert);
 		}

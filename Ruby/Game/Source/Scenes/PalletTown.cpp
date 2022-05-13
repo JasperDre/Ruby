@@ -4,7 +4,7 @@
 #include "Entities/Entity.h"
 #include "Entities/Player.h"
 #include "Entities/PalletTownObjects/OakHouse.h"
-#include "Entities/PalletTownObjects/PalletTownMap.h"
+#include "Entities/PalletTownObjects/PalletTownLevel.h"
 #include "Entities/PalletTownObjects/PlayerHouse.h"
 #include "Entities/PalletTownObjects/RivalHouse.h"
 #include "Entities/PalletTownObjects/TownBoy.h"
@@ -60,7 +60,7 @@ void PalletTown::LoadContent()
 	m_MyBoyMesh = new Mesh();
 	m_MyBoyMesh->SetShader(m_pMyGame->GetShader(), m_pMyGame->GetDebugShader());
 
-	m_PalletTownMap = new PalletTownMap(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);
+	m_PalletTownMap = new PalletTownLevel(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);
 	m_OakHouseTop = new OakHouse(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);
 	m_PlayerHouseTop = new PlayerHouse(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);
 	m_RivalHouseTop = new RivalHouse(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);

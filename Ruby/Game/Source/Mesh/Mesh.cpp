@@ -220,9 +220,9 @@ void Mesh::GenerateTriangle()
 
 	// Vertex info for a diamond.
 	VertexFormat vertexAttributes[] = {
-		VertexFormat(Vector2Float(0.0f,  1.0f), MyColor(255, 255, 255, 255), Vector2Float(0.5f, 1.0f)),
-		VertexFormat(Vector2Float(-0.5f, -1.0f), MyColor(255, 255, 255, 255), Vector2Float(0.25f, 0.0f)),
-		VertexFormat(Vector2Float(0.5f, -1.0f), MyColor(255, 255, 255, 255), Vector2Float(0.75f, 0.0f)),
+		VertexFormat(Vector2Float(0.0f,  1.0f), Color(255, 255, 255, 255), Vector2Float(0.5f, 1.0f)),
+		VertexFormat(Vector2Float(-0.5f, -1.0f), Color(255, 255, 255, 255), Vector2Float(0.25f, 0.0f)),
+		VertexFormat(Vector2Float(0.5f, -1.0f), Color(255, 255, 255, 255), Vector2Float(0.75f, 0.0f)),
 	};
 
 	// Gen and fill buffer with our attributes.
@@ -245,10 +245,10 @@ void Mesh::GenerateCircle()
 
 	// Vertex position info for a diamond.
 	VertexFormat vertexAttributes[] = {
-		VertexFormat(Vector2Float(0.0f,  1.0f), MyColor(0, 255,   0, 255), Vector2Float(0.5f, 1.0f)),
-		VertexFormat(Vector2Float(-1.0f,  0.0f), MyColor(0, 255,   0, 255), Vector2Float(0.0f, 0.5f)),
-		VertexFormat(Vector2Float(1.0f,  0.0f), MyColor(0, 255,   0, 255), Vector2Float(1.0f, 0.5f)),
-		VertexFormat(Vector2Float(0.0f, -1.0f), MyColor(0, 255,   0, 255), Vector2Float(0.5f, 0.0f)),
+		VertexFormat(Vector2Float(0.0f,  1.0f), Color(0, 255,   0, 255), Vector2Float(0.5f, 1.0f)),
+		VertexFormat(Vector2Float(-1.0f,  0.0f), Color(0, 255,   0, 255), Vector2Float(0.0f, 0.5f)),
+		VertexFormat(Vector2Float(1.0f,  0.0f), Color(0, 255,   0, 255), Vector2Float(1.0f, 0.5f)),
+		VertexFormat(Vector2Float(0.0f, -1.0f), Color(0, 255,   0, 255), Vector2Float(0.5f, 0.0f)),
 	};
 
 	// Gen and fill buffer with our attributes.
@@ -328,10 +328,10 @@ void Mesh::GenerateFrameMesh()
 	assert(m_VBO == 0);
 
 	VertexFormat vertexAttributes[] = {
-	VertexFormat(Vector2Float(0.0f,  0.0f), MyColor(0, 255,   0, 255), Vector2Float(0.0f, 0.0f)),
-	VertexFormat(Vector2Float(0.0f, 1.0f), MyColor(0, 255,   0, 255), Vector2Float(0.0f, 1.0f)),
-	VertexFormat(Vector2Float(1.0f,  1.0f), MyColor(0, 255,   0, 255), Vector2Float(1.0f, 1.0f)),
-	VertexFormat(Vector2Float(1.0f, 0.0f), MyColor(0, 255,   0, 255), Vector2Float(1.0f, 0.0f)),
+	VertexFormat(Vector2Float(0.0f,  0.0f), Color(0, 255,   0, 255), Vector2Float(0.0f, 0.0f)),
+	VertexFormat(Vector2Float(0.0f, 1.0f), Color(0, 255,   0, 255), Vector2Float(0.0f, 1.0f)),
+	VertexFormat(Vector2Float(1.0f,  1.0f), Color(0, 255,   0, 255), Vector2Float(1.0f, 1.0f)),
+	VertexFormat(Vector2Float(1.0f, 0.0f), Color(0, 255,   0, 255), Vector2Float(1.0f, 0.0f)),
 	};
 
 	// Gen and fill buffer with our attributes.
@@ -349,10 +349,10 @@ void Mesh::GenerateTileMesh()
 	assert(m_VBO == 0);
 
 	VertexFormat vertexAttributes[] = {
-	VertexFormat(Vector2Float(0.0f,  0.0f), MyColor(255, 255, 255, 255), Vector2Float(0.0f, 0.0f)),
-	VertexFormat(Vector2Float(0.0f,  1.0f), MyColor(255, 255, 255, 255), Vector2Float(0.0f, 1.0f)),
-	VertexFormat(Vector2Float(1.0f,  1.0f), MyColor(255, 255, 255, 255), Vector2Float(1.0f, 1.0f)),
-	VertexFormat(Vector2Float(1.0f,  0.0f), MyColor(255, 255, 255, 255), Vector2Float(1.0f, 0.0f)),
+	VertexFormat(Vector2Float(0.0f,  0.0f), Color(255, 255, 255, 255), Vector2Float(0.0f, 0.0f)),
+	VertexFormat(Vector2Float(0.0f,  1.0f), Color(255, 255, 255, 255), Vector2Float(0.0f, 1.0f)),
+	VertexFormat(Vector2Float(1.0f,  1.0f), Color(255, 255, 255, 255), Vector2Float(1.0f, 1.0f)),
+	VertexFormat(Vector2Float(1.0f,  0.0f), Color(255, 255, 255, 255), Vector2Float(1.0f, 0.0f)),
 	};
 
 	// Gen and fill buffer with our attributes.
@@ -371,10 +371,10 @@ void Mesh::GenerateWildTileMesh()
 	assert(m_VBO == 0);
 
 	VertexFormat vertexAttributes[] = {
-	VertexFormat(Vector2Float(0.0f,  0.0f), MyColor(255, 0, 0, 255), Vector2Float(0.0f, 0.0f)),
-	VertexFormat(Vector2Float(0.0f,  1.0f), MyColor(255, 0, 0, 255), Vector2Float(0.0f, 1.0f)),
-	VertexFormat(Vector2Float(1.0f,  1.0f), MyColor(255, 0, 0, 255), Vector2Float(1.0f, 1.0f)),
-	VertexFormat(Vector2Float(1.0f,  0.0f), MyColor(255, 0, 0, 255), Vector2Float(1.0f, 0.0f)),
+	VertexFormat(Vector2Float(0.0f,  0.0f), Color(255, 0, 0, 255), Vector2Float(0.0f, 0.0f)),
+	VertexFormat(Vector2Float(0.0f,  1.0f), Color(255, 0, 0, 255), Vector2Float(0.0f, 1.0f)),
+	VertexFormat(Vector2Float(1.0f,  1.0f), Color(255, 0, 0, 255), Vector2Float(1.0f, 1.0f)),
+	VertexFormat(Vector2Float(1.0f,  0.0f), Color(255, 0, 0, 255), Vector2Float(1.0f, 0.0f)),
 	};
 
 	// Gen and fill buffer with our attributes.
@@ -393,10 +393,10 @@ void Mesh::GenerateTextureMesh(Vector2Float aSize)
 	assert(m_VBO == 0);
 
 	VertexFormat vertexAttributes[] = {
-	VertexFormat(Vector2Float(0.0f,  0.0f), MyColor(255, 255, 255, 255), Vector2Float(0.0f, 0.0f)),
-	VertexFormat(Vector2Float(0.0f,  aSize.myY), MyColor(255, 255, 255, 255), Vector2Float(0.0f, 1.0f)),
-	VertexFormat(Vector2Float(aSize.myX,  aSize.myY), MyColor(255, 255, 255, 255), Vector2Float(1.0f, 1.0f)),
-	VertexFormat(Vector2Float(aSize.myX,  0.0f), MyColor(255, 255, 255, 255), Vector2Float(1.0f, 0.0f)),
+	VertexFormat(Vector2Float(0.0f,  0.0f), Color(255, 255, 255, 255), Vector2Float(0.0f, 0.0f)),
+	VertexFormat(Vector2Float(0.0f,  aSize.myY), Color(255, 255, 255, 255), Vector2Float(0.0f, 1.0f)),
+	VertexFormat(Vector2Float(aSize.myX,  aSize.myY), Color(255, 255, 255, 255), Vector2Float(1.0f, 1.0f)),
+	VertexFormat(Vector2Float(aSize.myX,  0.0f), Color(255, 255, 255, 255), Vector2Float(1.0f, 0.0f)),
 	};
 
 	// Gen and fill buffer with our attributes.
@@ -415,10 +415,10 @@ void Mesh::GenerateDebugMesh()
 	assert(m_VBO == 0);
 
 	VertexFormat vertexAttributes[] = {
-	VertexFormat(Vector2Float(0.0f,  1.0f), MyColor(255, 255,   255, 255), Vector2Float(0.0f, 1.0f)),
-	VertexFormat(Vector2Float(1.0f,  1.0f), MyColor(255, 255,   255, 255), Vector2Float(1.0f, 1.0f)),
-	VertexFormat(Vector2Float(1.0f,  0.0f), MyColor(255, 255,   255, 255), Vector2Float(1.0f, 0.0f)),
-	VertexFormat(Vector2Float(0.0f, 0.0f), MyColor(255, 255,   255, 255), Vector2Float(0.0f, 0.0f)),
+	VertexFormat(Vector2Float(0.0f,  1.0f), Color(255, 255,   255, 255), Vector2Float(0.0f, 1.0f)),
+	VertexFormat(Vector2Float(1.0f,  1.0f), Color(255, 255,   255, 255), Vector2Float(1.0f, 1.0f)),
+	VertexFormat(Vector2Float(1.0f,  0.0f), Color(255, 255,   255, 255), Vector2Float(1.0f, 0.0f)),
+	VertexFormat(Vector2Float(0.0f, 0.0f), Color(255, 255,   255, 255), Vector2Float(0.0f, 0.0f)),
 	};
 
 	glGenBuffers(1, &m_VBO);

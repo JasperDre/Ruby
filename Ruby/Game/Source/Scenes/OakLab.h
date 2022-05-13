@@ -6,7 +6,7 @@ class Mesh;
 class Player;
 class TileMap;
 class TileMapOakLab;
-class OakLabMap;
+class OakLabLevel;
 class OakLabDeskTop;
 class OakLabMachineTop;
 class OakLabPlantTop;
@@ -33,7 +33,7 @@ private:
 	Mesh* m_ProfOakMesh;
 	ProfessorOak* m_ProfOak;
 	AIController* m_OakAIController;
-	OakLabMap* m_OakLabMap;
+	OakLabLevel* m_OakLabMap;
 	OakLabDeskTop* m_OakLabWorkDesk;
 	OakLabMachineTop* m_OakLabMachineTop;
 	OakLabPlantTop* m_OakLabPlantTops;

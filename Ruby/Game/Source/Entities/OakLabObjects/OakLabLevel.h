@@ -8,11 +8,11 @@ class Mesh;
 class GameCore;
 class Canvas;
 
-class OakLabMap : public Level
+class OakLabLevel : public Level
 {
 public:
-	OakLabMap(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier);
-	~OakLabMap() override;
+	OakLabLevel(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier);
+	~OakLabLevel() override;
 
 	void Update(float deltatime) override {}
 	void Draw(Vector2Float camPos, Vector2Float projecScale) override;

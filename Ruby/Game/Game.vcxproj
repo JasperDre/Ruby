@@ -155,12 +155,12 @@
     <ClInclude Include="Source\Entities\Level.h" />
     <ClInclude Include="Source\Entities\OakLabObjects\OakLabDeskTop.h" />
     <ClInclude Include="Source\Entities\OakLabObjects\OakLabMachineTop.h" />
-    <ClInclude Include="Source\Entities\OakLabObjects\OakLabMap.h" />
+    <ClInclude Include="Source\Entities\OakLabObjects\OakLabLevel.h" />
     <ClInclude Include="Source\Entities\OakLabObjects\OakLabPlantTop.h" />
     <ClInclude Include="Source\Entities\OakLabObjects\OakLabTableTop.h" />
     <ClInclude Include="Source\Entities\OakLabObjects\ProfessorOak.h" />
     <ClInclude Include="Source\Entities\PalletTownObjects\OakHouse.h" />
-    <ClInclude Include="Source\Entities\PalletTownObjects\PalletTownMap.h" />
+    <ClInclude Include="Source\Entities\PalletTownObjects\PalletTownLevel.h" />
     <ClInclude Include="Source\Entities\PalletTownObjects\PlayerHouse.h" />
     <ClInclude Include="Source\Entities\PalletTownObjects\RivalHouse.h" />
     <ClInclude Include="Source\Entities\PalletTownObjects\TownBoy.h" />
@@ -169,7 +169,7 @@
     <ClInclude Include="Source\Entities\UI\PokeBall.h" />
     <ClInclude Include="Source\Entities\UI\ScoreNumber.h" />
     <ClInclude Include="Source\Entities\UI\UIObject.h" />
-    <ClInclude Include="Source\Entities\WoodsObjects\PetalburgWoodsMap.h" />
+    <ClInclude Include="Source\Entities\WoodsObjects\PetalburgWoodsLevel.h" />
     <ClInclude Include="Source\Entities\WoodsObjects\WildPokemonTile.h" />
     <ClInclude Include="Source\GamePCH.h" />
     <ClInclude Include="Source\GameplayHelpers\ResourceManager.h" />
@@ -197,12 +197,12 @@
     <ClCompile Include="Source\Entities\Level.cpp" />
     <ClCompile Include="Source\Entities\OakLabObjects\OakLabDeskTop.cpp" />
     <ClCompile Include="Source\Entities\OakLabObjects\OakLabMachineTop.cpp" />
-    <ClCompile Include="Source\Entities\OakLabObjects\OakLabMap.cpp" />
+    <ClCompile Include="Source\Entities\OakLabObjects\OakLabLevel.cpp" />
     <ClCompile Include="Source\Entities\OakLabObjects\OakLabPlantTop.cpp" />
     <ClCompile Include="Source\Entities\OakLabObjects\OakLabTableTop.cpp" />
     <ClCompile Include="Source\Entities\OakLabObjects\ProfessorOak.cpp" />
     <ClCompile Include="Source\Entities\PalletTownObjects\OakHouse.cpp" />
-    <ClCompile Include="Source\Entities\PalletTownObjects\PalletTownMap.cpp" />
+    <ClCompile Include="Source\Entities\PalletTownObjects\PalletTownLevel.cpp" />
     <ClCompile Include="Source\Entities\PalletTownObjects\PlayerHouse.cpp" />
     <ClCompile Include="Source\Entities\PalletTownObjects\RivalHouse.cpp" />
     <ClCompile Include="Source\Entities\PalletTownObjects\TownBoy.cpp" />
@@ -211,7 +211,7 @@
     <ClCompile Include="Source\Entities\UI\PokeBall.cpp" />
     <ClCompile Include="Source\Entities\UI\ScoreNumber.cpp" />
     <ClCompile Include="Source\Entities\UI\UIObject.cpp" />
-    <ClCompile Include="Source\Entities\WoodsObjects\PetalburgWoodsMap.cpp" />
+    <ClCompile Include="Source\Entities\WoodsObjects\PetalburgWoodsLevel.cpp" />
     <ClCompile Include="Source\Entities\WoodsObjects\WildPokemonTile.cpp" />
     <ClCompile Include="Source\GamePCH.cpp" />
     <ClCompile Include="Source\GameplayHelpers\ResourceManager.cpp" />

@@ -19,7 +19,7 @@ public:
 
 private:
 	std::vector<Frame> m_MyFrames;
-	std::array<unsigned short, 6> OakHOakLabDeskMap;
+	std::array<unsigned short, 6> myOakLabDeskTopMap;
 	Vector2Float m_MyTileUVOffset;
 	Vector2Float m_MyTileUVScale;
 	Vector2Float OaklabDeskPosition;

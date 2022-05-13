@@ -39,7 +39,7 @@
     <ClInclude Include="Source\Entities\OakLabObjects\OakLabMachineTop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Entities\OakLabObjects\OakLabMap.h">
+    <ClInclude Include="Source\Entities\OakLabObjects\OakLabLevel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Entities\OakLabObjects\OakLabPlantTop.h">
@@ -54,7 +54,7 @@
     <ClInclude Include="Source\Entities\PalletTownObjects\OakHouse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Entities\PalletTownObjects\PalletTownMap.h">
+    <ClInclude Include="Source\Entities\PalletTownObjects\PalletTownLevel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Entities\PalletTownObjects\PlayerHouse.h">
@@ -78,7 +78,7 @@
     <ClInclude Include="Source\Entities\UI\UIObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Entities\WoodsObjects\PetalburgWoodsMap.h">
+    <ClInclude Include="Source\Entities\WoodsObjects\PetalburgWoodsLevel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Entities\WoodsObjects\WildPokemonTile.h">
@@ -161,7 +161,7 @@
     <ClCompile Include="Source\Entities\OakLabObjects\OakLabMachineTop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Entities\OakLabObjects\OakLabMap.cpp">
+    <ClCompile Include="Source\Entities\OakLabObjects\OakLabLevel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Entities\OakLabObjects\OakLabPlantTop.cpp">
@@ -176,7 +176,7 @@
     <ClCompile Include="Source\Entities\PalletTownObjects\OakHouse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Entities\PalletTownObjects\PalletTownMap.cpp">
+    <ClCompile Include="Source\Entities\PalletTownObjects\PalletTownLevel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Entities\PalletTownObjects\PlayerHouse.cpp">
@@ -200,7 +200,7 @@
     <ClCompile Include="Source\Entities\UI\UIObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Entities\WoodsObjects\PetalburgWoodsMap.cpp">
+    <ClCompile Include="Source\Entities\WoodsObjects\PetalburgWoodsLevel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Entities\WoodsObjects\WildPokemonTile.cpp">

@@ -29,11 +29,11 @@
 #include "Win32/Utility/WindowsUtility.h"
 #endif
 #include "GL/GLHelpers.h"
+#include "Math/Color.h"
 #include "Math/MathHelpers.h"
 #include "Math/Matrix4Float.h"
 #include "Math/Vector.h"
 #include "Utility/FileUtility.h"
-#include "Utility/Helpers.h"
 #include "Utility/ShaderProgram.h"
 
 #if WIN32

@@ -3,7 +3,7 @@
 
 #include "Entities/Entity.h"
 #include "Entities/Player.h"
-#include "Entities/WoodsObjects/PetalburgWoodsMap.h"
+#include "Entities/WoodsObjects/PetalburgWoodsLevel.h"
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
@@ -25,7 +25,7 @@ PetalburgWoods::~PetalburgWoods()
 
 void PetalburgWoods::LoadContent()
 {
-	m_MyPetalburg = new PetalburgWoodsMap(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);
+	m_MyPetalburg = new PetalburgWoodsLevel(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);
 }
 
 void PetalburgWoods::Update(float deltatime)

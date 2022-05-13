@@ -6,7 +6,7 @@
 #include "Entities/Player.h"
 #include "Entities/OakLabObjects/OakLabDeskTop.h"
 #include "Entities/OakLabObjects/OakLabMachineTop.h"
-#include "Entities/OakLabObjects/OakLabMap.h"
+#include "Entities/OakLabObjects/OakLabLevel.h"
 #include "Entities/OakLabObjects/OakLabPlantTop.h"
 #include "Entities/OakLabObjects/OakLabTableTop.h"
 #include "Entities/OakLabObjects/ProfessorOak.h"
@@ -46,7 +46,7 @@ void OakLab::LoadContent()
 	m_ProfOakMesh = new Mesh();
 	m_ProfOakMesh->SetShader(m_pMyGame->GetShader(), m_pMyGame->GetDebugShader());
 
-	m_OakLabMap = new OakLabMap(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);
+	m_OakLabMap = new OakLabLevel(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);
 	m_OakLabWorkDesk = new OakLabDeskTop(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);
 	m_OakLabMachineTop = new OakLabMachineTop(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);
 	m_OakLabPlantTops = new OakLabPlantTop(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);

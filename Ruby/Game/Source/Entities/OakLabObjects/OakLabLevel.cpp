@@ -1,12 +1,12 @@
 #include "GamePCH.h"
 
-#include "OakLabMap.h"
+#include "OakLabLevel.h"
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 #include "Mesh/Canvas.h"
 
-OakLabMap::OakLabMap(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier)
+OakLabLevel::OakLabLevel(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier)
 	: Level(aTileMap, aGameCore, aMesh, aTextureIdentifier)
 {
 	myCanvas = new Canvas(myTileMap, aResourceManager);
@@ -15,12 +15,12 @@ OakLabMap::OakLabMap(ResourceManager* aResourceManager, TileMap* aTileMap, GameC
 	myCanvas->GenterateCanvasMesh((LABSIZE * 4) - (NUM_LAB_COLUMNS * 11));
 }
 
-OakLabMap::~OakLabMap()
+OakLabLevel::~OakLabLevel()
 {
 	delete myCanvas;
 }
 
-void OakLabMap::Draw(Vector2Float camPos, Vector2Float projecScale)
+void OakLabLevel::Draw(Vector2Float camPos, Vector2Float projecScale)
 {
 	myCanvas->DrawCanvas(camPos, projecScale, myTextureIdentifier);
 }

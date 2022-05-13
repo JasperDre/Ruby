@@ -8,11 +8,11 @@ protected:
 	struct VertexFormat
 	{
 		Vector2Float m_Pos;
-		MyColor m_Color;
+		Color m_Color;
 		Vector2Float m_UV;
 
 		VertexFormat() : m_Pos(0.0f), m_UV(0.0f) {}
-		VertexFormat(Vector2Float pos, MyColor color, Vector2Float UV)
+		VertexFormat(Vector2Float pos, Color color, Vector2Float UV)
 		{
 			m_Pos = pos;
 			m_Color = color;
