@@ -15,9 +15,16 @@
 #include <string>
 #include <vector>
 
-#include "cJSON/cJSON.h"
 #include "glad/glad.h"
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
 
+#include "Events/CollisionEvent.h"
+#include "Events/DoorEvent.h"
+#include "Events/Event.h"
+#include "Events/EventManager.h"
+#include "GameCore/GameCore.h"
 #include "GL/GLHelpers.h"
 #include "Math/Color.h"
 #include "Math/Matrix4Float.h"
@@ -29,9 +36,3 @@
 #include "Utility/MathUtility.h"
 #include "Utility/ShaderProgram.h"
 #include "Win32/FrameworkMain.h"
-
-#include "Events/CollisionEvent.h"
-#include "Events/DoorEvent.h"
-#include "Events/Event.h"
-#include "Events/EventManager.h"
-#include "GameCore/GameCore.h"

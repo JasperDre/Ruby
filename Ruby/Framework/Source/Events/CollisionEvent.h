@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Event.h"
+#include "Math/Vector2Float.h"
 
 class CollisionEvent : public Event
 {
