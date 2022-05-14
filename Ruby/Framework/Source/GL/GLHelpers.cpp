@@ -62,7 +62,7 @@ namespace GLHelpers
 
     void APIENTRY GLDebugMessageCallback(GLenum source, GLenum type, unsigned int id, GLenum severity, GLsizei /*length*/, const char* message, const void* /*userParam*/)
     {
-        // Ignore non-significant error/warning codes
+        // Ignore insignificant error codes
         if (id == 131169 || id == 131185 || id == 131218 || id == 131204)
             return;
 
@@ -71,57 +71,124 @@ namespace GLHelpers
         {
             case GL_DEBUG_SOURCE_API:
             {
-                errorMessage += "Source: API";
+                errorMessage += "Source: API\n";
                 break;
             }
-            case GL_DEBUG_SOURCE_WINDOW_SYSTEM:   errorMessage += "Source: Window System"; break;
-            case GL_DEBUG_SOURCE_SHADER_COMPILER: errorMessage += "Source: Shader Compiler"; break;
-            case GL_DEBUG_SOURCE_THIRD_PARTY:     errorMessage += "Source: Third Party"; break;
-            case GL_DEBUG_SOURCE_APPLICATION:     errorMessage += "Source: Application"; break;
-            case GL_DEBUG_SOURCE_OTHER:           errorMessage += "Source: Other"; break;
+            case GL_DEBUG_SOURCE_WINDOW_SYSTEM:
+            {
+                errorMessage += "Source: Window System\n";
+                break;
+            }
+            case GL_DEBUG_SOURCE_SHADER_COMPILER:
+            {
+                errorMessage += "Source: Shader Compiler\n";
+                break;
+            }
+            case GL_DEBUG_SOURCE_THIRD_PARTY:
+            {
+                errorMessage += "Source: Third Party\n";
+                break;
+            }
+            case GL_DEBUG_SOURCE_APPLICATION:
+            {
+                errorMessage += "Source: Application\n";
+                break;
+            }
+            case GL_DEBUG_SOURCE_OTHER:
+            {
+                errorMessage += "Source: Other\n";
+                break;
+            }
             default:
             {
-                errorMessage += "Source: Unkown";
+                errorMessage += "Source: Unkown\n";
                 break;
             }
         }
-
-        errorMessage += "\n";
 
         switch (type)
         {
-            case GL_DEBUG_TYPE_ERROR:              errorMessage += "Type: Error"; break;
-            case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR: errorMessage += "Type: Deprecated Behaviour"; break;
-            case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:  errorMessage += "Type: Undefined Behaviour"; break; 
-            case GL_DEBUG_TYPE_PORTABILITY:        errorMessage += "Type: Portability"; break;
-            case GL_DEBUG_TYPE_PERFORMANCE:         errorMessage += "Type: Performance"; break;
-            case GL_DEBUG_TYPE_MARKER:              errorMessage += "Type: Marker"; break;
-            case GL_DEBUG_TYPE_PUSH_GROUP:          errorMessage += "Type: Push Group"; break;
-            case GL_DEBUG_TYPE_POP_GROUP:           errorMessage += "Type: Pop Group"; break;
-            case GL_DEBUG_TYPE_OTHER:               errorMessage += "Type: Other"; break;
+            case GL_DEBUG_TYPE_ERROR:
+            {
+                errorMessage += "Type: Error\n";
+                break;
+            }
+            case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR:
+            {
+                errorMessage += "Type: Deprecated Behaviour\n";
+                break;
+            }
+            case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:
+            {
+                errorMessage += "Type: Undefined Behaviour\n";
+                break;
+            }
+            case GL_DEBUG_TYPE_PORTABILITY:
+            {
+                errorMessage += "Type: Portability\n";
+                break;
+            }
+            case GL_DEBUG_TYPE_PERFORMANCE:
+            {
+                errorMessage += "Type: Performance\n";
+                break;
+            }
+            case GL_DEBUG_TYPE_MARKER:
+            {
+                errorMessage += "Type: Marker\n";
+                break;
+            }
+            case GL_DEBUG_TYPE_PUSH_GROUP:
+            {
+                errorMessage += "Type: Push Group\n";
+                break;
+            }
+            case GL_DEBUG_TYPE_POP_GROUP:
+            {
+                errorMessage += "Type: Pop Group\n";
+                break;
+            }
+            case GL_DEBUG_TYPE_OTHER:
+            {
+                errorMessage += "Type: Other\n";
+                break;
+            }
             default:
             {
-                errorMessage += "Type: Unkown";
+                errorMessage += "Type: Unkown\n";
                 break;
             }
         }
 
-        errorMessage += "\n";
-        
         switch (severity)
         {
-            case GL_DEBUG_SEVERITY_HIGH:         errorMessage += "Severity: high"; break;
-            case GL_DEBUG_SEVERITY_MEDIUM:       errorMessage += "Severity: medium"; break;
-            case GL_DEBUG_SEVERITY_LOW:          errorMessage += "Severity: low"; break;
-            case GL_DEBUG_SEVERITY_NOTIFICATION: errorMessage += "Severity: notification"; break;
+            case GL_DEBUG_SEVERITY_HIGH:
+            {
+                errorMessage += "Severity: High\n";
+                break;
+            }
+            case GL_DEBUG_SEVERITY_MEDIUM:
+            {
+                errorMessage += "Severity: Medium\n";
+                break;
+            }
+            case GL_DEBUG_SEVERITY_LOW:
+            {
+                errorMessage += "Severity: Low\n";
+                break;
+            }
+            case GL_DEBUG_SEVERITY_NOTIFICATION:
+            {
+                errorMessage += "Severity: Notification\n";
+                break;
+            }
             default:
             {
-                errorMessage += "Severity: Unkown";
+                errorMessage += "Severity: Unkown\n";
                 break;
             }
         }
 
-        errorMessage += "\n";
         errorMessage += message;
 
         WindowsUtility::OutputMessage("%s\n", errorMessage.c_str());
@@ -139,87 +206,78 @@ namespace GLHelpers
         unsigned char* pngbuffer;
         unsigned int width, height;
         long filesize;
-        unsigned char* filebuffer = (unsigned char*)WindowsUtility::LoadCompleteFile( filename.c_str(), &filesize );
-        unsigned int result = lodepng_decode32( &pngbuffer, &width, &height, filebuffer, filesize );
+        const unsigned char* filebuffer = reinterpret_cast<unsigned char*>(WindowsUtility::LoadCompleteFile(filename.c_str(), &filesize));
+        const unsigned int result = lodepng_decode32(&pngbuffer, &width, &height, filebuffer, filesize);
         delete[] filebuffer;
-        assert( result == 0 );
+        assert(result == 0);
 
-        Flip32BitImageVertically( pngbuffer, width, height );
+        Flip32BitImageVertically(pngbuffer, width, height);
 
         GLuint texhandle = 0;
-        glGenTextures( 1, &texhandle );
-        glActiveTexture( GL_TEXTURE0 );
-        glBindTexture( GL_TEXTURE_2D, texhandle );
+        glGenTextures(1, &texhandle);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texhandle);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, static_cast<int>(width), static_cast<int>(height), 0, GL_RGBA, GL_UNSIGNED_BYTE, pngbuffer);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glBindTexture(GL_TEXTURE_2D, 0);
 
-        glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pngbuffer );
-
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
-
-        glBindTexture( GL_TEXTURE_2D, 0 );
-
-        free( pngbuffer );
+        free(pngbuffer);
 
         return texhandle;
     }
 
     GLuint LoadTextureCubemap(const char** filenames, GLuint oldtexturehandle)
     {
-        unsigned char* pngbuffer = 0;
-        unsigned int width = 0, height = 0;
+        unsigned char* pngbuffer = nullptr;
+        unsigned int width = 0;
+        unsigned int height = 0;
 
         GLuint texhandle = oldtexturehandle;
-        if( texhandle == 0 )
-            glGenTextures( 1, &texhandle );
-        glActiveTexture( GL_TEXTURE0 );
-        glBindTexture( GL_TEXTURE_CUBE_MAP, texhandle );
+        if (texhandle == 0)
+            glGenTextures(1, &texhandle);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, texhandle);
 
-        for( int i=0; i<6; i++ )
+        for (int i = 0; i < 6; i++)
         {
-            lodepng_decode32_file( &pngbuffer, &width, &height, filenames[i] );
-            assert( pngbuffer != 0 );
-            if( pngbuffer == 0 )
+            lodepng_decode32_file(&pngbuffer, &width, &height, filenames[i]);
+            assert(pngbuffer);
+            if (!pngbuffer)
                 return 0;
 
-            Flip32BitImageVertically( pngbuffer, width, height );
+            Flip32BitImageVertically(pngbuffer, width, height);
 
-            glTexImage2D( GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pngbuffer );
+            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGBA, static_cast<int>(width), static_cast<int>(height), 0, GL_RGBA, GL_UNSIGNED_BYTE, pngbuffer);
 
-            free( pngbuffer );
+            free(pngbuffer);
         }
 
-        glTexParameteri( GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
-        glTexParameteri( GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
-        glTexParameteri( GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-        glTexParameteri( GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
-
-        glBindTexture( GL_TEXTURE_CUBE_MAP, 0 );
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
         return texhandle;
     }
 
     void Flip32BitImageVertically(unsigned char* buffer, unsigned int width, unsigned int height)
     {
-        // flip the image in buffer.  Assumes RGBA 32 bit.
-    
+        unsigned int* temp = new unsigned int[width];
+        const unsigned int linesize = width * sizeof(unsigned int);
+
+        unsigned int* buffer32 = reinterpret_cast<unsigned*>(buffer);
+        for (unsigned int y = 0; y < height / 2; y++)
         {
-            // temp allocation big enough for one line
-            unsigned int* temp;
-            temp = new unsigned int[width];
-            int linesize = width * sizeof(unsigned int);
+            const unsigned int LineOffsetY = y * width;
+            const unsigned int LineOffsetHminusY = (height - 1 - y) * width;
 
-            unsigned int* buffer32 = (unsigned int*)buffer;
-            for( unsigned int y=0; y<height/2; y++ )
-            {
-                int LineOffsetY = y*width;
-                int LineOffsetHminusY = (height-1-y)*width;
-
-                memcpy( temp, &buffer32[LineOffsetY], linesize );
-                memcpy( &buffer32[LineOffsetY], &buffer32[LineOffsetHminusY], linesize );
-                memcpy( &buffer32[LineOffsetHminusY], temp, linesize );
-            }
-
-            delete[] temp;
+            memcpy(temp, &buffer32[LineOffsetY], linesize);
+            memcpy(&buffer32[LineOffsetY], &buffer32[LineOffsetHminusY], linesize);
+            memcpy(&buffer32[LineOffsetHminusY], temp, linesize);
         }
+
+        delete[] temp;
     }
 }
