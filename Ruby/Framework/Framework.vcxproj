@@ -27,6 +27,7 @@
     <ClInclude Include="Source\FrameworkPCH.h" />
     <ClInclude Include="Source\GameCore\GameCore.h" />
     <ClInclude Include="Source\GL\GLHelpers.h" />
+    <ClInclude Include="Source\InputManager.h" />
     <ClInclude Include="Source\Math\Color.h" />
     <ClInclude Include="Source\Math\MathHelpers.h" />
     <ClInclude Include="Source\Math\Matrix4Float.h" />
@@ -44,6 +45,7 @@
     <ClCompile Include="Source\FrameworkPCH.cpp" />
     <ClCompile Include="Source\GameCore\GameCore.cpp" />
     <ClCompile Include="Source\GL\GLHelpers.cpp" />
+    <ClCompile Include="Source\InputManager.cpp" />
     <ClCompile Include="Source\Math\Matrix4Float.cpp" />
     <ClCompile Include="Source\Math\Vector2Float.cpp" />
     <ClCompile Include="Source\Math\Vector3Float.cpp" />
@@ -124,8 +126,9 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>FrameworkPCH.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Framework\Libraries;$(SolutionDir)Framework\Source;$(SolutionDir)Glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Framework\Libraries;$(SolutionDir)Framework\Source;$(SolutionDir)Glad\include;$(SolutionDir)Framework\Libraries\glfw-3.3.7.bin.WIN32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -133,8 +136,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>CJson.lib;LodePNG.lib;Glad.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>CJson.lib;LodePNG.lib;Glad.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Debug;$(SolutionDir)Framework\Libraries\glfw-3.3.7.bin.WIN32\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

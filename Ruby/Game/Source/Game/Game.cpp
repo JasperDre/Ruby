@@ -3,11 +3,13 @@
 
 #include <filesystem>
 
+#include "InputManager.h"
 #include "Controllers/PlayerController.h"
 #include "Entities/GameCamera.h"
 #include "Entities/Entity.h"
 #include "Entities/Player.h"
 #include "Entities/UI/UIObject.h"
+#include "Events/InputEvent.h"
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/SceneManager.h"
 #include "GameplayHelpers/TileMap.h"
@@ -197,10 +199,9 @@ void Game::OnEvent(Event* pEvent)
 
 void Game::Update(float deltatime)
 {
-	if (deltatime > 1 / 20.0f)
-	{
-		deltatime = 1 / 20.0f;
-	}
+	if (deltatime > 1.0f / 20.0f)
+		deltatime = 1.0f / 20.0f;
+
 	Scene* aActiveScene = m_MySceneManager->GetActiveScene();
 
 	aActiveScene->Update(deltatime);
@@ -208,9 +209,30 @@ void Game::Update(float deltatime)
 	m_TrainerCamera->Update(deltatime);
 	m_TrainerCamera->ClampToPlayer(myPlayer->GetPosition());
 	m_UICanvas->SetPosition(m_TrainerCamera->GetCameraPosition());
-	int arange = RAND_MAX % 2;
 
-	//OutputMessage("arange = %d \n", arange);
+	if (InputManager::GetInstance().IsKeyDown(Keys::W))
+	{
+		Event* pEvent = new InputEvent(Keys::W);
+		GetEventManager()->QueueEvent(pEvent);
+	}
+
+	if (InputManager::GetInstance().IsKeyDown(Keys::A))
+	{
+		Event* pEvent = new InputEvent(Keys::A);
+		GetEventManager()->QueueEvent(pEvent);
+	}
+
+	if (InputManager::GetInstance().IsKeyDown(Keys::S))
+	{
+		Event* pEvent = new InputEvent(Keys::S);
+		GetEventManager()->QueueEvent(pEvent);
+	}
+
+	if (InputManager::GetInstance().IsKeyDown(Keys::D))
+	{
+		Event* pEvent = new InputEvent(Keys::D);
+		GetEventManager()->QueueEvent(pEvent);
+	}
 }
 
 void Game::Draw()

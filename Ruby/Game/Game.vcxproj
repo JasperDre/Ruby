@@ -93,6 +93,7 @@
       <PrecompiledHeaderFile>GamePCH.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(SolutionDir)Game\Source;$(SolutionDir)Framework\Source;$(SolutionDir)Framework\Libraries;$(SolutionDir)Glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

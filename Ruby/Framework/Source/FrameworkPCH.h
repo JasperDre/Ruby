@@ -38,7 +38,6 @@ typedef Vector4Int ivec4;
 #include "Events/DoorEvent.h"
 #include "Events/Event.h"
 #include "Events/EventManager.h"
-#include "Events/InputEvent.h"
 #include "GameCore/GameCore.h"
 
 #if WIN32
