@@ -66,16 +66,8 @@ void ShaderProgram::Cleanup()
 
 void ShaderProgram::CompileShader(GLuint& shaderhandle, const char* shaderstring)
 {
-#if WIN32
     const char* strings[] = { shaderstring };
     glShaderSource(shaderhandle, 1, strings, nullptr);
-#else
-    // Define glsl version, set default float precision
-    //     and comment out the first line in the shader which should be #version for WIN32.
-    const char* strings[] = { "#version 100\nprecision highp float;\n//", shaderstring };
-    glShaderSource( shaderhandle, 2, strings, 0 );
-#endif
-
     glCompileShader(shaderhandle);
 
     int compiled = 0;

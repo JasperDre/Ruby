@@ -11,7 +11,7 @@ public:
     virtual ~ShaderProgram();
 
     void Cleanup();
-    void CompileShader(GLuint& shaderhandle, const char* shaderstring);
+    static void CompileShader(GLuint& shaderhandle, const char* shaderstring);
     bool Init(const char* vertfilename, const char* fragfilename);
     bool Reload();
 
