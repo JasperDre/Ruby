@@ -1,8 +1,6 @@
 #include "FrameworkPCH.h"
 #include "FrameworkMain.h"
 
-#include <string>
-
 #include "InputManager.h"
 
 #include "GLFW/glfw3.h"
@@ -33,7 +31,6 @@ void Framework::Init(int width, int height)
 
     if (!CreateGLWindow(title.c_str(), width, height, 32, 31, 1, false))
         WindowsUtility::OutputMessage("Failed to initialize OpenGL window");
-
 }
 
 void Framework::Run(GameCore* pGameCore)

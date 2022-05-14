@@ -15,6 +15,8 @@
 #include <memory.h>
 #include <queue>
 #include <vector>
+#include <string>
+#include <map>
 
 #include "cJSON/cJSON.h"
 #include "glad/glad.h"
