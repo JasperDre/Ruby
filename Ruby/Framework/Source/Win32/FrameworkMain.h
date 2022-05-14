@@ -13,7 +13,6 @@ public:
     void Shutdown() const;
     void SetWindowSize(int width, int height);
 
-    void GetMouseCoordinates(int* mx, int* my) const {}
     [[nodiscard]] unsigned int GetWindowWidth() const { return m_CurrentWindowWidth; }
     [[nodiscard]] unsigned int GetWindowHeight() const { return m_CurrentWindowHeight; }
     [[nodiscard]] GameCore* GetGameCore() const { return m_pGameCore; }
