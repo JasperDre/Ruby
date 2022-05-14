@@ -19,7 +19,7 @@ public:
 
 protected:
     void ResizeWindow(int width, int height);
-    bool CreateGLWindow(const char* title, int width, int height, char colorbits, char zbits, char stencilbits, bool fullscreenflag);
+    bool CreateGLWindow(const char* title, int width, int height);
     void KillGLWindow() const;
     static void KeyCallback(GLFWwindow* aWindow, int aKey, int aScancode, int anAction, int aMode);
     static void CursorCallback(GLFWwindow* aWindow, double aXPosition, double aYPosition);
@@ -32,5 +32,4 @@ protected:
     int m_InitialWindowHeight;
     int m_CurrentWindowWidth;
     int m_CurrentWindowHeight;
-    bool m_FullscreenMode;
 };
