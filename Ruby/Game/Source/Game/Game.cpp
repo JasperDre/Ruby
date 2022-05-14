@@ -93,7 +93,7 @@ void Game::OnSurfaceChanged(int width, int height)
 
 void Game::LoadContent()
 {
-	srand(static_cast<unsigned int>(WindowsUtility::GetSystemTime()));
+	srand(static_cast<unsigned int>(std::chrono::duration<float>(std::chrono::system_clock::now().time_since_epoch()).count()));
 
 	std::string rootDirectory = std::filesystem::current_path().generic_string();
 	rootDirectory += "/../";

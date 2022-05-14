@@ -56,7 +56,7 @@ namespace GLHelpers
             }
         }
 
-        WindowsUtility::OutputMessage("%s\n", errorString);
+        DebugUtility::OutputMessage("%s\n", errorString);
         assert(error == GL_NO_ERROR);
     }
 
@@ -191,13 +191,13 @@ namespace GLHelpers
 
         errorMessage += message;
 
-        WindowsUtility::OutputMessage("%s\n", errorMessage.c_str());
+        DebugUtility::OutputMessage("%s\n", errorMessage.c_str());
         assert(errorMessage.empty());
     }
 
     void GLFWErrorCallback(int anError, const char* aDescription)
     {
-        WindowsUtility::OutputMessage("%i %s\n", anError, aDescription);
+        DebugUtility::OutputMessage("%i %s\n", anError, aDescription);
         assert(!aDescription);
     }
 
@@ -205,10 +205,9 @@ namespace GLHelpers
     {
         unsigned char* pngbuffer;
         unsigned int width, height;
-        long filesize;
-        const unsigned char* filebuffer = reinterpret_cast<unsigned char*>(WindowsUtility::LoadCompleteFile(filename.c_str(), &filesize));
-        const unsigned int result = lodepng_decode32(&pngbuffer, &width, &height, filebuffer, filesize);
-        delete[] filebuffer;
+        const unsigned int filesize = FileUtility::GetFileSize(filename);
+        const unsigned char* source = reinterpret_cast<unsigned char*>(FileUtility::ReadBinaryFileIntoBuffer(filename));
+        const unsigned int result = lodepng_decode32(&pngbuffer, &width, &height, source, filesize);
         assert(result == 0);
 
         Flip32BitImageVertically(pngbuffer, width, height);

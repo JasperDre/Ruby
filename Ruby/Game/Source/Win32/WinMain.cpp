@@ -5,7 +5,7 @@
 #define SCREEN_WIDTH 600
 #define SCREEN_HEIGHT 600
 
-int APIENTRY WinMain(HINSTANCE /*hInst*/, HINSTANCE /*hInstPrev*/, PSTR /*cmdline*/, int /*cmdshow*/)
+int main()
 {
 	const auto framework = new Framework();
 	framework->Init(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -17,5 +17,5 @@ int APIENTRY WinMain(HINSTANCE /*hInst*/, HINSTANCE /*hInstPrev*/, PSTR /*cmdlin
 	delete game;
 	delete framework;
 
-	return WM_QUIT;
+	return 0;
 }

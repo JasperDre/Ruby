@@ -35,10 +35,10 @@
     <ClInclude Include="Source\Math\Vector2Float.h" />
     <ClInclude Include="Source\Math\Vector3Float.h" />
     <ClInclude Include="Source\Math\Vector4Float.h" />
+    <ClInclude Include="Source\Utility\DebugUtility.h" />
     <ClInclude Include="Source\Utility\FileUtility.h" />
     <ClInclude Include="Source\Utility\ShaderProgram.h" />
     <ClInclude Include="Source\Win32\FrameworkMain.h" />
-    <ClInclude Include="Source\Win32\Utility\WindowsUtility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Events\EventManager.cpp" />
@@ -50,9 +50,9 @@
     <ClCompile Include="Source\Math\Vector2Float.cpp" />
     <ClCompile Include="Source\Math\Vector3Float.cpp" />
     <ClCompile Include="Source\Math\Vector4Float.cpp" />
+    <ClCompile Include="Source\Utility\DebugUtility.cpp" />
     <ClCompile Include="Source\Utility\ShaderProgram.cpp" />
     <ClCompile Include="Source\Win32\FrameworkMain.cpp" />
-    <ClCompile Include="Source\Win32\Utility\WindowsUtility.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -128,7 +128,7 @@
       <PrecompiledHeaderFile>FrameworkPCH.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(SolutionDir)Framework\Libraries;$(SolutionDir)Framework\Source;$(SolutionDir)Glad\include;$(SolutionDir)Framework\Libraries\glfw-3.3.7.bin.WIN32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>

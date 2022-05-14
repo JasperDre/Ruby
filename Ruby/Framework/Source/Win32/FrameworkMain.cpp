@@ -29,7 +29,7 @@ void Framework::Init(int width, int height)
 #endif
 
     if (!CreateGLWindow(title.c_str(), width, height))
-        WindowsUtility::OutputMessage("Failed to initialize OpenGL window");
+        DebugUtility::OutputMessage("Failed to initialize OpenGL window");
 }
 
 void Framework::Run(GameCore* pGameCore)
@@ -38,18 +38,19 @@ void Framework::Run(GameCore* pGameCore)
     m_pGameCore->OnSurfaceChanged(m_CurrentWindowWidth, m_CurrentWindowHeight);
     m_pGameCore->LoadContent();
 
-    double previousTime = WindowsUtility::GetSystemTime();
+    auto previousTime = std::chrono::high_resolution_clock::now();
 
     while (!glfwWindowShouldClose(myWindow))
     {
+        auto currentTime = std::chrono::high_resolution_clock::now();
+        auto elapsedTime = currentTime - previousTime;
+        const float deltaTime = std::chrono::duration<float>(elapsedTime).count();
+        previousTime = currentTime;
+
         glfwPollEvents();
 
         if (InputManager::GetInstance().IsKeyDown(Keys::Escape))
             glfwSetWindowShouldClose(myWindow, true);
-
-        const double currentTime = WindowsUtility::GetSystemTime();
-        const float deltaTime = static_cast<float>(currentTime - previousTime);
-        previousTime = currentTime;
 
         m_pGameCore->GetEventManager()->DispatchEvents(m_pGameCore);
         m_pGameCore->Update(deltaTime);

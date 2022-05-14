@@ -87,7 +87,7 @@ void ShaderProgram::CompileShader(GLuint& shaderhandle, const char* shaderstring
 
         char* infobuffer = new char[infolen + 1];
         glGetShaderInfoLog(shaderhandle, infolen + 1, nullptr, infobuffer);
-        WindowsUtility::OutputMessage(infobuffer);
+        DebugUtility::OutputMessage(infobuffer);
         assert(false);
         delete[] infobuffer;
 
@@ -98,8 +98,8 @@ void ShaderProgram::CompileShader(GLuint& shaderhandle, const char* shaderstring
 
 bool ShaderProgram::Init(const char* vertfilename, const char* fragfilename)
 {
-    m_VertShaderString = WindowsUtility::LoadCompleteFile(vertfilename, nullptr);
-    m_FragShaderString = WindowsUtility::LoadCompleteFile(fragfilename, nullptr);
+    m_VertShaderString = FileUtility::ReadFileIntoBuffer(vertfilename);
+    m_FragShaderString = FileUtility::ReadFileIntoBuffer(fragfilename);
 
     assert(m_VertShaderString);
     assert(m_FragShaderString);
@@ -141,7 +141,7 @@ bool ShaderProgram::Reload()
 
         char* infobuffer = new char[infolen + 1];
         glGetProgramInfoLog(m_Program, infolen + 1, nullptr, infobuffer);
-        WindowsUtility::OutputMessage(infobuffer);
+        DebugUtility::OutputMessage(infobuffer);
         assert(false);
         delete[] infobuffer;
 
