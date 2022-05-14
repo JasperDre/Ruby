@@ -145,6 +145,7 @@ public:
     InputManager(InputManager const&) = delete;
     void operator=(InputManager const&) = delete;
 
+    void ClearKeyActionsThisFrame();
     void OnKeyAction(int aKey, int, bool aIsKeyDown, int);
     void OnCursorAction(double aXPosition, double aYPosition);
     void OnScrollAction(double aXOffset, double aYOffset);
@@ -152,6 +153,8 @@ public:
 
     [[nodiscard]] bool IsKeyDown(Keys aKey) const;
     [[nodiscard]] bool IsMouseButtonDown(MouseButtons aMouseButton) const;
+    [[nodiscard]] const std::vector<Keys>& GetReleasedKeysThisFrame() const { return myReleasedKeysThisFrame; }
+    [[nodiscard]] const std::vector<Keys>& GetPressedKeysThisFrame() const { return myPressedKeysThisFrame; }
 
     float myCursorXPosition;
     float myCursorYPosition;
@@ -166,5 +169,7 @@ private:
     static MouseButtons GetTranslatedMouseButton(int aButton);
 
     std::map<Keys, bool> myKeys;
+    std::vector<Keys> myReleasedKeysThisFrame;
+    std::vector<Keys> myPressedKeysThisFrame;
     std::map<MouseButtons, bool> myMouseButtons;
 };

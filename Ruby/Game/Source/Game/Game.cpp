@@ -203,36 +203,25 @@ void Game::Update(float deltatime)
 		deltatime = 1.0f / 20.0f;
 
 	Scene* aActiveScene = m_MySceneManager->GetActiveScene();
-
 	aActiveScene->Update(deltatime);
 
 	m_TrainerCamera->Update(deltatime);
 	m_TrainerCamera->ClampToPlayer(myPlayer->GetPosition());
 	m_UICanvas->SetPosition(m_TrainerCamera->GetCameraPosition());
 
-	if (InputManager::GetInstance().IsKeyDown(Keys::W))
+	for (const Keys key : InputManager::GetInstance().GetPressedKeysThisFrame())
 	{
-		Event* pEvent = new InputEvent(Keys::W);
+		Event* pEvent = new InputEvent(key, false);
 		GetEventManager()->QueueEvent(pEvent);
 	}
 
-	if (InputManager::GetInstance().IsKeyDown(Keys::A))
+	for (const Keys key : InputManager::GetInstance().GetReleasedKeysThisFrame())
 	{
-		Event* pEvent = new InputEvent(Keys::A);
+		Event* pEvent = new InputEvent(key, true);
 		GetEventManager()->QueueEvent(pEvent);
 	}
 
-	if (InputManager::GetInstance().IsKeyDown(Keys::S))
-	{
-		Event* pEvent = new InputEvent(Keys::S);
-		GetEventManager()->QueueEvent(pEvent);
-	}
-
-	if (InputManager::GetInstance().IsKeyDown(Keys::D))
-	{
-		Event* pEvent = new InputEvent(Keys::D);
-		GetEventManager()->QueueEvent(pEvent);
-	}
+	InputManager::GetInstance().ClearKeyActionsThisFrame();
 }
 
 void Game::Draw()

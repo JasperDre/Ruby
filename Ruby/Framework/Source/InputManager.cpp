@@ -30,9 +30,24 @@ bool InputManager::IsMouseButtonDown(MouseButtons aMouseButton) const
     return iterator->second;
 }
 
+void InputManager::ClearKeyActionsThisFrame()
+{
+    myReleasedKeysThisFrame.clear();
+    myPressedKeysThisFrame.clear();
+}
+
 void InputManager::OnKeyAction(int aKey, int /*aScancode*/, bool aIsKeyDown, int /*aMode*/)
 {
     myKeys[GetTranslatedKey(aKey)] = aIsKeyDown;
+
+    if (aIsKeyDown == GLFW_RELEASE)
+    {
+        myReleasedKeysThisFrame.emplace_back(GetTranslatedKey(aKey));
+    }
+    else
+    {
+        myPressedKeysThisFrame.emplace_back(GetTranslatedKey(aKey));
+    }
 }
 
 void InputManager::OnCursorAction(double aXPosition, double aYPosition)

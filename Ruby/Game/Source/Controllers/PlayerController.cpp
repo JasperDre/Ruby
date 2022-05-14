@@ -15,52 +15,63 @@ void PlayerController::OnEvent(Event* pEvent)
 {
 	if (pEvent->GetEventType() == EventTypes::EventType_Input)
 	{
-#if WIN32
 		const InputEvent* pInput = dynamic_cast<InputEvent*>(pEvent);
-
-		if (pInput->myKey == Keys::W)
+		if (pInput->myIsReleased)
 		{
-			ClearInput();
-			m_Up = true;
-			m_InputReleased = false;
+			if (pInput->myKey == Keys::W)
+			{
+				ClearInput();
+				m_Up = false;
+			}
+
+			if (pInput->myKey == Keys::S)
+			{
+				ClearInput();
+				m_Down = false;
+			}
+
+			if (pInput->myKey == Keys::A)
+			{
+				ClearInput();
+				m_Left = false;
+			}
+
+			if (pInput->myKey == Keys::D)
+			{
+				ClearInput();
+				m_Right = false;
+			}
+			
+			if (m_Up == false && m_Down == false && m_Left == false && m_Right == false)
+				m_InputReleased = true;
 		}
 		else
 		{
-			m_Up = false;
-		}
+			if (pInput->myKey == Keys::W)
+			{
+				ClearInput();
+				m_Up = true;
+			}
 
-		if (pInput->myKey == Keys::S)
-		{
-			ClearInput();
-			m_Down = true;
+			if (pInput->myKey == Keys::S)
+			{
+				ClearInput();
+				m_Down = true;
+			}
+
+			if (pInput->myKey == Keys::A)
+			{
+				ClearInput();
+				m_Left = true;
+			}
+
+			if (pInput->myKey == Keys::D)
+			{
+				ClearInput();
+				m_Right = true;
+			}
+
 			m_InputReleased = false;
 		}
-		else
-		{
-			m_Down = false;
-		}
-
-		if (pInput->myKey == Keys::A)
-		{
-			ClearInput();
-			m_Left = true;
-			m_InputReleased = false;
-		}
-		else
-		{
-			m_Left = false;
-		}
-
-		if (pInput->myKey == Keys::D)
-		{
-			ClearInput();
-			m_Right = true;
-			m_InputReleased = false;
-		}
-		else
-		{
-			m_Right = false;
-		}
-#endif
 	}
 }

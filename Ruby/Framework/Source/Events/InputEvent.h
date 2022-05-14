@@ -6,9 +6,10 @@
 class InputEvent : public Event
 {
 public:
-    InputEvent(Keys aKey) : myKey(aKey) {}
+    InputEvent(Keys aKey, bool anIsReleased) : myKey(aKey), myIsReleased(anIsReleased) {}
 
     [[nodiscard]] EventTypes GetEventType() const override { return EventTypes::EventType_Input; }
 
     Keys myKey;
+    const bool myIsReleased;
 };
