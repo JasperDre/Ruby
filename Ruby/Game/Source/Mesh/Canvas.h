@@ -11,7 +11,7 @@ class Canvas : public Mesh
 {
 public:
     Canvas(TileMap* aTileMap, ResourceManager* aResourceManager);
-    ~Canvas() override;
+    ~Canvas() override = default;
 
 	void GeneratePalletVertexData(const unsigned short BitMap[MAPSIZE]);
 	void GenerateLabVertexData(const unsigned short BitMap[LABSIZE]);

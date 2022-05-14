@@ -71,7 +71,7 @@ TileInfo TileMapOakLab::GetTileFromOakLabMap(OakLab_Tile_Type aType)
 	return m_TileInfoMap.find(aType)->second;
 }
 
-bool TileMapOakLab::GetTileAtPlayer(ivec2 playerColumnRow)
+bool TileMapOakLab::GetTileAtPlayer(Vector2Int playerColumnRow)
 {
 	int anIndex = (NUM_LAB_COLUMNS * playerColumnRow.y) + playerColumnRow.x;
 
@@ -88,7 +88,7 @@ bool TileMapOakLab::GetTileAtPlayer(ivec2 playerColumnRow)
 	return aTileInfo.IsWalkable;
 }
 
-bool TileMapOakLab::GetTileAtNPC(ivec2 npcColumnRow)
+bool TileMapOakLab::GetTileAtNPC(Vector2Int npcColumnRow)
 {
 	int anIndex = (NUM_LAB_COLUMNS * npcColumnRow.y) + npcColumnRow.x;
 
@@ -126,8 +126,8 @@ int TileMapOakLab::GetIndexFromColumnRow(int aColumn, int aRow)
 	return anIndexOnMap;
 }
 
-ivec2 TileMapOakLab::GetColumRowFromIndex(int anIndex)
+Vector2Int TileMapOakLab::GetColumRowFromIndex(int anIndex)
 {
-	return ivec2(anIndex % NUM_LAB_COLUMNS, anIndex / NUM_LAB_COLUMNS);
+	return Vector2Int(anIndex % NUM_LAB_COLUMNS, anIndex / NUM_LAB_COLUMNS);
 }
 

@@ -93,6 +93,7 @@ void Player::Update(float deltatime)
 				m_InTransition = false;
 			}
 		}
+
 		if (myDirection == SpriteDirection::SpriteWalkDown || myDirection == SpriteDirection::SpriteWalkLeft)
 		{
 			if (myPosition.myY > aTransitionDestination.myY)
@@ -149,7 +150,7 @@ void Player::Move(SpriteDirection dir, float deltatime)
 	}
 }
 
-void Player::Pause()
+void Player::Pause() const
 {
 	for (const auto& m_Animation : m_Animations)
 		m_Animation->Pause();
@@ -198,10 +199,10 @@ SpriteDirection Player::GetMyDirection() const
 bool Player::CheckForCollision(Vector2Float aPosition) const
 {
 	//Get the location of each point of collision on the player and then truncate it to a row and column
-	const ivec2 OriginIndex = ivec2((aPosition.myX / TILESIZE), ((aPosition.myY - 0.3f) / TILESIZE));
-	const ivec2 TopLeftIndex = ivec2((aPosition.myX / TILESIZE), (((aPosition.myY - 0.5f) + (TILESIZE / 2)) / TILESIZE));
-	const ivec2 TopRightIndex = ivec2(((aPosition.myX + (TILESIZE / 2)) / TILESIZE), (((aPosition.myY - 0.5f) + (TILESIZE / 2)) / TILESIZE));
-	const ivec2 BottomRightIndex = ivec2(((aPosition.myX + (TILESIZE / 2)) / TILESIZE), ((aPosition.myY - 0.3f) / TILESIZE));
+	const Vector2Int OriginIndex = Vector2Int(static_cast<int>(aPosition.myX / TILESIZE), static_cast<int>((aPosition.myY - 0.3f) / TILESIZE));
+	const Vector2Int TopLeftIndex = Vector2Int(static_cast<int>(aPosition.myX / TILESIZE), static_cast<int>(((aPosition.myY - 0.5f) + (TILESIZE / 2)) / TILESIZE));
+	const Vector2Int TopRightIndex = Vector2Int(static_cast<int>((aPosition.myX + (TILESIZE / 2)) / TILESIZE), static_cast<int>(((aPosition.myY - 0.5f) + (TILESIZE / 2)) / TILESIZE));
+	const Vector2Int BottomRightIndex = Vector2Int(static_cast<int>((aPosition.myX + (TILESIZE / 2)) / TILESIZE), static_cast<int>((aPosition.myY - 0.3f) / TILESIZE));
 
 	//Check each index for whether the tile it lands on is walkable
 	const bool CheckOrigin = myGameCore->GetTileMap()->GetTileAtPlayer(OriginIndex);

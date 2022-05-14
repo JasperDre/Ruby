@@ -28,8 +28,8 @@ public:
     [[nodiscard]] Vector3Float MultiplyComponents(const Vector3Float& o) const { return Vector3Float(myX * o.myX, myY * o.myY, myZ * o.myZ); }
     [[nodiscard]] Vector3Float DivideComponents(const Vector3Float& o) const { return Vector3Float(myX / o.myX, myY / o.myY, myZ / o.myZ); }
 
-    bool operator ==(const Vector3Float& o) const { return IsEqualFloat(myX, o.myX) && IsEqualFloat(myY, o.myY) && IsEqualFloat(myZ, o.myZ); }
-    bool operator !=(const Vector3Float& o) const { return !IsEqualFloat(myX, o.myX) || !IsEqualFloat(myY, o.myY) || !IsEqualFloat(myZ, o.myZ); }
+    bool operator ==(const Vector3Float& o) const;
+    bool operator !=(const Vector3Float& o) const;
 
     Vector3Float operator -() const { return Vector3Float(-myX, -myY, -myZ); }
     Vector3Float operator *(const float o) const { return Vector3Float(myX * o, myY * o, myZ * o); }

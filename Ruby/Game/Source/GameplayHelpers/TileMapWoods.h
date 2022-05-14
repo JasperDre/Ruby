@@ -15,16 +15,16 @@ public:
 
 	virtual TileInfo GetTileFromWoodsMap(Forest_Tile_Type aType) override;
 
-	virtual bool GetTileAtPlayer(ivec2 playerColumnRow) override;
+	virtual bool GetTileAtPlayer(Vector2Int playerColumnRow) override;
 
-	virtual bool GetTileAtNPC(ivec2 npcColumnRow) override;
+	virtual bool GetTileAtNPC(Vector2Int npcColumnRow) override;
 
 	virtual TileInfo GetTileAtIndex(int anIndex) override;
 
 	virtual int GetMapWidth() override;
 	virtual int GetMapHeight() override;
 	virtual int GetIndexFromColumnRow(int aColumn, int aRow) override;
-	virtual ivec2 GetColumRowFromIndex(int anIndex) override;
+	virtual Vector2Int GetColumRowFromIndex(int anIndex) override;
 
 private:
 	std::map<Forest_Tile_Type, TileInfo> m_TileInfoMap;

@@ -9,7 +9,7 @@ float Vector4Float::Length() const
 Vector4Float Vector4Float::GetNormalized() const
 {
 	float length = Length();
-	if (IsEqualFloat(length, 0.0f))
+	if (MathUtility::IsEqualFloat(length, 0.0f))
 		return Vector4Float(myX, myY, myZ, myW);
 
 	length = 1.0f / length;
@@ -20,7 +20,7 @@ Vector4Float Vector4Float::GetNormalized() const
 Vector4Float Vector4Float::Normalize()
 {
 	const float length = Length();
-	if (!IsEqualFloat(length, 0.0f))
+	if (!MathUtility::IsEqualFloat(length, 0.0f))
 	{
 		myX /= length;
 		myY /= length;

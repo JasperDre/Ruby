@@ -29,14 +29,18 @@
     <ClInclude Include="Source\GL\GLHelpers.h" />
     <ClInclude Include="Source\InputManager.h" />
     <ClInclude Include="Source\Math\Color.h" />
-    <ClInclude Include="Source\Math\MathHelpers.h" />
+    <ClInclude Include="Source\Math\MathConstants.h" />
     <ClInclude Include="Source\Math\Matrix4Float.h" />
-    <ClInclude Include="Source\Math\Vector.h" />
+    <ClInclude Include="Source\Math\Rectangle.h" />
     <ClInclude Include="Source\Math\Vector2Float.h" />
+    <ClInclude Include="Source\Math\Vector2Int.h" />
     <ClInclude Include="Source\Math\Vector3Float.h" />
+    <ClInclude Include="Source\Math\Vector3Int.h" />
     <ClInclude Include="Source\Math\Vector4Float.h" />
+    <ClInclude Include="Source\Math\Vector4Int.h" />
     <ClInclude Include="Source\Utility\DebugUtility.h" />
     <ClInclude Include="Source\Utility\FileUtility.h" />
+    <ClInclude Include="Source\Utility\MathUtility.h" />
     <ClInclude Include="Source\Utility\ShaderProgram.h" />
     <ClInclude Include="Source\Win32\FrameworkMain.h" />
   </ItemGroup>
@@ -48,9 +52,13 @@
     <ClCompile Include="Source\InputManager.cpp" />
     <ClCompile Include="Source\Math\Matrix4Float.cpp" />
     <ClCompile Include="Source\Math\Vector2Float.cpp" />
+    <ClCompile Include="Source\Math\Vector2Int.cpp" />
     <ClCompile Include="Source\Math\Vector3Float.cpp" />
+    <ClCompile Include="Source\Math\Vector3Int.cpp" />
     <ClCompile Include="Source\Math\Vector4Float.cpp" />
+    <ClCompile Include="Source\Math\Vector4Int.cpp" />
     <ClCompile Include="Source\Utility\DebugUtility.cpp" />
+    <ClCompile Include="Source\Utility\MathUtility.cpp" />
     <ClCompile Include="Source\Utility\ShaderProgram.cpp" />
     <ClCompile Include="Source\Win32\FrameworkMain.cpp" />
   </ItemGroup>

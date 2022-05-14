@@ -66,8 +66,8 @@ public:
 
 	virtual void AddTile(const std::string& anIndex, Frame aFrame) = 0;
 
-	virtual bool GetTileAtPlayer(ivec2 playerColumnRow) = 0;
-	virtual bool GetTileAtNPC(ivec2 npcColumnRow) = 0;
+	virtual bool GetTileAtPlayer(Vector2Int playerColumnRow) = 0;
+	virtual bool GetTileAtNPC(Vector2Int npcColumnRow) = 0;
 	virtual TileInfo GetTileFromPalletMap(Tile_Type aType);
 	virtual TileInfo GetTileFromOakLabMap(OakLab_Tile_Type aType);
 	virtual TileInfo GetTileFromWoodsMap(Forest_Tile_Type aType);
@@ -76,7 +76,7 @@ public:
 	virtual int GetMapWidth() = 0;
 	virtual int GetMapHeight() = 0;
 	virtual int GetIndexFromColumnRow(int aColumn, int aRow) = 0;
-	virtual ivec2 GetColumRowFromIndex(int anIndex) = 0;
+	virtual Vector2Int GetColumRowFromIndex(int anIndex) = 0;
 
 protected:
 	Areas m_MyArea;

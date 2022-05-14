@@ -77,7 +77,7 @@ TileInfo TileMapWoods::GetTileFromWoodsMap(Forest_Tile_Type aType)
 	return m_TileInfoMap.find(aType)->second;
 }
 
-bool TileMapWoods::GetTileAtPlayer(ivec2 playerColumnRow)
+bool TileMapWoods::GetTileAtPlayer(Vector2Int playerColumnRow)
 {
 	int anIndex = (NUM_FOREST_COLUMNS * playerColumnRow.y) + playerColumnRow.x;
 
@@ -95,7 +95,7 @@ bool TileMapWoods::GetTileAtPlayer(ivec2 playerColumnRow)
 
 }
 
-bool TileMapWoods::GetTileAtNPC(ivec2 npcColumnRow)
+bool TileMapWoods::GetTileAtNPC(Vector2Int npcColumnRow)
 {
 	int anIndex = (NUM_COLUMNS * npcColumnRow.y) + npcColumnRow.x;
 
@@ -133,8 +133,8 @@ int TileMapWoods::GetIndexFromColumnRow(int aColumn, int aRow)
 	return anIndexOnMap;
 }
 
-ivec2 TileMapWoods::GetColumRowFromIndex(int anIndex)
+Vector2Int TileMapWoods::GetColumRowFromIndex(int anIndex)
 {
-	return ivec2(anIndex % NUM_FOREST_COLUMNS, anIndex / NUM_FOREST_COLUMNS);
+	return Vector2Int(anIndex % NUM_FOREST_COLUMNS, anIndex / NUM_FOREST_COLUMNS);
 }
 

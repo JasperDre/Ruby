@@ -38,19 +38,18 @@ public:
 	[[nodiscard]] int* GetInputSet() const override;
 	[[nodiscard]] int GetCurrentInput() const override;
 	[[nodiscard]] int GetNextTileFromSet(int aCurrentInput) const override;
-	[[nodiscard]] ivec2 GetMyMinIndex() const override;
-	[[nodiscard]] ivec2 GetMyMaxIndex() const override;
+	[[nodiscard]] Vector2Int GetMyMinIndex() const override;
+	[[nodiscard]] Vector2Int GetMyMaxIndex() const override;
 	[[nodiscard]] int GetMyMapWidth() const override;
 	[[nodiscard]] int GetMaxPathSize() const override;
-	[[nodiscard]] int RangeRandomIntAlg(int min, int max) const override;
-	SpriteDirection CalculateNextInput(ivec2 anIndex);
-	bool GetNextPath(ivec2 anIndex);
+	SpriteDirection CalculateNextInput(Vector2Int anIndex);
+	bool GetNextPath(Vector2Int anIndex);
 
 private:
 	std::array<int, MAXPATHSIZE_TOWN_NPC> m_MyInputSet;
 	Vector2Float NewPosition;
-	ivec2 m_MyNewDestination;
-	ivec2 m_MyIndex;
+	Vector2Int m_MyNewDestination;
+	Vector2Int m_MyIndex;
 	TileMap* m_MyTileMap;
 	int* m_MyPath;
 	int m_CurrentInput;

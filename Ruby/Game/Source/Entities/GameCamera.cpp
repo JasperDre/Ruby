@@ -12,7 +12,7 @@ GameCamera::GameCamera(GameCore* pGame, Mesh* pMesh, GLuint myTexture, Player* a
 	: Entity(pGame, pMesh, myTexture)
 {
 	myPosition = Vector2Float(aPlayer->GetPosition() + Vector2Float(0.0f, 1.0f));
-	m_MyScreenSize = Vector2Float(pGame->GetFramework()->GetWindowWidth(), pGame->GetFramework()->GetWindowHeight());
+	m_MyScreenSize = Vector2Float(static_cast<float>(pGame->GetFramework()->GetWindowWidth()), static_cast<float>(pGame->GetFramework()->GetWindowHeight()));
 
 	CAMERAMIN = Vector2Float(15.0f, 15.0f);
 	CAMERAMAX = Vector2Float(48.0f, 48.0f);
@@ -82,8 +82,8 @@ Vector2Float GameCamera::GetCameraPosition() const
 {
 	Vector2Float pos = myPosition;
 
-	pos.myX -= fmod(pos.myX, (m_MyScreenSize.myX/150) / m_MyScreenSize.myX);
-	pos.myY -= fmod(pos.myY, (m_MyScreenSize.myY/150) / m_MyScreenSize.myY);
+	pos.myX -= std::fmod(pos.myX, (m_MyScreenSize.myX / 150.0f) / m_MyScreenSize.myX);
+	pos.myY -= std::fmod(pos.myY, (m_MyScreenSize.myY / 150.0f) / m_MyScreenSize.myY);
 
 	return pos;
 }
@@ -98,7 +98,7 @@ Vector2Float GameCamera::GetCameraProjection() const
 	return m_MyProjection;
 }
 
-void GameCamera::OnEvent(Event * anEvent)
+void GameCamera::OnEvent(Event* anEvent)
 {
 	const DoorEvent* doorEvent = dynamic_cast<DoorEvent*>(anEvent);
 	if (doorEvent->GetEventType() == EventTypes::EventType_Door)

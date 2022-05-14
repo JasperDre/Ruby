@@ -29,7 +29,7 @@ public:
 	Vector4Float operator +(const Vector4Float& o) const { return Vector4Float(myX + o.myX, myY + o.myY, myZ + o.myZ, myW + o.myW); }
 	Vector4Float operator -(const Vector4Float& o) const { return Vector4Float(myX - o.myX, myY - o.myY, myZ - o.myZ, myW - o.myW); }
 
-	float& operator[] (int i);
+	float& operator[](int i);
 
 	float myX;
 	float myY;

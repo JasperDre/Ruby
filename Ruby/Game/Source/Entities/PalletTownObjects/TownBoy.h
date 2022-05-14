@@ -19,7 +19,7 @@ public:
 	void Draw(Vector2Float camPos, Vector2Float projecScale) override;
 	void OnEvent(Event* anEvent) override {}
 	void Move(SpriteDirection dir, float deltatime);
-	void Pause();
+	void Pause() const;
 	void Resume() const;
 	void ResetPathFinder() const;
 
@@ -27,20 +27,19 @@ public:
 
 	[[nodiscard]] bool CheckForCollision(Vector2Float NPCNewPosition) const;
 	[[nodiscard]] int* GetInputSet() const override;
-	[[nodiscard]] bool GetNodeIsClearOnSpecial(int tx, int ty)const  override;
+	[[nodiscard]] bool GetNodeIsClearOnSpecial(int tx, int ty) const override;
 	[[nodiscard]] int GetMyMapWidth() const override;
 	[[nodiscard]] int GetMaxPathSize() const override;
-	[[nodiscard]] int RangeRandomIntAlg(int min, int max) const override;
-	SpriteDirection CalculateNextInput(ivec2 anIndex);
-	bool GetNextPath(ivec2 anIndex);
+	SpriteDirection CalculateNextInput(Vector2Int anIndex);
+	bool GetNextPath(Vector2Int anIndex);
 
 private:
 	std::array<std::string, NUM_DIRECTIONS> AnimationKeys;
 	std::array<int, MAXPATHSIZE_TOWN_NPC> m_MyInputSet;
 	std::array<AnimatedSprite*, NUM_DIRECTIONS> m_Animations;
 	Vector2Float NewPosition;
-	ivec2 m_MyNewDestination;
-	ivec2 m_MyIndex;
+	Vector2Int m_MyNewDestination;
+	Vector2Int m_MyIndex;
 	TileMap* m_MyTileMap;
 	int* m_MyPath;
 	SpriteDirection myNewDirection;

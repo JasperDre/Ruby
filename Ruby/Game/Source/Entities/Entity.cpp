@@ -27,7 +27,7 @@ AI_States Entity::GetMyState() const
 	return AI_States::IdleState;
 }
 
-ivec2 Entity::GetMyIndex() const
+Vector2Int Entity::GetMyIndex() const
 {
-	return ivec2(static_cast<int>(myPosition.myX / TILESIZE), static_cast<int>(myPosition.myY / TILESIZE));
+	return Vector2Int(static_cast<int>(myPosition.myX / TILESIZE), static_cast<int>(myPosition.myY / TILESIZE));
 }

@@ -39,7 +39,7 @@ void ResourceManager::UnpackJson(const std::string& JSONfilename, TileMap* aTile
 		int textureWidth = cJSON_GetObjectItem(root, "width")->valueint;
 		int textureHeight = cJSON_GetObjectItem(root, "height")->valueint;
 
-		m_MyTextureSize.emplace_back(ivec2(textureWidth, textureHeight));
+		m_MyTextureSize.emplace_back(Vector2Int(textureWidth, textureHeight));
 
 		//Extract the Array of Frames from the root
 		cJSON* frames = cJSON_GetObjectItem(root, "Files");
@@ -101,7 +101,7 @@ Frame ResourceManager::GetFrameAtIndex(const std::string& anIndex) const
 	return m_AnimationsMap.find(anIndex)->second;
 }
 
-ivec2 ResourceManager::GetTextureSize(int anIndex) const
+Vector2Int ResourceManager::GetTextureSize(int anIndex) const
 {
 	return m_MyTextureSize.at(anIndex);
 }

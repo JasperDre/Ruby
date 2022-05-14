@@ -49,8 +49,8 @@ bool AIController::GetNextPath()
 
 	while (!m_PathingComplete)
 	{
-		m_MyNewDestination.x = RangeRandomIntAlg(m_MyMinIndex % m_MyMapWidth, m_MyMaxIndex % m_MyMapWidth);
-		m_MyNewDestination.y = RangeRandomIntAlg(m_MyMinIndex / m_MyMapWidth, m_MyMaxIndex / m_MyMapWidth);
+		m_MyNewDestination.x = MathUtility::GetRandomRangeInteger(m_MyMinIndex % m_MyMapWidth, m_MyMaxIndex % m_MyMapWidth);
+		m_MyNewDestination.y = MathUtility::GetRandomRangeInteger(m_MyMinIndex / m_MyMapWidth, m_MyMaxIndex / m_MyMapWidth);
 
 		m_PathingComplete = m_MyPathFinder->FindPath(m_MyNPCindex.x, m_MyNPCindex.y, m_MyNewDestination.x, m_MyNewDestination.y);
 	}
@@ -113,7 +113,7 @@ SpriteDirection AIController::CalculateNextInput()
 
 	if (m_CurrentInput != -1)
 	{
-		m_NextTileColumnRow = ivec2(*(m_MyPath + m_CurrentInput) % m_MyMapWidth, *(m_MyPath + m_CurrentInput) / m_MyMapWidth);
+		m_NextTileColumnRow = Vector2Int(*(m_MyPath + m_CurrentInput) % m_MyMapWidth, *(m_MyPath + m_CurrentInput) / m_MyMapWidth);
 
 		if (m_NextTileColumnRow.x != m_MyNPCindex.x)
 		{
@@ -140,27 +140,12 @@ SpriteDirection AIController::CalculateNextInput()
 	return SpriteDirection::SpriteDirectionStop;
 }
 
-ivec2 AIController::SetNPCCurrentPosition(Vector2Float aNPCPosition)
+Vector2Int AIController::SetNPCCurrentPosition(Vector2Float aNPCPosition)
 {
-	return ivec2(static_cast<int>(aNPCPosition.myX / TILESIZE), static_cast<int>(aNPCPosition.myY / TILESIZE));
+	return Vector2Int(static_cast<int>(aNPCPosition.myX / TILESIZE), static_cast<int>(aNPCPosition.myY / TILESIZE));
 }
 
-ivec2 AIController::CalculatedDirection(ivec2 aCurrentIndex, Vector2Float aDirection)
+Vector2Int AIController::CalculatedDirection(Vector2Int aCurrentIndex, Vector2Float aDirection)
 {
-	return ivec2(aCurrentIndex.x + static_cast<int>(aDirection.myX), aCurrentIndex.y + static_cast<int>(aDirection.myY));
-}
-
-int AIController::RangeRandomIntAlg(int min, int max)
-{
-	const int aRange = max - min + 1;
-	const int aRemainder = RAND_MAX % aRange;
-	int x;
-	do
-	{
-		x = rand();
-
-	}
-	while (x >= RAND_MAX - aRemainder);
-
-	return min + x % aRange;
+	return Vector2Int(aCurrentIndex.x + static_cast<int>(aDirection.myX), aCurrentIndex.y + static_cast<int>(aDirection.myY));
 }

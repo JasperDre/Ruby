@@ -11,6 +11,7 @@
 #include <map>
 #include <memory.h>
 #include <queue>
+#include <random>
 #include <string>
 #include <vector>
 
@@ -19,17 +20,15 @@
 
 #include "GL/GLHelpers.h"
 #include "Math/Color.h"
-#include "Math/MathHelpers.h"
 #include "Math/Matrix4Float.h"
-#include "Math/Vector.h"
+#include "Math/Vector2Int.h"
+#include "Math/Vector3Int.h"
+#include "Math/Vector4Int.h"
 #include "Utility/DebugUtility.h"
 #include "Utility/FileUtility.h"
+#include "Utility/MathUtility.h"
 #include "Utility/ShaderProgram.h"
 #include "Win32/FrameworkMain.h"
-
-typedef Vector2Int ivec2;
-typedef Vector3Int ivec3;
-typedef Vector4Int ivec4;
 
 #include "Events/CollisionEvent.h"
 #include "Events/DoorEvent.h"

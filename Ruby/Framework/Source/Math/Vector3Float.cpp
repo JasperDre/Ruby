@@ -9,7 +9,7 @@ float Vector3Float::Length() const
 Vector3Float Vector3Float::GetNormalized() const
 {
 	float length = Length();
-	if (IsEqualFloat(length, 0.0f))
+	if (MathUtility::IsEqualFloat(length, 0.0f))
 		return Vector3Float(myX, myY, myZ);
 	
 	length = 1.0f / length;
@@ -20,13 +20,27 @@ Vector3Float Vector3Float::GetNormalized() const
 Vector3Float Vector3Float::Normalize()
 {
 	const float length = Length();
-	if (!IsEqualFloat(length,0) )
-	{ 
+	if (!MathUtility::IsEqualFloat(length,0.0f))
+	{
 		myX /= length; myY /= length;
 		myZ /= length;
 	}
-	
+
 	return *this;
+}
+
+bool Vector3Float::operator==(const Vector3Float& o) const
+{
+	return MathUtility::IsEqualFloat(myX, o.myX)
+		&& MathUtility::IsEqualFloat(myY, o.myY)
+		&& MathUtility::IsEqualFloat(myZ, o.myZ);
+}
+
+bool Vector3Float::operator!=(const Vector3Float& o) const
+{
+	return !MathUtility::IsEqualFloat(myX, o.myX)
+		|| !MathUtility::IsEqualFloat(myY, o.myY)
+		|| !MathUtility::IsEqualFloat(myZ, o.myZ);
 }
 
 float& Vector3Float::operator[](int i)

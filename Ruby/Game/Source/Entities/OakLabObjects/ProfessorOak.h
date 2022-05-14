@@ -32,27 +32,26 @@ public:
 	void SetCurrentInput(int aCurrentInput) override;
 	void SetMyDirection(SpriteDirection aDirection) override;
 
-	bool GetNextPath(ivec2 anIndex);
-	SpriteDirection CalculateNextInput(ivec2 anIndex);
+	bool GetNextPath(Vector2Int anIndex);
+	SpriteDirection CalculateNextInput(Vector2Int anIndex);
 	[[nodiscard]] AI_States GetMyState() const override { return m_MyState; }
 	[[nodiscard]] bool GetNodeIsClearOnSpecial(int tx, int ty) const override;
 	[[nodiscard]] bool CheckForCollision(Vector2Float NPCNewPosition) const;
 	[[nodiscard]] int* GetInputSet() const override { return m_MyPath; }
 	[[nodiscard]] int GetCurrentInput() const override { return m_CurrentInput; }
 	[[nodiscard]] int GetNextTileFromSet(int aCurrentInput) const override { return m_MyInputSet[aCurrentInput]; }
-	[[nodiscard]] ivec2 GetMyMinIndex() const override;
-	[[nodiscard]] ivec2 GetMyMaxIndex() const override;
+	[[nodiscard]] Vector2Int GetMyMinIndex() const override;
+	[[nodiscard]] Vector2Int GetMyMaxIndex() const override;
 	[[nodiscard]] int GetMyMapWidth() const override;
 	[[nodiscard]] int GetMaxPathSize() const override;
-	[[nodiscard]] int RangeRandomIntAlg(int min, int max) const override;
 
 private:
 	std::array<std::string, NUM_DIRECTIONS> AnimationKeys;
 	std::array<int, OAKMAXPATHSIZE> m_MyInputSet;
 	std::array<AnimatedSprite*, NUM_DIRECTIONS> m_Animations;
 	Vector2Float NewPosition;
-	ivec2 m_MyNewDestination;
-	ivec2 m_MyIndex;
+	Vector2Int m_MyNewDestination;
+	Vector2Int m_MyIndex;
 	TileMap* m_MyTileMap;
 	int* m_MyPath;
 	SpriteDirection myDirection;

@@ -41,13 +41,10 @@ void InputManager::OnKeyAction(int aKey, int /*aScancode*/, bool aIsKeyDown, int
     myKeys[GetTranslatedKey(aKey)] = aIsKeyDown;
 
     if (aIsKeyDown == GLFW_RELEASE)
-    {
         myReleasedKeysThisFrame.emplace_back(GetTranslatedKey(aKey));
-    }
-    else
-    {
+
+    if (aIsKeyDown == GLFW_PRESS)
         myPressedKeysThisFrame.emplace_back(GetTranslatedKey(aKey));
-    }
 }
 
 void InputManager::OnCursorAction(double aXPosition, double aYPosition)

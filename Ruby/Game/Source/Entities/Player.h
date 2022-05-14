@@ -19,7 +19,7 @@ public:
 	void OnEvent(Event* anEvent) override;
 	void SetPlayerController(PlayerController* aController) { myController = aController; }
 	void Move(SpriteDirection dir, float deltatime);
-	void Pause();
+	void Pause() const;
 	void Resume() const;
 	void SetStop(bool StopPlayer);
 	void PlayerTransition();

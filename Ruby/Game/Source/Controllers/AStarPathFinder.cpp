@@ -224,7 +224,7 @@ void AStarPathFinder::AddNeighboursToOpenList(int nodeIndex, int endNodeIndex)
 int AStarPathFinder::CalculateH(int nodeIndex, int endNodeIndex) const
 {
 	// Calculate the h score using the Manhatten distance
-	const ivec2 nodeColumnRow = ivec2(nodeIndex % m_MapWidth, nodeIndex / m_MapWidth);
-	const ivec2 endNodeColumnRow = ivec2(endNodeIndex % m_MapWidth, endNodeIndex / m_MapWidth);
+	const Vector2Int nodeColumnRow = Vector2Int(nodeIndex % m_MapWidth, nodeIndex / m_MapWidth);
+	const Vector2Int endNodeColumnRow = Vector2Int(endNodeIndex % m_MapWidth, endNodeIndex / m_MapWidth);
 	return std::abs(nodeColumnRow.x - endNodeColumnRow.y) + abs(nodeColumnRow.y - endNodeColumnRow.x);
 }

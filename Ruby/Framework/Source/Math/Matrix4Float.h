@@ -1,18 +1,18 @@
 #pragma once
 
-#include "Vector.h"
+#include "Vector4Float.h"
 
 // Values are stored column major.
 // m11 m21 m31 m41       Sx  0  0 Tx
 // m12 m22 m32 m42  --\   0 Sy  0 Ty
 // m13 m23 m33 m43  --/   0  0 Sz Tz
 // m14 m24 m34 m44        0  0  0  1
-class MyMatrix
+class Matrix4Float
 {
 public:
 
-    MyMatrix() : m11(0.0f), m12(0.0f), m13(0.0f), m14(0.0f), m21(0.0f), m22(0.0f), m23(0.0f), m24(0.0f), m31(0.0f), m32(0.0f), m33(0.0f), m34(0.0f), m41(0.0f), m42(0.0f), m43(0.0f), m44(0.0f) {}
-    MyMatrix(float v11, float v12, float v13, float v14,
+    Matrix4Float() : m11(0.0f), m12(0.0f), m13(0.0f), m14(0.0f), m21(0.0f), m22(0.0f), m23(0.0f), m24(0.0f), m31(0.0f), m32(0.0f), m33(0.0f), m34(0.0f), m41(0.0f), m42(0.0f), m43(0.0f), m44(0.0f) {}
+    Matrix4Float(float v11, float v12, float v13, float v14,
              float v21, float v22, float v23, float v24,
              float v31, float v32, float v33, float v34,
              float v41, float v42, float v43, float v44)
@@ -66,14 +66,14 @@ public:
         temp = m34; m34 = m43; m43 = temp;
     }
 
-    MyMatrix operator *(const float o) const
+    Matrix4Float operator *(const float o) const
     {
-        MyMatrix newmat;
+        Matrix4Float newmat;
 
-        newmat.m11 = this->m11 * o; newmat.m21 = this->m21 * o; newmat.m31 = this->m31 * o; newmat.m41 = this->m41 * o;
-        newmat.m12 = this->m12 * o; newmat.m22 = this->m22 * o; newmat.m32 = this->m32 * o; newmat.m42 = this->m42 * o;
-        newmat.m13 = this->m13 * o; newmat.m23 = this->m23 * o; newmat.m33 = this->m33 * o; newmat.m43 = this->m43 * o;
-        newmat.m14 = this->m14 * o; newmat.m24 = this->m24 * o; newmat.m34 = this->m34 * o; newmat.m44 = this->m44 * o;
+        newmat.m11 = m11 * o; newmat.m21 = m21 * o; newmat.m31 = m31 * o; newmat.m41 = m41 * o;
+        newmat.m12 = m12 * o; newmat.m22 = m22 * o; newmat.m32 = m32 * o; newmat.m42 = m42 * o;
+        newmat.m13 = m13 * o; newmat.m23 = m23 * o; newmat.m33 = m33 * o; newmat.m43 = m43 * o;
+        newmat.m14 = m14 * o; newmat.m24 = m24 * o; newmat.m34 = m34 * o; newmat.m44 = m44 * o;
 
         return newmat;
     }
@@ -110,70 +110,33 @@ public:
                         m14 * o.myX + m24 * o.myY + m34 * o.myZ + m44 * o.myW);
     }
 
-    MyMatrix operator *(const MyMatrix o) const
+    Matrix4Float operator *(const Matrix4Float o) const
     {
-        MyMatrix newmat;
+        Matrix4Float newmat;
 
-        newmat.m11 = this->m11 * o.m11 + this->m21 * o.m12 + this->m31 * o.m13 + this->m41 * o.m14;
-        newmat.m12 = this->m12 * o.m11 + this->m22 * o.m12 + this->m32 * o.m13 + this->m42 * o.m14;
-        newmat.m13 = this->m13 * o.m11 + this->m23 * o.m12 + this->m33 * o.m13 + this->m43 * o.m14;
-        newmat.m14 = this->m14 * o.m11 + this->m24 * o.m12 + this->m34 * o.m13 + this->m44 * o.m14;
-        newmat.m21 = this->m11 * o.m21 + this->m21 * o.m22 + this->m31 * o.m23 + this->m41 * o.m24;
-        newmat.m22 = this->m12 * o.m21 + this->m22 * o.m22 + this->m32 * o.m23 + this->m42 * o.m24;
-        newmat.m23 = this->m13 * o.m21 + this->m23 * o.m22 + this->m33 * o.m23 + this->m43 * o.m24;
-        newmat.m24 = this->m14 * o.m21 + this->m24 * o.m22 + this->m34 * o.m23 + this->m44 * o.m24;
-        newmat.m31 = this->m11 * o.m31 + this->m21 * o.m32 + this->m31 * o.m33 + this->m41 * o.m34;
-        newmat.m32 = this->m12 * o.m31 + this->m22 * o.m32 + this->m32 * o.m33 + this->m42 * o.m34;
-        newmat.m33 = this->m13 * o.m31 + this->m23 * o.m32 + this->m33 * o.m33 + this->m43 * o.m34;
-        newmat.m34 = this->m14 * o.m31 + this->m24 * o.m32 + this->m34 * o.m33 + this->m44 * o.m34;
-        newmat.m41 = this->m11 * o.m41 + this->m21 * o.m42 + this->m31 * o.m43 + this->m41 * o.m44;
-        newmat.m42 = this->m12 * o.m41 + this->m22 * o.m42 + this->m32 * o.m43 + this->m42 * o.m44;
-        newmat.m43 = this->m13 * o.m41 + this->m23 * o.m42 + this->m33 * o.m43 + this->m43 * o.m44;
-        newmat.m44 = this->m14 * o.m41 + this->m24 * o.m42 + this->m34 * o.m43 + this->m44 * o.m44;
+        newmat.m11 = m11 * o.m11 + m21 * o.m12 + m31 * o.m13 + m41 * o.m14;
+        newmat.m12 = m12 * o.m11 + m22 * o.m12 + m32 * o.m13 + m42 * o.m14;
+        newmat.m13 = m13 * o.m11 + m23 * o.m12 + m33 * o.m13 + m43 * o.m14;
+        newmat.m14 = m14 * o.m11 + m24 * o.m12 + m34 * o.m13 + m44 * o.m14;
+        newmat.m21 = m11 * o.m21 + m21 * o.m22 + m31 * o.m23 + m41 * o.m24;
+        newmat.m22 = m12 * o.m21 + m22 * o.m22 + m32 * o.m23 + m42 * o.m24;
+        newmat.m23 = m13 * o.m21 + m23 * o.m22 + m33 * o.m23 + m43 * o.m24;
+        newmat.m24 = m14 * o.m21 + m24 * o.m22 + m34 * o.m23 + m44 * o.m24;
+        newmat.m31 = m11 * o.m31 + m21 * o.m32 + m31 * o.m33 + m41 * o.m34;
+        newmat.m32 = m12 * o.m31 + m22 * o.m32 + m32 * o.m33 + m42 * o.m34;
+        newmat.m33 = m13 * o.m31 + m23 * o.m32 + m33 * o.m33 + m43 * o.m34;
+        newmat.m34 = m14 * o.m31 + m24 * o.m32 + m34 * o.m33 + m44 * o.m34;
+        newmat.m41 = m11 * o.m41 + m21 * o.m42 + m31 * o.m43 + m41 * o.m44;
+        newmat.m42 = m12 * o.m41 + m22 * o.m42 + m32 * o.m43 + m42 * o.m44;
+        newmat.m43 = m13 * o.m41 + m23 * o.m42 + m33 * o.m43 + m43 * o.m44;
+        newmat.m44 = m14 * o.m41 + m24 * o.m42 + m34 * o.m43 + m44 * o.m44;
 
         return newmat;
     }
 
-    bool Inverse(float tolerance = 0.0001f)
-    {
-        // Determinants of 2x2 submatrices
-        const float S0 = m11 * m22 - m12 * m21;
-        const float S1 = m11 * m23 - m13 * m21;
-        const float S2 = m11 * m24 - m14 * m21;
-        const float S3 = m12 * m23 - m13 * m22;
-        const float S4 = m12 * m24 - m14 * m22;
-        const float S5 = m13 * m24 - m14 * m23;
+    bool Inverse(float tolerance = 0.0001f);
 
-        const float C5 = m33 * m44 - m34 * m43;
-        const float C4 = m32 * m44 - m34 * m42;
-        const float C3 = m32 * m43 - m33 * m42;
-        const float C2 = m31 * m44 - m34 * m41;
-        const float C1 = m31 * m43 - m33 * m41;
-        const float C0 = m31 * m42 - m32 * m41;
-
-        // If determinant equals 0, there is no inverse
-        const float det = S0 * C5 - S1 * C4 + S2 * C3 + S3 * C2 - S4 * C1 + S5 * C0;
-        if (fabs(det) <= tolerance)
-            return false;
-
-        // Compute adjugate matrix
-        *this = MyMatrix(
-             m22 * C5 - m23 * C4 + m24 * C3, -m12 * C5 + m13 * C4 - m14 * C3,
-             m42 * S5 - m43 * S4 + m44 * S3, -m32 * S5 + m33 * S4 - m34 * S3,
-
-            -m21 * C5 + m23 * C2 - m24 * C1, m11 * C5 - m13 * C2 + m14 * C1,
-            -m41 * S5 + m43 * S2 - m44 * S1, m31 * S5 - m33 * S2 + m34 * S1,
-
-             m21 * C4 - m22 * C2 + m24 * C0, -m11 * C4 + m12 * C2 - m14 * C0,
-             m41 * S4 - m42 * S2 + m44 * S0, -m31 * S4 + m32 * S2 - m34 * S0,
-
-            -m21 * C3 + m22 * C1 - m23 * C0, m11 * C3 - m12 * C1 + m13 * C0,
-            -m41 * S3 + m42 * S1 - m43 * S0, m31 * S3 - m32 * S1 + m33 * S0) * (1.0f / det);
-
-        return true;
-    }
-
-    [[nodiscard]] MyMatrix GetInverse(float tolerance = 0.0001f) const;
+    [[nodiscard]] Matrix4Float GetInverse(float tolerance = 0.0001f) const;
 
     float m11, m12, m13, m14, m21, m22, m23, m24, m31, m32, m33, m34, m41, m42, m43, m44;
 };

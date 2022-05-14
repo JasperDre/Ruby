@@ -6,14 +6,12 @@
 #include "Mesh/Mesh.h"
 
 Canvas::Canvas(TileMap* aTileMap, ResourceManager* aResourceManager)
+	: IsReversed(false)
 {
 	m_MyTileMap = aTileMap;
 	m_MyResourceManager = aResourceManager;
 }
-Canvas::~Canvas()
-{
 
-}
 void Canvas::GeneratePalletVertexData(const unsigned short BitMap[MAPSIZE])
 {
 	//create the masks to find the Tile Type and Variant
@@ -212,7 +210,7 @@ void Canvas::GenerateForestVertexData(const unsigned short BitMap[FORESTMAPSIZE]
 }
 void Canvas::AddVert(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float aUVscale, Vector2Float aUVoffset)
 {
-	const float radians = objectAngle / 180.0f * PI;
+	const float radians = objectAngle / 180.0f * Math::pi;
 
 	for (unsigned int i = 0; i < m_BaseTileVerts.size(); i++)
 	{

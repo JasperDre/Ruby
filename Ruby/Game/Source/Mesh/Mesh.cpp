@@ -68,7 +68,7 @@ void Mesh::Draw(Vector2Float objectPos, float objectAngle, Vector2Float objectSc
 	glUseProgram(shader);
 
 	SetUniform2f(shader, "u_ObjectScale", objectScale);
-	SetUniform1f(shader, "u_ObjectAngleRadians", objectAngle / 180.0f * PI);
+	SetUniform1f(shader, "u_ObjectAngleRadians", objectAngle / 180.0f * Math::pi);
 	SetUniform2f(shader, "u_ObjectPosition", objectPos);
 	SetUniform2f(shader, "u_CameraTranslation", camPos * -1);
 	SetUniform2f(shader, "u_ProjectionScale", projScale);
@@ -126,7 +126,7 @@ void Mesh::DrawCanvas(Vector2Float cameraPos, Vector2Float projectionScale, GLui
 	glUseProgram(shader);
 
 	SetUniform2f(shader, "u_ObjectScale", 1);
-	SetUniform1f(shader, "u_ObjectAngleRadians", 0 / 180.0f * PI);
+	SetUniform1f(shader, "u_ObjectAngleRadians", 0 / 180.0f * Math::pi);
 	SetUniform2f(shader, "u_ObjectPosition", Vector2Float(0.0f, 0.0f));
 	SetUniform2f(shader, "u_CameraTranslation", cameraPos * -1);
 	SetUniform2f(shader, "u_ProjectionScale", projectionScale);
@@ -146,7 +146,7 @@ void Mesh::DrawCanvas(Vector2Float cameraPos, Vector2Float projectionScale, GLui
 	GLHelpers::CheckForGLErrors();
 
 	if (IsDebug)
-		DebugDraw(Vector2Float(0.0f, 0.0f), 0 / 180.0f * PI, 1, cameraPos, projectionScale);
+		DebugDraw(Vector2Float(0.0f, 0.0f), 0 / 180.0f * Math::pi, 1, cameraPos, projectionScale);
 
 	GLHelpers::CheckForGLErrors();
 }
@@ -179,7 +179,7 @@ void Mesh::DebugDraw(Vector2Float objectPos, float objectAngle, Vector2Float obj
 
 	// Set up uniforms.
 	SetUniform2f(shader, "u_ObjectScale", objectScale);
-	SetUniform1f(shader, "u_ObjectAngleRadians", objectAngle / 180.0f * PI);
+	SetUniform1f(shader, "u_ObjectAngleRadians", objectAngle / 180.0f * Math::pi);
 	SetUniform2f(shader, "u_ObjectPosition", objectPos);
 	SetUniform2f(shader, "u_CameraTranslation", camPos * -1);
 	SetUniform2f(shader, "u_ProjectionScale", projScale);
@@ -257,8 +257,8 @@ void Mesh::GeneratePolygon(float radius, int vertices, char r, char g, char b, c
 	m_Circle.push_back(y);
 	for (int i = 1; i <= vertices; i++)
 	{
-		x = -(radius * cos(i * (2.0f * PI / vertices)));
-		y = -(radius * sin(i * (2.0f * PI / vertices)));
+		x = -(radius * cos(i * (2.0f * Math::pi / vertices)));
+		y = -(radius * sin(i * (2.0f * Math::pi / vertices)));
 
 		m_Circle.push_back(x);
 		m_Circle.push_back(y);
@@ -269,8 +269,8 @@ void Mesh::GeneratePolygon(float radius, int vertices, char r, char g, char b, c
 
 
 	}
-	x = -(radius * cos(1 * (2.0f * PI / vertices)));
-	y = -(radius * sin(1 * (2.0f * PI / vertices)));
+	x = -(radius * cos(1 * (2.0f * Math::pi / vertices)));
+	y = -(radius * sin(1 * (2.0f * Math::pi / vertices)));
 	m_Circle.push_back(x);
 	m_Circle.push_back(y);
 	m_Circle.push_back(r);

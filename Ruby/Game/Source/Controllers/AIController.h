@@ -14,15 +14,14 @@ public:
 
 	SpriteDirection MoveNPC();
 	SpriteDirection CalculateNextInput();
-	static ivec2 SetNPCCurrentPosition(Vector2Float aNPCPosition);
-	static ivec2 CalculatedDirection(ivec2 aCurrentIndex, Vector2Float aDirection);
+	static Vector2Int SetNPCCurrentPosition(Vector2Float aNPCPosition);
+	static Vector2Int CalculatedDirection(Vector2Int aCurrentIndex, Vector2Float aDirection);
 	bool GetNextPath();
-	static int RangeRandomIntAlg(int min, int max);
 
 private:
-	ivec2 m_MyNPCindex;
-	ivec2 m_MyNewDestination;
-	ivec2 m_NextTileColumnRow;
+	Vector2Int m_MyNPCindex;
+	Vector2Int m_MyNewDestination;
+	Vector2Int m_NextTileColumnRow;
 	AStarPathFinder* m_MyPathFinder;
 	TileMap* m_MyTileMap;
 	Entity* m_MyNPC;

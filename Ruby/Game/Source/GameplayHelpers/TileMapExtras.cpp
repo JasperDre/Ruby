@@ -23,12 +23,12 @@ Frame TileMapExtras::GetFrameFromExtrasMap(std::string aType)
 	return m_TileInfoMap.find(aType)->second;
 }
 
-bool TileMapExtras::GetTileAtPlayer(ivec2 playerColumnRow)
+bool TileMapExtras::GetTileAtPlayer(Vector2Int playerColumnRow)
 {
 	return false;
 }
 
-bool TileMapExtras::GetTileAtNPC(ivec2 npcColumnRow)
+bool TileMapExtras::GetTileAtNPC(Vector2Int npcColumnRow)
 {
 	return false;
 }
@@ -48,7 +48,7 @@ int TileMapExtras::GetIndexFromColumnRow(int aColumn, int aRow)
 	return 0;
 }
 
-ivec2 TileMapExtras::GetColumRowFromIndex(int anIndex)
+Vector2Int TileMapExtras::GetColumRowFromIndex(int anIndex)
 {
-	return ivec2();
+	return Vector2Int();
 }

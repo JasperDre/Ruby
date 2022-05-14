@@ -76,7 +76,7 @@ TileInfo TileMapPalletTown::GetTileFromPalletMap(Tile_Type aType)
 	return m_TileInfoMap.find(aType)->second;
 }
 
-bool TileMapPalletTown::GetTileAtPlayer(ivec2 playerColumnRow)
+bool TileMapPalletTown::GetTileAtPlayer(Vector2Int playerColumnRow)
 {
 	int anIndex = (NUM_COLUMNS * playerColumnRow.y) + playerColumnRow.x;
 
@@ -99,7 +99,7 @@ bool TileMapPalletTown::GetTileAtPlayer(ivec2 playerColumnRow)
 
 }
 
-bool TileMapPalletTown::GetTileAtNPC(ivec2 npcColumnRow)
+bool TileMapPalletTown::GetTileAtNPC(Vector2Int npcColumnRow)
 {
 	int anIndex = (NUM_COLUMNS * npcColumnRow.y) + npcColumnRow.x;
 
@@ -137,7 +137,7 @@ int TileMapPalletTown::GetIndexFromColumnRow(int aColumn, int aRow)
 	return anIndexOnMap;
 }
 
-ivec2 TileMapPalletTown::GetColumRowFromIndex(int anIndex)
+Vector2Int TileMapPalletTown::GetColumRowFromIndex(int anIndex)
 {
-	return ivec2(anIndex % NUM_COLUMNS, anIndex / NUM_COLUMNS);
+	return Vector2Int(anIndex % NUM_COLUMNS, anIndex / NUM_COLUMNS);
 }
