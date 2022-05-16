@@ -232,7 +232,7 @@ void Game::Draw()
 	// Draw our game objects.
 	aSceneDraw->Draw(myPlayerCamera->GetCameraPosition(), myPlayerCamera->GetCameraProjection());
 
-	//m_UICanvas->Draw(0, m_TrainerCamera->GetCameraProjection());
+	myUICanvas->Draw(0, myPlayerCamera->GetCameraProjection());
 
 	GLHelpers::CheckForGLErrors();
 }

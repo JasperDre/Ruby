@@ -8,7 +8,7 @@ class ResourceManager;
 class ScoreNumber : public Entity
 {
 public:
-	ScoreNumber(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
+	ScoreNumber(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* aMesh, GLuint aTexture);
 	~ScoreNumber() override;
 
 	void Update(float deltatime) override {}
