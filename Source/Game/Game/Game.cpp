@@ -93,6 +93,12 @@ void Game::LoadContent()
 	std::string rootDirectory = std::filesystem::current_path().generic_string();
 	rootDirectory += "/../../../";
 
+	int iconWidth = 0;
+	int iconHeight = 0;
+	int iconNumberOfComponents = 0;
+	unsigned char* iconSource = GLHelpers::LoadImage(GetFilePath(rootDirectory, "Data/Textures/Icon.png"), iconWidth, iconHeight, iconNumberOfComponents);
+	GetFramework()->SetWindowIcon(iconSource, iconWidth, iconHeight);
+
 	// Create our shaders.
 	myShader = new ShaderProgram(GetFilePath(rootDirectory, "Data/Shaders/Moving.vert"), GetFilePath(rootDirectory, "Data/Shaders/Moving.frag"));
 	myDebugShader = new ShaderProgram(GetFilePath(rootDirectory, "Data/Shaders/Color.vert"), GetFilePath(rootDirectory, "Data/Shaders/Color.frag"));

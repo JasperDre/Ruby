@@ -202,6 +202,23 @@ namespace GLHelpers
         assert(!aDescription);
     }
 
+    unsigned char* LoadImage(const std::string& filename, int& aWidth, int& aHeight, int& aNumberOfComponents)
+    {
+        const bool isFileValid = FileUtility::IsFileValid(filename);
+        assert(isFileValid);
+        if (!isFileValid)
+            return nullptr;
+
+        unsigned char* image = stbi_load(filename.c_str(), &aWidth, &aHeight, &aNumberOfComponents, STBI_default);
+        if (!image)
+        {
+            stbi_image_free(image);
+            return nullptr;
+        }
+
+        return image;
+    }
+
     GLuint LoadTexture(const std::string& filename)
     {
         const bool isFileValid = FileUtility::IsFileValid(filename);
@@ -212,7 +229,7 @@ namespace GLHelpers
         int width = 0;
         int height = 0;
         int numberOfComponents = 0;
-        unsigned char* image = stbi_load(filename.c_str(), &width, &height, &numberOfComponents, STBI_default);
+        unsigned char* image = LoadImage(filename, width, height, numberOfComponents);
         if (!image)
         {
             stbi_image_free(image);

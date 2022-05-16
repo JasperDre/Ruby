@@ -87,6 +87,15 @@ void Framework::SetWindowSize(int width, int height)
     ResizeWindow(nextWidth, nextHeight);
 }
 
+void Framework::SetWindowIcon(unsigned char* aSource, int aWidth, int aHeight) const
+{
+    GLFWimage processIcon[1];
+    processIcon[0].pixels = aSource;
+    processIcon[0].width = aWidth;
+    processIcon[0].height = aHeight;
+    glfwSetWindowIcon(myWindow, 1, processIcon);
+}
+
 void Framework::ResizeWindow(int width, int height)
 {
     if (height <= 0)
