@@ -78,36 +78,46 @@ void Player::Update(float deltatime)
 
 	if (m_InTransition)
 	{
-		if (myDirection == SpriteDirection::SpriteWalkUp || myDirection == SpriteDirection::SpriteWalkRight)
+		switch (myDirection)
 		{
-			if (myPosition.myY < aTransitionDestination.myY)
+			case SpriteDirection::SpriteWalkUp:
+			case SpriteDirection::SpriteWalkRight:
 			{
-				Move(myDirection, deltatime);
-			}
-			else if (myPosition.myX < aTransitionDestination.myX)
-			{
-				Move(myDirection, deltatime);
-			}
-			else
-			{
-				m_InTransition = false;
-			}
-		}
+				if (myPosition.myY < aTransitionDestination.myY)
+				{
+					Move(myDirection, deltatime);
+				}
+				else if (myPosition.myX < aTransitionDestination.myX)
+				{
+					Move(myDirection, deltatime);
+				}
+				else
+				{
+					m_InTransition = false;
+				}
 
-		if (myDirection == SpriteDirection::SpriteWalkDown || myDirection == SpriteDirection::SpriteWalkLeft)
-		{
-			if (myPosition.myY > aTransitionDestination.myY)
-			{
-				Move(myDirection, deltatime);
+				break;
 			}
-			else if (myPosition.myX > aTransitionDestination.myX)
+			case SpriteDirection::SpriteWalkDown:
+			case SpriteDirection::SpriteWalkLeft:
 			{
-				Move(myDirection, deltatime);
+				if (myPosition.myY > aTransitionDestination.myY)
+				{
+					Move(myDirection, deltatime);
+				}
+				else if (myPosition.myX > aTransitionDestination.myX)
+				{
+					Move(myDirection, deltatime);
+				}
+				else
+				{
+					m_InTransition = false;
+				}
+
+				break;
 			}
-			else
-			{
-				m_InTransition = false;
-			}
+			case SpriteDirection::SpriteDirectionStop:
+				break;
 		}
 	}
 
