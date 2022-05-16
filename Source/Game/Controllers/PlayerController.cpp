@@ -4,11 +4,11 @@
 #include "Events/InputEvent.h"
 
 PlayerController::PlayerController()
-	: m_Up(false)
-	, m_Down(false)
-	, m_Left(false)
-	, m_Right(false)
-	, m_InputReleased(false)
+	: myIsUp(false)
+	, myIsDown(false)
+	, myIsLeft(false)
+	, myIsRight(false)
+	, myIsInputReleased(false)
 {}
 
 void PlayerController::OnEvent(Event* pEvent)
@@ -21,57 +21,57 @@ void PlayerController::OnEvent(Event* pEvent)
 			if (pInput->myKey == Keys::W)
 			{
 				ClearInput();
-				m_Up = false;
+				myIsUp = false;
 			}
 
 			if (pInput->myKey == Keys::S)
 			{
 				ClearInput();
-				m_Down = false;
+				myIsDown = false;
 			}
 
 			if (pInput->myKey == Keys::A)
 			{
 				ClearInput();
-				m_Left = false;
+				myIsLeft = false;
 			}
 
 			if (pInput->myKey == Keys::D)
 			{
 				ClearInput();
-				m_Right = false;
+				myIsRight = false;
 			}
 			
-			if (m_Up == false && m_Down == false && m_Left == false && m_Right == false)
-				m_InputReleased = true;
+			if (myIsUp == false && myIsDown == false && myIsLeft == false && myIsRight == false)
+				myIsInputReleased = true;
 		}
 		else
 		{
 			if (pInput->myKey == Keys::W)
 			{
 				ClearInput();
-				m_Up = true;
+				myIsUp = true;
 			}
 
 			if (pInput->myKey == Keys::S)
 			{
 				ClearInput();
-				m_Down = true;
+				myIsDown = true;
 			}
 
 			if (pInput->myKey == Keys::A)
 			{
 				ClearInput();
-				m_Left = true;
+				myIsLeft = true;
 			}
 
 			if (pInput->myKey == Keys::D)
 			{
 				ClearInput();
-				m_Right = true;
+				myIsRight = true;
 			}
 
-			m_InputReleased = false;
+			myIsInputReleased = false;
 		}
 	}
 }

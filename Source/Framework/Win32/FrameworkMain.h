@@ -14,9 +14,9 @@ public:
     void SetWindowSize(int width, int height);
     void SetWindowIcon(unsigned char* aSource, int aWidth, int aHeight) const;
 
-    [[nodiscard]] unsigned int GetWindowWidth() const { return m_CurrentWindowWidth; }
-    [[nodiscard]] unsigned int GetWindowHeight() const { return m_CurrentWindowHeight; }
-    [[nodiscard]] GameCore* GetGameCore() const { return m_pGameCore; }
+    [[nodiscard]] unsigned int GetWindowWidth() const { return myCurrentWindowWidth; }
+    [[nodiscard]] unsigned int GetWindowHeight() const { return myCurrentWindowHeight; }
+    [[nodiscard]] GameCore* GetGameCore() const { return myGameCore; }
 
 protected:
     void ResizeWindow(int width, int height);
@@ -28,9 +28,9 @@ protected:
     static void MouseButtonCallback(GLFWwindow* aWindow, int aButton, int anAction, int aModifiers);
 
     GLFWwindow* myWindow;
-    GameCore* m_pGameCore;
-    int m_InitialWindowWidth;
-    int m_InitialWindowHeight;
-    int m_CurrentWindowWidth;
-    int m_CurrentWindowHeight;
+    GameCore* myGameCore;
+    int myInitialWindowWidth;
+    int myInitialWindowHeight;
+    int myCurrentWindowWidth;
+    int myCurrentWindowHeight;
 };

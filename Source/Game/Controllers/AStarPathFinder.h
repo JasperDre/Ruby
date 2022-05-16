@@ -12,12 +12,12 @@ enum class PathNodeStatus
 
 struct PathNode
 {
-	int parentNodeIndex;
-	PathNodeStatus Status;
+	int myParentNodeIndex;
+	PathNodeStatus myStatus;
 
-	float F; // Current sum.
-	float G; // Cost to get to current node.
-	float H; // Heuristic: Manhatten distance to destination.
+	float mySum; // Current sum.
+	float myCost; // Cost to get to current node.
+	float myDistance; // Heuristic: Manhatten distance to destination.
 };
 
 class AStarPathFinder
@@ -43,12 +43,12 @@ private:
 	void RemoveFromOpen(int nodeindex);
 	void AddNeighboursToOpenList(int nodeIndex, int endNodeIndex);
 
-	TileMap* m_pMyTileMap;
-	Entity* m_MyNPC;
-	PathNode* m_Nodes;
-	int* m_OpenNodes;
-	int m_MapWidth;
-	int m_MapHeight;
-	int m_NumNodes;
-	int m_NumOpen;
+	TileMap* myTileMap;
+	Entity* myNPC;
+	PathNode* myNodes;
+	int* myOpenNodes;
+	int myMapWidth;
+	int myMapHeight;
+	int myNumNodes;
+	int myNumOpen;
 };

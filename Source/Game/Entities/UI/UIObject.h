@@ -11,14 +11,15 @@ class Mesh;
 class UIObject : public Entity
 {
 public:
-	UIObject(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* aMesh, GLuint aTexture);
+	UIObject(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier);
 	~UIObject() override;
 
 	void Update(float deltatime) override {}
 	void Draw(Vector2Float camPos, Vector2Float camProjection) override;
 
 	void SetScore(int aScore) const;
+
 private:
-	PokeBall* m_PokeBall;
-	ScoreNumber* m_ScoreNumber;
+	PokeBall* myPokeBall;
+	ScoreNumber* myScoreNumber;
 };

@@ -11,7 +11,7 @@ class Player;
 class GameCore
 {
 public:
-	GameCore(Framework* pFramework, EventManager* pEventManager);
+	GameCore(Framework* aFramework, EventManager* anEventManager);
 	virtual ~GameCore();
 
 	virtual void OnSurfaceChanged(int width, int height) = 0;
@@ -21,17 +21,15 @@ public:
 	virtual void Update(float deltatime) = 0;
 	virtual void Draw() = 0;
 
-	virtual TileMap* GetTileMap() = 0;
-	virtual SceneManager* GetSceneManager() = 0;
-	virtual ShaderProgram* GetShader() = 0;
-	virtual ShaderProgram* GetDebugShader() = 0;
-
-	virtual Player* GetMyPlayer() = 0;
-
-	[[nodiscard]] Framework* GetFramework() const { return m_pFramework; }
-	[[nodiscard]] EventManager* GetEventManager() const { return m_pEventManager; }
+	[[nodiscard]] virtual TileMap* GetTileMap() const = 0;
+	[[nodiscard]] virtual SceneManager* GetSceneManager() const = 0;
+	[[nodiscard]] virtual ShaderProgram* GetShader() const = 0;
+	[[nodiscard]] virtual ShaderProgram* GetDebugShader() const = 0;
+	[[nodiscard]] virtual Player* GetMyPlayer() const = 0;
+	[[nodiscard]] virtual Framework* GetFramework() const { return myFramework; }
+	[[nodiscard]] virtual EventManager* GetEventManager() const { return myEventManager; }
 
 protected:
-	Framework* m_pFramework;
-	EventManager* m_pEventManager;
+	Framework* myFramework;
+	EventManager* myEventManager;
 };

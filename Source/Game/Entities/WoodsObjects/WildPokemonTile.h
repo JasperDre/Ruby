@@ -19,7 +19,7 @@ public:
 	void Draw(Vector2Float camPos, Vector2Float projecScale) override;
 	virtual void PathingUpdate(float delatime);
 	virtual void WalkingUpdate(float deltatime);
-	virtual void TrackToPlayerUpdate(float deltatime);
+	virtual void TrackToPlayerUpdate(float deltatime) {}
 	void Move(SpriteDirection dir, float deltatime);
 	void ResetPathFinder() const;
 	void ResetInputSet() override;
@@ -33,8 +33,8 @@ public:
 	virtual void SetMinIndex(int anIndex) { myMinIndex = anIndex; }
 
 	[[nodiscard]] AI_States GetMyState() const override;
-	[[nodiscard]] bool GetNodeIsClearOnSpecial(int tx, int ty) const override;
-	[[nodiscard]] bool CheckForCollision(Vector2Float NPCNewPosition) const;
+	[[nodiscard]] bool IsNodeClearOnSpecial(int tx, int ty) const override;
+	[[nodiscard]] bool IsColliding(Vector2Float NPCNewPosition) const;
 	[[nodiscard]] int* GetInputSet() const override;
 	[[nodiscard]] int GetCurrentInput() const override;
 	[[nodiscard]] int GetNextTileFromSet(int aCurrentInput) const override;
@@ -46,16 +46,16 @@ public:
 	bool GetNextPath(Vector2Int anIndex);
 
 private:
-	std::array<int, MAXPATHSIZE_TOWN_NPC> m_MyInputSet;
-	Vector2Float NewPosition;
-	Vector2Int m_MyNewDestination;
-	Vector2Int m_MyIndex;
-	TileMap* m_MyTileMap;
-	int* m_MyPath;
-	int m_CurrentInput;
-	bool m_IsFirstInput;
-	bool m_PathingComplete;
+	std::array<int, MAXPATHSIZE_TOWN_NPC> myInputSet;
+	Vector2Float myNewPosition;
+	Vector2Int myNewDestination;
+	Vector2Int myIndex;
+	TileMap* myTileMap;
+	int* myPath;
+	int myCurrentInput;
+	bool myIsFirstInput;
+	bool myPathingComplete;
 	SpriteDirection myDirection;
 	SpriteDirection myNewDirection;
-	AI_States m_MyState;
+	AI_States myState;
 };

@@ -11,7 +11,7 @@ class ResourceManager;
 class Player : public Entity
 {
 public:
-	Player(ResourceManager* aResourceManager, GameCore* myGame, Mesh* aMesh, GLuint aTexture);
+	Player(ResourceManager* aResourceManager, GameCore* aGameCore, Mesh* aMesh, GLuint aTexture);
 	~Player() override;
 
 	void Update(float deltatime) override;
@@ -21,20 +21,20 @@ public:
 	void Move(SpriteDirection dir, float deltatime);
 	void Pause() const;
 	void Resume() const;
-	void SetStop(bool StopPlayer);
+	void SetStop(bool aStopPlayer);
 	void PlayerTransition();
 
 	[[nodiscard]] SpriteDirection GetMyDirection() const;
 	[[nodiscard]] bool CheckForCollision(Vector2Float aPosition) const;
 
 private:
-	std::array<std::string, NUM_DIRECTIONS> AnimationKeys;
-	std::array<AnimatedSprite*, NUM_DIRECTIONS> m_Animations;
-	Vector2Float NewPosition;
-	Vector2Float aTransitionDestination;
+	std::array<std::string, NUM_DIRECTIONS> myAnimationKeys;
+	std::array<AnimatedSprite*, NUM_DIRECTIONS> myAnimations;
+	Vector2Float myNewPosition;
+	Vector2Float myTransitionDestination;
 	ResourceManager* myResourceManager;
 	PlayerController* myController;
 	SpriteDirection myDirection;
-	bool m_InTransition;
-	bool m_Stop;
+	bool myIsInTransition;
+	bool myIsStopped;
 };

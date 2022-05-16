@@ -22,12 +22,12 @@ Frame TileMapExtras::GetFrameFromExtrasMap(const std::string& aType) const
 	return m_TileInfoMap.find(aType)->second;
 }
 
-bool TileMapExtras::GetTileAtPlayer(Vector2Int playerColumnRow) const
+bool TileMapExtras::IsTileAtPlayer(Vector2Int playerColumnRow) const
 {
 	return false;
 }
 
-bool TileMapExtras::GetTileAtNPC(Vector2Int npcColumnRow) const
+bool TileMapExtras::IsTileAtNPC(Vector2Int npcColumnRow) const
 {
 	return false;
 }

@@ -5,8 +5,8 @@
 
 TileMap::TileMap(GameCore* myGame, Areas aArea)
 {
-	m_pMyGame = myGame;
-	m_MyArea = aArea;
+	myGame = myGame;
+	myArea = aArea;
 }
 
 TileInfo TileMap::GetTileFromPalletMap(Tile_Type /*aType*/) const

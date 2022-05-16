@@ -66,23 +66,23 @@ public:
 
 	virtual void AddTile(const std::string& anIndex, Frame aFrame) = 0;
 
-	[[nodiscard]] virtual bool GetTileAtPlayer(Vector2Int playerColumnRow) const = 0;
-	[[nodiscard]] virtual bool GetTileAtNPC(Vector2Int npcColumnRow) const = 0;
+	[[nodiscard]] virtual bool IsTileAtPlayer(Vector2Int playerColumnRow) const = 0;
+	[[nodiscard]] virtual bool IsTileAtNPC(Vector2Int npcColumnRow) const = 0;
 	[[nodiscard]] virtual TileInfo GetTileFromPalletMap(Tile_Type aType) const;
 	[[nodiscard]] virtual TileInfo GetTileFromOakLabMap(OakLab_Tile_Type aType) const;
 	[[nodiscard]] virtual TileInfo GetTileFromWoodsMap(Forest_Tile_Type aType) const;
-	[[nodiscard]] virtual TileInfo GetTileAtIndex(int anIndex) const { return aNullTileInfo; }
-	[[nodiscard]] virtual Frame GetFrameFromExtrasMap(const std::string& anIndex) const { return aNullFrame; }
+	[[nodiscard]] virtual TileInfo GetTileAtIndex(int anIndex) const { return myNullTileInfo; }
+	[[nodiscard]] virtual Frame GetFrameFromExtrasMap(const std::string& anIndex) const { return myNullFrame; }
 	[[nodiscard]] virtual int GetMapWidth() const = 0;
 	[[nodiscard]] virtual int GetMapHeight() const = 0;
 	[[nodiscard]] virtual int GetIndexFromColumnRow(int aColumn, int aRow) const = 0;
 	[[nodiscard]] virtual Vector2Int GetColumRowFromIndex(int anIndex) const = 0;
 
 protected:
-	Areas m_MyArea;
-	Frame aNullFrame;
-	GameCore* m_pMyGame;
+	Areas myArea;
+	Frame myNullFrame;
+	GameCore* myGame;
 
 private:
-	TileInfo aNullTileInfo;
+	TileInfo myNullTileInfo;
 };

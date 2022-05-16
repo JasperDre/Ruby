@@ -8,12 +8,12 @@ class ResourceManager;
 class PokeBall : public Entity
 {
 public:
-	PokeBall(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
+	PokeBall(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier);
 
 	void Update(float deltatime) override {}
 	void Draw(Vector2Float camPos, Vector2Float camProjection) override;
 
 private:
-	Frame m_MyFrame;
-	TileMap* m_MyExtrasTileMap;
+	Frame myFrame;
+	TileMap* myExtrasTileMap;
 };

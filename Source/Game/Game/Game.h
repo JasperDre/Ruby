@@ -28,13 +28,13 @@ public:
 	void Update(float deltatime) override;
 	void Draw() override;
 
-	TileMap* GetTileMap() override;
-	SceneManager* GetSceneManager() override;
-	ShaderProgram* GetShader() override;
-	ShaderProgram* GetDebugShader() override;
-	Player* GetMyPlayer() override;
-
 	void SetCameraScreenSize(float width, float height);
+
+	[[nodiscard]] TileMap* GetTileMap() const override;
+	[[nodiscard]] SceneManager* GetSceneManager() const override;
+	[[nodiscard]] ShaderProgram* GetShader() const override;
+	[[nodiscard]] ShaderProgram* GetDebugShader() const override;
+	[[nodiscard]] Player* GetMyPlayer() const override;
 
 protected:
 	Vector2Float myWindowSize;

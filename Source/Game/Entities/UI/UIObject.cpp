@@ -7,28 +7,28 @@
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 
-UIObject::UIObject(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* aMesh, GLuint aTexture)
-	: Entity(myGame, aMesh, aTexture)
+UIObject::UIObject(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier)
+	: Entity(aGameCore, aMesh, aTextureIdentifier)
 {
-	m_PokeBall = new PokeBall(aResourceManager, aTileMap, myGame, myMesh, aTexture);
-	m_ScoreNumber = new ScoreNumber(aResourceManager, aTileMap, myGame, myMesh, aTexture);
-	m_PokeBall->SetPosition(Vector2Float(myPosition.myX - 14.0f, myPosition.myY + 12.5f));
-	m_ScoreNumber->SetPosition(Vector2Float(myPosition.myX - 12.5f, myPosition.myY + 12.5f));
+	myPokeBall = new PokeBall(aResourceManager, aTileMap, aGameCore, myMesh, aTextureIdentifier);
+	myScoreNumber = new ScoreNumber(aResourceManager, aTileMap, aGameCore, myMesh, aTextureIdentifier);
+	myPokeBall->SetPosition(Vector2Float(myPosition.myX - 14.0f, myPosition.myY + 12.5f));
+	myScoreNumber->SetPosition(Vector2Float(myPosition.myX - 12.5f, myPosition.myY + 12.5f));
 }
 
 UIObject::~UIObject()
 {
-	delete m_ScoreNumber;
-	delete m_PokeBall;
+	delete myScoreNumber;
+	delete myPokeBall;
 }
 
 void UIObject::Draw(Vector2Float camPos, Vector2Float camProjection)
 {
-	m_PokeBall->Draw(camPos, camProjection);
-	m_ScoreNumber->Draw(camPos, camProjection);
+	myPokeBall->Draw(camPos, camProjection);
+	myScoreNumber->Draw(camPos, camProjection);
 }
 
 void UIObject::SetScore(int aScore) const
 {
-	m_ScoreNumber->SetScore(aScore);
+	myScoreNumber->SetScore(aScore);
 }

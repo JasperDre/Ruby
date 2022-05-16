@@ -2,36 +2,36 @@
 
 ShaderProgram::ShaderProgram()
 {
-    m_VertShaderString = nullptr;
-    m_FragShaderString = nullptr;
+    myVertShaderString = nullptr;
+    myFragShaderString = nullptr;
 
-    m_VertShader = 0;
-    m_FragShader = 0;
-    m_Program = 0;
+    myVertShader = 0;
+    myFragShader = 0;
+    myProgram = 0;
 }
 
-ShaderProgram::ShaderProgram(const char* vertfilename, const char* fragfilename)
+ShaderProgram::ShaderProgram(const char* aVertexShaderFilepath, const char* aFragmentShaderFilepath)
 {
-    m_VertShaderString = nullptr;
-    m_FragShaderString = nullptr;
+    myVertShaderString = nullptr;
+    myFragShaderString = nullptr;
 
-    m_VertShader = 0;
-    m_FragShader = 0;
-    m_Program = 0;
+    myVertShader = 0;
+    myFragShader = 0;
+    myProgram = 0;
 
-    Init(vertfilename, fragfilename);
+    Init(aVertexShaderFilepath, aFragmentShaderFilepath);
 }
 
-ShaderProgram::ShaderProgram(const std::string& vertfilename, const std::string& fragfilename)
+ShaderProgram::ShaderProgram(const std::string& aVertexShaderFilepath, const std::string& aFragmentShaderFilepath)
 {
-    m_VertShaderString = nullptr;
-    m_FragShaderString = nullptr;
+    myVertShaderString = nullptr;
+    myFragShaderString = nullptr;
 
-    m_VertShader = 0;
-    m_FragShader = 0;
-    m_Program = 0;
+    myVertShader = 0;
+    myFragShader = 0;
+    myProgram = 0;
 
-    Init(vertfilename.c_str(), fragfilename.c_str());
+    Init(aVertexShaderFilepath.c_str(), aFragmentShaderFilepath.c_str());
 }
 
 ShaderProgram::~ShaderProgram()
@@ -41,27 +41,27 @@ ShaderProgram::~ShaderProgram()
 
 void ShaderProgram::Cleanup()
 {
-    delete[] m_VertShaderString;
-    delete[] m_FragShaderString;
+    delete[] myVertShaderString;
+    delete[] myFragShaderString;
 
-    glDetachShader(m_Program, m_VertShader);
-    glDetachShader(m_Program, m_FragShader);
+    glDetachShader(myProgram, myVertShader);
+    glDetachShader(myProgram, myFragShader);
 
-    if (m_VertShader)
-        glDeleteShader(m_VertShader);
+    if (myVertShader)
+        glDeleteShader(myVertShader);
 
-    if (m_FragShader)
-        glDeleteShader(m_FragShader);
+    if (myFragShader)
+        glDeleteShader(myFragShader);
 
-    if (m_Program)
-        glDeleteProgram(m_Program);
+    if (myProgram)
+        glDeleteProgram(myProgram);
 
-    m_VertShaderString = nullptr;
-    m_FragShaderString = nullptr;
+    myVertShaderString = nullptr;
+    myFragShaderString = nullptr;
 
-    m_VertShader = 0;
-    m_FragShader = 0;
-    m_Program = 0;
+    myVertShader = 0;
+    myFragShader = 0;
+    myProgram = 0;
 }
 
 void ShaderProgram::CompileShader(GLuint& shaderhandle, const char* shaderstring)
@@ -100,12 +100,12 @@ bool ShaderProgram::Init(const char* vertfilename, const char* fragfilename)
     if (!isFragFileValid)
         return false;
 
-    m_VertShaderString = FileUtility::ReadFileIntoBuffer(vertfilename);
-    m_FragShaderString = FileUtility::ReadFileIntoBuffer(fragfilename);
+    myVertShaderString = FileUtility::ReadFileIntoBuffer(vertfilename);
+    myFragShaderString = FileUtility::ReadFileIntoBuffer(fragfilename);
 
-    assert(m_VertShaderString);
-    assert(m_FragShaderString);
-    if (!m_VertShaderString || !m_FragShaderString)
+    assert(myVertShaderString);
+    assert(myFragShaderString);
+    if (!myVertShaderString || !myFragShaderString)
         return false;
 
     return Reload();
@@ -113,36 +113,36 @@ bool ShaderProgram::Init(const char* vertfilename, const char* fragfilename)
 
 bool ShaderProgram::Reload()
 {
-    assert(m_VertShaderString);
-    assert(m_FragShaderString);
+    assert(myVertShaderString);
+    assert(myFragShaderString);
 
-    m_VertShader = glCreateShader(GL_VERTEX_SHADER);
-    m_FragShader = glCreateShader(GL_FRAGMENT_SHADER);
+    myVertShader = glCreateShader(GL_VERTEX_SHADER);
+    myFragShader = glCreateShader(GL_FRAGMENT_SHADER);
 
-    CompileShader(m_VertShader, m_VertShaderString);
-    CompileShader(m_FragShader, m_FragShaderString);
+    CompileShader(myVertShader, myVertShaderString);
+    CompileShader(myFragShader, myFragShaderString);
 
-    if (m_VertShader == 0 || m_FragShader == 0)
+    if (myVertShader == 0 || myFragShader == 0)
     {
         Cleanup();
         return false;
     }
 
-    m_Program = glCreateProgram();
-    glAttachShader(m_Program, m_VertShader);
-    glAttachShader(m_Program, m_FragShader);
+    myProgram = glCreateProgram();
+    glAttachShader(myProgram, myVertShader);
+    glAttachShader(myProgram, myFragShader);
 
-    glLinkProgram(m_Program);
+    glLinkProgram(myProgram);
 
     int linked = 0;
-    glGetProgramiv(m_Program, GL_LINK_STATUS, &linked);
+    glGetProgramiv(myProgram, GL_LINK_STATUS, &linked);
     if (linked == 0)
     {
         int infolen = 0;
-        glGetProgramiv(m_Program, GL_INFO_LOG_LENGTH, &infolen);
+        glGetProgramiv(myProgram, GL_INFO_LOG_LENGTH, &infolen);
 
         char* infobuffer = new char[infolen + 1];
-        glGetProgramInfoLog(m_Program, infolen + 1, nullptr, infobuffer);
+        glGetProgramInfoLog(myProgram, infolen + 1, nullptr, infobuffer);
         DebugUtility::OutputMessage(infobuffer);
         assert(false);
         delete[] infobuffer;

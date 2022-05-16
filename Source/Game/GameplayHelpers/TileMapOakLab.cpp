@@ -12,14 +12,14 @@ TileMapOakLab::TileMapOakLab(GameCore* myGame, Areas anArea)
 		const OakLab_Tile_Type aType = static_cast<OakLab_Tile_Type>(i + 9);
 		TileInfo aNullTile = TileInfo(aType);
 
-		if (aNullTile.MyLabType == Oak_Lab_NullWall_)
+		if (aNullTile.myLabType == Oak_Lab_NullWall_)
 		{
-			aNullTile.IsWalkable = false;
+			aNullTile.myIsWalkable = false;
 		}
 		else
 		{
-			aNullTile.IsWalkable = true;
-			aNullTile.IsDoor = true;
+			aNullTile.myIsWalkable = true;
+			aNullTile.myIsDoor = true;
 		}
 
 		m_TileInfoMap.insert(std::pair<OakLab_Tile_Type, TileInfo>(static_cast<OakLab_Tile_Type>(i + 9), aNullTile));
@@ -33,24 +33,24 @@ TileMapOakLab::~TileMapOakLab()
 
 void TileMapOakLab::AddTile(const std::string& anIndex, Frame aFrame)
 {
-	if (m_MyArea == Areas::Area_OakLab)
+	if (myArea == Areas::Area_OakLab)
 	{
 		//Check to see if the TileInfo does not exists, if so make a new TileInfo
 		if (OakLab_Tile_Type aType = LabTypeSelecter.find(anIndex)->second; m_TileInfoMap.find(aType) == m_TileInfoMap.end())
 		{
 			TileInfo myNewTile = TileInfo(aType);
 
-			if (myNewTile.MyLabType == Oak_Lab_Floor_ || myNewTile.MyLabType == Oak_Lab_Seat_ || myNewTile.MyLabType == Oak_Lab_Entrance_)
+			if (myNewTile.myLabType == Oak_Lab_Floor_ || myNewTile.myLabType == Oak_Lab_Seat_ || myNewTile.myLabType == Oak_Lab_Entrance_)
 			{
-				myNewTile.IsWalkable = true;
+				myNewTile.myIsWalkable = true;
 			}
 			else
 			{
-				myNewTile.IsWalkable = false;
+				myNewTile.myIsWalkable = false;
 			}
 
 			//push the frame attributes into the Variant vector
-			myNewTile.MyVariant.push_back(aFrame);
+			myNewTile.myVariant.push_back(aFrame);
 
 			//insert the new TileInfo into the TileInfo Map
 			m_TileInfoMap.insert(std::pair<OakLab_Tile_Type, TileInfo>(aType, myNewTile));
@@ -58,7 +58,7 @@ void TileMapOakLab::AddTile(const std::string& anIndex, Frame aFrame)
 		//if the TileInfo does exist then push back the new frame attributes into its variant vector
 		else
 		{
-			m_TileInfoMap.at(aType).MyVariant.push_back(aFrame);
+			m_TileInfoMap.at(aType).myVariant.push_back(aFrame);
 		}
 	}
 }
@@ -68,28 +68,28 @@ TileInfo TileMapOakLab::GetTileFromOakLabMap(OakLab_Tile_Type aType) const
 	return m_TileInfoMap.find(aType)->second;
 }
 
-bool TileMapOakLab::GetTileAtPlayer(Vector2Int playerColumnRow) const
+bool TileMapOakLab::IsTileAtPlayer(Vector2Int playerColumnRow) const
 {
 	const int anIndex = (NUM_LAB_COLUMNS * playerColumnRow.y) + playerColumnRow.x;
 	constexpr short TypeMask = 15;
 	const TileInfo aTileInfo = m_TileInfoMap.find(static_cast<OakLab_Tile_Type>(TypeMask & OakLabBitMap[anIndex]))->second;
 
-	if (aTileInfo.MyLabType == Oak_Lab_NullDoor_)
+	if (aTileInfo.myLabType == Oak_Lab_NullDoor_)
 	{
 		Event* doorevent = new DoorEvent(10);
-		m_pMyGame->GetEventManager()->QueueEvent(doorevent);
+		myGame->GetEventManager()->QueueEvent(doorevent);
 	}
 
-	return aTileInfo.IsWalkable;
+	return aTileInfo.myIsWalkable;
 }
 
-bool TileMapOakLab::GetTileAtNPC(Vector2Int npcColumnRow) const
+bool TileMapOakLab::IsTileAtNPC(Vector2Int npcColumnRow) const
 {
 	const int anIndex = (NUM_LAB_COLUMNS * npcColumnRow.y) + npcColumnRow.x;
 	constexpr short TypeMask = 15;
 	const TileInfo aTileInfo = m_TileInfoMap.find(static_cast<OakLab_Tile_Type>(TypeMask & OakLabBitMap[anIndex]))->second;
 
-	return aTileInfo.IsWalkable;
+	return aTileInfo.myIsWalkable;
 }
 
 TileInfo TileMapOakLab::GetTileAtIndex(int anIndex) const

@@ -15,70 +15,70 @@
 #include "Mesh/Mesh.h"
 #include "Scenes/Scene.h"
 
-OakLab::OakLab(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player * aPlayer, GLuint aTexture)
-	: Scene(myGame, myArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(7.5f * TILESIZE, 2.0f * TILESIZE), aTexture)
+OakLab::OakLab(GameCore* aGameCore, Areas anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player * aPlayer, unsigned int aTextureIdentifier)
+	: Scene(aGameCore, anArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(7.5f * TILESIZE, 2.0f * TILESIZE), aTextureIdentifier)
 {
-	m_ProfOakMesh = nullptr;
-	m_ProfOak = nullptr;
-	m_OakAIController = nullptr;
-	m_OakLabMap = nullptr;
-	m_OakLabWorkDesk = nullptr;
-	m_OakLabMachineTop = nullptr;
-	m_OakLabPlantTops = nullptr;
-	m_OakLabTableTop = nullptr;
-	m_OakStartPosition = Vector2Float(6.0f * TILESIZE, 11.0f * TILESIZE);
+	myOakMesh = nullptr;
+	myOak = nullptr;
+	myOakAIController = nullptr;
+	myOakLabMap = nullptr;
+	myOakLabWorkDesk = nullptr;
+	myOakLabMachineTop = nullptr;
+	myOakLabPlantTops = nullptr;
+	myOakLabTableTop = nullptr;
+	myOakStartPosition = Vector2Float(6.0f * TILESIZE, 11.0f * TILESIZE);
 }
 
 OakLab::~OakLab()
 {
-	delete m_OakLabTableTop;
-	delete m_OakLabPlantTops;
-	delete m_OakLabMachineTop;
-	delete m_OakLabWorkDesk;
-	delete m_OakLabMap;
-	delete m_OakAIController;
-	delete m_ProfOak;
-	delete m_ProfOakMesh;
+	delete myOakLabTableTop;
+	delete myOakLabPlantTops;
+	delete myOakLabMachineTop;
+	delete myOakLabWorkDesk;
+	delete myOakLabMap;
+	delete myOakAIController;
+	delete myOak;
+	delete myOakMesh;
 }
 
 void OakLab::LoadContent()
 {
-	m_ProfOakMesh = new Mesh();
-	m_ProfOakMesh->SetShader(m_pMyGame->GetShader(), m_pMyGame->GetDebugShader());
+	myOakMesh = new Mesh();
+	myOakMesh->SetShader(myGame->GetShader(), myGame->GetDebugShader());
 
-	m_OakLabMap = new OakLabLevel(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);
-	m_OakLabWorkDesk = new OakLabDeskTop(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);
-	m_OakLabMachineTop = new OakLabMachineTop(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);
-	m_OakLabPlantTops = new OakLabPlantTop(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);
-	m_OakLabTableTop = new OakLabTableTop(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);
-	m_ProfOak = new ProfessorOak(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_ProfOakMesh, m_pMyResourceManager->GetaTexture(TextureHandle::Player_NPCSprites));
+	myOakLabMap = new OakLabLevel(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
+	myOakLabWorkDesk = new OakLabDeskTop(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
+	myOakLabMachineTop = new OakLabMachineTop(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
+	myOakLabPlantTops = new OakLabPlantTop(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
+	myOakLabTableTop = new OakLabTableTop(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
+	myOak = new ProfessorOak(myResourceManager, myTileMap, myGame, myOakMesh, myResourceManager->GetaTexture(TextureHandle::Player_NPCSprites));
 }
 
 void OakLab::Update(float deltatime)
 {
-	m_pMyTrainer->Update(deltatime);
-	m_ProfOak->Update(deltatime);
+	myPlayer->Update(deltatime);
+	myOak->Update(deltatime);
 }
 
 void OakLab::Draw(Vector2Float camPos, Vector2Float camProjection)
 {
-	m_OakLabMap->Draw(camPos, camProjection);
+	myOakLabMap->Draw(camPos, camProjection);
 
-	m_ProfOak->Draw(camPos, camProjection);
+	myOak->Draw(camPos, camProjection);
 
-	m_pMyTrainer->Draw(camPos, camProjection);
+	myPlayer->Draw(camPos, camProjection);
 
-	m_OakLabWorkDesk->Draw(camPos, camProjection);
-	m_OakLabMachineTop->Draw(camPos, camProjection);
-	m_OakLabPlantTops->Draw(camPos, camProjection);
-	m_OakLabTableTop->Draw(camPos, camProjection);
+	myOakLabWorkDesk->Draw(camPos, camProjection);
+	myOakLabMachineTop->Draw(camPos, camProjection);
+	myOakLabPlantTops->Draw(camPos, camProjection);
+	myOakLabTableTop->Draw(camPos, camProjection);
 }
 
 void OakLab::OnIsActive()
 {
-	m_pMyTrainer->SetPosition(m_pMyPlayerStart);
-	m_ProfOak->SetPosition(m_OakStartPosition);
-	m_ProfOak->ResetPathFinder();
+	myPlayer->SetPosition(myPlayerStartPosition);
+	myOak->SetPosition(myOakStartPosition);
+	myOak->ResetPathFinder();
 }
 
 void OakLab::Reload()
@@ -87,5 +87,5 @@ void OakLab::Reload()
 
 void OakLab::Unload()
 {
-	m_pMyPlayerStart = Vector2Float(7.5f * TILESIZE, TILESIZE + 0.3f);
+	myPlayerStartPosition = Vector2Float(7.5f * TILESIZE, TILESIZE + 0.3f);
 }

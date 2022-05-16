@@ -8,8 +8,8 @@
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 
-PetalburgWoods::PetalburgWoods(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager * aResourceManager, Mesh* aMesh, Player* aPlayer, GLuint aTexture)
-	: Scene(myGame, myArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(37.0f * TILESIZE, TILESIZE), aTexture)
+PetalburgWoods::PetalburgWoods(GameCore* aGameCore, Areas anArea, TileMap* aTileMap, ResourceManager * aResourceManager, Mesh* aMesh, Player* aPlayer, unsigned int aTextureIdentifier)
+	: Scene(aGameCore, anArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(37.0f * TILESIZE, TILESIZE), aTextureIdentifier)
 	, m_MyPetalburg(nullptr)
 {
 	PlayerSavedPosition = Vector2Float(0.0f, 0.0f);
@@ -22,36 +22,29 @@ PetalburgWoods::~PetalburgWoods()
 
 void PetalburgWoods::LoadContent()
 {
-	m_MyPetalburg = new PetalburgWoodsLevel(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);
+	m_MyPetalburg = new PetalburgWoodsLevel(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
 }
 
 void PetalburgWoods::Update(float deltatime)
 {
-	m_pMyTrainer->Update(deltatime);
+	myPlayer->Update(deltatime);
 }
 
 void PetalburgWoods::Draw(Vector2Float camPos, Vector2Float camProjection)
 {
 	m_MyPetalburg->Draw(camPos, camProjection);
-	m_pMyTrainer->Draw(camPos, camProjection);
+	myPlayer->Draw(camPos, camProjection);
 }
 
 void PetalburgWoods::OnIsActive()
 {
 	if (PlayerSavedPosition != Vector2Float(0.0f, 0.0f))
-	{
-		m_pMyPlayerStart = PlayerSavedPosition;
-	}
+		myPlayerStartPosition = PlayerSavedPosition;
 
-	m_pMyTrainer->SetPosition(m_pMyPlayerStart);
-}
-
-void PetalburgWoods::Reload()
-{
-
+	myPlayer->SetPosition(myPlayerStartPosition);
 }
 
 void PetalburgWoods::Unload()
 {
-	PlayerSavedPosition = m_pMyTrainer->GetPosition();
+	PlayerSavedPosition = myPlayer->GetPosition();
 }

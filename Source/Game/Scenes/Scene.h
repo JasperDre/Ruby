@@ -12,7 +12,7 @@ class Player;
 class Scene
 {
 public:
-	Scene(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, Vector2Float aPlayerStartPosition, GLuint aTexture);
+	Scene(GameCore* aGame, Areas anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, Vector2Float aPlayerStartPosition, unsigned int aTextureIdentifier);
 	virtual ~Scene() = default;
 
 	virtual void LoadContent() = 0;
@@ -24,23 +24,23 @@ public:
 	virtual void Reload() = 0;
 
 	virtual void SetIsActive(bool setActive);
-	virtual void SetPlayerStart(Vector2Float PlayerLastPos) { m_pMyPlayerStart = PlayerLastPos; }
+	virtual void SetPlayerStart(Vector2Float PlayerLastPos) { myPlayerStartPosition = PlayerLastPos; }
 
-	[[nodiscard]] virtual bool GetIsActive() const { return m_Active; }
-	[[nodiscard]] virtual Areas GetMyArea() const { return m_MyArea; }
-	[[nodiscard]] virtual Player* GetMyPlayer() const { return m_pMyTrainer; }
-	[[nodiscard]] virtual TileMap* GetMyTileMap() const { return m_MyTileMap;}
-	[[nodiscard]] virtual Vector2Float GetPlayerStart() const { return m_pMyPlayerStart; }
+	[[nodiscard]] virtual bool IsActive() const { return myIsActive; }
+	[[nodiscard]] virtual Areas GetMyArea() const { return myArea; }
+	[[nodiscard]] virtual Player* GetMyPlayer() const { return myPlayer; }
+	[[nodiscard]] virtual TileMap* GetMyTileMap() const { return myTileMap;}
+	[[nodiscard]] virtual Vector2Float GetPlayerStart() const { return myPlayerStartPosition; }
 
 protected:
-	std::vector<Entity*> m_MyEntities;
-	Areas m_MyArea;
-	Vector2Float m_pMyPlayerStart;
-	TileMap* m_MyTileMap;
-	GameCore* m_pMyGame;
-	ResourceManager* m_pMyResourceManager;
-	Mesh* m_pMyMesh;
-	Player* m_pMyTrainer;
-	GLuint m_pMyTexture;
-	bool m_Active;
+	std::vector<Entity*> myEntities;
+	Areas myArea;
+	Vector2Float myPlayerStartPosition;
+	TileMap* myTileMap;
+	GameCore* myGame;
+	ResourceManager* myResourceManager;
+	Mesh* myMesh;
+	Player* myPlayer;
+	unsigned int myTextureIdentifier;
+	bool myIsActive;
 };

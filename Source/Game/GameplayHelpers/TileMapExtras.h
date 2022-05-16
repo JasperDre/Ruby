@@ -13,8 +13,8 @@ public:
 	void AddTile(const std::string& anIndex, Frame aFrame) override;
 
 	[[nodiscard]] Frame GetFrameFromExtrasMap(const std::string& aType) const override;
-	[[nodiscard]] bool GetTileAtPlayer(Vector2Int playerColumnRow) const override;
-	[[nodiscard]] bool GetTileAtNPC(Vector2Int npcColumnRow) const override;
+	[[nodiscard]] bool IsTileAtPlayer(Vector2Int playerColumnRow) const override;
+	[[nodiscard]] bool IsTileAtNPC(Vector2Int npcColumnRow) const override;
 	[[nodiscard]] int GetMapWidth() const override;
 	[[nodiscard]] int GetMapHeight() const override;
 	[[nodiscard]] int GetIndexFromColumnRow(int aColumn, int aRow) const override;

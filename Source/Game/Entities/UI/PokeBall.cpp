@@ -6,19 +6,19 @@
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 
-PokeBall::PokeBall(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture)
-	: Entity(myGame, myMesh, aTexture)
+PokeBall::PokeBall(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier)
+	: Entity(aGameCore, aMesh, aTextureIdentifier)
 {
-	m_MyExtrasTileMap = aTileMap;
-	myTextureIdentifier = aTexture;
+	myExtrasTileMap = aTileMap;
+	myTextureIdentifier = aTextureIdentifier;
 
-	m_MyFrame = m_MyExtrasTileMap->GetFrameFromExtrasMap("PokeBall_UIScore.png");
-	m_MyFrame.myUVOffset = Vector2Float(m_MyFrame.myOrigin.myX / static_cast<float>(aResourceManager->GetTextureSize(4).x), m_MyFrame.myOrigin.myY / static_cast<float>(aResourceManager->GetTextureSize(4).y));
-	m_MyFrame.myUVScale = Vector2Float(m_MyFrame.mySize.myX / static_cast<float>(aResourceManager->GetTextureSize(4).x), m_MyFrame.mySize.myY / static_cast<float>(aResourceManager->GetTextureSize(4).y));
+	myFrame = myExtrasTileMap->GetFrameFromExtrasMap("PokeBall_UIScore.png");
+	myFrame.myUVOffset = Vector2Float(myFrame.myOrigin.myX / static_cast<float>(aResourceManager->GetTextureSize(4).x), myFrame.myOrigin.myY / static_cast<float>(aResourceManager->GetTextureSize(4).y));
+	myFrame.myUVScale = Vector2Float(myFrame.mySize.myX / static_cast<float>(aResourceManager->GetTextureSize(4).x), myFrame.mySize.myY / static_cast<float>(aResourceManager->GetTextureSize(4).y));
 }
 
 void PokeBall::Draw(Vector2Float camPos, Vector2Float camProjection)
 {
-	m_MyFrame.myWorldSpace = myPosition;
-	myMesh->Draw(m_MyFrame.myWorldSpace, 0.0f, TILESIZE * 0.8f, 0, camProjection, myTextureIdentifier, m_MyFrame.myUVScale, m_MyFrame.myUVOffset);
+	myFrame.myWorldSpace = myPosition;
+	myMesh->Draw(myFrame.myWorldSpace, 0.0f, TILESIZE * 0.8f, 0, camProjection, myTextureIdentifier, myFrame.myUVScale, myFrame.myUVOffset);
 }

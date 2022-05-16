@@ -9,18 +9,18 @@ public:
 
     void OnEvent(Event* pEvent);
 
-	void ClearInput() { m_Up = false; m_Down = false; m_Left = false; m_Right = false; }
+	void ClearInput() { myIsUp = false; myIsDown = false; myIsLeft = false; myIsRight = false; }
 
-    [[nodiscard]] bool IsForwardHeld() const { return m_Up; }
-    [[nodiscard]] bool IsReverseHeld() const { return m_Down; }
-    [[nodiscard]] bool IsTurnLeftHeld() const { return m_Left; }
-    [[nodiscard]] bool IsTurnRightHeld() const { return m_Right; }
-    [[nodiscard]] bool IsInputReleased() const { return m_InputReleased; }
+    [[nodiscard]] bool IsForwardHeld() const { return myIsUp; }
+    [[nodiscard]] bool IsReverseHeld() const { return myIsDown; }
+    [[nodiscard]] bool IsTurnLeftHeld() const { return myIsLeft; }
+    [[nodiscard]] bool IsTurnRightHeld() const { return myIsRight; }
+    [[nodiscard]] bool IsInputReleased() const { return myIsInputReleased; }
 
 protected:
-    bool m_Up;
-    bool m_Down;
-    bool m_Left;
-    bool m_Right;
-	bool m_InputReleased;
+    bool myIsUp;
+    bool myIsDown;
+    bool myIsLeft;
+    bool myIsRight;
+	bool myIsInputReleased;
 };

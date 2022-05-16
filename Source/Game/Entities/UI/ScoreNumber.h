@@ -8,7 +8,7 @@ class ResourceManager;
 class ScoreNumber : public Entity
 {
 public:
-	ScoreNumber(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* aMesh, GLuint aTexture);
+	ScoreNumber(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* aMesh, unsigned int aTextureIdentifier);
 	~ScoreNumber() override;
 
 	void Update(float deltatime) override {}
@@ -17,7 +17,7 @@ public:
 	void SetScore(int aScore);
 
 private:
-	std::vector<Frame> MyScoreFrames;
-	TileMap* m_MyExtrasTileMap;
+	std::vector<Frame> myScoreFrames;
+	TileMap* myExtrasTileMap;
 	ResourceManager* myResourceManager;
 };

@@ -12,104 +12,104 @@ TileMapPalletTown::TileMapPalletTown(GameCore* myGame, Areas anArea) : TileMap(m
 		const Tile_Type aType = static_cast<Tile_Type>(i + 13);
 		TileInfo aNullTile = TileInfo(aType);
 
-		if (aNullTile.MyType == Town_Null_Wall_)
+		if (aNullTile.myType == Town_Null_Wall_)
 		{
-			aNullTile.IsWalkable = false;
+			aNullTile.myIsWalkable = false;
 		}
 		else
 		{
-			aNullTile.IsWalkable = true;
-			aNullTile.IsDoor = true;
+			aNullTile.myIsWalkable = true;
+			aNullTile.myIsDoor = true;
 		}
 
-		m_TileInfoMap.insert(std::pair<Tile_Type, TileInfo>(static_cast<Tile_Type>(i + 13), aNullTile));
+		myTileInfoMap.insert(std::pair<Tile_Type, TileInfo>(static_cast<Tile_Type>(i + 13), aNullTile));
 	}
 }
 
 TileMapPalletTown::~TileMapPalletTown()
 {
-	m_TileInfoMap.clear();
+	myTileInfoMap.clear();
 }
 void TileMapPalletTown::AddTile(const std::string& anIndex, Frame aFrame)
 {
-	if (m_MyArea == Areas::Area_PalletTown)
+	if (myArea == Areas::Area_PalletTown)
 	{
 		//Find the Tile Type from the index string
 		Tile_Type aType = TypeSelecter.find(anIndex)->second;
 
 		//Check to see if the TileInfo does not exists, if so make a new TileInfo
-		if (m_TileInfoMap.find(aType) == m_TileInfoMap.end())
+		if (myTileInfoMap.find(aType) == myTileInfoMap.end())
 		{
 
 			TileInfo myNewTile = TileInfo(aType);
 
-			if (myNewTile.MyType == Town_Flower_ || myNewTile.MyType == Town_Grass_A_ || myNewTile.MyType == Town_Grass_B_ || myNewTile.MyType == Wild_Grass_)
+			if (myNewTile.myType == Town_Flower_ || myNewTile.myType == Town_Grass_A_ || myNewTile.myType == Town_Grass_B_ || myNewTile.myType == Wild_Grass_)
 			{
-				myNewTile.IsWalkable = true;
+				myNewTile.myIsWalkable = true;
 			}
-			else if (myNewTile.MyType == Oak_Door_ || myNewTile.MyType == Player_Door_) //if the tile is a door
+			else if (myNewTile.myType == Oak_Door_ || myNewTile.myType == Player_Door_) //if the tile is a door
 			{
-				myNewTile.IsWalkable = true;
-				myNewTile.IsDoor = true;
+				myNewTile.myIsWalkable = true;
+				myNewTile.myIsDoor = true;
 			}
 			else
 			{
-				myNewTile.IsWalkable = false;
+				myNewTile.myIsWalkable = false;
 			}
 
 			//push the frame attributes into the Variant vector
-			myNewTile.MyVariant.push_back(aFrame);
+			myNewTile.myVariant.push_back(aFrame);
 
 			//insert the new TileInfo into the TileInfo Map
-			m_TileInfoMap.insert(std::pair<Tile_Type, TileInfo>(aType, myNewTile));
+			myTileInfoMap.insert(std::pair<Tile_Type, TileInfo>(aType, myNewTile));
 		}
 		//if the TileInfo does exist then push back the new frame attributes into its variant vector
 		else
 		{
-			m_TileInfoMap.at(aType).MyVariant.push_back(aFrame);
+			myTileInfoMap.at(aType).myVariant.push_back(aFrame);
 		}
 	}
 }
 
 TileInfo TileMapPalletTown::GetTileFromPalletMap(Tile_Type aType) const
 {
-	return m_TileInfoMap.find(aType)->second;
+	return myTileInfoMap.find(aType)->second;
 }
 
-bool TileMapPalletTown::GetTileAtPlayer(Vector2Int playerColumnRow) const
+bool TileMapPalletTown::IsTileAtPlayer(Vector2Int playerColumnRow) const
 {
 	const int anIndex = (NUM_COLUMNS * playerColumnRow.y) + playerColumnRow.x;
 	constexpr short TypeMask = 15;
-	const TileInfo aTileInfo = m_TileInfoMap.find(static_cast<Tile_Type>(TypeMask & PalletTownBitMap[anIndex]))->second;
+	const TileInfo aTileInfo = myTileInfoMap.find(static_cast<Tile_Type>(TypeMask & PalletTownBitMap[anIndex]))->second;
 
-	if (aTileInfo.MyType == Oak_Door_)
+	if (aTileInfo.myType == Oak_Door_)
 	{
 		Event* doorEvent = new DoorEvent(11);
-		m_pMyGame->GetEventManager()->QueueEvent(doorEvent);
+		myGame->GetEventManager()->QueueEvent(doorEvent);
 	}
-	else if (aTileInfo.MyType == Town_Null_Door_)
+	else if (aTileInfo.myType == Town_Null_Door_)
 	{
 		Event* doorEvent = new DoorEvent(12);
-		m_pMyGame->GetEventManager()->QueueEvent(doorEvent);
+		myGame->GetEventManager()->QueueEvent(doorEvent);
 	}
 
-	return aTileInfo.IsWalkable;
+	return aTileInfo.myIsWalkable;
 
 }
 
-bool TileMapPalletTown::GetTileAtNPC(Vector2Int npcColumnRow) const
+bool TileMapPalletTown::IsTileAtNPC(Vector2Int npcColumnRow) const
 {
 	const int anIndex = (NUM_COLUMNS * npcColumnRow.y) + npcColumnRow.x;
 	constexpr short TypeMask = 15;
-	const TileInfo aTileInfo = m_TileInfoMap.find(static_cast<Tile_Type>(TypeMask & PalletTownBitMap[anIndex]))->second;
+	const TileInfo aTileInfo = myTileInfoMap.find(static_cast<Tile_Type>(TypeMask & PalletTownBitMap[anIndex]))->second;
 
-	return aTileInfo.IsWalkable;
+	return aTileInfo.myIsWalkable;
 }
 
 TileInfo TileMapPalletTown::GetTileAtIndex(int anIndex) const
 {
 	constexpr short TypeMask = 15;
-	TileInfo aTileInfo = m_TileInfoMap.find(static_cast<Tile_Type>(TypeMask & PalletTownBitMap[anIndex]))->second;
+	TileInfo aTileInfo = myTileInfoMap.find(static_cast<Tile_Type>(TypeMask & PalletTownBitMap[anIndex]))->second;
 
 	return aTileInfo;
 }

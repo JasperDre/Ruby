@@ -5,19 +5,19 @@
 
 Framework::Framework()
     : myWindow(nullptr)
-    , m_pGameCore(nullptr)
-    , m_InitialWindowWidth(-1)
-    , m_InitialWindowHeight(-1)
-    , m_CurrentWindowWidth(-1)
-    , m_CurrentWindowHeight(-1)
+    , myGameCore(nullptr)
+    , myInitialWindowWidth(-1)
+    , myInitialWindowHeight(-1)
+    , myCurrentWindowWidth(-1)
+    , myCurrentWindowHeight(-1)
 {}
 
 void Framework::Init(int width, int height)
 {
-    m_InitialWindowWidth = width;
-    m_InitialWindowHeight = height;
-    m_CurrentWindowWidth = m_InitialWindowWidth;
-    m_CurrentWindowHeight = m_InitialWindowHeight;
+    myInitialWindowWidth = width;
+    myInitialWindowHeight = height;
+    myCurrentWindowWidth = myInitialWindowWidth;
+    myCurrentWindowHeight = myInitialWindowHeight;
 
     std::string title = "Ruby";
 #if _WIN64
@@ -32,9 +32,9 @@ void Framework::Init(int width, int height)
 
 void Framework::Run(GameCore* pGameCore)
 {
-    m_pGameCore = pGameCore;
-    m_pGameCore->OnSurfaceChanged(m_CurrentWindowWidth, m_CurrentWindowHeight);
-    m_pGameCore->LoadContent();
+    myGameCore = pGameCore;
+    myGameCore->OnSurfaceChanged(myCurrentWindowWidth, myCurrentWindowHeight);
+    myGameCore->LoadContent();
 
     auto previousTime = std::chrono::high_resolution_clock::now();
 
@@ -50,10 +50,10 @@ void Framework::Run(GameCore* pGameCore)
         if (InputManager::GetInstance().IsKeyDown(Keys::Escape))
             glfwSetWindowShouldClose(myWindow, true);
 
-        m_pGameCore->GetEventManager()->DispatchEvents(m_pGameCore);
-        m_pGameCore->Update(deltaTime);
-        m_pGameCore->Draw();
-        glfwGetFramebufferSize(myWindow, &m_CurrentWindowWidth, &m_CurrentWindowHeight);
+        myGameCore->GetEventManager()->DispatchEvents(myGameCore);
+        myGameCore->Update(deltaTime);
+        myGameCore->Draw();
+        glfwGetFramebufferSize(myWindow, &myCurrentWindowWidth, &myCurrentWindowHeight);
         glfwSwapBuffers(myWindow);
     }
 }
@@ -104,11 +104,11 @@ void Framework::ResizeWindow(int width, int height)
     if (width <= 0)
         width = 1;
 
-    m_CurrentWindowWidth = width;
-    m_CurrentWindowHeight = height;
+    myCurrentWindowWidth = width;
+    myCurrentWindowHeight = height;
 
-    if (m_pGameCore)
-        m_pGameCore->OnSurfaceChanged(width, height);
+    if (myGameCore)
+        myGameCore->OnSurfaceChanged(width, height);
 }
 
 bool Framework::CreateGLWindow(const char* title, int width, int height)

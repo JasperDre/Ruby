@@ -34,30 +34,30 @@ public:
 
 	bool GetNextPath(Vector2Int anIndex);
 	SpriteDirection CalculateNextInput(Vector2Int anIndex);
-	[[nodiscard]] AI_States GetMyState() const override { return m_MyState; }
-	[[nodiscard]] bool GetNodeIsClearOnSpecial(int tx, int ty) const override;
-	[[nodiscard]] bool CheckForCollision(Vector2Float NPCNewPosition) const;
-	[[nodiscard]] int* GetInputSet() const override { return m_MyPath; }
-	[[nodiscard]] int GetCurrentInput() const override { return m_CurrentInput; }
-	[[nodiscard]] int GetNextTileFromSet(int aCurrentInput) const override { return m_MyInputSet[aCurrentInput]; }
+	[[nodiscard]] AI_States GetMyState() const override { return myState; }
+	[[nodiscard]] bool IsNodeClearOnSpecial(int tx, int ty) const override;
+	[[nodiscard]] bool IsColliding(Vector2Float NPCNewPosition) const;
+	[[nodiscard]] int* GetInputSet() const override { return myPath; }
+	[[nodiscard]] int GetCurrentInput() const override { return myCurrentInput; }
+	[[nodiscard]] int GetNextTileFromSet(int aCurrentInput) const override { return myInputSet[aCurrentInput]; }
 	[[nodiscard]] Vector2Int GetMyMinIndex() const override;
 	[[nodiscard]] Vector2Int GetMyMaxIndex() const override;
 	[[nodiscard]] int GetMyMapWidth() const override;
 	[[nodiscard]] int GetMaxPathSize() const override;
 
 private:
-	std::array<std::string, NUM_DIRECTIONS> AnimationKeys;
-	std::array<int, OAKMAXPATHSIZE> m_MyInputSet;
-	std::array<AnimatedSprite*, NUM_DIRECTIONS> m_Animations;
-	Vector2Float NewPosition;
-	Vector2Int m_MyNewDestination;
-	Vector2Int m_MyIndex;
-	TileMap* m_MyTileMap;
-	int* m_MyPath;
+	std::array<std::string, NUM_DIRECTIONS> myAnimationKeys;
+	std::array<int, OAKMAXPATHSIZE> myInputSet;
+	std::array<AnimatedSprite*, NUM_DIRECTIONS> myAnimations;
+	Vector2Float myNewPosition;
+	Vector2Int myNewDestination;
+	Vector2Int myIndex;
+	TileMap* myTileMap;
+	int* myPath;
 	SpriteDirection myDirection;
 	SpriteDirection myNewDirection;
-	AI_States m_MyState;
-	int m_CurrentInput;
-	bool m_PathingComplete;
-	bool m_IsFirstInput;
+	AI_States myState;
+	int myCurrentInput;
+	bool myIsPathingComplete;
+	bool myIsFirstInput;
 };

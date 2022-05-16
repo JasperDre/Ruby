@@ -12,7 +12,7 @@ class TileMap;
 class TownBoy : public Entity
 {
 public:
-	TownBoy(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTexture);
+	TownBoy(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier);
 	~TownBoy() override;
 
 	void Update(float deltatime) override;
@@ -25,27 +25,27 @@ public:
 
 	void SetStop(bool StopNPC);
 
-	[[nodiscard]] bool CheckForCollision(Vector2Float NPCNewPosition) const;
+	[[nodiscard]] bool IsColliding(Vector2Float NPCNewPosition) const;
 	[[nodiscard]] int* GetInputSet() const override;
-	[[nodiscard]] bool GetNodeIsClearOnSpecial(int tx, int ty) const override;
+	[[nodiscard]] bool IsNodeClearOnSpecial(int tx, int ty) const override;
 	[[nodiscard]] int GetMyMapWidth() const override;
 	[[nodiscard]] int GetMaxPathSize() const override;
 	SpriteDirection CalculateNextInput(Vector2Int anIndex);
 	bool GetNextPath(Vector2Int anIndex);
 
 private:
-	std::array<std::string, NUM_DIRECTIONS> AnimationKeys;
-	std::array<int, MAXPATHSIZE_TOWN_NPC> m_MyInputSet;
-	std::array<AnimatedSprite*, NUM_DIRECTIONS> m_Animations;
-	Vector2Float NewPosition;
-	Vector2Int m_MyNewDestination;
-	Vector2Int m_MyIndex;
-	TileMap* m_MyTileMap;
-	int* m_MyPath;
+	std::array<std::string, NUM_DIRECTIONS> myAnimationKeys;
+	std::array<int, MAXPATHSIZE_TOWN_NPC> myInputSet;
+	std::array<AnimatedSprite*, NUM_DIRECTIONS> myAnimations;
+	Vector2Float myNewPosition;
+	Vector2Int myNewDestination;
+	Vector2Int myIndex;
+	TileMap* myTileMap;
+	int* myPath;
 	SpriteDirection myNewDirection;
 	SpriteDirection myDirection;
-	int m_CurrentInput;
-	bool m_IsFirstInput;
-	bool m_PathingComplete;
-	bool m_Stop;
+	int myCurrentInput;
+	bool myIsFirstInput;
+	bool myIsPathingComplete;
+	bool myIsStopped;
 };

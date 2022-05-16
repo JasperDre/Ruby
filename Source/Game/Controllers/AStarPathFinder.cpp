@@ -6,23 +6,23 @@
 
 AStarPathFinder::AStarPathFinder(TileMap* aTileMap, Entity* aNPC)
 {
-	m_pMyTileMap = aTileMap;
-	m_MapWidth = m_pMyTileMap->GetMapWidth();
-	m_MapHeight = m_pMyTileMap->GetMapHeight();
-	m_NumNodes = m_MapWidth * m_MapHeight;
-	m_Nodes = new PathNode[m_NumNodes];
-	m_OpenNodes = new int[m_NumNodes];
-	m_MyNPC = aNPC;
-	m_NumOpen = 0;
+	myTileMap = aTileMap;
+	myMapWidth = myTileMap->GetMapWidth();
+	myMapHeight = myTileMap->GetMapHeight();
+	myNumNodes = myMapWidth * myMapHeight;
+	myNodes = new PathNode[myNumNodes];
+	myOpenNodes = new int[myNumNodes];
+	myNPC = aNPC;
+	myNumOpen = 0;
 
-	for (int i = 0; i < m_NumNodes; i++)
+	for (int i = 0; i < myNumNodes; i++)
 	{
-		(m_Nodes + i)->parentNodeIndex = -1;
-		(m_Nodes + i)->Status = PathNodeStatus::Unchecked;
+		(myNodes + i)->myParentNodeIndex = -1;
+		(myNodes + i)->myStatus = PathNodeStatus::Unchecked;
 
-		(m_Nodes + i)->F = 0;
-		(m_Nodes + i)->G = FLT_MAX; // Set G to be highest cost possible, so any comparison will be better.
-		(m_Nodes + i)->H = -1; // -1 indicates the heuristic hasn't been calculated yet.
+		(myNodes + i)->mySum = 0;
+		(myNodes + i)->myCost = FLT_MAX; // Set G to be highest cost possible, so any comparison will be better.
+		(myNodes + i)->myDistance = -1; // -1 indicates the heuristic hasn't been calculated yet.
 	}
 
 	Reset();
@@ -30,22 +30,22 @@ AStarPathFinder::AStarPathFinder(TileMap* aTileMap, Entity* aNPC)
 
 AStarPathFinder::~AStarPathFinder()
 {
-	delete[] m_OpenNodes;
-	delete[] m_Nodes;
+	delete[] myOpenNodes;
+	delete[] myNodes;
 }
 
 void AStarPathFinder::Reset()
 {
-	m_NumOpen = 0;
+	myNumOpen = 0;
 
-	for (int i = 0; i < m_NumNodes; i++)
+	for (int i = 0; i < myNumNodes; i++)
 	{
-		m_Nodes[i].parentNodeIndex = -1;
-		m_Nodes[i].Status = PathNodeStatus::Unchecked;
+		myNodes[i].myParentNodeIndex = -1;
+		myNodes[i].myStatus = PathNodeStatus::Unchecked;
 
-		m_Nodes[i].F = 0;
-		m_Nodes[i].G = FLT_MAX; // Set G to be highest cost possible, so any comparison will be better.
-		m_Nodes[i].H = -1; // -1 indicates the heuristic hasn't been calculated yet.
+		myNodes[i].mySum = 0;
+		myNodes[i].myCost = FLT_MAX; // Set G to be highest cost possible, so any comparison will be better.
+		myNodes[i].myDistance = -1; // -1 indicates the heuristic hasn't been calculated yet.
 	}
 }
 
@@ -59,9 +59,9 @@ bool AStarPathFinder::FindPath(int sx, int sy, int ex, int ey)
 	const int destinationIndex = CalculateNodeIndex(ex, ey);
 
 	// Set starting node cost to zero, then add it to the open list to start the process.
-	m_Nodes[startingIndex].G = 0.0f;
-	m_Nodes[startingIndex].H = static_cast<float>(CalculateH(startingIndex, destinationIndex));
-	m_Nodes[startingIndex].F = m_Nodes[startingIndex].G + m_Nodes[startingIndex].H;
+	myNodes[startingIndex].myCost = 0.0f;
+	myNodes[startingIndex].myDistance = static_cast<float>(CalculateH(startingIndex, destinationIndex));
+	myNodes[startingIndex].mySum = myNodes[startingIndex].myCost + myNodes[startingIndex].myDistance;
 
 	AddToOpen(startingIndex);
 
@@ -76,11 +76,11 @@ bool AStarPathFinder::FindPath(int sx, int sy, int ex, int ey)
 			return true;
 
 		// Mark the node as closed.
-		m_Nodes[lowestFNodeIndex].Status = PathNodeStatus::Closed;
+		myNodes[lowestFNodeIndex].myStatus = PathNodeStatus::Closed;
 		// Add neighbours to open list.
 		AddNeighboursToOpenList(lowestFNodeIndex, destinationIndex);
 		// If we're out of nodes to check, then we're done without finding the end node.
-		if (m_NumOpen == 0)
+		if (myNumOpen == 0)
 			return false;
 	}
 }
@@ -101,7 +101,7 @@ int* AStarPathFinder::GetPath(int* path, int maxdistance, int ex, int ey) const
 			length++;
 		}
 
-		nodeIndex = m_Nodes[nodeIndex].parentNodeIndex;
+		nodeIndex = myNodes[nodeIndex].myParentNodeIndex;
 		if (nodeIndex == -1)
 			return path;
 	}
@@ -109,26 +109,26 @@ int* AStarPathFinder::GetPath(int* path, int maxdistance, int ex, int ey) const
 
 void AStarPathFinder::AddToOpen(int nodeindex)
 {
-	assert(m_Nodes[nodeindex].Status != PathNodeStatus::Closed);
+	assert(myNodes[nodeindex].myStatus != PathNodeStatus::Closed);
 
 	// If the node isn't already open, then add it to the list.
-	if (m_Nodes[nodeindex].Status != PathNodeStatus::Open)
+	if (myNodes[nodeindex].myStatus != PathNodeStatus::Open)
 	{
-		m_OpenNodes[m_NumOpen] = nodeindex;
-		m_NumOpen++;
-		m_Nodes[nodeindex].Status = PathNodeStatus::Open;
+		myOpenNodes[myNumOpen] = nodeindex;
+		myNumOpen++;
+		myNodes[nodeindex].myStatus = PathNodeStatus::Open;
 	}
 }
 
 void AStarPathFinder::RemoveFromOpen(int nodeindex)
 {
 	// Remove the node from the open list, since we don't care about order, replace the node we're removing with the last node in list.
-	for (int i = 0; i < m_NumOpen; i++)
+	for (int i = 0; i < myNumOpen; i++)
 	{
-		if (m_OpenNodes[i] == nodeindex)
+		if (myOpenNodes[i] == nodeindex)
 		{
-			m_NumOpen--;
-			m_OpenNodes[i] = m_OpenNodes[m_NumOpen];
+			myNumOpen--;
+			myOpenNodes[i] = myOpenNodes[myNumOpen];
 			return;
 		}
 	}
@@ -140,12 +140,12 @@ int AStarPathFinder::FindNodeIndexWithLowestFInOpen() const
 	int IndexofLowest = 0;
 
 	// Loop through the nodes in the open list, then find and return the node with the lowest F score.
-	for (int i = 0; i < m_NumOpen; i++)
+	for (int i = 0; i < myNumOpen; i++)
 	{
-		const int anIndex = m_OpenNodes[i];
-		if (m_Nodes[anIndex].F < LowestF)
+		const int anIndex = myOpenNodes[i];
+		if (myNodes[anIndex].mySum < LowestF)
 		{
-			LowestF = m_Nodes[anIndex].F;
+			LowestF = myNodes[anIndex].mySum;
 			IndexofLowest = anIndex;
 		}
 	}
@@ -155,27 +155,27 @@ int AStarPathFinder::FindNodeIndexWithLowestFInOpen() const
 
 int AStarPathFinder::CalculateNodeIndex(int tx, int ty) const
 {
-	assert(ty >= 0 && ty <= m_MapHeight && tx >= 0 && tx <= m_MapWidth);
+	assert(ty >= 0 && ty <= myMapHeight && tx >= 0 && tx <= myMapWidth);
 
 	// Calculate the node index based on the tiles x/y.
-	return (m_MapWidth * ty) + tx;
+	return (myMapWidth * ty) + tx;
 }
 
 int AStarPathFinder::CheckIfNodeIsClearAndReturnNodeIndex(int tx, int ty) const
 {
 	// If the node is out of bounds, return -1 (an invalid tile index).
-	if (!m_MyNPC->GetNodeIsClearOnSpecial(tx, ty))
+	if (!myNPC->IsNodeClearOnSpecial(tx, ty))
 		return -1;
 
 	//If the node is already closed, return -1 (an invalid tile index).
 	const int anIndex = CalculateNodeIndex(tx, ty);
 
-	if (m_Nodes[anIndex].Status == PathNodeStatus::Closed)
+	if (myNodes[anIndex].myStatus == PathNodeStatus::Closed)
 		return -1;
 
 	// If the node can't be walked on, return -1 (an invalid tile index).
-	const TileInfo aNodeTile = m_pMyTileMap->GetTileAtIndex(ty * m_MapWidth + tx);
-	if (!aNodeTile.IsWalkable)
+	const TileInfo aNodeTile = myTileMap->GetTileAtIndex(ty * myMapWidth + tx);
+	if (!aNodeTile.myIsWalkable)
 		return -1;
 
 	// Return a valid tile index.
@@ -185,8 +185,8 @@ int AStarPathFinder::CheckIfNodeIsClearAndReturnNodeIndex(int tx, int ty) const
 void AStarPathFinder::AddNeighboursToOpenList(int nodeIndex, int endNodeIndex)
 {
 	// Calculate the tile x/y based on the nodeIndex.
-	const int TileColumn = nodeIndex % m_MapWidth;
-	const int TileRow = nodeIndex / m_MapWidth;
+	const int TileColumn = nodeIndex % myMapWidth;
+	const int TileRow = nodeIndex / myMapWidth;
 
 	// Fill an array with the four neighbour tile indices. (use CheckIfNodeIsClearAndReturnNodeIndex() for each to see if it's valid).
 	int NeighbourNodes[4];
@@ -206,16 +206,16 @@ void AStarPathFinder::AddNeighboursToOpenList(int nodeIndex, int endNodeIndex)
 			AddToOpen(NeighbourNode);
 
 			// If the cost to get there from here (new G) is less than the previous cost (old G) to get there, then overwrite the values.
-			if (m_Nodes[NeighbourNode].G > m_Nodes[nodeIndex].G)
+			if (myNodes[NeighbourNode].myCost > myNodes[nodeIndex].myCost)
 			{
 				// Set the parent node.
-				(m_Nodes + NeighbourNode)->parentNodeIndex = nodeIndex;
+				(myNodes + NeighbourNode)->myParentNodeIndex = nodeIndex;
 				// Set the new cost to travel to that node.
-				(m_Nodes + NeighbourNode)->G = (m_Nodes + nodeIndex)->G + cost;
+				(myNodes + NeighbourNode)->myCost = (myNodes + nodeIndex)->myCost + cost;
 				// If we haven't already calculated the heuristic, calculate it.
-				(m_Nodes + NeighbourNode)->H = static_cast<float>(CalculateH(NeighbourNode, endNodeIndex));
+				(myNodes + NeighbourNode)->myDistance = static_cast<float>(CalculateH(NeighbourNode, endNodeIndex));
 				// Calculate the final value.
-				(m_Nodes + NeighbourNode)->F = m_Nodes[NeighbourNode].G + m_Nodes[NeighbourNode].H;
+				(myNodes + NeighbourNode)->mySum = myNodes[NeighbourNode].myCost + myNodes[NeighbourNode].myDistance;
 			}
 		}
 	}
@@ -224,7 +224,7 @@ void AStarPathFinder::AddNeighboursToOpenList(int nodeIndex, int endNodeIndex)
 int AStarPathFinder::CalculateH(int nodeIndex, int endNodeIndex) const
 {
 	// Calculate the h score using the Manhatten distance
-	const Vector2Int nodeColumnRow = Vector2Int(nodeIndex % m_MapWidth, nodeIndex / m_MapWidth);
-	const Vector2Int endNodeColumnRow = Vector2Int(endNodeIndex % m_MapWidth, endNodeIndex / m_MapWidth);
+	const Vector2Int nodeColumnRow = Vector2Int(nodeIndex % myMapWidth, nodeIndex / myMapWidth);
+	const Vector2Int endNodeColumnRow = Vector2Int(endNodeIndex % myMapWidth, endNodeIndex / myMapWidth);
 	return std::abs(nodeColumnRow.x - endNodeColumnRow.y) + abs(nodeColumnRow.y - endNodeColumnRow.x);
 }

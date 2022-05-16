@@ -17,7 +17,7 @@ class AIController;
 class OakLab : public Scene
 {
 public:
-	OakLab(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, GLuint aTexture);
+	OakLab(GameCore* aGameCore, Areas anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, unsigned int aTextureIdentifier);
 	~OakLab() override;
 
 	void LoadContent() override;
@@ -29,13 +29,13 @@ public:
 	void OnEvent(Event* /*anEvent*/) override {}
 
 private:
-	Vector2Float m_OakStartPosition;
-	Mesh* m_ProfOakMesh;
-	ProfessorOak* m_ProfOak;
-	AIController* m_OakAIController;
-	OakLabLevel* m_OakLabMap;
-	OakLabDeskTop* m_OakLabWorkDesk;
-	OakLabMachineTop* m_OakLabMachineTop;
-	OakLabPlantTop* m_OakLabPlantTops;
-	OakLabTableTop* m_OakLabTableTop;
+	Vector2Float myOakStartPosition;
+	Mesh* myOakMesh;
+	ProfessorOak* myOak;
+	AIController* myOakAIController;
+	OakLabLevel* myOakLabMap;
+	OakLabDeskTop* myOakLabWorkDesk;
+	OakLabMachineTop* myOakLabMachineTop;
+	OakLabPlantTop* myOakLabPlantTops;
+	OakLabTableTop* myOakLabTableTop;
 };

@@ -30,7 +30,7 @@ public:
 
 	[[nodiscard]] virtual bool IsColliding(Entity* pOtherGameObject) const { return false; }
 	[[nodiscard]] virtual AI_States GetMyState() const;
-	[[nodiscard]] virtual bool GetNodeIsClearOnSpecial(int tx, int ty) const { return false; }
+	[[nodiscard]] virtual bool IsNodeClearOnSpecial(int tx, int ty) const { return false; }
 	[[nodiscard]] virtual int* GetInputSet() const { return nullptr; }
 	[[nodiscard]] virtual int GetCurrentInput() const { return 0; }
 	[[nodiscard]] virtual int GetNextTileFromSet(int aCurrentInput) const { return 0; }

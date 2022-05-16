@@ -18,8 +18,8 @@ public:
 	[[nodiscard]] GLuint GetaTexture(TextureHandle aTextureName) const;
 
 protected:
-	std::map<std::string, Frame> m_AnimationsMap;
-	std::map<TextureHandle, GLuint> m_MyTextures;
-	std::vector<Vector2Int> m_MyTextureSize;
-	TileMap* m_MyTileMap;
+	std::map<std::string, Frame> myAnimationsMap;
+	std::map<TextureHandle, GLuint> myTextures;
+	std::vector<Vector2Int> myTextureSize;
+	TileMap* myTileMap;
 };

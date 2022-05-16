@@ -7,129 +7,129 @@
 
 AIController::AIController(TileMap* aTileMap, int aMinIndex, int aMaxIndex, Entity* aNPC)
 {
-	m_MyTileMap = aTileMap;
-	m_MyNPC = aNPC;
-	m_MyPathFinder = new AStarPathFinder(aTileMap, aNPC);
+	myTileMap = aTileMap;
+	myNPC = aNPC;
+	myPathFinder = new AStarPathFinder(aTileMap, aNPC);
 
-	m_MyMapWidth = m_MyTileMap->GetMapWidth();
+	myMapWidth = myTileMap->GetMapWidth();
 
-	m_MyMaxPathSize = abs((aMinIndex % m_MyMapWidth) - (aMaxIndex % m_MyMapWidth)) + abs((aMinIndex / m_MyMapWidth) - (aMaxIndex / m_MyMapWidth));
+	myMaxPathSize = abs((aMinIndex % myMapWidth) - (aMaxIndex % myMapWidth)) + abs((aMinIndex / myMapWidth) - (aMaxIndex / myMapWidth));
 
-	m_MyPath = new int[m_MyMaxPathSize + 1];
+	myPath = new int[myMaxPathSize + 1];
 
-	for (int i = 0; i < m_MyMaxPathSize + 1; i++)
-		m_MyPath[i] = -1;
+	for (int i = 0; i < myMaxPathSize + 1; i++)
+		myPath[i] = -1;
 
-	m_MyMaxIndex = aMaxIndex;
-	m_MyMinIndex = aMinIndex;
+	myMaxIndex = aMaxIndex;
+	myMinIndex = aMinIndex;
 
-	m_CurrentInput = 0;
+	myCurrentInput = 0;
 
-	m_MyNewDestination = m_MyNPCindex;
-	m_PathingComplete = false;
+	myNewDestination = myNPCindex;
+	myIsPathingComplete = false;
 
-	m_CurrentDirection = SpriteDirection::SpriteDirectionStop;
+	myCurrentDirection = SpriteDirection::SpriteDirectionStop;
 }
 
 AIController::~AIController()
 {
-	delete[] m_MyPath;
-	delete m_MyPathFinder;
+	delete[] myPath;
+	delete myPathFinder;
 }
 
 bool AIController::GetNextPath()
 {
-	m_MyNPCindex = SetNPCCurrentPosition(m_MyNPC->GetPosition());
-	for (int i = 0; i < m_MyMaxPathSize + 1; i++)
-		m_MyPath[i] = -1;
+	myNPCindex = SetNPCCurrentPosition(myNPC->GetPosition());
+	for (int i = 0; i < myMaxPathSize + 1; i++)
+		myPath[i] = -1;
 
 	ResetPathFinder();
 
-	m_PathingComplete = false;
+	myIsPathingComplete = false;
 
-	while (!m_PathingComplete)
+	while (!myIsPathingComplete)
 	{
-		m_MyNewDestination.x = MathUtility::GetRandomRangeInteger(m_MyMinIndex % m_MyMapWidth, m_MyMaxIndex % m_MyMapWidth);
-		m_MyNewDestination.y = MathUtility::GetRandomRangeInteger(m_MyMinIndex / m_MyMapWidth, m_MyMaxIndex / m_MyMapWidth);
+		myNewDestination.x = MathUtility::GetRandomRangeInteger(myMinIndex % myMapWidth, myMaxIndex % myMapWidth);
+		myNewDestination.y = MathUtility::GetRandomRangeInteger(myMinIndex / myMapWidth, myMaxIndex / myMapWidth);
 
-		m_PathingComplete = m_MyPathFinder->FindPath(m_MyNPCindex.x, m_MyNPCindex.y, m_MyNewDestination.x, m_MyNewDestination.y);
+		myIsPathingComplete = myPathFinder->FindPath(myNPCindex.x, myNPCindex.y, myNewDestination.x, myNewDestination.y);
 	}
 
-	if (m_PathingComplete)
-		m_MyPathFinder->GetPath(m_MyPath, m_MyMaxPathSize, m_MyNewDestination.x, m_MyNewDestination.y);
+	if (myIsPathingComplete)
+		myPathFinder->GetPath(myPath, myMaxPathSize, myNewDestination.x, myNewDestination.y);
 
-	m_CurrentInput = 0;
+	myCurrentInput = 0;
 
-	while (*(m_MyPath + m_CurrentInput) != -1)
-		m_CurrentInput++;
+	while (*(myPath + myCurrentInput) != -1)
+		myCurrentInput++;
 
-	m_CurrentInput--;
+	myCurrentInput--;
 
-	return m_PathingComplete;
+	return myIsPathingComplete;
 }
 
 void AIController::ResetPathFinder() const
 {
-	m_MyPathFinder->Reset();
+	myPathFinder->Reset();
 }
 
 SpriteDirection AIController::MoveNPC()
 {
-	m_CurrentDirection = CalculateNextInput();
+	myCurrentDirection = CalculateNextInput();
 
-	if (m_CurrentDirection == SpriteDirection::SpriteDirectionStop)
+	if (myCurrentDirection == SpriteDirection::SpriteDirectionStop)
 		return SpriteDirection::SpriteDirectionStop;
 
-	if (m_NextTileColumnRow != m_MyNPCindex)
+	if (myNextTileColumnRow != myNPCindex)
 	{
-		if (m_CurrentDirection == SpriteDirection::SpriteWalkRight)
+		if (myCurrentDirection == SpriteDirection::SpriteWalkRight)
 		{
 			return SpriteDirection::SpriteWalkRight;
 		}
-		if (m_CurrentDirection == SpriteDirection::SpriteWalkLeft)
+		if (myCurrentDirection == SpriteDirection::SpriteWalkLeft)
 		{
 			return SpriteDirection::SpriteWalkLeft;
 		}
-		if (m_CurrentDirection == SpriteDirection::SpriteWalkDown)
+		if (myCurrentDirection == SpriteDirection::SpriteWalkDown)
 		{
 			return SpriteDirection::SpriteWalkDown;
 		}
-		if (m_CurrentDirection == SpriteDirection::SpriteWalkUp)
+		if (myCurrentDirection == SpriteDirection::SpriteWalkUp)
 		{
 			return SpriteDirection::SpriteWalkUp;
 		}
 	}
 	else
 	{
-		m_CurrentDirection = SpriteDirection::SpriteDirectionStop;
+		myCurrentDirection = SpriteDirection::SpriteDirectionStop;
 	}
 
-	return m_CurrentDirection;
+	return myCurrentDirection;
 }
 
 SpriteDirection AIController::CalculateNextInput()
 {
-	m_CurrentInput--;
+	myCurrentInput--;
 
-	if (m_CurrentInput != -1)
+	if (myCurrentInput != -1)
 	{
-		m_NextTileColumnRow = Vector2Int(*(m_MyPath + m_CurrentInput) % m_MyMapWidth, *(m_MyPath + m_CurrentInput) / m_MyMapWidth);
+		myNextTileColumnRow = Vector2Int(*(myPath + myCurrentInput) % myMapWidth, *(myPath + myCurrentInput) / myMapWidth);
 
-		if (m_NextTileColumnRow.x != m_MyNPCindex.x)
+		if (myNextTileColumnRow.x != myNPCindex.x)
 		{
-			if (m_NextTileColumnRow.x > m_MyNPCindex.x)
+			if (myNextTileColumnRow.x > myNPCindex.x)
 				return SpriteDirection::SpriteWalkRight;
 
-			if (m_NextTileColumnRow.x < m_MyNPCindex.x)
+			if (myNextTileColumnRow.x < myNPCindex.x)
 				return SpriteDirection::SpriteWalkLeft;
 		}
-		else if (m_NextTileColumnRow.y != m_MyNPCindex.y)
+		else if (myNextTileColumnRow.y != myNPCindex.y)
 		{
-			if (m_NextTileColumnRow.y > m_MyNPCindex.y)
+			if (myNextTileColumnRow.y > myNPCindex.y)
 				return SpriteDirection::SpriteWalkUp;
 		}
 
-		if (m_NextTileColumnRow.y < m_MyNPCindex.y)
+		if (myNextTileColumnRow.y < myNPCindex.y)
 			return SpriteDirection::SpriteWalkDown;
 	}
 	else

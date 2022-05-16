@@ -16,5 +16,5 @@ public:
 	void Draw(Vector2Float camPos, Vector2Float camProject) override;
 
 private:
-	std::array<unsigned short, 2> OakLabMachineMap;
+	std::array<unsigned short, 2> myOakLabMachineMap;
 };

@@ -6,10 +6,10 @@
 #include "Mesh/Mesh.h"
 
 Canvas::Canvas(TileMap* aTileMap, ResourceManager* aResourceManager)
-	: IsReversed(false)
+	: myIsReversed(false)
 {
-	m_MyTileMap = aTileMap;
-	m_MyResourceManager = aResourceManager;
+	myTileMap = aTileMap;
+	myResourceManager = aResourceManager;
 }
 
 void Canvas::GeneratePalletVertexData(const unsigned short BitMap[MAPSIZE])
@@ -35,14 +35,14 @@ void Canvas::GeneratePalletVertexData(const unsigned short BitMap[MAPSIZE])
 			{
 
 				//create a temp TileInfo struct to access the attributes
-				TileInfo atile = m_MyTileMap->GetTileFromPalletMap(Tile_Type(TileSelecter));
+				TileInfo atile = myTileMap->GetTileFromPalletMap(Tile_Type(TileSelecter));
 
 				//extract the Frame attribute of the correct variant
-				Frame aframe = atile.MyVariant.at(VariantSelecter / 16 - 1);
+				Frame aframe = atile.myVariant.at(VariantSelecter / 16 - 1);
 
 				//set the UV's of the tile at the index
-				Vector2Float aVOffset = Vector2Float((aframe.myOrigin.myX / m_MyResourceManager->GetTextureSize(0).x), (aframe.myOrigin.myY / m_MyResourceManager->GetTextureSize(0).y));
-				Vector2Float aUVScale = Vector2Float((aframe.mySize.myX / m_MyResourceManager->GetTextureSize(0).x), (aframe.mySize.myY / m_MyResourceManager->GetTextureSize(0).y));
+				Vector2Float aVOffset = Vector2Float((aframe.myOrigin.myX / myResourceManager->GetTextureSize(0).x), (aframe.myOrigin.myY / myResourceManager->GetTextureSize(0).y));
+				Vector2Float aUVScale = Vector2Float((aframe.mySize.myX / myResourceManager->GetTextureSize(0).x), (aframe.mySize.myY / myResourceManager->GetTextureSize(0).y));
 
 				//set up the position
 				Vector2Float aposition = Vector2Float(((((i / NUM_COLUMNS) * NUM_COLUMNS) + j) % NUM_COLUMNS) * TILESIZE, ((((i / NUM_COLUMNS) * NUM_COLUMNS) + j) / NUM_COLUMNS) * TILESIZE);
@@ -61,14 +61,14 @@ void Canvas::GeneratePalletVertexData(const unsigned short BitMap[MAPSIZE])
 			if (Tile_Type(TileSelecter) != Town_Null_Wall_ && Tile_Type(TileSelecter) != Town_Null_Door_)
 			{
 				//create a temp TileInfo struct to access the attributes
-				TileInfo atile = m_MyTileMap->GetTileFromPalletMap(Tile_Type(TileSelecter));
+				TileInfo atile = myTileMap->GetTileFromPalletMap(Tile_Type(TileSelecter));
 
 				//extract the Frame attribute of the correct variant
-				Frame aframe = atile.MyVariant.at(VariantSelecter / 16 - 1);
+				Frame aframe = atile.myVariant.at(VariantSelecter / 16 - 1);
 
 				//set the UV's of the tile at the index
-				Vector2Float aUVOffset = Vector2Float((aframe.myOrigin.myX / m_MyResourceManager->GetTextureSize(0).x), (aframe.myOrigin.myY / m_MyResourceManager->GetTextureSize(0).y));
-				Vector2Float aUVScale = Vector2Float((aframe.mySize.myX / m_MyResourceManager->GetTextureSize(0).x), (aframe.mySize.myY / m_MyResourceManager->GetTextureSize(0).y));
+				Vector2Float aUVOffset = Vector2Float((aframe.myOrigin.myX / myResourceManager->GetTextureSize(0).x), (aframe.myOrigin.myY / myResourceManager->GetTextureSize(0).y));
+				Vector2Float aUVScale = Vector2Float((aframe.mySize.myX / myResourceManager->GetTextureSize(0).x), (aframe.mySize.myY / myResourceManager->GetTextureSize(0).y));
 
 				//set up the position
 				Vector2Float aposition = Vector2Float((i % NUM_COLUMNS) * TILESIZE, (i / NUM_COLUMNS) * TILESIZE);
@@ -100,14 +100,14 @@ void Canvas::GenerateLabVertexData(const unsigned short BitMap[LABSIZE])
 			if (OakLab_Tile_Type(TileSelecter) != Oak_Lab_NullWall_ && OakLab_Tile_Type(TileSelecter) != Oak_Lab_NullDoor_)
 			{
 				//create a temp TileInfo struct to access the attributes
-				TileInfo atile = m_MyTileMap->GetTileFromOakLabMap(OakLab_Tile_Type(TileSelecter));
+				TileInfo atile = myTileMap->GetTileFromOakLabMap(OakLab_Tile_Type(TileSelecter));
 
 				//extract the Frame attribute of the correct variant
-				Frame aframe = atile.MyVariant.at(VariantSelecter / 16 - 1);
+				Frame aframe = atile.myVariant.at(VariantSelecter / 16 - 1);
 
 				//set the UV's of the tile at the index
-				Vector2Float aVOffset = Vector2Float((aframe.myOrigin.myX / m_MyResourceManager->GetTextureSize(1).x), (aframe.myOrigin.myY / m_MyResourceManager->GetTextureSize(1).y));
-				Vector2Float aUVScale = Vector2Float((aframe.mySize.myX / m_MyResourceManager->GetTextureSize(1).x), (aframe.mySize.myY / m_MyResourceManager->GetTextureSize(1).y));
+				Vector2Float aVOffset = Vector2Float((aframe.myOrigin.myX / myResourceManager->GetTextureSize(1).x), (aframe.myOrigin.myY / myResourceManager->GetTextureSize(1).y));
+				Vector2Float aUVScale = Vector2Float((aframe.mySize.myX / myResourceManager->GetTextureSize(1).x), (aframe.mySize.myY / myResourceManager->GetTextureSize(1).y));
 
 				//set up the position
 				Vector2Float aposition = Vector2Float(((((i / NUM_LAB_COLUMNS) * NUM_LAB_COLUMNS) + j) % NUM_LAB_COLUMNS) * TILESIZE, ((((i / NUM_LAB_COLUMNS) * NUM_LAB_COLUMNS) + j) / NUM_LAB_COLUMNS) * TILESIZE);
@@ -126,14 +126,14 @@ void Canvas::GenerateLabVertexData(const unsigned short BitMap[LABSIZE])
 			if (OakLab_Tile_Type(TileSelecter) != Oak_Lab_NullWall_ && OakLab_Tile_Type(TileSelecter) != Oak_Lab_NullDoor_)
 			{
 				//create a temp TileInfo struct to access the attributes
-				TileInfo atile = m_MyTileMap->GetTileFromOakLabMap(OakLab_Tile_Type(TileSelecter));
+				TileInfo atile = myTileMap->GetTileFromOakLabMap(OakLab_Tile_Type(TileSelecter));
 
 				//extract the Frame attribute of the correct variant
-				Frame aframe = atile.MyVariant.at(VariantSelecter / 16 - 1);
+				Frame aframe = atile.myVariant.at(VariantSelecter / 16 - 1);
 
 				//set the UV's of the tile at the index
-				Vector2Float aUVOffset = Vector2Float((aframe.myOrigin.myX / m_MyResourceManager->GetTextureSize(1).x), (aframe.myOrigin.myY / m_MyResourceManager->GetTextureSize(1).y));
-				Vector2Float aUVScale = Vector2Float((aframe.mySize.myX / m_MyResourceManager->GetTextureSize(1).x), (aframe.mySize.myY / m_MyResourceManager->GetTextureSize(1).y));
+				Vector2Float aUVOffset = Vector2Float((aframe.myOrigin.myX / myResourceManager->GetTextureSize(1).x), (aframe.myOrigin.myY / myResourceManager->GetTextureSize(1).y));
+				Vector2Float aUVScale = Vector2Float((aframe.mySize.myX / myResourceManager->GetTextureSize(1).x), (aframe.mySize.myY / myResourceManager->GetTextureSize(1).y));
 
 				//set up the position
 				Vector2Float aposition = Vector2Float((i % NUM_LAB_COLUMNS) * TILESIZE, (i / NUM_LAB_COLUMNS) * TILESIZE);
@@ -165,14 +165,14 @@ void Canvas::GenerateForestVertexData(const unsigned short BitMap[FORESTMAPSIZE]
 			if (Forest_Tile_Type(TileSelecter) != Forest_Null_Wall && Forest_Tile_Type(TileSelecter) != Forest_Null_Door)
 			{
 				//create a temp TileInfo struct to access the attributes
-				TileInfo atile = m_MyTileMap->GetTileFromWoodsMap(Forest_Tile_Type(TileSelecter));
+				TileInfo atile = myTileMap->GetTileFromWoodsMap(Forest_Tile_Type(TileSelecter));
 
 				//extract the Frame attribute of the correct variant
-				Frame aframe = atile.MyVariant.at(VariantSelecter / 16 - 1);
+				Frame aframe = atile.myVariant.at(VariantSelecter / 16 - 1);
 
 				//set the UV's of the tile at the index
-				Vector2Float aVOffset = Vector2Float((aframe.myOrigin.myX / m_MyResourceManager->GetTextureSize(3).x), (aframe.myOrigin.myY / m_MyResourceManager->GetTextureSize(3).y));
-				Vector2Float aUVScale = Vector2Float((aframe.mySize.myX / m_MyResourceManager->GetTextureSize(3).x), (aframe.mySize.myY / m_MyResourceManager->GetTextureSize(3).y));
+				Vector2Float aVOffset = Vector2Float((aframe.myOrigin.myX / myResourceManager->GetTextureSize(3).x), (aframe.myOrigin.myY / myResourceManager->GetTextureSize(3).y));
+				Vector2Float aUVScale = Vector2Float((aframe.mySize.myX / myResourceManager->GetTextureSize(3).x), (aframe.mySize.myY / myResourceManager->GetTextureSize(3).y));
 
 				//set up the position
 				Vector2Float aposition = Vector2Float(((((i / NUM_FOREST_COLUMNS) * NUM_FOREST_COLUMNS) + j) % NUM_FOREST_COLUMNS) * TILESIZE, ((((i / NUM_FOREST_COLUMNS) * NUM_FOREST_COLUMNS) + j) / NUM_FOREST_COLUMNS) * TILESIZE);
@@ -191,14 +191,14 @@ void Canvas::GenerateForestVertexData(const unsigned short BitMap[FORESTMAPSIZE]
 			if (Forest_Tile_Type(TileSelecter) != Forest_Null_Wall && Forest_Tile_Type(TileSelecter) != Forest_Null_Door)
 			{
 				//create a temp TileInfo struct to access the attributes
-				TileInfo atile = m_MyTileMap->GetTileFromWoodsMap(Forest_Tile_Type(TileSelecter));
+				TileInfo atile = myTileMap->GetTileFromWoodsMap(Forest_Tile_Type(TileSelecter));
 
 				//extract the Frame attribute of the correct variant
-				Frame aframe = atile.MyVariant.at(VariantSelecter / 16 - 1);
+				Frame aframe = atile.myVariant.at(VariantSelecter / 16 - 1);
 
 				//set the UV's of the tile at the index
-				Vector2Float aUVOffset = Vector2Float((aframe.myOrigin.myX / m_MyResourceManager->GetTextureSize(3).x), (aframe.myOrigin.myY / m_MyResourceManager->GetTextureSize(3).y));
-				Vector2Float aUVScale = Vector2Float((aframe.mySize.myX / m_MyResourceManager->GetTextureSize(3).x), (aframe.mySize.myY / m_MyResourceManager->GetTextureSize(3).y));
+				Vector2Float aUVOffset = Vector2Float((aframe.myOrigin.myX / myResourceManager->GetTextureSize(3).x), (aframe.myOrigin.myY / myResourceManager->GetTextureSize(3).y));
+				Vector2Float aUVScale = Vector2Float((aframe.mySize.myX / myResourceManager->GetTextureSize(3).x), (aframe.mySize.myY / myResourceManager->GetTextureSize(3).y));
 
 				//set up the position
 				Vector2Float aposition = Vector2Float((i % NUM_FOREST_COLUMNS) * TILESIZE, (i / NUM_FOREST_COLUMNS) * TILESIZE);
@@ -214,7 +214,7 @@ void Canvas::AddVert(Vector2Float objectPos, float objectAngle, Vector2Float obj
 
 	for (unsigned int i = 0; i < m_BaseTileVerts.size(); i++)
 	{
-		if (IsReversed == true)
+		if (myIsReversed == true)
 		{
 			Vector2Float finalPos = m_BaseTileVertsReverse.at(i).myPosition;
 
@@ -261,5 +261,5 @@ void Canvas::AddVert(Vector2Float objectPos, float objectAngle, Vector2Float obj
 
 void Canvas::SetIsReverse(bool isreverse)
 {
-	IsReversed = isreverse;
+	myIsReversed = isreverse;
 }

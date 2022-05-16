@@ -5,12 +5,12 @@
 #include "Utility/FileUtility.h"
 
 ResourceManager::ResourceManager()
-	: m_MyTileMap(nullptr)
+	: myTileMap(nullptr)
 {}
 
 ResourceManager::~ResourceManager()
 {
-	m_AnimationsMap.clear();
+	myAnimationsMap.clear();
 }
 
 void ResourceManager::UnpackJson(const std::string& JSONfilename, TileMap* aTileMap)
@@ -32,7 +32,7 @@ void ResourceManager::UnpackJson(const std::string& JSONfilename, TileMap* aTile
 	const int textureWidth = document["width"].GetInt();
 	const int textureHeight = document["height"].GetInt();
 
-	m_MyTextureSize.emplace_back(Vector2Int(textureWidth, textureHeight));
+	myTextureSize.emplace_back(Vector2Int(textureWidth, textureHeight));
 
 	const rapidjson::Value& frames = document["Files"];
 	//Extract the Array of Frames from the root
@@ -61,7 +61,7 @@ void ResourceManager::UnpackJson(const std::string& JSONfilename, TileMap* aTile
 				//create a frame with the attributes from the JSON file
 				Frame myNewFrame = Frame(Vector2Float(static_cast<float>(x), static_cast<float>(y)), Vector2Float(static_cast<float>(width), static_cast<float>(height)));
 
-				m_AnimationsMap.insert(std::pair<std::string, Frame>(frameName, myNewFrame));
+				myAnimationsMap.insert(std::pair<std::string, Frame>(frameName, myNewFrame));
 			}
 			//Then check to see if Frame attribute is a tile
 			if (height == 16 && width == 16)
@@ -88,20 +88,20 @@ void ResourceManager::UnpackJson(const std::string& JSONfilename, TileMap* aTile
 
 Frame ResourceManager::GetFrameAtIndex(const std::string& anIndex) const
 {
-	return m_AnimationsMap.find(anIndex)->second;
+	return myAnimationsMap.find(anIndex)->second;
 }
 
 Vector2Int ResourceManager::GetTextureSize(int anIndex) const
 {
-	return m_MyTextureSize.at(anIndex);
+	return myTextureSize.at(anIndex);
 }
 
 GLuint ResourceManager::GetaTexture(TextureHandle aTextureName) const
 {
-	return m_MyTextures.find(aTextureName)->second;
+	return myTextures.find(aTextureName)->second;
 }
 
 void ResourceManager::HoldTexture(TextureHandle aTextureName, GLuint aTexture)
 {
-	m_MyTextures.insert(std::pair<TextureHandle, GLuint>(aTextureName, aTexture));
+	myTextures.insert(std::pair<TextureHandle, GLuint>(aTextureName, aTexture));
 }

@@ -7,27 +7,27 @@
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 
-Scene::Scene(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, Vector2Float aPlayerStartPosition, GLuint aTexture)
-	: m_MyArea(myArea)
-	, m_pMyPlayerStart(aPlayerStartPosition)
-	, m_MyTileMap(aTileMap)
-	, m_pMyGame(myGame)
-	, m_pMyResourceManager(aResourceManager)
-	, m_pMyMesh(aMesh)
-	, m_pMyTrainer(aPlayer)
-	, m_pMyTexture(aTexture)
-	, m_Active(false)
+Scene::Scene(GameCore* aGame, Areas anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, Vector2Float aPlayerStartPosition, unsigned int aTextureIdentifier)
+	: myArea(anArea)
+	, myPlayerStartPosition(aPlayerStartPosition)
+	, myTileMap(aTileMap)
+	, myGame(aGame)
+	, myResourceManager(aResourceManager)
+	, myMesh(aMesh)
+	, myPlayer(aPlayer)
+	, myTextureIdentifier(aTextureIdentifier)
+	, myIsActive(false)
 {}
 
 void Scene::SetIsActive(bool setActive)
 {
-	m_Active = setActive;
+	myIsActive = setActive;
 
-	if (m_Active)
+	if (myIsActive)
 	{
 		Reload();
 	}
-	else if (!m_Active)
+	else if (!myIsActive)
 	{
 		Unload();
 	}

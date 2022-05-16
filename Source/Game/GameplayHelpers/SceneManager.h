@@ -12,17 +12,15 @@ public:
 	SceneManager();
 	~SceneManager();
 
-	void GenerateScenes(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, GLuint aTexture);
+	void GenerateScenes(GameCore* aGameCore, Areas anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, unsigned int aTextureIdentifier);
+	void OnEvent(Event* anEvent) const;
 
-	void SetActiveScene(Areas aSceneHandle);
+	void SetActiveScene(Areas aSceneHandle) const;
+	void SetSavedPlayerPosition(Vector2Float aPosition) { mySavedPlayerPosition = aPosition; }
 
-	Scene* GetActiveScene();
-
-	void OnEvent(Event* anEvent);
-
-	void SetPlayerSavedPosition(Vector2Float aPosition) { m_PlayerSavedPosition = aPosition; }
+	[[nodiscard]] Scene* GetActiveScene() const;
 
 private:
-	std::map<Areas, Scene*> m_MyScenes;
-	Vector2Float m_PlayerSavedPosition;
+	std::map<Areas, Scene*> myScenes;
+	Vector2Float mySavedPlayerPosition;
 };

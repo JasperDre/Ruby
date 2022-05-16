@@ -14,98 +14,93 @@
 #include "Mesh/Mesh.h"
 #include "Scenes/Scene.h"
 
-PalletTown::PalletTown(GameCore* myGame, Areas myArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, GLuint aTexture)
-	: Scene(myGame, myArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(9.0f * TILESIZE, 20.0f * TILESIZE), aTexture)
+PalletTown::PalletTown(GameCore* aGameCore, Areas anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, unsigned int aTextureIdentifier)
+	: Scene(aGameCore, anArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(9.0f * TILESIZE, 20.0f * TILESIZE), aTextureIdentifier)
 {
-	m_PalletTownMap = nullptr;
-	m_OakHouseTop = nullptr;
-	m_PlayerHouseTop = nullptr;
-	m_RivalHouseTop = nullptr;
-	m_GirlNPC = nullptr;
-	m_BoyNPC = nullptr;
-	m_MyGirlMesh = nullptr;
-	m_MyBoyMesh = nullptr;
-	m_GirlNPCStart = Vector2Float(16.0f * TILESIZE, 9.0f * TILESIZE);
-	m_BoyNPCStart = Vector2Float(14.0f * TILESIZE, 19.0f * TILESIZE);
-	PlayerSavedPosition = Vector2Float(0.0f, 0.0f);
-	GirlSavedPosition = Vector2Float(0.0f, 0.0f);
-	BoySavedPosition = Vector2Float(0.0f, 0.0f);
+	myPalletTownMap = nullptr;
+	myOakHouseTop = nullptr;
+	myPlayerHouseTop = nullptr;
+	myRivalHouseTop = nullptr;
+	myGirlNPC = nullptr;
+	myBoyNPC = nullptr;
+	myGirlMesh = nullptr;
+	myBoyMesh = nullptr;
+	myGirlNPCStartPosition = Vector2Float(16.0f * TILESIZE, 9.0f * TILESIZE);
+	myBoyNPCStartPosition = Vector2Float(14.0f * TILESIZE, 19.0f * TILESIZE);
+	mySavedPlayerPosition = Vector2Float(0.0f, 0.0f);
+	mySavedGirlPosition = Vector2Float(0.0f, 0.0f);
+	mySavedBoyPosition = Vector2Float(0.0f, 0.0f);
 }
 
 PalletTown::~PalletTown()
 {
-	delete m_MyBoyMesh;
-	delete m_MyGirlMesh;
-	delete m_BoyNPC;
-	delete m_GirlNPC;
-	delete m_RivalHouseTop;
-	delete m_PlayerHouseTop;
-	delete m_OakHouseTop;
-	delete m_PalletTownMap;
+	delete myBoyMesh;
+	delete myGirlMesh;
+	delete myBoyNPC;
+	delete myGirlNPC;
+	delete myRivalHouseTop;
+	delete myPlayerHouseTop;
+	delete myOakHouseTop;
+	delete myPalletTownMap;
 }
 
 void PalletTown::LoadContent()
 {
-	m_MyGirlMesh = new Mesh();
-	m_MyGirlMesh->SetShader(m_pMyGame->GetShader(), m_pMyGame->GetDebugShader());
-	m_MyBoyMesh = new Mesh();
-	m_MyBoyMesh->SetShader(m_pMyGame->GetShader(), m_pMyGame->GetDebugShader());
+	myGirlMesh = new Mesh();
+	myGirlMesh->SetShader(myGame->GetShader(), myGame->GetDebugShader());
+	myBoyMesh = new Mesh();
+	myBoyMesh->SetShader(myGame->GetShader(), myGame->GetDebugShader());
 
-	m_PalletTownMap = new PalletTownLevel(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);
-	m_OakHouseTop = new OakHouse(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);
-	m_PlayerHouseTop = new PlayerHouse(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);
-	m_RivalHouseTop = new RivalHouse(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_pMyMesh, m_pMyTexture);
-	m_GirlNPC = new TownGirl(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_MyGirlMesh, m_pMyResourceManager->GetaTexture(TextureHandle::Player_NPCSprites));
-	m_BoyNPC = new TownBoy(m_pMyResourceManager, m_MyTileMap, m_pMyGame, m_MyBoyMesh, m_pMyResourceManager->GetaTexture(TextureHandle::Player_NPCSprites));
+	myPalletTownMap = new PalletTownLevel(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
+	myOakHouseTop = new OakHouse(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
+	myPlayerHouseTop = new PlayerHouse(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
+	myRivalHouseTop = new RivalHouse(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
+	myGirlNPC = new TownGirl(myResourceManager, myTileMap, myGame, myGirlMesh, myResourceManager->GetaTexture(TextureHandle::Player_NPCSprites));
+	myBoyNPC = new TownBoy(myResourceManager, myTileMap, myGame, myBoyMesh, myResourceManager->GetaTexture(TextureHandle::Player_NPCSprites));
 }
 
 void PalletTown::Update(float deltatime)
 {
-	m_pMyTrainer->Update(deltatime);
-	m_GirlNPC->Update(deltatime);
-	m_BoyNPC->Update(deltatime);
+	myPlayer->Update(deltatime);
+	myGirlNPC->Update(deltatime);
+	myBoyNPC->Update(deltatime);
 }
 
 void PalletTown::Draw(Vector2Float camPos, Vector2Float camProjection)
 {
-	m_PalletTownMap->Draw(camPos, camProjection);
+	myPalletTownMap->Draw(camPos, camProjection);
 
-	m_GirlNPC->Draw(camPos, camProjection);
-	m_BoyNPC->Draw(camPos, camProjection);
+	myGirlNPC->Draw(camPos, camProjection);
+	myBoyNPC->Draw(camPos, camProjection);
 
-	m_pMyTrainer->Draw(camPos, camProjection);
+	myPlayer->Draw(camPos, camProjection);
 
-	m_OakHouseTop->Draw(camPos, camProjection);
-	m_PlayerHouseTop->Draw(camPos, camProjection);
-	m_RivalHouseTop->Draw(camPos, camProjection);
+	myOakHouseTop->Draw(camPos, camProjection);
+	myPlayerHouseTop->Draw(camPos, camProjection);
+	myRivalHouseTop->Draw(camPos, camProjection);
 }
 
 void PalletTown::OnIsActive()
 {
-	if (PlayerSavedPosition != Vector2Float(0.0f, 0.0f))
+	if (mySavedPlayerPosition != Vector2Float(0.0f))
 	{
-		m_pMyPlayerStart = PlayerSavedPosition;
-		m_GirlNPCStart = GirlSavedPosition;
-		m_BoyNPCStart = BoySavedPosition;
+		myPlayerStartPosition = mySavedPlayerPosition;
+		myGirlNPCStartPosition = mySavedGirlPosition;
+		myBoyNPCStartPosition = mySavedBoyPosition;
 	}
 
-	m_pMyTrainer->SetPosition(m_pMyPlayerStart);
+	myPlayer->SetPosition(myPlayerStartPosition);
 
-	m_GirlNPC->SetPosition(m_GirlNPCStart);
-	m_BoyNPC->SetPosition(m_BoyNPCStart);
+	myGirlNPC->SetPosition(myGirlNPCStartPosition);
+	myBoyNPC->SetPosition(myBoyNPCStartPosition);
 
-	m_GirlNPC->ResetPathFinder();
-	m_BoyNPC->ResetPathFinder();
-}
-
-void PalletTown::Reload()
-{
-
+	myGirlNPC->ResetPathFinder();
+	myBoyNPC->ResetPathFinder();
 }
 
 void PalletTown::Unload()
 {
-	PlayerSavedPosition = m_pMyTrainer->GetPosition();
-	GirlSavedPosition = m_GirlNPC->GetPosition();
-	BoySavedPosition = m_BoyNPC->GetPosition();
+	mySavedPlayerPosition = myPlayer->GetPosition();
+	mySavedGirlPosition = myGirlNPC->GetPosition();
+	mySavedBoyPosition = myBoyNPC->GetPosition();
 }

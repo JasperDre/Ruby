@@ -9,46 +9,46 @@
 #include "Scenes/Scene.h"
 #include "Sprites/AnimatedSprite.h"
 
-Player::Player(ResourceManager* aResourceManager, GameCore* myGame, Mesh* aMesh, GLuint aTexture)
-	: Entity(myGame, aMesh, aTexture)
+Player::Player(ResourceManager* aResourceManager, GameCore* aGameCore, Mesh* aMesh, GLuint aTexture)
+	: Entity(aGameCore, aMesh, aTexture)
 	, myController(nullptr)
 {
-	AnimationKeys = { "PlayerWalkDown_", "PlayerWalkRight_", "PlayerWalkLeft_", "PlayerWalkUp_" };
+	myAnimationKeys = { "PlayerWalkDown_", "PlayerWalkRight_", "PlayerWalkLeft_", "PlayerWalkUp_" };
 
-	for (unsigned int i = 0; i < m_Animations.size(); i++)
+	for (unsigned int i = 0; i < myAnimations.size(); i++)
 	{
-		m_Animations[i] = new AnimatedSprite(aResourceManager, myGame, aMesh, 2, aTexture);
-		m_Animations[i]->AddFrame(AnimationKeys[i] + "1.png");
-		m_Animations[i]->AddFrame(AnimationKeys[i] + "2.png");
-		m_Animations[i]->AddFrame(AnimationKeys[i] + "1.png");
-		m_Animations[i]->AddFrame(AnimationKeys[i] + "3.png");
-		m_Animations[i]->SetFrameSpeed(6.0f);
-		m_Animations[i]->SetLoop(true);
-		m_Animations[i]->SetPosition(myPosition);
+		myAnimations[i] = new AnimatedSprite(aResourceManager, aGameCore, aMesh, 2, aTexture);
+		myAnimations[i]->AddFrame(myAnimationKeys[i] + "1.png");
+		myAnimations[i]->AddFrame(myAnimationKeys[i] + "2.png");
+		myAnimations[i]->AddFrame(myAnimationKeys[i] + "1.png");
+		myAnimations[i]->AddFrame(myAnimationKeys[i] + "3.png");
+		myAnimations[i]->SetFrameSpeed(6.0f);
+		myAnimations[i]->SetLoop(true);
+		myAnimations[i]->SetPosition(myPosition);
 	}
 
 	myDirection = SpriteDirection::SpriteWalkDown;
 	myResourceManager = aResourceManager;
 	myMesh->GenerateFrameMesh();
 
-	m_Stop = false;
-	m_InTransition = false;
+	myIsStopped = false;
+	myIsInTransition = false;
 }
 
 Player::~Player()
 {
-	for (const auto& m_Animation : m_Animations)
+	for (const auto& m_Animation : myAnimations)
 		delete m_Animation;
 }
 
 void Player::Update(float deltatime)
 {
 	Pause();
-	if (!m_InTransition)
+	if (!myIsInTransition)
 	{
 		if (myController)
 		{
-			if (!m_Stop)
+			if (!myIsStopped)
 			{
 				if (myController->IsForwardHeld())
 				{
@@ -68,7 +68,7 @@ void Player::Update(float deltatime)
 				}
 				if (myController->IsInputReleased())
 				{
-					for (const auto& m_Animation : m_Animations)
+					for (const auto& m_Animation : myAnimations)
 						m_Animation->SetFrameIndex(0);
 				}
 
@@ -76,24 +76,24 @@ void Player::Update(float deltatime)
 		}
 	}
 
-	if (m_InTransition)
+	if (myIsInTransition)
 	{
 		switch (myDirection)
 		{
 			case SpriteDirection::SpriteWalkUp:
 			case SpriteDirection::SpriteWalkRight:
 			{
-				if (myPosition.myY < aTransitionDestination.myY)
+				if (myPosition.myY < myTransitionDestination.myY)
 				{
 					Move(myDirection, deltatime);
 				}
-				else if (myPosition.myX < aTransitionDestination.myX)
+				else if (myPosition.myX < myTransitionDestination.myX)
 				{
 					Move(myDirection, deltatime);
 				}
 				else
 				{
-					m_InTransition = false;
+					myIsInTransition = false;
 				}
 
 				break;
@@ -101,17 +101,17 @@ void Player::Update(float deltatime)
 			case SpriteDirection::SpriteWalkDown:
 			case SpriteDirection::SpriteWalkLeft:
 			{
-				if (myPosition.myY > aTransitionDestination.myY)
+				if (myPosition.myY > myTransitionDestination.myY)
 				{
 					Move(myDirection, deltatime);
 				}
-				else if (myPosition.myX > aTransitionDestination.myX)
+				else if (myPosition.myX > myTransitionDestination.myX)
 				{
 					Move(myDirection, deltatime);
 				}
 				else
 				{
-					m_InTransition = false;
+					myIsInTransition = false;
 				}
 
 				break;
@@ -121,7 +121,7 @@ void Player::Update(float deltatime)
 		}
 	}
 
-	for (const auto& m_Animation : m_Animations)
+	for (const auto& m_Animation : myAnimations)
 	{
 		m_Animation->SetPosition(GetPosition());
 		m_Animation->Update(deltatime);
@@ -130,12 +130,12 @@ void Player::Update(float deltatime)
 
 void Player::Draw(Vector2Float camPos, Vector2Float projecScale)
 {
-	m_Animations[static_cast<int>(myDirection)]->Draw(camPos, projecScale);
+	myAnimations[static_cast<int>(myDirection)]->Draw(camPos, projecScale);
 }
 
 void Player::Move(SpriteDirection dir, float deltatime)
 {
-	NewPosition = myPosition;
+	myNewPosition = myPosition;
 
 	Resume();
 
@@ -146,36 +146,36 @@ void Player::Move(SpriteDirection dir, float deltatime)
 
 	const Vector2Float velocity = DIRECTIONVECTOR[static_cast<int>(dir)] * PLAYER_SPEED;
 
-	NewPosition += velocity * deltatime;
-	if (m_InTransition == false)
+	myNewPosition += velocity * deltatime;
+	if (myIsInTransition == false)
 	{
-		if (CheckForCollision(NewPosition) == true)
+		if (CheckForCollision(myNewPosition) == true)
 		{
-			SetPosition(NewPosition);
+			SetPosition(myNewPosition);
 		}
 	}
 	else
 	{
-		SetPosition(NewPosition);
+		SetPosition(myNewPosition);
 	}
 }
 
 void Player::Pause() const
 {
-	for (const auto& m_Animation : m_Animations)
+	for (const auto& m_Animation : myAnimations)
 		m_Animation->Pause();
 }
 
 void Player::Resume() const
 {
-	for (const auto m_Animation : m_Animations)
+	for (const auto m_Animation : myAnimations)
 		m_Animation->Resume();
 }
 
-void Player::SetStop(bool StopPlayer)
+void Player::SetStop(bool aStopPlayer)
 {
-	if (m_Stop != StopPlayer)
-		m_Stop = StopPlayer;
+	if (myIsStopped != aStopPlayer)
+		myIsStopped = aStopPlayer;
 }
 
 void Player::OnEvent(Event* anEvent)
@@ -197,8 +197,8 @@ void Player::OnEvent(Event* anEvent)
 
 void Player::PlayerTransition()
 {
-	m_InTransition = true;
-	aTransitionDestination = GetPosition() + Vector2Float(DIRECTIONVECTOR[static_cast<int>(myDirection)] * (TILESIZE / 4));
+	myIsInTransition = true;
+	myTransitionDestination = GetPosition() + Vector2Float(DIRECTIONVECTOR[static_cast<int>(myDirection)] * (TILESIZE / 4));
 }
 
 SpriteDirection Player::GetMyDirection() const
@@ -215,10 +215,10 @@ bool Player::CheckForCollision(Vector2Float aPosition) const
 	const Vector2Int BottomRightIndex = Vector2Int(static_cast<int>((aPosition.myX + (TILESIZE / 2)) / TILESIZE), static_cast<int>((aPosition.myY - 0.3f) / TILESIZE));
 
 	//Check each index for whether the tile it lands on is walkable
-	const bool CheckOrigin = myGameCore->GetTileMap()->GetTileAtPlayer(OriginIndex);
-	const bool CheckTopLeft = myGameCore->GetTileMap()->GetTileAtPlayer(TopLeftIndex);
-	const bool CheckTopRight = myGameCore->GetTileMap()->GetTileAtPlayer(TopRightIndex);
-	const bool CheckBottomRight = myGameCore->GetTileMap()->GetTileAtPlayer(BottomRightIndex);
+	const bool CheckOrigin = myGameCore->GetTileMap()->IsTileAtPlayer(OriginIndex);
+	const bool CheckTopLeft = myGameCore->GetTileMap()->IsTileAtPlayer(TopLeftIndex);
+	const bool CheckTopRight = myGameCore->GetTileMap()->IsTileAtPlayer(TopRightIndex);
+	const bool CheckBottomRight = myGameCore->GetTileMap()->IsTileAtPlayer(BottomRightIndex);
 
 	//If all the point land on walkable tile return true else return false
 	const bool Collision = (CheckOrigin && CheckTopLeft && CheckTopRight && CheckBottomRight);

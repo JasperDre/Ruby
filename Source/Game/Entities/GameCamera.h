@@ -10,7 +10,7 @@ class Vector2Float;
 class GameCamera : public Entity
 {
 public:
-	GameCamera(GameCore* pGame, Mesh* pMesh, GLuint myTexture, Player* aPlayer);
+	GameCamera(GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier, Player* aPlayer);
 	~GameCamera() override = default;
 
 	void Update(float deltatime) override {}
@@ -24,11 +24,11 @@ public:
 	[[nodiscard]] Vector2Float GetCameraProjection() const;
 
 private:
-	Vector2Float m_MyProjection;
-	Vector2Float m_MyScreenSize;
-	Vector2Float CAMERAMAX;
-	Vector2Float CAMERAMIN;
-	Vector2Float newCamPos;
-	Vector2Float CamOffset;
-	bool m_InTransition;
+	Vector2Float myProjection;
+	Vector2Float myScreenSize;
+	Vector2Float myCameraMax;
+	Vector2Float myCameraMin;
+	Vector2Float myNewCamPosition;
+	Vector2Float myCameraOffset;
+	bool myIsInTransition;
 };

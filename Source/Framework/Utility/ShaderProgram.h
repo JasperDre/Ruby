@@ -6,8 +6,8 @@ class ShaderProgram
 {
 public:
     ShaderProgram();
-    ShaderProgram(const char* vertfilename, const char* fragfilename);
-    ShaderProgram(const std::string& vertfilename, const std::string& fragfilename);
+    ShaderProgram(const char* aVertexShaderFilepath, const char* aFragmentShaderFilepath);
+    ShaderProgram(const std::string& aVertexShaderFilepath, const std::string& aFragmentShaderFilepath);
     virtual ~ShaderProgram();
 
     void Cleanup();
@@ -15,12 +15,12 @@ public:
     bool Init(const char* vertfilename, const char* fragfilename);
     bool Reload();
 
-    [[nodiscard]] GLuint GetProgram() const { return m_Program; }
+    [[nodiscard]] GLuint GetProgram() const { return myProgram; }
 
 private:
-    char* m_VertShaderString;
-    char* m_FragShaderString;
-    GLuint m_VertShader;
-    GLuint m_FragShader;
-    GLuint m_Program;
+    char* myVertShaderString;
+    char* myFragShaderString;
+    GLuint myVertShader;
+    GLuint myFragShader;
+    GLuint myProgram;
 };

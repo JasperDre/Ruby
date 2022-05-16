@@ -5,8 +5,8 @@
 
 #include "Game/Game.h"
 
-TileMapWoods::TileMapWoods(GameCore* myGame, Areas anArea)
-	: TileMap(myGame, anArea)
+TileMapWoods::TileMapWoods(GameCore* aGameCore, Areas anArea)
+	: TileMap(aGameCore, anArea)
 {
 	for (int i = 0; i < 2; i++)
 	{
@@ -14,14 +14,14 @@ TileMapWoods::TileMapWoods(GameCore* myGame, Areas anArea)
 
 		TileInfo aNullTile = TileInfo(aType);
 
-		if (aNullTile.MyForestType == Forest_Null_Wall)
+		if (aNullTile.myForestType == Forest_Null_Wall)
 		{
-			aNullTile.IsWalkable = false;
+			aNullTile.myIsWalkable = false;
 		}
 		else
 		{
-			aNullTile.IsWalkable = true;
-			aNullTile.IsDoor = true;
+			aNullTile.myIsWalkable = true;
+			aNullTile.myIsDoor = true;
 		}
 
 		myTileInfoMap.insert(std::pair<Forest_Tile_Type, TileInfo>(static_cast<Forest_Tile_Type>(i + 6), aNullTile));
@@ -35,7 +35,7 @@ TileMapWoods::~TileMapWoods()
 
 void TileMapWoods::AddTile(const std::string& anIndex, Frame aFrame)
 {
-	if (m_MyArea == Areas::Area_Woods)
+	if (myArea == Areas::Area_Woods)
 	{
 		//Find the Tile Type from the index string
 		Forest_Tile_Type aType = WoodsTypeSelecter.find(anIndex)->second;
@@ -46,22 +46,22 @@ void TileMapWoods::AddTile(const std::string& anIndex, Frame aFrame)
 
 			TileInfo myNewTile = TileInfo(aType);
 
-			if (myNewTile.MyForestType == Forest_Grass_ || myNewTile.MyForestType == Forest_Wild_Grass_)
+			if (myNewTile.myForestType == Forest_Grass_ || myNewTile.myForestType == Forest_Wild_Grass_)
 			{
-				myNewTile.IsWalkable = true;
+				myNewTile.myIsWalkable = true;
 			}
-			else if (myNewTile.MyForestType == Forest_Null_Door) //if the tile is a door
+			else if (myNewTile.myForestType == Forest_Null_Door) //if the tile is a door
 			{
-				myNewTile.IsWalkable = true;
-				myNewTile.IsDoor = true;
+				myNewTile.myIsWalkable = true;
+				myNewTile.myIsDoor = true;
 			}
 			else
 			{
-				myNewTile.IsWalkable = false;
+				myNewTile.myIsWalkable = false;
 			}
 
 			//push the frame attributes into the Variant vector
-			myNewTile.MyVariant.push_back(aFrame);
+			myNewTile.myVariant.push_back(aFrame);
 
 			//insert the new TileInfo into the TileInfo Map
 			myTileInfoMap.insert(std::pair<Forest_Tile_Type, TileInfo>(aType, myNewTile));
@@ -69,7 +69,7 @@ void TileMapWoods::AddTile(const std::string& anIndex, Frame aFrame)
 		//if the TileInfo does exist then push back the new frame attributes into its variant vector
 		else
 		{
-			myTileInfoMap.at(aType).MyVariant.push_back(aFrame);
+			myTileInfoMap.at(aType).myVariant.push_back(aFrame);
 		}
 	}
 }
@@ -79,29 +79,29 @@ TileInfo TileMapWoods::GetTileFromWoodsMap(Forest_Tile_Type aType) const
 	return myTileInfoMap.find(aType)->second;
 }
 
-bool TileMapWoods::GetTileAtPlayer(Vector2Int playerColumnRow) const
+bool TileMapWoods::IsTileAtPlayer(Vector2Int playerColumnRow) const
 {
 	const int anIndex = (NUM_FOREST_COLUMNS * playerColumnRow.y) + playerColumnRow.x;
 	constexpr short TypeMask = 15;
 	const TileInfo aTileInfo = myTileInfoMap.find(static_cast<Forest_Tile_Type>(TypeMask & ForestBitMap[anIndex]))->second;
 
-	if (aTileInfo.MyForestType == Forest_Null_Door)
+	if (aTileInfo.myForestType == Forest_Null_Door)
 	{
 		Event* doorEvent = new DoorEvent(13);
-		m_pMyGame->GetEventManager()->QueueEvent(doorEvent);
+		myGame->GetEventManager()->QueueEvent(doorEvent);
 	}
 
-	return aTileInfo.IsWalkable;
+	return aTileInfo.myIsWalkable;
 
 }
 
-bool TileMapWoods::GetTileAtNPC(Vector2Int npcColumnRow) const
+bool TileMapWoods::IsTileAtNPC(Vector2Int npcColumnRow) const
 {
 	const int anIndex = (NUM_COLUMNS * npcColumnRow.y) + npcColumnRow.x;
 	constexpr short TypeMask = 15;
 	const TileInfo aTileInfo = myTileInfoMap.find(static_cast<Forest_Tile_Type>(TypeMask & ForestBitMap[anIndex]))->second;
 
-	return aTileInfo.IsWalkable;
+	return aTileInfo.myIsWalkable;
 }
 
 TileInfo TileMapWoods::GetTileAtIndex(int anIndex) const

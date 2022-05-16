@@ -243,27 +243,27 @@ void Game::Draw()
 	GLHelpers::CheckForGLErrors();
 }
 
-TileMap* Game::GetTileMap()
+TileMap* Game::GetTileMap() const
 {
 	return mySceneManager->GetActiveScene()->GetMyTileMap();
 }
 
-SceneManager* Game::GetSceneManager()
+SceneManager* Game::GetSceneManager() const
 {
 	return mySceneManager;
 }
 
-ShaderProgram* Game::GetShader()
+ShaderProgram* Game::GetShader() const
 {
 	return myShader;
 }
 
-ShaderProgram* Game::GetDebugShader()
+ShaderProgram* Game::GetDebugShader() const
 {
 	return myDebugShader;
 }
 
-Player* Game::GetMyPlayer()
+Player* Game::GetMyPlayer() const
 {
 	return myPlayer;
 }
