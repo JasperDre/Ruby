@@ -193,8 +193,8 @@ void Game::OnEvent(Event* pEvent)
 
 void Game::Update(float deltatime)
 {
-	if (deltatime > 1.0f / 20.0f)
-		deltatime = 1.0f / 20.0f;
+	if (deltatime > 1.0f / 60.0f)
+		deltatime = 1.0f / 60.0f;
 
 	Scene* aActiveScene = mySceneManager->GetActiveScene();
 	aActiveScene->Update(deltatime);
