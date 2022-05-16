@@ -4,41 +4,28 @@
 
 class Mesh
 {
-protected:
+public:
 	struct VertexFormat
 	{
-		Vector2Float m_Pos;
-		Color m_Color;
-		Vector2Float m_UV;
-
-		VertexFormat() : m_Pos(0.0f), m_UV(0.0f) {}
+		VertexFormat() : myPosition(0.0f), myUVCoordinates(0.0f) {}
 		VertexFormat(Vector2Float pos, Color color, Vector2Float UV)
 		{
-			m_Pos = pos;
-			m_Color = color;
-			m_UV = UV;
+			myPosition = pos;
+			myColor = color;
+			myUVCoordinates = UV;
 		}
+
+		Vector2Float myPosition;
+		Vector2Float myUVCoordinates;
+		Color myColor;
 	};
 
-	std::vector<VertexFormat> m_CanvasVerts;
-	ShaderProgram* m_pShader;
-	ShaderProgram* m_DebugShader;
-	GLuint m_VBO;
-	GLuint m_MyTexture;
-	int m_NumVerts;
-	float p_MyRadius;
-	float p_MyWidth;
-	float p_MyHeight;
-	GLenum m_PrimitiveType;
-	bool IsDebug;
-
-public:
 	Mesh();
 	virtual ~Mesh();
 
-	void Draw(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float camPos, Vector2Float projScale, GLuint aTexture, Vector2Float aUVscale, Vector2Float aUVoffset);
-	void DrawCanvas(Vector2Float cameraPos, Vector2Float projectionScale, GLuint aTexture);
-	void DebugDraw(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float camPos, Vector2Float projScale);
+	void Draw(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float camPos, Vector2Float projScale, GLuint aTexture, Vector2Float aUVscale, Vector2Float aUVoffset) const;
+	void DrawCanvas(Vector2Float cameraPos, Vector2Float projectionScale, GLuint aTexture) const;
+	void DebugDraw(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float camPos, Vector2Float projScale) const;
 	void GenerateTriangle();
 	void GenerateCircle();
 	void GeneratePolygon(float radius, int vertices, char r, char g, char b, char a);
@@ -49,5 +36,18 @@ public:
 	void GenerateDebugMesh();
 	void GenterateCanvasMesh(int aSize);
 
-	void SetShader(ShaderProgram* pShader, ShaderProgram* pDebug) { m_pShader = pShader; m_DebugShader = pDebug; }
+	void SetShader(ShaderProgram* pShader, ShaderProgram* pDebug) { myShader = pShader; myDebugShader = pDebug; }
+
+protected:
+	std::vector<VertexFormat> myCanvasVertices;
+	ShaderProgram* myShader;
+	ShaderProgram* myDebugShader;
+	GLuint myVBOIdentifier;
+	GLuint myTextureIdentifier;
+	int myNumberOfVertices;
+	float myRadius;
+	float myWidth;
+	float myHeight;
+	GLenum myPrimitiveType;
+	bool myIsDebug;
 };

@@ -216,7 +216,7 @@ void Canvas::AddVert(Vector2Float objectPos, float objectAngle, Vector2Float obj
 	{
 		if (IsReversed == true)
 		{
-			Vector2Float finalPos = m_BaseTileVertsReverse.at(i).m_Pos;
+			Vector2Float finalPos = m_BaseTileVertsReverse.at(i).myPosition;
 
 			finalPos *= objectScale;
 
@@ -225,19 +225,19 @@ void Canvas::AddVert(Vector2Float objectPos, float objectAngle, Vector2Float obj
 
 			finalPos += objectPos;
 
-			Vector2Float UVTemp = m_BaseTileVertsReverse.at(i).m_UV;
+			Vector2Float UVTemp = m_BaseTileVertsReverse.at(i).myUVCoordinates;
 
 			UVTemp *= aUVscale;
 
 			UVTemp += aUVoffset;
 
-			VertexFormat aVert = VertexFormat(Vector2Float(finalPos), Color(m_BaseTileVertsReverse.at(i).m_Color), Vector2Float(UVTemp));
+			VertexFormat aVert = VertexFormat(Vector2Float(finalPos), Color(m_BaseTileVertsReverse.at(i).myColor), Vector2Float(UVTemp));
 
-			m_CanvasVerts.push_back(aVert);
+			myCanvasVertices.push_back(aVert);
 		}
 		else
 		{
-			Vector2Float finalPos = m_BaseTileVerts.at(i).m_Pos;
+			Vector2Float finalPos = m_BaseTileVerts.at(i).myPosition;
 
 			finalPos *= objectScale;
 
@@ -246,15 +246,15 @@ void Canvas::AddVert(Vector2Float objectPos, float objectAngle, Vector2Float obj
 
 			finalPos += objectPos;
 
-			Vector2Float UVTemp = m_BaseTileVerts.at(i).m_UV;
+			Vector2Float UVTemp = m_BaseTileVerts.at(i).myUVCoordinates;
 
 			UVTemp *= aUVscale;
 
 			UVTemp += aUVoffset;
 
-			VertexFormat aVert = VertexFormat(Vector2Float(finalPos), Color(m_BaseTileVerts.at(i).m_Color), Vector2Float(UVTemp));
+			VertexFormat aVert = VertexFormat(Vector2Float(finalPos), Color(m_BaseTileVerts.at(i).myColor), Vector2Float(UVTemp));
 
-			m_CanvasVerts.push_back(aVert);
+			myCanvasVertices.push_back(aVert);
 		}
 	}
 }
