@@ -1,8 +1,6 @@
 #include "GamePCH.h"
 #include "Game/Game.h"
 
-#include <filesystem>
-
 #include "Controllers/PlayerController.h"
 #include "Entities/GameCamera.h"
 #include "Entities/Entity.h"
@@ -28,48 +26,48 @@ static std::string GetFilePath(const std::string& aRootDirectory, const char* aF
 
 Game::Game(Framework* pFramework)
 	: GameCore(pFramework, new EventManager())
-	, m_pShader(nullptr)
-	, m_pDebugShader(nullptr)
-	, m_TrainerMesh(nullptr)
-	, m_TileMesh(nullptr)
-	, m_CameraMesh(nullptr)
-	, m_UIMesh(nullptr)
-	, m_MyResourceManager(nullptr)
-	, m_PalletTileMap(nullptr)
-	, m_OakLabTileMap(nullptr)
-	, m_WoodsTileMap(nullptr)
-	, m_ExtrasTileMap(nullptr)
+	, myShader(nullptr)
+	, myDebugShader(nullptr)
+	, myPlayerMesh(nullptr)
+	, myTileMesh(nullptr)
+	, myCameraMesh(nullptr)
+	, myUIMesh(nullptr)
+	, myResourceManager(nullptr)
+	, myPalletTileMap(nullptr)
+	, myOakLabTileMap(nullptr)
+	, myWoodsTileMap(nullptr)
+	, myExtrasTileMap(nullptr)
 	, myPlayer(nullptr)
-	, m_UICanvas(nullptr)
-	, m_TrainerCamera(nullptr)
-	, m_pPlayerController(nullptr)
-	, m_MySceneManager(nullptr)
-	, m_Tileset(0)
-	, m_OakLabTileset(0)
-	, m_Sprites(0)
-	, m_WoodsTileset(0)
-	, m_ExtrasSet(0)
-	, m_BattleScene(0)
+	, myUICanvas(nullptr)
+	, myPlayerCamera(nullptr)
+	, myPlayerController(nullptr)
+	, mySceneManager(nullptr)
+	, myTilesetTextureIdentifier(0)
+	, myOakLabTilesetTextureIdentifier(0)
+	, mySpritesTextureIdentifier(0)
+	, myWoodsTilesetTextureIdentifier(0)
+	, myExtrasSetTextureIdentifier(0)
+	, myBattleSceneTextureIdentifier(0)
 {}
 
 Game::~Game()
 {
-	delete m_MySceneManager;
-	delete m_pPlayerController;
-	delete m_TrainerCamera;
-	delete m_UICanvas;
+	delete mySceneManager;
+	delete myPlayerController;
+	delete myPlayerCamera;
+	delete myUICanvas;
 	delete myPlayer;
-	delete m_ExtrasTileMap;
-	delete m_WoodsTileMap;
-	delete m_OakLabTileMap;
-	delete m_PalletTileMap;
-	delete m_MyResourceManager;
-	delete m_UIMesh;
-	delete m_CameraMesh;
-	delete m_TileMesh;
-	delete m_TrainerMesh;
-	delete m_pDebugShader;
-	delete m_pShader;
+	delete myExtrasTileMap;
+	delete myWoodsTileMap;
+	delete myOakLabTileMap;
+	delete myPalletTileMap;
+	delete myResourceManager;
+	delete myUIMesh;
+	delete myCameraMesh;
+	delete myTileMesh;
+	delete myPlayerMesh;
+	delete myDebugShader;
+	delete myShader;
 }
 
 void Game::OnSurfaceChanged(int width, int height)
@@ -96,72 +94,71 @@ void Game::LoadContent()
 	rootDirectory += "/../../../";
 
 	// Create our shaders.
-	m_pShader = new ShaderProgram(GetFilePath(rootDirectory, "Data/Shaders/Moving.vert"), GetFilePath(rootDirectory, "Data/Shaders/Moving.frag"));
-	m_pDebugShader = new ShaderProgram(GetFilePath(rootDirectory, "Data/Shaders/Color.vert"), GetFilePath(rootDirectory, "Data/Shaders/Color.frag"));
+	myShader = new ShaderProgram(GetFilePath(rootDirectory, "Data/Shaders/Moving.vert"), GetFilePath(rootDirectory, "Data/Shaders/Moving.frag"));
+	myDebugShader = new ShaderProgram(GetFilePath(rootDirectory, "Data/Shaders/Color.vert"), GetFilePath(rootDirectory, "Data/Shaders/Color.frag"));
 
 	// Create out meshes.
-	m_TrainerMesh = new Mesh();
-	m_TrainerMesh->SetShader(m_pShader, m_pDebugShader);
+	myPlayerMesh = new Mesh();
+	myPlayerMesh->SetShader(myShader, myDebugShader);
 
-	m_TileMesh = new Mesh();
-	m_TileMesh->SetShader(m_pShader, m_pDebugShader);
-	m_TileMesh->GenerateTileMesh();
+	myTileMesh = new Mesh();
+	myTileMesh->SetShader(myShader, myDebugShader);
+	myTileMesh->GenerateTileMesh();
 
-	m_CameraMesh = new Mesh();
-	m_CameraMesh->SetShader(m_pShader, m_pDebugShader);
+	myCameraMesh = new Mesh();
+	myCameraMesh->SetShader(myShader, myDebugShader);
 
-	m_UIMesh = new Mesh();
-	m_UIMesh->SetShader(m_pShader, m_pDebugShader);
-	m_UIMesh->GenerateTileMesh();
+	myUIMesh = new Mesh();
+	myUIMesh->SetShader(myShader, myDebugShader);
+	myUIMesh->GenerateTileMesh();
 
 	//Create our Textures
-	m_Tileset = GLHelpers::LoadTexture(GetFilePath(rootDirectory, "Data/Textures/TileSet.png"));
-	m_OakLabTileset = GLHelpers::LoadTexture(GetFilePath(rootDirectory, "Data/Textures/OakLabTileSet.png"));
-	m_Sprites = GLHelpers::LoadTexture(GetFilePath(rootDirectory, "Data/Textures/Player_NPCSprites.png"));
-	m_WoodsTileset = GLHelpers::LoadTexture(GetFilePath(rootDirectory, "Data/Textures/WoodsTileSet.png"));
-	m_ExtrasSet = GLHelpers::LoadTexture(GetFilePath(rootDirectory, "Data/Textures/ExtrasTileSet.png"));
-	m_BattleScene = GLHelpers::LoadTexture(GetFilePath(rootDirectory, "Data/Textures/BattleScene.png"));
+	myTilesetTextureIdentifier = GLHelpers::LoadTexture(GetFilePath(rootDirectory, "Data/Textures/TileSet.png"));
+	myOakLabTilesetTextureIdentifier = GLHelpers::LoadTexture(GetFilePath(rootDirectory, "Data/Textures/OakLabTileSet.png"));
+	mySpritesTextureIdentifier = GLHelpers::LoadTexture(GetFilePath(rootDirectory, "Data/Textures/Player_NPCSprites.png"));
+	myWoodsTilesetTextureIdentifier = GLHelpers::LoadTexture(GetFilePath(rootDirectory, "Data/Textures/WoodsTileSet.png"));
+	myExtrasSetTextureIdentifier = GLHelpers::LoadTexture(GetFilePath(rootDirectory, "Data/Textures/ExtrasTileSet.png"));
+	myBattleSceneTextureIdentifier = GLHelpers::LoadTexture(GetFilePath(rootDirectory, "Data/Textures/BattleScene.png"));
 
 	//Create a Resource Manager to parse JSON file and set up frames from sprite sheet
-	m_PalletTileMap = new TileMapPalletTown(this, Areas::Area_PalletTown);
-	m_OakLabTileMap = new TileMapOakLab(this, Areas::Area_OakLab);
-	m_WoodsTileMap = new TileMapWoods(this, Areas::Area_Woods);
-	m_ExtrasTileMap = new TileMapExtras(this, Areas::Area_Null);
-	m_MyResourceManager = new ResourceManager();
+	myPalletTileMap = new TileMapPalletTown(this, Areas::Area_PalletTown);
+	myOakLabTileMap = new TileMapOakLab(this, Areas::Area_OakLab);
+	myWoodsTileMap = new TileMapWoods(this, Areas::Area_Woods);
+	myExtrasTileMap = new TileMapExtras(this, Areas::Area_Null);
+	myResourceManager = new ResourceManager();
 
-	m_MyResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/TileSet.json"), m_PalletTileMap);
-	m_MyResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/OakLabTileSet.json"), m_OakLabTileMap);
-	m_MyResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/Player_NPCSprites.json"), m_PalletTileMap);
-	m_MyResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/WoodsTileSet.json"), m_WoodsTileMap);
-	m_MyResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/ExtrasTileSet.json"), m_ExtrasTileMap);
-	m_MyResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/BattleScene.json"), m_ExtrasTileMap);
+	myResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/TileSet.json"), myPalletTileMap);
+	myResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/OakLabTileSet.json"), myOakLabTileMap);
+	myResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/Player_NPCSprites.json"), myPalletTileMap);
+	myResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/WoodsTileSet.json"), myWoodsTileMap);
+	myResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/ExtrasTileSet.json"), myExtrasTileMap);
+	myResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/BattleScene.json"), myExtrasTileMap);
 
-	m_MyResourceManager->HoldTexture(TextureHandle::TileSet, m_Tileset);
-	m_MyResourceManager->HoldTexture(TextureHandle::OakLabTileSet, m_OakLabTileset);
-	m_MyResourceManager->HoldTexture(TextureHandle::Player_NPCSprites, m_Sprites);
-	m_MyResourceManager->HoldTexture(TextureHandle::ForestTileSet, m_WoodsTileset);
+	myResourceManager->HoldTexture(TextureHandle::TileSet, myTilesetTextureIdentifier);
+	myResourceManager->HoldTexture(TextureHandle::OakLabTileSet, myOakLabTilesetTextureIdentifier);
+	myResourceManager->HoldTexture(TextureHandle::Player_NPCSprites, mySpritesTextureIdentifier);
+	myResourceManager->HoldTexture(TextureHandle::ForestTileSet, myWoodsTilesetTextureIdentifier);
 
 	//Create our game objects
-	myPlayer = new Player(m_MyResourceManager, this, m_TrainerMesh, m_Sprites);
-	m_UICanvas = new UIObject(m_MyResourceManager, m_ExtrasTileMap, this, m_UIMesh, m_ExtrasSet);
-
+	myPlayer = new Player(myResourceManager, this, myPlayerMesh, mySpritesTextureIdentifier);
+	myUICanvas = new UIObject(myResourceManager, myExtrasTileMap, this, myUIMesh, myExtrasSetTextureIdentifier);
 
 	// Assign our controllers.
-	m_pPlayerController = new PlayerController();
-	myPlayer->SetPlayerController(m_pPlayerController);
+	myPlayerController = new PlayerController();
+	myPlayer->SetPlayerController(myPlayerController);
 
 	//Create our player camera
-	m_TrainerCamera = new GameCamera(this, m_CameraMesh, 0, myPlayer);
-	m_TrainerCamera->SetMyProjection(1 / (aWindowSize.myX / 40));
+	myPlayerCamera = new GameCamera(this, myCameraMesh, 0, myPlayer);
+	myPlayerCamera->SetMyProjection(1.0f / (myWindowSize.myX / 40.0f));
 
 	//Finally Create our SceneManager and Scenes
-	m_MySceneManager = new SceneManager();
-	m_MySceneManager->GenerateScenes(this, Areas::Area_PalletTown, m_PalletTileMap, m_MyResourceManager, m_TileMesh, myPlayer, m_Tileset);
-	m_MySceneManager->GenerateScenes(this, Areas::Area_OakLab, m_OakLabTileMap, m_MyResourceManager, m_TileMesh, myPlayer, m_OakLabTileset);
-	m_MySceneManager->GenerateScenes(this, Areas::Area_Woods, m_WoodsTileMap, m_MyResourceManager, m_TileMesh, myPlayer, m_WoodsTileset);
-	m_MySceneManager->SetActiveScene(Areas::Area_PalletTown);
+	mySceneManager = new SceneManager();
+	mySceneManager->GenerateScenes(this, Areas::Area_PalletTown, myPalletTileMap, myResourceManager, myTileMesh, myPlayer, myTilesetTextureIdentifier);
+	mySceneManager->GenerateScenes(this, Areas::Area_OakLab, myOakLabTileMap, myResourceManager, myTileMesh, myPlayer, myOakLabTilesetTextureIdentifier);
+	mySceneManager->GenerateScenes(this, Areas::Area_Woods, myWoodsTileMap, myResourceManager, myTileMesh, myPlayer, myWoodsTilesetTextureIdentifier);
+	mySceneManager->SetActiveScene(Areas::Area_PalletTown);
 
-	m_UICanvas->SetPosition(m_TrainerCamera->GetPosition());
+	myUICanvas->SetPosition(myPlayerCamera->GetPosition());
 
 	GLHelpers::CheckForGLErrors();
 }
@@ -172,7 +169,7 @@ void Game::OnEvent(Event* pEvent)
 	{
 		case EventTypes::EventType_Input:
 		{
-			m_pPlayerController->OnEvent(pEvent);
+			myPlayerController->OnEvent(pEvent);
 			break;
 		}
 		case EventTypes::EventType_Collision:
@@ -182,11 +179,11 @@ void Game::OnEvent(Event* pEvent)
 		}
 		case EventTypes::EventType_Door:
 		{
-			m_MySceneManager->OnEvent(pEvent);
+			mySceneManager->OnEvent(pEvent);
 			if (pEvent->GetEventType() != EventTypes::EventType_Input)
 			{
 				myPlayer->OnEvent(pEvent);
-				m_TrainerCamera->OnEvent(pEvent);
+				myPlayerCamera->OnEvent(pEvent);
 			}
 
 			break;
@@ -199,12 +196,12 @@ void Game::Update(float deltatime)
 	if (deltatime > 1.0f / 20.0f)
 		deltatime = 1.0f / 20.0f;
 
-	Scene* aActiveScene = m_MySceneManager->GetActiveScene();
+	Scene* aActiveScene = mySceneManager->GetActiveScene();
 	aActiveScene->Update(deltatime);
 
-	m_TrainerCamera->Update(deltatime);
-	m_TrainerCamera->ClampToPlayer(myPlayer->GetPosition());
-	m_UICanvas->SetPosition(m_TrainerCamera->GetCameraPosition());
+	myPlayerCamera->Update(deltatime);
+	myPlayerCamera->ClampToPlayer(myPlayer->GetPosition());
+	myUICanvas->SetPosition(myPlayerCamera->GetCameraPosition());
 
 	for (const Keys key : InputManager::GetInstance().GetPressedKeysThisFrame())
 	{
@@ -230,10 +227,10 @@ void Game::Draw()
 #endif
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	Scene* aSceneDraw = m_MySceneManager->GetActiveScene();
+	Scene* aSceneDraw = mySceneManager->GetActiveScene();
 
 	// Draw our game objects.
-	aSceneDraw->Draw(m_TrainerCamera->GetCameraPosition(), m_TrainerCamera->GetCameraProjection());
+	aSceneDraw->Draw(myPlayerCamera->GetCameraPosition(), myPlayerCamera->GetCameraProjection());
 
 	//m_UICanvas->Draw(0, m_TrainerCamera->GetCameraProjection());
 
@@ -242,22 +239,22 @@ void Game::Draw()
 
 TileMap* Game::GetTileMap()
 {
-	return m_MySceneManager->GetActiveScene()->GetMyTileMap();
+	return mySceneManager->GetActiveScene()->GetMyTileMap();
 }
 
 SceneManager* Game::GetSceneManager()
 {
-	return m_MySceneManager;
+	return mySceneManager;
 }
 
 ShaderProgram* Game::GetShader()
 {
-	return m_pShader;
+	return myShader;
 }
 
 ShaderProgram* Game::GetDebugShader()
 {
-	return m_pDebugShader;
+	return myDebugShader;
 }
 
 Player* Game::GetMyPlayer()
@@ -267,8 +264,8 @@ Player* Game::GetMyPlayer()
 
 void Game::SetCameraScreenSize(float width, float height)
 {
-	aWindowSize = Vector2Float(width, height);
+	myWindowSize = Vector2Float(width, height);
 
-	if (m_TrainerCamera)
-		m_TrainerCamera->SetScreenSize(aWindowSize);
+	if (myPlayerCamera)
+		myPlayerCamera->SetScreenSize(myWindowSize);
 }

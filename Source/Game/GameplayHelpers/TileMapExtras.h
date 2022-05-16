@@ -8,18 +8,17 @@ class TileMapExtras : public TileMap
 {
 public:
 	TileMapExtras(GameCore* myGame, Areas anArea);
-	~TileMapExtras();
+	~TileMapExtras() override;
 
 	void AddTile(const std::string& anIndex, Frame aFrame) override;
 
-	Frame GetFrameFromExtrasMap(std::string aType) override;
-
-	bool GetTileAtPlayer(Vector2Int playerColumnRow) override;
-	bool GetTileAtNPC(Vector2Int npcColumnRow) override;
-	int GetMapWidth() override;
-	int GetMapHeight() override;
-	int GetIndexFromColumnRow(int aColumn, int aRow) override;
-	Vector2Int GetColumRowFromIndex(int anIndex) override;
+	[[nodiscard]] Frame GetFrameFromExtrasMap(const std::string& aType) const override;
+	[[nodiscard]] bool GetTileAtPlayer(Vector2Int playerColumnRow) const override;
+	[[nodiscard]] bool GetTileAtNPC(Vector2Int npcColumnRow) const override;
+	[[nodiscard]] int GetMapWidth() const override;
+	[[nodiscard]] int GetMapHeight() const override;
+	[[nodiscard]] int GetIndexFromColumnRow(int aColumn, int aRow) const override;
+	[[nodiscard]] Vector2Int GetColumRowFromIndex(int anIndex) const override;
 
 private:
 	std::map<std::string, Frame> m_TileInfoMap;

@@ -4,12 +4,12 @@
 #include "Game/Game.h"
 #include "GameplayHelpers/TileMap.h"
 
-TileMapOakLab::TileMapOakLab(GameCore* myGame, Areas anArea) : TileMap(myGame, anArea)
+TileMapOakLab::TileMapOakLab(GameCore* myGame, Areas anArea)
+	: TileMap(myGame, anArea)
 {
 	for (int i = 0; i < 2; i++)
 	{
-		OakLab_Tile_Type aType = OakLab_Tile_Type(i + 9);
-
+		const OakLab_Tile_Type aType = static_cast<OakLab_Tile_Type>(i + 9);
 		TileInfo aNullTile = TileInfo(aType);
 
 		if (aNullTile.MyLabType == Oak_Lab_NullWall_)
@@ -21,29 +21,26 @@ TileMapOakLab::TileMapOakLab(GameCore* myGame, Areas anArea) : TileMap(myGame, a
 			aNullTile.IsWalkable = true;
 			aNullTile.IsDoor = true;
 		}
-		m_TileInfoMap.insert(std::pair<OakLab_Tile_Type, TileInfo>(OakLab_Tile_Type(i + 9), aNullTile));
+
+		m_TileInfoMap.insert(std::pair<OakLab_Tile_Type, TileInfo>(static_cast<OakLab_Tile_Type>(i + 9), aNullTile));
 	}
 }
 
 TileMapOakLab::~TileMapOakLab()
 {
-
+	m_TileInfoMap.clear();
 }
 
 void TileMapOakLab::AddTile(const std::string& anIndex, Frame aFrame)
 {
 	if (m_MyArea == Areas::Area_OakLab)
 	{
-		//Find the Tile Type from the index string
-		OakLab_Tile_Type aType = LabTypeSelecter.find(anIndex)->second;
-
 		//Check to see if the TileInfo does not exists, if so make a new TileInfo
-		if (m_TileInfoMap.find(aType) == m_TileInfoMap.end())
+		if (OakLab_Tile_Type aType = LabTypeSelecter.find(anIndex)->second; m_TileInfoMap.find(aType) == m_TileInfoMap.end())
 		{
-
 			TileInfo myNewTile = TileInfo(aType);
 
-			if (myNewTile.MyLabType == Oak_Lab_Floor_|| myNewTile.MyLabType == Oak_Lab_Seat_ || myNewTile.MyLabType == Oak_Lab_Entrance_)
+			if (myNewTile.MyLabType == Oak_Lab_Floor_ || myNewTile.MyLabType == Oak_Lab_Seat_ || myNewTile.MyLabType == Oak_Lab_Entrance_)
 			{
 				myNewTile.IsWalkable = true;
 			}
@@ -66,18 +63,16 @@ void TileMapOakLab::AddTile(const std::string& anIndex, Frame aFrame)
 	}
 }
 
-TileInfo TileMapOakLab::GetTileFromOakLabMap(OakLab_Tile_Type aType)
+TileInfo TileMapOakLab::GetTileFromOakLabMap(OakLab_Tile_Type aType) const
 {
 	return m_TileInfoMap.find(aType)->second;
 }
 
-bool TileMapOakLab::GetTileAtPlayer(Vector2Int playerColumnRow)
+bool TileMapOakLab::GetTileAtPlayer(Vector2Int playerColumnRow) const
 {
-	int anIndex = (NUM_LAB_COLUMNS * playerColumnRow.y) + playerColumnRow.x;
-
-	short TypeMask = 15;
-
-	TileInfo aTileInfo = m_TileInfoMap.find(OakLab_Tile_Type(TypeMask & OakLabBitMap[anIndex]))->second;
+	const int anIndex = (NUM_LAB_COLUMNS * playerColumnRow.y) + playerColumnRow.x;
+	constexpr short TypeMask = 15;
+	const TileInfo aTileInfo = m_TileInfoMap.find(static_cast<OakLab_Tile_Type>(TypeMask & OakLabBitMap[anIndex]))->second;
 
 	if (aTileInfo.MyLabType == Oak_Lab_NullDoor_)
 	{
@@ -88,45 +83,42 @@ bool TileMapOakLab::GetTileAtPlayer(Vector2Int playerColumnRow)
 	return aTileInfo.IsWalkable;
 }
 
-bool TileMapOakLab::GetTileAtNPC(Vector2Int npcColumnRow)
+bool TileMapOakLab::GetTileAtNPC(Vector2Int npcColumnRow) const
 {
-	int anIndex = (NUM_LAB_COLUMNS * npcColumnRow.y) + npcColumnRow.x;
-
-	short TypeMask = 15;
-
-	TileInfo aTileInfo = m_TileInfoMap.find(OakLab_Tile_Type(TypeMask & OakLabBitMap[anIndex]))->second;
+	const int anIndex = (NUM_LAB_COLUMNS * npcColumnRow.y) + npcColumnRow.x;
+	constexpr short TypeMask = 15;
+	const TileInfo aTileInfo = m_TileInfoMap.find(static_cast<OakLab_Tile_Type>(TypeMask & OakLabBitMap[anIndex]))->second;
 
 	return aTileInfo.IsWalkable;
 }
 
-TileInfo TileMapOakLab::GetTileAtIndex(int anIndex)
+TileInfo TileMapOakLab::GetTileAtIndex(int anIndex) const
 {
-	short TypeMask = 15;
-
-	TileInfo aTileInfo = m_TileInfoMap.find(OakLab_Tile_Type(TypeMask & OakLabBitMap[anIndex]))->second;
+	constexpr short TypeMask = 15;
+	TileInfo aTileInfo = m_TileInfoMap.find(static_cast<OakLab_Tile_Type>(TypeMask & OakLabBitMap[anIndex]))->second;
 
 	return aTileInfo;
 }
 
-int TileMapOakLab::GetMapWidth()
+int TileMapOakLab::GetMapWidth() const
 {
 	return NUM_LAB_COLUMNS;
 }
 
-int TileMapOakLab::GetMapHeight()
+int TileMapOakLab::GetMapHeight() const
 {
 	return NUM_LAB_ROWS;
 }
 
-int TileMapOakLab::GetIndexFromColumnRow(int aColumn, int aRow)
+int TileMapOakLab::GetIndexFromColumnRow(int aColumn, int aRow) const
 {
 	assert(aColumn >= 0 && aRow >= 0 && aColumn <= NUM_LAB_COLUMNS && aRow <= NUM_LAB_ROWS);
+	const int anIndexOnMap = (aRow * NUM_LAB_COLUMNS) + aColumn;
 
-	int anIndexOnMap = (aRow * NUM_LAB_COLUMNS) + aColumn;
 	return anIndexOnMap;
 }
 
-Vector2Int TileMapOakLab::GetColumRowFromIndex(int anIndex)
+Vector2Int TileMapOakLab::GetColumRowFromIndex(int anIndex) const
 {
 	return Vector2Int(anIndex % NUM_LAB_COLUMNS, anIndex / NUM_LAB_COLUMNS);
 }

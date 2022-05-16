@@ -3,52 +3,51 @@
 
 #include "GameplayHelpers/TileMap.h"
 
-TileMapExtras::TileMapExtras(GameCore * myGame, Areas anArea) : TileMap(myGame, anArea)
-{
-
-}
+TileMapExtras::TileMapExtras(GameCore* myGame, Areas anArea)
+	: TileMap(myGame, anArea)
+{}
 
 TileMapExtras::~TileMapExtras()
 {
 	m_TileInfoMap.clear();
 }
 
-void TileMapExtras::AddTile(const std::string & anIndex, Frame aFrame)
+void TileMapExtras::AddTile(const std::string& anIndex, Frame aFrame)
 {
 	m_TileInfoMap.insert(std::pair<std::string, Frame>(anIndex, aFrame));
 }
 
-Frame TileMapExtras::GetFrameFromExtrasMap(std::string aType)
+Frame TileMapExtras::GetFrameFromExtrasMap(const std::string& aType) const
 {
 	return m_TileInfoMap.find(aType)->second;
 }
 
-bool TileMapExtras::GetTileAtPlayer(Vector2Int playerColumnRow)
+bool TileMapExtras::GetTileAtPlayer(Vector2Int playerColumnRow) const
 {
 	return false;
 }
 
-bool TileMapExtras::GetTileAtNPC(Vector2Int npcColumnRow)
+bool TileMapExtras::GetTileAtNPC(Vector2Int npcColumnRow) const
 {
 	return false;
 }
 
-int TileMapExtras::GetMapWidth()
+int TileMapExtras::GetMapWidth() const
 {
 	return 0;
 }
 
-int TileMapExtras::GetMapHeight()
+int TileMapExtras::GetMapHeight() const
 {
 	return 0;
 }
 
-int TileMapExtras::GetIndexFromColumnRow(int aColumn, int aRow)
+int TileMapExtras::GetIndexFromColumnRow(int aColumn, int aRow) const
 {
 	return 0;
 }
 
-Vector2Int TileMapExtras::GetColumRowFromIndex(int anIndex)
+Vector2Int TileMapExtras::GetColumRowFromIndex(int anIndex) const
 {
 	return Vector2Int();
 }

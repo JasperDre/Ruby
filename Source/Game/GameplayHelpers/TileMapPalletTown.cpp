@@ -9,8 +9,7 @@ TileMapPalletTown::TileMapPalletTown(GameCore* myGame, Areas anArea) : TileMap(m
 {
 	for (int i = 0; i < 2; i++)
 	{
-		Tile_Type aType = Tile_Type(i + 13);
-
+		const Tile_Type aType = static_cast<Tile_Type>(i + 13);
 		TileInfo aNullTile = TileInfo(aType);
 
 		if (aNullTile.MyType == Town_Null_Wall_)
@@ -22,7 +21,8 @@ TileMapPalletTown::TileMapPalletTown(GameCore* myGame, Areas anArea) : TileMap(m
 			aNullTile.IsWalkable = true;
 			aNullTile.IsDoor = true;
 		}
-		m_TileInfoMap.insert(std::pair<Tile_Type, TileInfo>(Tile_Type(i + 13), aNullTile));
+
+		m_TileInfoMap.insert(std::pair<Tile_Type, TileInfo>(static_cast<Tile_Type>(i + 13), aNullTile));
 	}
 }
 
@@ -47,7 +47,7 @@ void TileMapPalletTown::AddTile(const std::string& anIndex, Frame aFrame)
 			{
 				myNewTile.IsWalkable = true;
 			}
-			else if (myNewTile.MyType == Oak_Door_ || myNewTile.MyType == Player_Door_)		//if the tile is a door
+			else if (myNewTile.MyType == Oak_Door_ || myNewTile.MyType == Player_Door_) //if the tile is a door
 			{
 				myNewTile.IsWalkable = true;
 				myNewTile.IsDoor = true;
@@ -71,18 +71,16 @@ void TileMapPalletTown::AddTile(const std::string& anIndex, Frame aFrame)
 	}
 }
 
-TileInfo TileMapPalletTown::GetTileFromPalletMap(Tile_Type aType)
+TileInfo TileMapPalletTown::GetTileFromPalletMap(Tile_Type aType) const
 {
 	return m_TileInfoMap.find(aType)->second;
 }
 
-bool TileMapPalletTown::GetTileAtPlayer(Vector2Int playerColumnRow)
+bool TileMapPalletTown::GetTileAtPlayer(Vector2Int playerColumnRow) const
 {
-	int anIndex = (NUM_COLUMNS * playerColumnRow.y) + playerColumnRow.x;
-
-	short TypeMask = 15;
-
-	TileInfo aTileInfo = m_TileInfoMap.find(Tile_Type(TypeMask & PalletTownBitMap[anIndex]))->second;
+	const int anIndex = (NUM_COLUMNS * playerColumnRow.y) + playerColumnRow.x;
+	constexpr short TypeMask = 15;
+	const TileInfo aTileInfo = m_TileInfoMap.find(static_cast<Tile_Type>(TypeMask & PalletTownBitMap[anIndex]))->second;
 
 	if (aTileInfo.MyType == Oak_Door_)
 	{
@@ -99,45 +97,42 @@ bool TileMapPalletTown::GetTileAtPlayer(Vector2Int playerColumnRow)
 
 }
 
-bool TileMapPalletTown::GetTileAtNPC(Vector2Int npcColumnRow)
+bool TileMapPalletTown::GetTileAtNPC(Vector2Int npcColumnRow) const
 {
-	int anIndex = (NUM_COLUMNS * npcColumnRow.y) + npcColumnRow.x;
-
-	short TypeMask = 15;
-
-	TileInfo aTileInfo = m_TileInfoMap.find(Tile_Type(TypeMask & PalletTownBitMap[anIndex]))->second;
+	const int anIndex = (NUM_COLUMNS * npcColumnRow.y) + npcColumnRow.x;
+	constexpr short TypeMask = 15;
+	const TileInfo aTileInfo = m_TileInfoMap.find(static_cast<Tile_Type>(TypeMask & PalletTownBitMap[anIndex]))->second;
 
 	return aTileInfo.IsWalkable;
 }
 
-TileInfo TileMapPalletTown::GetTileAtIndex(int anIndex)
+TileInfo TileMapPalletTown::GetTileAtIndex(int anIndex) const
 {
-	short TypeMask = 15;
-
-	TileInfo aTileInfo = m_TileInfoMap.find(Tile_Type(TypeMask & PalletTownBitMap[anIndex]))->second;
+	constexpr short TypeMask = 15;
+	TileInfo aTileInfo = m_TileInfoMap.find(static_cast<Tile_Type>(TypeMask & PalletTownBitMap[anIndex]))->second;
 
 	return aTileInfo;
 }
 
-int TileMapPalletTown::GetMapWidth()
+int TileMapPalletTown::GetMapWidth() const
 {
 	return NUM_COLUMNS;
 }
 
-int TileMapPalletTown::GetMapHeight()
+int TileMapPalletTown::GetMapHeight() const
 {
 	return NUM_ROWS;
 }
 
-int TileMapPalletTown::GetIndexFromColumnRow(int aColumn, int aRow)
+int TileMapPalletTown::GetIndexFromColumnRow(int aColumn, int aRow) const
 {
 	assert(aColumn >= 0 && aRow >= 0 && aColumn <= NUM_COLUMNS && aRow <= NUM_COLUMNS);
+	const int anIndexOnMap = (aRow * NUM_COLUMNS) + aColumn;
 
-	int anIndexOnMap = (aRow * NUM_COLUMNS) + aColumn;
 	return anIndexOnMap;
 }
 
-Vector2Int TileMapPalletTown::GetColumRowFromIndex(int anIndex)
+Vector2Int TileMapPalletTown::GetColumRowFromIndex(int anIndex) const
 {
 	return Vector2Int(anIndex % NUM_COLUMNS, anIndex / NUM_COLUMNS);
 }
