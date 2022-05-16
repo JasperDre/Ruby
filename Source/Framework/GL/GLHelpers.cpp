@@ -309,4 +309,35 @@ namespace GLHelpers
 
         delete[] temp;
     }
+
+    GLint GetAttributeLocation(GLuint aShaderProgram, const char* aName)
+    {
+        return glGetAttribLocation(aShaderProgram, aName);
+    }
+
+    GLint GetUniformLocation(GLuint aShaderProgram, const char* aName)
+    {
+        return glGetUniformLocation(aShaderProgram, aName);
+    }
+
+    void SetUniform1f(GLuint aShaderProgram, const char* aName, float aValue)
+    {
+        const GLint uniform = GetUniformLocation(aShaderProgram, aName);
+        if (uniform != -1)
+            glUniform1f(uniform, aValue);
+    }
+
+    void SetUniform2f(GLuint aShaderProgram, const char* aName, Vector2Float aValue)
+    {
+        const GLint uniform = GetUniformLocation(aShaderProgram, aName);
+        if (uniform != -1)
+            glUniform2f(uniform, aValue.myX, aValue.myY);
+    }
+
+    void SetUniform1i(GLuint aShaderProgram, const char* aName, int aValue)
+    {
+        const GLint uniform = GetUniformLocation(aShaderProgram, aName);
+        if (uniform != -1)
+            glUniform1i(uniform, aValue);
+    }
 }
