@@ -156,11 +156,6 @@ public:
     [[nodiscard]] const std::vector<Keys>& GetReleasedKeysThisFrame() const { return myReleasedKeysThisFrame; }
     [[nodiscard]] const std::vector<Keys>& GetPressedKeysThisFrame() const { return myPressedKeysThisFrame; }
 
-    float myCursorXPosition;
-    float myCursorYPosition;
-    float myScrollXOffset;
-    float myScrollYOffset;
-
 private:
     InputManager();
     ~InputManager() = default;
@@ -169,7 +164,11 @@ private:
     static MouseButtons GetTranslatedMouseButton(int aButton);
 
     std::map<Keys, bool> myKeys;
+    std::map<MouseButtons, bool> myMouseButtons;
     std::vector<Keys> myReleasedKeysThisFrame;
     std::vector<Keys> myPressedKeysThisFrame;
-    std::map<MouseButtons, bool> myMouseButtons;
+    float myCursorXPosition;
+    float myCursorYPosition;
+    float myScrollXOffset;
+    float myScrollYOffset;
 };

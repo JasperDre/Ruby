@@ -4,6 +4,8 @@
 
 #include <array>
 
+class ResourceManager;
+
 class OakLabTableTop : public Sprite
 {
 public:

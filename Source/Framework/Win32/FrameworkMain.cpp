@@ -1,8 +1,6 @@
 #include "FrameworkPCH.h"
 #include "FrameworkMain.h"
 
-#include "InputManager.h"
-
 #include "GLFW/glfw3.h"
 
 Framework::Framework()
@@ -22,10 +20,10 @@ void Framework::Init(int width, int height)
     m_CurrentWindowHeight = m_InitialWindowHeight;
 
     std::string title = "Ruby";
-#if WIN32
-    title.append(" Windows x86");
-#else
+#if _WIN64
     title.append(" Windows x64");
+#elif _WIN32
+    title.append(" Windows x86");
 #endif
 
     if (!CreateGLWindow(title.c_str(), width, height))

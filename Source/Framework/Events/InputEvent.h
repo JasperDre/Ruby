@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Event.h"
-#include <InputManager.h>
 
 class InputEvent : public Event
 {

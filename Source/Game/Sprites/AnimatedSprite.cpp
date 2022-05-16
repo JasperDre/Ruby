@@ -24,25 +24,22 @@ AnimatedSprite::~AnimatedSprite()
 
 void AnimatedSprite::Update(float deltatime)
 {
-	if (m_isPaused == false)
+	if (!m_isPaused)
 	{
 		m_ElapsedTime += deltatime;
 
-		const int lastFrame = m_CurrentFrame;
+		const unsigned int lastFrame = m_CurrentFrame;
 
-		int frameIndex = static_cast<int>((m_ElapsedTime / (1.0 / m_FrameSpeed)));
+		unsigned int frameIndex = static_cast<unsigned int>((m_ElapsedTime / (1.0 / m_FrameSpeed)));
 
-		if (m_isLooped == true)
-		{
+		if (m_isLooped)
 			frameIndex = frameIndex % m_ActiveFrames.size();
-		}
+
 		if (frameIndex != lastFrame)
-		{
 			SetFrameIndex(frameIndex);
-		}
 	}
 
-	//safety check
+	// Safety check
 	if (m_CurrentFrame > 3)
 	{
 		m_CurrentFrame = 0;
@@ -72,7 +69,7 @@ void AnimatedSprite::UseFrame(const std::string& aFrame)
 
 unsigned int AnimatedSprite::GetFrameCount() const
 {
-	return m_ActiveFrames.size();
+	return static_cast<unsigned int>(m_ActiveFrames.size());
 }
 
 void AnimatedSprite::SetFrameSpeed(float fps)

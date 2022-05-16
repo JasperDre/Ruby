@@ -5,11 +5,13 @@
 class TileMap;
 class PokeBall;
 class ScoreNumber;
+class ResourceManager;
+class Mesh;
 
 class UIObject : public Entity
 {
 public:
-	UIObject(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* myMesh, GLuint aTexture);
+	UIObject(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* aMesh, GLuint aTexture);
 	~UIObject() override;
 
 	void Update(float deltatime) override {}

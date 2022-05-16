@@ -1,9 +1,8 @@
 #pragma once
 
-#include "GamePCH.h"
-#include "Game/Game.h"
+#include "Math/Vector2Float.h"
 
-//Area names used to call the conrtuctors of initial areas through the Scene Manager as well as switching the active scene & loading/unloading inactive scenes
+// Area names used to call the conrtuctors of initial areas through the Scene Manager as well as switching the active scene & loading/unloading inactive scenes
 enum class Areas
 {
 	Area_PalletTown,
@@ -14,10 +13,10 @@ enum class Areas
 	Area_Null
 };
 
-//Names of Textures used to call texture charactistics from ResourceManager
+// Names of Textures used to call texture charactistics from ResourceManager
 enum class TextureHandle
 {
-	TileSet ,
+	TileSet,
 	OakLabTileSet,
 	Player_NPCSprites,
 	ForestTileSet,
@@ -25,10 +24,10 @@ enum class TextureHandle
 	Extras
 };
 
-//Base Tile Types per Area, mask is base 0 - 15
+// Base Tile Types per Area, mask is base 0 - 15
 enum Tile_Type
 {
-	Trainer_House_ = 0,	 //(0000 0000 0000 0000) 
+	Trainer_House_ = 0,	 //(0000 0000 0000 0000)
 	Oak_House_ = 1,		 //(0000 0000 0000 0001)
 	Town_Sign_ = 2,		 //(0000 0000 0000 0010)
 	Town_MailBox_ = 3,	 //(0000 0000 0000 0011)
@@ -72,7 +71,7 @@ enum Forest_Tile_Type
 	Forest_Null_Door = 7
 };
 
-//Enum for max number of Tile Variants, the mask for Variants is base 16 - 32,767 - Note: Variant 0 is used when NULL tiles or NULL doors are required for the Area 
+// Enum for max number of Tile Variants, the mask for Variants is base 16 - 32,767 - Note: Variant 0 is used when NULL tiles or NULL doors are required for the Area
 enum Tile_Variants
 {
 	TileVariant_0 = 0,		//(0000 0000 0000 0000)
@@ -113,81 +112,6 @@ enum Tile_Variants
 	TileVariant_35 = 560,	//(0000 0010 0100 0000)
 };
 
-//Definition for single frame off a given spritesheet
-struct Frame
-{
-	Frame()
-		: myOrigin(0.0f)
-		, mySize(0.0f)
-		, myWorldSpace(0.0f)
-		, myUVScale(0.0f)
-		, myUVOffset(0.0f)
-	{}
-
-	Frame(Vector2Float anOrigin, Vector2Float aSize)
-		: myOrigin(anOrigin)
-		, mySize(aSize)
-		, myWorldSpace(0.0f)
-		, myUVScale(0.0f)
-		, myUVOffset(0.0f)
-	{}
-
-	Vector2Float myOrigin;
-	Vector2Float mySize;
-	Vector2Float myWorldSpace;
-	Vector2Float myUVScale;
-	Vector2Float myUVOffset;
-};
-
-//TileInfo definition
-struct TileInfo
-{
-	TileInfo(Tile_Type aType)
-		: MyLabType(OakLab_Tile_Type::Oak_Lab_BookShelf_)
-		, MyForestType(Forest_Tile_Type::Forest_Fence_)
-		, MyType(aType)
-		, MyIndex(0)
-		, IsDoor(false)
-		, IsWalkable(true)
-	{}
-
-	TileInfo(OakLab_Tile_Type aType)
-		: MyLabType(aType)
-		, MyForestType(Forest_Tile_Type::Forest_Fence_)
-		, MyType(Tile_Type::Oak_Door_)
-		, MyIndex(0)
-		, IsDoor(false)
-		, IsWalkable(true)
-	{}
-
-	TileInfo(Forest_Tile_Type aType)
-		: MyLabType(OakLab_Tile_Type::Oak_Lab_BookShelf_)
-		, MyForestType(aType)
-		, MyType(Tile_Type::Oak_Door_)
-		, MyIndex(0)
-		, IsDoor(false)
-		, IsWalkable(true)
-	{}
-
-	TileInfo()
-		: MyLabType(OakLab_Tile_Type::Oak_Lab_BookShelf_)
-		, MyForestType(Forest_Tile_Type::Forest_Fence_)
-		, MyType(Tile_Type::Oak_Door_)
-		, MyIndex(0)
-		, IsDoor(false)
-		, IsWalkable(true)
-	{}
-
-	std::vector<Frame> MyVariant;
-	OakLab_Tile_Type MyLabType;
-	Forest_Tile_Type MyForestType;
-	Tile_Type MyType;
-	int MyIndex;
-	bool IsDoor;
-	bool IsWalkable;
-};
-
-//Player and NPC direction Enum and matching direction vectors
 enum class SpriteDirection
 {
 	SpriteWalkDown,
@@ -199,12 +123,6 @@ enum class SpriteDirection
 
 const Vector2Float DIRECTIONVECTOR[] = { Vector2Float(0.0f, -1.0f), Vector2Float(1.0f, 0.0f), Vector2Float(-1.0f, 0.0f), Vector2Float(0.0f, 1.0f) };
 
-//Global AI State function declaration
-typedef bool (Entity::*GetForNodeIsClearOnSpecial)(int tx, int ty);
-typedef int (Entity::*GetRangeRandomIntAlg)(int min, int max);
-typedef void(*AIStateUpdate)(Entity* aGameObject, float deltatime);
-
-//Const Enum of NPC States
 enum class AI_States
 {
 	IdleState,
@@ -213,7 +131,6 @@ enum class AI_States
 	TrackToPlayerState
 };
 
-//Global const variables such as map sizes, tile size, player/NPC speed are defined here for ease of access if changes are required 
 constexpr float PLAYER_SPEED = 4.4f;
 constexpr float NPC_SPEED = 3.6f;
 constexpr float TILESIZE = 2.0f;
@@ -235,7 +152,6 @@ constexpr int NUM_FOREST_ROWS = 44;
 constexpr int NUM_FOREST_COLUMNS = 48;
 const Vector2Float PLAYER_START = Vector2Float(9.0f * TILESIZE, 20.0f * TILESIZE);
 
-//Definition of short BitMaps for each Area are defined here
 const unsigned short PalletTownBitMap[MAPSIZE] =
 {
 	58,  74,  58,  74,  58,  74,  58,  74,  23,  84,  73,  89,  89,  105,  39,  39,  39,  39,  39,  39,  39,  39,  58,  74,  58,  74,  58,  74,  58,  74,  58,  74,

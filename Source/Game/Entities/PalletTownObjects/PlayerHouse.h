@@ -4,6 +4,8 @@
 
 #include <array>
 
+class ResourceManager;
+
 class PlayerHouse : public Sprite
 {
 public:

@@ -2,7 +2,9 @@
 
 #include <map>
 
+class Mesh;
 class Scene;
+class ResourceManager;
 
 class SceneManager
 {

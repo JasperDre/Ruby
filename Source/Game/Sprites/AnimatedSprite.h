@@ -41,7 +41,7 @@ private:
 	Mesh* m_MyMesh;
 	float m_FrameSpeed;
 	float m_ElapsedTime;
-	int m_CurrentFrame;
+	unsigned int m_CurrentFrame;
 	int m_MyTexutureIndex;
 	bool m_isPaused;
 	bool m_isLooped;

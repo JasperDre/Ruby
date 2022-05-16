@@ -26,6 +26,7 @@
 #include "Events/EventManager.h"
 #include "GameCore/GameCore.h"
 #include "GL/GLHelpers.h"
+#include "Input/InputManager.h"
 #include "Math/Color.h"
 #include "Math/Matrix4Float.h"
 #include "Math/Vector2Int.h"

@@ -7,7 +7,8 @@
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 
-UIObject::UIObject(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh * myMesh, GLuint aTexture) : Entity(myGame, myMesh, aTexture)
+UIObject::UIObject(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* myGame, Mesh* aMesh, GLuint aTexture)
+	: Entity(myGame, aMesh, aTexture)
 {
 	m_PokeBall = new PokeBall(aResourceManager, aTileMap, myGame, myMesh, aTexture);
 	m_ScoreNumber = new ScoreNumber(aResourceManager, aTileMap, myGame, myMesh, aTexture);
