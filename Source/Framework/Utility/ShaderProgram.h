@@ -11,16 +11,16 @@ public:
     virtual ~ShaderProgram();
 
     void Cleanup();
-    static void CompileShader(GLuint& shaderhandle, const char* shaderstring);
+    static void CompileShader(unsigned int& shaderhandle, const char* shaderstring);
     bool Init(const char* vertfilename, const char* fragfilename);
     bool Reload();
 
-    [[nodiscard]] GLuint GetProgram() const { return myProgram; }
+    [[nodiscard]] unsigned int GetProgram() const { return myProgram; }
 
 private:
     char* myVertShaderString;
     char* myFragShaderString;
-    GLuint myVertShader;
-    GLuint myFragShader;
-    GLuint myProgram;
+    unsigned int myVertShader;
+    unsigned int myFragShader;
+    unsigned int myProgram;
 };

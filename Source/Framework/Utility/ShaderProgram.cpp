@@ -1,4 +1,10 @@
-#include "FrameworkPCH.h"
+#include "ShaderProgram.h"
+
+#include <cassert>
+#include <glad/glad.h>
+
+#include "DebugUtility.h"
+#include "FileUtility.h"
 
 ShaderProgram::ShaderProgram()
 {
@@ -64,7 +70,7 @@ void ShaderProgram::Cleanup()
     myProgram = 0;
 }
 
-void ShaderProgram::CompileShader(GLuint& shaderhandle, const char* shaderstring)
+void ShaderProgram::CompileShader(unsigned int& shaderhandle, const char* shaderstring)
 {
     const char* strings[] = { shaderstring };
     glShaderSource(shaderhandle, 1, strings, nullptr);

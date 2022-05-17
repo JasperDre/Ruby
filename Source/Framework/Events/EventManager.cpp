@@ -1,4 +1,9 @@
-#include "FrameworkPCH.h"
+#include "EventManager.h"
+
+#include <cassert>
+
+#include "Event.h"
+#include "GameCore/GameCore.h"
 
 EventManager::~EventManager()
 {

@@ -1,5 +1,6 @@
-#include "FrameworkPCH.h"
 #include "Vector4Int.h"
+
+#include <cmath>
 
 float Vector4Int::Length() const
 {

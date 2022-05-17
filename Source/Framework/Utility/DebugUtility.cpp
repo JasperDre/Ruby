@@ -1,5 +1,7 @@
-#include "FrameworkPCH.h"
 #include "DebugUtility.h"
+
+#include <cstdarg>
+#include <cstdio>
 
 namespace DebugUtility
 {

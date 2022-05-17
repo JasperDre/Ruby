@@ -44,7 +44,7 @@ public:
     Vector3Int operator +=(const Vector3Int& o) { x += o.x; y += o.y; z += o.z; return *this; }
     Vector3Int operator -=(const Vector3Int& o) { x -= o.x; y -= o.y; z -= o.z; return *this; }
 
-    int& operator[](int i) { assert(i>=0 && i<3); return *(&x + i); }
+    int& operator[](int i);
 };
 
 inline Vector3Float operator *(float scalar, const Vector3Int& vector) { return Vector3Float(scalar * vector.x, scalar * vector.y, scalar * vector.z); }

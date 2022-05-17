@@ -1,4 +1,6 @@
-#include "FrameworkPCH.h"
+#include "GameCore.h"
+
+#include "Events/EventManager.h"
 
 GameCore::GameCore(Framework* aFramework, EventManager* anEventManager)
     : myFramework(aFramework)

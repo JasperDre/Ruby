@@ -1,7 +1,14 @@
-#include "FrameworkPCH.h"
 #include "FrameworkMain.h"
 
+#include <chrono>
+#include <string>
+
+#include "Events/EventManager.h"
+#include "GameCore/GameCore.h"
+#include "GL/GLHelpers.h"
 #include "GLFW/glfw3.h"
+#include "Input/InputManager.h"
+#include "Utility/DebugUtility.h"
 
 Framework::Framework()
     : myWindow(nullptr)

@@ -1,9 +1,13 @@
-#include "FrameworkPCH.h"
 #include "Vector3Float.h"
+
+#include <cassert>
+#include <cmath>
+
+#include "Utility/MathUtility.h"
 
 float Vector3Float::Length() const
 {
-	return sqrtf(myX * myX + myY * myY + myZ * myZ);
+	return std::sqrtf(myX * myX + myY * myY + myZ * myZ);
 }
 
 Vector3Float Vector3Float::GetNormalized() const

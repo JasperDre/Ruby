@@ -1,5 +1,9 @@
-#include "FrameworkPCH.h"
 #include "Matrix4Float.h"
+
+#include <cassert>
+#include <cmath>
+
+#include "MathConstants.h"
 
 void Matrix4Float::SetIdentity()
 {
@@ -215,15 +219,15 @@ void Matrix4Float::CreateFrustum(float left, float right, float bottom, float to
 
 void Matrix4Float::CreatePerspectiveVFoV(float halfvertfovdegrees, float aspect, float nearZ, float farZ)
 {
-    const GLfloat frustumTop = std::tanf(halfvertfovdegrees / 360.0f * Math::pi) * nearZ;
-    const GLfloat frustumRight = frustumTop * aspect;
+    const float frustumTop = std::tanf(halfvertfovdegrees / 360.0f * Math::pi) * nearZ;
+    const float frustumRight = frustumTop * aspect;
     CreateFrustum(-frustumRight, frustumRight, -frustumTop, frustumTop, nearZ, farZ);
 }
 
 void Matrix4Float::CreatePerspectiveHFoV(float halfhorfovdegrees, float aspect, float nearZ, float farZ)
 {
-    const GLfloat frustumRight = std::tanf(halfhorfovdegrees / 360.0f * Math::pi) * nearZ;
-    const GLfloat frustumTop = frustumRight / aspect;
+    const float frustumRight = std::tanf(halfhorfovdegrees / 360.0f * Math::pi) * nearZ;
+    const float frustumTop = frustumRight / aspect;
     CreateFrustum(-frustumRight, frustumRight, -frustumTop, frustumTop, nearZ, farZ);
 }
 
