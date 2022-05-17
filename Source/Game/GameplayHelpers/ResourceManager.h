@@ -1,6 +1,12 @@
 #pragma once
 
+#include <map>
+#include <string>
+#include <vector>
+
 #include "Constants.h"
+#include "Frame.h"
+#include "Math/Vector2Int.h"
 
 class TileMap;
 
@@ -10,16 +16,16 @@ public:
 	ResourceManager();
 	~ResourceManager();
 
-	void UnpackJson(const std::string& JSONfilename, TileMap* aTileMap);
-	void HoldTexture(TextureHandle aTextureName, GLuint aTexture);
+	void UnpackJson(const std::string& aFilepath, TileMap* aTileMap);
+	void HoldTexture(TextureHandle aTextureName, unsigned int aTexture);
 
 	[[nodiscard]] Frame GetFrameAtIndex(const std::string& anIndex) const;
 	[[nodiscard]] Vector2Int GetTextureSize(int anIndex) const;
-	[[nodiscard]] GLuint GetaTexture(TextureHandle aTextureName) const;
+	[[nodiscard]] unsigned int GetTexture(TextureHandle aTextureName) const;
 
 protected:
 	std::map<std::string, Frame> myAnimationsMap;
-	std::map<TextureHandle, GLuint> myTextures;
+	std::map<TextureHandle, unsigned int> myTextures;
 	std::vector<Vector2Int> myTextureSize;
 	TileMap* myTileMap;
 };

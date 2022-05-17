@@ -1,6 +1,13 @@
 #pragma once
 
 #include <map>
+#include <string>
+
+#include "Constants.h"
+#include "Frame.h"
+#include "TileInfo.h"
+#include "TileMap.h"
+#include "Math/Vector2Int.h"
 
 class TileMap;
 class GameCore;
@@ -11,7 +18,7 @@ public:
 	TileMapWoods(GameCore* aGameCore, Areas anArea);
 	~TileMapWoods() override;
 
-	void AddTile(const std::string& anIndex, Frame aFrame) override;
+	void AddTile(const std::string& anIndex, const Frame& aFrame) override;
 
 	[[nodiscard]] TileInfo GetTileFromWoodsMap(Forest_Tile_Type aType) const override;
 	[[nodiscard]] bool IsTileAtPlayer(Vector2Int playerColumnRow) const override;

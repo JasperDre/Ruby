@@ -1,11 +1,14 @@
-#include "GamePCH.h"
 #include "TileMapOakLab.h"
 
+#include <cassert>
+
+#include "Events/DoorEvent.h"
+#include "Events/EventManager.h"
 #include "Game/Game.h"
 #include "GameplayHelpers/TileMap.h"
 
-TileMapOakLab::TileMapOakLab(GameCore* myGame, Areas anArea)
-	: TileMap(myGame, anArea)
+TileMapOakLab::TileMapOakLab(GameCore* aGameCore, Areas anArea)
+	: TileMap(aGameCore, anArea)
 {
 	for (int i = 0; i < 2; i++)
 	{
@@ -31,7 +34,7 @@ TileMapOakLab::~TileMapOakLab()
 	m_TileInfoMap.clear();
 }
 
-void TileMapOakLab::AddTile(const std::string& anIndex, Frame aFrame)
+void TileMapOakLab::AddTile(const std::string& anIndex, const Frame& aFrame)
 {
 	if (myArea == Areas::Area_OakLab)
 	{

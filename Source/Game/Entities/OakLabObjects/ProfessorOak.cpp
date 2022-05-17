@@ -1,12 +1,13 @@
-#include "GamePCH.h"
 #include "ProfessorOak.h"
 
 #include "Controllers/AStarPathFinder.h"
 #include "Entities/Entity.h"
+#include "GameCore/GameCore.h"
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 #include "Sprites/AnimatedSprite.h"
+#include "Utility/MathUtility.h"
 
 ProfessorOak::ProfessorOak(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTexture)
 	: Entity(aGameCore, aMesh, aTexture)

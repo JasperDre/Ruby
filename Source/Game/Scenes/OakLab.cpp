@@ -1,15 +1,15 @@
-#include "GamePCH.h"
 #include "OakLab.h"
 
 #include "Controllers/AIController.h"
 #include "Entities/Entity.h"
 #include "Entities/Player.h"
 #include "Entities/OakLabObjects/OakLabDeskTop.h"
-#include "Entities/OakLabObjects/OakLabMachineTop.h"
 #include "Entities/OakLabObjects/OakLabLevel.h"
+#include "Entities/OakLabObjects/OakLabMachineTop.h"
 #include "Entities/OakLabObjects/OakLabPlantTop.h"
 #include "Entities/OakLabObjects/OakLabTableTop.h"
 #include "Entities/OakLabObjects/ProfessorOak.h"
+#include "GameCore/GameCore.h"
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
@@ -51,7 +51,7 @@ void OakLab::LoadContent()
 	myOakLabMachineTop = new OakLabMachineTop(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
 	myOakLabPlantTops = new OakLabPlantTop(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
 	myOakLabTableTop = new OakLabTableTop(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
-	myOak = new ProfessorOak(myResourceManager, myTileMap, myGame, myOakMesh, myResourceManager->GetaTexture(TextureHandle::Player_NPCSprites));
+	myOak = new ProfessorOak(myResourceManager, myTileMap, myGame, myOakMesh, myResourceManager->GetTexture(TextureHandle::Player_NPCSprites));
 }
 
 void OakLab::Update(float deltatime)

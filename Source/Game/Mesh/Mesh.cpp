@@ -1,5 +1,11 @@
-#include "GamePCH.h"
 #include "Mesh.h"
+
+#include <cassert>
+#include <cmath>
+
+#include "GL/GLHelpers.h"
+#include "Math/MathConstants.h"
+#include "Utility/ShaderProgram.h"
 
 Mesh::Mesh()
 	: myRadius(0)
@@ -21,7 +27,7 @@ Mesh::~Mesh()
 	myCanvasVertices.clear();
 }
 
-void Mesh::Draw(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float camPos, Vector2Float projScale, GLuint aTexture, Vector2Float aUVscale, Vector2Float aUVoffset) const
+void Mesh::Draw(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float camPos, Vector2Float projScale, unsigned int aTexture, Vector2Float aUVscale, Vector2Float aUVoffset) const
 {
 	assert(myPrimitiveType != static_cast<GLenum>(-1));
 	assert(myNumberOfVertices != 0);
@@ -79,7 +85,7 @@ void Mesh::Draw(Vector2Float objectPos, float objectAngle, Vector2Float objectSc
 	GLHelpers::CheckForGLErrors();
 }
 
-void Mesh::DrawCanvas(Vector2Float cameraPos, Vector2Float projectionScale, GLuint aTexture) const
+void Mesh::DrawCanvas(Vector2Float cameraPos, Vector2Float projectionScale, unsigned int aTexture) const
 {
 	assert(myPrimitiveType != static_cast<GLenum>(-1));
 	assert(myNumberOfVertices != 0);

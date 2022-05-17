@@ -1,4 +1,3 @@
-#include "GamePCH.h"
 #include "OakLabPlantTop.h"
 
 #include "GameplayHelpers/ResourceManager.h"

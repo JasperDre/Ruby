@@ -3,6 +3,7 @@
 #include "Entity.h"
 
 #include <array>
+#include <string>
 
 class AnimatedSprite;
 class PlayerController;
@@ -11,7 +12,7 @@ class ResourceManager;
 class Player : public Entity
 {
 public:
-	Player(ResourceManager* aResourceManager, GameCore* aGameCore, Mesh* aMesh, GLuint aTexture);
+	Player(ResourceManager* aResourceManager, GameCore* aGameCore, Mesh* aMesh, unsigned int aTexture);
 	~Player() override;
 
 	void Update(float deltatime) override;

@@ -1,11 +1,12 @@
-#include "GamePCH.h"
 #include "TownBoy.h"
 
 #include "Controllers/AStarPathFinder.h"
+#include "GameCore/GameCore.h"
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 #include "Sprites/AnimatedSprite.h"
+#include "Utility/MathUtility.h"
 
 TownBoy::TownBoy(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier)
 	: Entity(aGameCore, aMesh, aTextureIdentifier)

@@ -1,6 +1,12 @@
 #pragma once
 
 #include <vector>
+#include <glad/glad.h>
+
+#include "Math/Color.h"
+#include "Math/Vector2Float.h"
+
+class ShaderProgram;
 
 class Mesh
 {
@@ -23,8 +29,8 @@ public:
 	Mesh();
 	virtual ~Mesh();
 
-	void Draw(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float camPos, Vector2Float projScale, GLuint aTexture, Vector2Float aUVscale, Vector2Float aUVoffset) const;
-	void DrawCanvas(Vector2Float cameraPos, Vector2Float projectionScale, GLuint aTexture) const;
+	void Draw(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float camPos, Vector2Float projScale, unsigned int aTexture, Vector2Float aUVscale, Vector2Float aUVoffset) const;
+	void DrawCanvas(Vector2Float cameraPos, Vector2Float projectionScale, unsigned int aTexture) const;
 	void DebugDraw(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float camPos, Vector2Float projScale) const;
 	void GenerateTriangle();
 	void GenerateCircle();
@@ -42,8 +48,8 @@ protected:
 	std::vector<VertexFormat> myCanvasVertices;
 	ShaderProgram* myShader;
 	ShaderProgram* myDebugShader;
-	GLuint myVBOIdentifier;
-	GLuint myTextureIdentifier;
+	unsigned int myVBOIdentifier;
+	unsigned int myTextureIdentifier;
 	int myNumberOfVertices;
 	float myRadius;
 	float myWidth;

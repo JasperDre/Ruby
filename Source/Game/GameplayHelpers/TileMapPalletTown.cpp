@@ -1,11 +1,13 @@
-#include "GamePCH.h"
-
-#include "GameplayHelpers/TileMap.h"
 #include "TileMapPalletTown.h"
 
-#include "Game/Game.h"
+#include <cassert>
 
-TileMapPalletTown::TileMapPalletTown(GameCore* myGame, Areas anArea) : TileMap(myGame, anArea)
+#include "Events/DoorEvent.h"
+#include "Events/EventManager.h"
+#include "Game/Game.h"
+#include "GameplayHelpers/TileMap.h"
+
+TileMapPalletTown::TileMapPalletTown(GameCore* aGameCore, Areas anArea) : TileMap(aGameCore, anArea)
 {
 	for (int i = 0; i < 2; i++)
 	{
@@ -30,7 +32,8 @@ TileMapPalletTown::~TileMapPalletTown()
 {
 	myTileInfoMap.clear();
 }
-void TileMapPalletTown::AddTile(const std::string& anIndex, Frame aFrame)
+
+void TileMapPalletTown::AddTile(const std::string& anIndex, const Frame& aFrame)
 {
 	if (myArea == Areas::Area_PalletTown)
 	{

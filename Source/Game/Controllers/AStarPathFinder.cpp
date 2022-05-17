@@ -1,5 +1,6 @@
-#include "GamePCH.h"
 #include "AStarPathFinder.h"
+
+#include <cassert>
 
 #include "Entities/Entity.h"
 #include "GameplayHelpers/TileMap.h"

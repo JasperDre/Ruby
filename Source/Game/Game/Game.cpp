@@ -1,11 +1,13 @@
-#include "GamePCH.h"
 #include "Game/Game.h"
 
+#include <filesystem>
+
 #include "Controllers/PlayerController.h"
-#include "Entities/GameCamera.h"
 #include "Entities/Entity.h"
+#include "Entities/GameCamera.h"
 #include "Entities/Player.h"
 #include "Entities/UI/UIObject.h"
+#include "Events/EventManager.h"
 #include "Events/InputEvent.h"
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/SceneManager.h"
@@ -14,8 +16,12 @@
 #include "GameplayHelpers/TileMapOakLab.h"
 #include "GameplayHelpers/TileMapPalletTown.h"
 #include "GameplayHelpers/TileMapWoods.h"
+#include "GL/GLHelpers.h"
+#include "Input/InputManager.h"
 #include "Mesh/Mesh.h"
 #include "Scenes/Scene.h"
+#include "Utility/ShaderProgram.h"
+#include "Win32/FrameworkMain.h"
 
 static std::string GetFilePath(const std::string& aRootDirectory, const char* aFilename)
 {
@@ -24,8 +30,8 @@ static std::string GetFilePath(const std::string& aRootDirectory, const char* aF
 	return path;
 }
 
-Game::Game(Framework* pFramework)
-	: GameCore(pFramework, new EventManager())
+Game::Game(Framework* aFramework)
+	: GameCore(aFramework, new EventManager())
 	, myShader(nullptr)
 	, myDebugShader(nullptr)
 	, myPlayerMesh(nullptr)

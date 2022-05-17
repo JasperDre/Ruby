@@ -1,7 +1,9 @@
 #pragma once
 
+#include "Constants.h"
 #include "Scenes/Scene.h"
 
+class Event;
 class Mesh;
 class TileMap;
 class TileMapWoods;

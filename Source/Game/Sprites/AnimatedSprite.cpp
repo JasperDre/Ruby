@@ -1,4 +1,3 @@
-#include "GamePCH.h"
 #include "AnimatedSprite.h"
 
 #include "GameplayHelpers/ResourceManager.h"

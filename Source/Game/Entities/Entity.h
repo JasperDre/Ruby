@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Constants.h"
+#include "Math/Vector2Int.h"
+
 class Mesh;
 class Event;
 class AStarPathFinder;

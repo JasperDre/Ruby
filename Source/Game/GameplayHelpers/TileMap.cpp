@@ -1,11 +1,8 @@
-#include "GamePCH.h"
 #include "TileMap.h"
 
-#include "GameplayHelpers/ResourceManager.h"
-
-TileMap::TileMap(GameCore* myGame, Areas aArea)
+TileMap::TileMap(GameCore* aGameCore, Areas aArea)
 {
-	myGame = myGame;
+	myGame = aGameCore;
 	myArea = aArea;
 }
 

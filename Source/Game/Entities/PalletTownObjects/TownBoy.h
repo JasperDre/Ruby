@@ -3,6 +3,7 @@
 #include "Entities/Entity.h"
 
 #include <array>
+#include <string>
 
 class AnimatedSprite;
 class AStarPathFinder;

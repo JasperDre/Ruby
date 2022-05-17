@@ -1,6 +1,12 @@
 #pragma once
 
 #include <map>
+#include <string>
+
+#include "Frame.h"
+#include "TileInfo.h"
+#include "TileMap.h"
+#include "Math/Vector2Int.h"
 
 class TileMap;
 class GameCore;
@@ -8,10 +14,10 @@ class GameCore;
 class TileMapPalletTown : public TileMap
 {
 public:
-	TileMapPalletTown(GameCore* myGame, Areas anArea);
+	TileMapPalletTown(GameCore* aGameCore, Areas anArea);
 	~TileMapPalletTown() override;
 	
-	void AddTile(const std::string& anIndex, Frame aFrame) override;
+	void AddTile(const std::string& anIndex, const Frame& aFrame) override;
 
 	[[nodiscard]] TileInfo GetTileFromPalletMap(Tile_Type aType) const override;
 	[[nodiscard]] bool IsTileAtPlayer(Vector2Int playerColumnRow) const override;

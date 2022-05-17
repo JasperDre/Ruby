@@ -1,12 +1,15 @@
-#include "GamePCH.h"
 #include "GameCamera.h"
 
-#include "Game/Game.h"
+#include <cmath>
+
 #include "Entities/Entity.h"
 #include "Entities/Player.h"
+#include "Events/DoorEvent.h"
+#include "Game/Game.h"
 #include "GameplayHelpers/SceneManager.h"
 #include "Mesh/Mesh.h"
 #include "Scenes/Scene.h"
+#include "Win32/FrameworkMain.h"
 
 GameCamera::GameCamera(GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier, Player* aPlayer)
 	: Entity(aGameCore, aMesh, aTextureIdentifier)

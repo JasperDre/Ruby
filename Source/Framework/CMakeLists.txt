@@ -37,6 +37,7 @@ set_target_properties(glfw PROPERTIES
   IMPORTED_LOCATION "${DEPENDENCIES_DIR}/glfw/src/Debug/glfw3.lib"
   INTERFACE_INCLUDE_DIRECTORIES "${SUBMODULES_DIR}/glfw/include"
 )
+target_compile_options(glfw INTERFACE "$<$<CXX_COMPILER_ID:MSVC>:/MP>")
 
 # GLAD
 add_library(glad STATIC IMPORTED)
@@ -44,6 +45,7 @@ set_target_properties(glad PROPERTIES
   IMPORTED_LOCATION "${DEPENDENCIES_DIR}/glad/Debug/glad.lib"
   INTERFACE_INCLUDE_DIRECTORIES "${DEPENDENCIES_DIR}/glad/include"
 )
+target_compile_options(glad INTERFACE "$<$<CXX_COMPILER_ID:MSVC>:/MP>")
 
 add_library(Framework STATIC ${SRC})
 

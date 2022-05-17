@@ -1,4 +1,3 @@
-#include "GamePCH.h"
 #include "PalletTown.h"
 
 #include "Entities/Entity.h"
@@ -9,6 +8,7 @@
 #include "Entities/PalletTownObjects/RivalHouse.h"
 #include "Entities/PalletTownObjects/TownBoy.h"
 #include "Entities/PalletTownObjects/TownGirl.h"
+#include "GameCore/GameCore.h"
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
@@ -55,8 +55,8 @@ void PalletTown::LoadContent()
 	myOakHouseTop = new OakHouse(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
 	myPlayerHouseTop = new PlayerHouse(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
 	myRivalHouseTop = new RivalHouse(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
-	myGirlNPC = new TownGirl(myResourceManager, myTileMap, myGame, myGirlMesh, myResourceManager->GetaTexture(TextureHandle::Player_NPCSprites));
-	myBoyNPC = new TownBoy(myResourceManager, myTileMap, myGame, myBoyMesh, myResourceManager->GetaTexture(TextureHandle::Player_NPCSprites));
+	myGirlNPC = new TownGirl(myResourceManager, myTileMap, myGame, myGirlMesh, myResourceManager->GetTexture(TextureHandle::Player_NPCSprites));
+	myBoyNPC = new TownBoy(myResourceManager, myTileMap, myGame, myBoyMesh, myResourceManager->GetTexture(TextureHandle::Player_NPCSprites));
 }
 
 void PalletTown::Update(float deltatime)

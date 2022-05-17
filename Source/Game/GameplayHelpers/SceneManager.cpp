@@ -1,6 +1,6 @@
-#include "GamePCH.h"
 #include "GameplayHelpers/SceneManager.h"
 
+#include "Events/DoorEvent.h"
 #include "Scenes/OakLab.h"
 #include "Scenes/PalletTown.h"
 #include "Scenes/PetalburgWoods.h"

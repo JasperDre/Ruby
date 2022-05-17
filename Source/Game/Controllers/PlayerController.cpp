@@ -1,7 +1,7 @@
-#include "GamePCH.h"
 #include "PlayerController.h"
 
 #include "Events/InputEvent.h"
+#include "Input/InputManager.h"
 
 PlayerController::PlayerController()
 	: myIsUp(false)
@@ -11,11 +11,11 @@ PlayerController::PlayerController()
 	, myIsInputReleased(false)
 {}
 
-void PlayerController::OnEvent(Event* pEvent)
+void PlayerController::OnEvent(Event* anEvent)
 {
-	if (pEvent->GetEventType() == EventTypes::EventType_Input)
+	if (anEvent->GetEventType() == EventTypes::EventType_Input)
 	{
-		const InputEvent* pInput = dynamic_cast<InputEvent*>(pEvent);
+		const InputEvent* pInput = dynamic_cast<InputEvent*>(anEvent);
 		if (pInput->myIsReleased)
 		{
 			if (pInput->myKey == Keys::W)

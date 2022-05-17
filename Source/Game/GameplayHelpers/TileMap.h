@@ -3,6 +3,11 @@
 #include <string>
 #include <map>
 
+#include "Constants.h"
+#include "Frame.h"
+#include "TileInfo.h"
+#include "Math/Vector2Int.h"
+
 class GameCore;
 
 class TileMap
@@ -61,10 +66,10 @@ protected:
 	                                                             {"Forest_Tree_6.png", Forest_Tree_},   {"Forest_Tree_7.png", Forest_Tree_},   {"Forest_Tree_8.png", Forest_Tree_},   {"Forest_Wild_Grass_1.png", Forest_Wild_Grass_}, {"Forest_Wild_Grass_2.png", Forest_Wild_Grass_} };
 
 public:
-	TileMap(GameCore* myGame, Areas aArea);
+	TileMap(GameCore* aGameCore, Areas aArea);
 	virtual ~TileMap() = default;
 
-	virtual void AddTile(const std::string& anIndex, Frame aFrame) = 0;
+	virtual void AddTile(const std::string& anIndex, const Frame& aFrame) = 0;
 
 	[[nodiscard]] virtual bool IsTileAtPlayer(Vector2Int playerColumnRow) const = 0;
 	[[nodiscard]] virtual bool IsTileAtNPC(Vector2Int npcColumnRow) const = 0;

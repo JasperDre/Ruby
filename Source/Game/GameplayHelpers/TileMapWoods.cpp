@@ -1,9 +1,11 @@
-#include "GamePCH.h"
-
-#include "GameplayHelpers/TileMap.h"
 #include "TileMapWoods.h"
 
+#include <cassert>
+
+#include "Events/DoorEvent.h"
+#include "Events/EventManager.h"
 #include "Game/Game.h"
+#include "GameplayHelpers/TileMap.h"
 
 TileMapWoods::TileMapWoods(GameCore* aGameCore, Areas anArea)
 	: TileMap(aGameCore, anArea)
@@ -33,7 +35,7 @@ TileMapWoods::~TileMapWoods()
 	myTileInfoMap.clear();
 }
 
-void TileMapWoods::AddTile(const std::string& anIndex, Frame aFrame)
+void TileMapWoods::AddTile(const std::string& anIndex, const Frame& aFrame)
 {
 	if (myArea == Areas::Area_Woods)
 	{

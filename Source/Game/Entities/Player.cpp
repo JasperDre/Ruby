@@ -1,7 +1,9 @@
-#include "GamePCH.h"
 #include "Player.h"
 
+#include <Events/DoorEvent.h>
+
 #include "Controllers/PlayerController.h"
+#include "GameCore/GameCore.h"
 #include "GameplayHelpers/ResourceManager.h"
 #include "GameplayHelpers/SceneManager.h"
 #include "GameplayHelpers/TileMap.h"
@@ -9,7 +11,7 @@
 #include "Scenes/Scene.h"
 #include "Sprites/AnimatedSprite.h"
 
-Player::Player(ResourceManager* aResourceManager, GameCore* aGameCore, Mesh* aMesh, GLuint aTexture)
+Player::Player(ResourceManager* aResourceManager, GameCore* aGameCore, Mesh* aMesh, unsigned int aTexture)
 	: Entity(aGameCore, aMesh, aTexture)
 	, myController(nullptr)
 {

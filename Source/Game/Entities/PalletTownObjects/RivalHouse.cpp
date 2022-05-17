@@ -1,4 +1,3 @@
-#include "GamePCH.h"
 #include "RivalHouse.h"
 
 #include "GameplayHelpers/ResourceManager.h"

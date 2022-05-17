@@ -1,8 +1,9 @@
-#include "GamePCH.h"
 #include "Canvas.h"
 
 #include "GameplayHelpers/ResourceManager.h"
+#include "GameplayHelpers/TileInfo.h"
 #include "GameplayHelpers/TileMap.h"
+#include "Math/MathConstants.h"
 #include "Mesh/Mesh.h"
 
 Canvas::Canvas(TileMap* aTileMap, ResourceManager* aResourceManager)

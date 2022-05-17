@@ -7,7 +7,7 @@ class PlayerController
 public:
 	PlayerController();
 
-    void OnEvent(Event* pEvent);
+    void OnEvent(Event* anEvent);
 
 	void ClearInput() { myIsUp = false; myIsDown = false; myIsLeft = false; myIsRight = false; }
 

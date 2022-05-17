@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Constants.h"
-#include "Entity.h"
-
 #include <vector>
+
+#include "Entity.h"
+#include "GameplayHelpers/Frame.h"
 
 class Mesh;
 class TileMap;

@@ -1,4 +1,3 @@
-#include "GamePCH.h"
 #include "Sprite.h"
 
 Sprite::Sprite(TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureIdentifier)

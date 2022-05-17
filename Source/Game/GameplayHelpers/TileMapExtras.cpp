@@ -1,10 +1,9 @@
-#include "GamePCH.h"
 #include "TileMapExtras.h"
 
 #include "GameplayHelpers/TileMap.h"
 
-TileMapExtras::TileMapExtras(GameCore* myGame, Areas anArea)
-	: TileMap(myGame, anArea)
+TileMapExtras::TileMapExtras(GameCore* aGameCore, Areas anArea)
+	: TileMap(aGameCore, anArea)
 {}
 
 TileMapExtras::~TileMapExtras()
@@ -12,7 +11,7 @@ TileMapExtras::~TileMapExtras()
 	m_TileInfoMap.clear();
 }
 
-void TileMapExtras::AddTile(const std::string& anIndex, Frame aFrame)
+void TileMapExtras::AddTile(const std::string& anIndex, const Frame& aFrame)
 {
 	m_TileInfoMap.insert(std::pair<std::string, Frame>(anIndex, aFrame));
 }

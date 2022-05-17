@@ -7,10 +7,10 @@ class GameCore;
 class TileMapOakLab : public TileMap
 {
 public:
-	TileMapOakLab(GameCore* myGame, Areas anArea);
+	TileMapOakLab(GameCore* aGameCore, Areas anArea);
 	~TileMapOakLab() override;
 
-	void AddTile(const std::string& anIndex, Frame aFrame) override;
+	void AddTile(const std::string& anIndex, const Frame& aFrame) override;
 
 	[[nodiscard]] TileInfo GetTileFromOakLabMap(OakLab_Tile_Type aType) const override;
 	[[nodiscard]] bool IsTileAtPlayer(Vector2Int playerColumnRow) const override;

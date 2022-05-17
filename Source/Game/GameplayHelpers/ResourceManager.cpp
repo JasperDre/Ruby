@@ -1,7 +1,10 @@
-#include "GamePCH.h"
 #include "ResourceManager.h"
 
+#include <cassert>
+#include <rapidjson/document.h>
+
 #include "GameplayHelpers/TileMap.h"
+#include "Utility/DebugUtility.h"
 #include "Utility/FileUtility.h"
 
 ResourceManager::ResourceManager()
@@ -13,14 +16,14 @@ ResourceManager::~ResourceManager()
 	myAnimationsMap.clear();
 }
 
-void ResourceManager::UnpackJson(const std::string& JSONfilename, TileMap* aTileMap)
+void ResourceManager::UnpackJson(const std::string& aFilepath, TileMap* aTileMap)
 {
-	const bool isFileValid = FileUtility::IsFileValid(JSONfilename);
+	const bool isFileValid = FileUtility::IsFileValid(aFilepath);
 	assert(isFileValid);
 	if (!isFileValid)
 		return;
 
-	const char* buffer = FileUtility::ReadFileIntoBuffer(JSONfilename);
+	const char* buffer = FileUtility::ReadFileIntoBuffer(aFilepath);
 	rapidjson::Document document;
 	document.Parse(buffer);
 	if (document.HasParseError())
@@ -53,7 +56,7 @@ void ResourceManager::UnpackJson(const std::string& JSONfilename, TileMap* aTile
 		const int x = frame["posx"].GetInt();
 		const int y = frame["posy"].GetInt();
 
-		if (JSONfilename.find("ExtrasTileSet.json") == std::string::npos)
+		if (aFilepath.find("ExtrasTileSet.json") == std::string::npos)
 		{
 			//Check to see if the frame attribute is an animation sprite
 			if (height == 21 && width == 14)
@@ -96,12 +99,12 @@ Vector2Int ResourceManager::GetTextureSize(int anIndex) const
 	return myTextureSize.at(anIndex);
 }
 
-GLuint ResourceManager::GetaTexture(TextureHandle aTextureName) const
+unsigned int ResourceManager::GetTexture(TextureHandle aTextureName) const
 {
 	return myTextures.find(aTextureName)->second;
 }
 
-void ResourceManager::HoldTexture(TextureHandle aTextureName, GLuint aTexture)
+void ResourceManager::HoldTexture(TextureHandle aTextureName, unsigned int aTexture)
 {
-	myTextures.insert(std::pair<TextureHandle, GLuint>(aTextureName, aTexture));
+	myTextures.insert(std::pair<TextureHandle, unsigned int>(aTextureName, aTexture));
 }

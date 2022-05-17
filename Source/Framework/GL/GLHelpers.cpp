@@ -1,8 +1,10 @@
-#include "FrameworkPCH.h"
 #include "GLHelpers.h"
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include <stb_image.h>
+
+#include "Utility/DebugUtility.h"
+#include "Utility/FileUtility.h"
 
 namespace GLHelpers
 {
@@ -61,7 +63,7 @@ namespace GLHelpers
         assert(error == GL_NO_ERROR);
     }
 
-    void APIENTRY GLDebugMessageCallback(GLenum source, GLenum type, unsigned int id, GLenum severity, GLsizei /*length*/, const char* message, const void* /*userParam*/)
+    void APIENTRY GLDebugMessageCallback(GLenum source, GLenum type, unsigned int id, GLenum severity, int /*length*/, const char* message, const void* /*userParam*/)
     {
         // Ignore insignificant error codes
         if (id == 131169 || id == 131185 || id == 131218 || id == 131204)
@@ -219,7 +221,7 @@ namespace GLHelpers
         return image;
     }
 
-    GLuint LoadTexture(const std::string& filename)
+    unsigned int LoadTexture(const std::string& filename)
     {
         const bool isFileValid = FileUtility::IsFileValid(filename);
         assert(isFileValid);
@@ -238,7 +240,7 @@ namespace GLHelpers
 
         Flip32BitImageVertically(image, width, height);
 
-        GLuint texhandle = 0;
+        unsigned int texhandle = 0;
         glGenTextures(1, &texhandle);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texhandle);
@@ -251,9 +253,9 @@ namespace GLHelpers
         return texhandle;
     }
 
-    GLuint LoadTextureCubemap(const char** filenames, GLuint oldtexturehandle)
+    unsigned int LoadTextureCubemap(const char** filenames, unsigned int oldtexturehandle)
     {
-        GLuint texhandle = oldtexturehandle;
+        unsigned int texhandle = oldtexturehandle;
         if (texhandle == 0)
             glGenTextures(1, &texhandle);
         glActiveTexture(GL_TEXTURE0);
@@ -310,33 +312,33 @@ namespace GLHelpers
         delete[] temp;
     }
 
-    GLint GetAttributeLocation(GLuint aShaderProgram, const char* aName)
+    int GetAttributeLocation(unsigned int aShaderProgram, const char* aName)
     {
         return glGetAttribLocation(aShaderProgram, aName);
     }
 
-    GLint GetUniformLocation(GLuint aShaderProgram, const char* aName)
+    int GetUniformLocation(unsigned int aShaderProgram, const char* aName)
     {
         return glGetUniformLocation(aShaderProgram, aName);
     }
 
-    void SetUniform1f(GLuint aShaderProgram, const char* aName, float aValue)
+    void SetUniform1f(unsigned int aShaderProgram, const char* aName, float aValue)
     {
-        const GLint uniform = GetUniformLocation(aShaderProgram, aName);
+        const int uniform = GetUniformLocation(aShaderProgram, aName);
         if (uniform != -1)
             glUniform1f(uniform, aValue);
     }
 
-    void SetUniform2f(GLuint aShaderProgram, const char* aName, Vector2Float aValue)
+    void SetUniform2f(unsigned int aShaderProgram, const char* aName, Vector2Float aValue)
     {
-        const GLint uniform = GetUniformLocation(aShaderProgram, aName);
+        const int uniform = GetUniformLocation(aShaderProgram, aName);
         if (uniform != -1)
             glUniform2f(uniform, aValue.myX, aValue.myY);
     }
 
-    void SetUniform1i(GLuint aShaderProgram, const char* aName, int aValue)
+    void SetUniform1i(unsigned int aShaderProgram, const char* aName, int aValue)
     {
-        const GLint uniform = GetUniformLocation(aShaderProgram, aName);
+        const int uniform = GetUniformLocation(aShaderProgram, aName);
         if (uniform != -1)
             glUniform1i(uniform, aValue);
     }

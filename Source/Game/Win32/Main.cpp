@@ -1,6 +1,5 @@
-#include "GamePCH.h"
-
 #include "Game/Game.h"
+#include "Win32/FrameworkMain.h"
 
 #define SCREEN_WIDTH 600
 #define SCREEN_HEIGHT 600

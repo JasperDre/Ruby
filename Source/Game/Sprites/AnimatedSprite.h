@@ -1,7 +1,10 @@
 #pragma once
 
+#include <string>
+#include <vector>
+
 #include "Entities/Entity.h"
-#include "Constants.h"
+#include "GameplayHelpers/Frame.h"
 
 class GameCore;
 class ResourceManager;

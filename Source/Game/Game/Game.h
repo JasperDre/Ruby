@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameCore/GameCore.h"
+#include "Math/Vector2Float.h"
 
 class Mesh;
 class Entity;
@@ -18,7 +19,7 @@ class SceneManager;
 class Game : public GameCore
 {
 public:
-	Game(Framework* pFramework);
+	Game(Framework* aFramework);
 	~Game() override;
 
 	void OnSurfaceChanged(int width, int height) override;
@@ -54,10 +55,10 @@ protected:
 	GameCamera* myPlayerCamera;
 	PlayerController* myPlayerController;
 	SceneManager* mySceneManager;
-	GLuint myTilesetTextureIdentifier;
-	GLuint myOakLabTilesetTextureIdentifier;
-	GLuint mySpritesTextureIdentifier;
-	GLuint myWoodsTilesetTextureIdentifier;
-	GLuint myExtrasSetTextureIdentifier;
-	GLuint myBattleSceneTextureIdentifier;
+	unsigned int myTilesetTextureIdentifier;
+	unsigned int myOakLabTilesetTextureIdentifier;
+	unsigned int mySpritesTextureIdentifier;
+	unsigned int myWoodsTilesetTextureIdentifier;
+	unsigned int myExtrasSetTextureIdentifier;
+	unsigned int myBattleSceneTextureIdentifier;
 };

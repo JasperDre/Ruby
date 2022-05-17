@@ -2,6 +2,9 @@
 
 #include <vector>
 
+#include "Constants.h"
+
+class Event;
 class GameCore;
 class Mesh;
 class ResourceManager;

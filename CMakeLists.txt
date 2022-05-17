@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.7.0)
 
 set(CMAKE_CXX_STANDARD 17)
 add_definitions(-DUNICODE)
+add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/MP>")
 set_property(GLOBAL PROPERTY CMAKE_CXX_STANDARD_REQUIRED ON)
 set_property(GLOBAL PROPERTY CMAKE_CXX_EXTENSIONS OFF)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)

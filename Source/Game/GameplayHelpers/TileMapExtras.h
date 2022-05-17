@@ -7,10 +7,10 @@ class GameCore;
 class TileMapExtras : public TileMap
 {
 public:
-	TileMapExtras(GameCore* myGame, Areas anArea);
+	TileMapExtras(GameCore* aGameCore, Areas anArea);
 	~TileMapExtras() override;
 
-	void AddTile(const std::string& anIndex, Frame aFrame) override;
+	void AddTile(const std::string& anIndex, const Frame& aFrame) override;
 
 	[[nodiscard]] Frame GetFrameFromExtrasMap(const std::string& aType) const override;
 	[[nodiscard]] bool IsTileAtPlayer(Vector2Int playerColumnRow) const override;
