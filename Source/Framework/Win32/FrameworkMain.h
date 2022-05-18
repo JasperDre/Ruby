@@ -8,19 +8,20 @@ class Framework
 public:
     Framework();
 
-    void Init(int width, int height);
-    void Run(GameCore* pGameCore);
+    void Init(int aWidth, int aHeight);
+    void Run(GameCore* aGameCore);
     void Shutdown() const;
-    void SetWindowSize(int width, int height);
+    void SetWindowSize(int aWidth, int aHeight);
     void SetWindowIcon(unsigned char* aSource, int aWidth, int aHeight) const;
 
     [[nodiscard]] unsigned int GetWindowWidth() const { return myCurrentWindowWidth; }
     [[nodiscard]] unsigned int GetWindowHeight() const { return myCurrentWindowHeight; }
     [[nodiscard]] GameCore* GetGameCore() const { return myGameCore; }
 
-protected:
-    void ResizeWindow(int width, int height);
-    bool CreateGLWindow(const char* title, int width, int height);
+private:
+    void PrintDebugInfo() const;
+    void ResizeWindow(int aWidth, int aHeight);
+    bool CreateWindow(const char* aTitle, int aWidth, int aHeight);
     void KillGLWindow() const;
     static void KeyCallback(GLFWwindow* aWindow, int aKey, int aScancode, int anAction, int aMode);
     static void CursorCallback(GLFWwindow* aWindow, double aXPosition, double aYPosition);

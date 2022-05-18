@@ -19,10 +19,10 @@ Framework::Framework()
     , myCurrentWindowHeight(-1)
 {}
 
-void Framework::Init(int width, int height)
+void Framework::Init(int aWidth, int aHeight)
 {
-    myInitialWindowWidth = width;
-    myInitialWindowHeight = height;
+    myInitialWindowWidth = aWidth;
+    myInitialWindowHeight = aHeight;
     myCurrentWindowWidth = myInitialWindowWidth;
     myCurrentWindowHeight = myInitialWindowHeight;
 
@@ -33,13 +33,15 @@ void Framework::Init(int width, int height)
     title.append(" Windows x86");
 #endif
 
-    if (!CreateGLWindow(title.c_str(), width, height))
+    if (!CreateWindow(title.c_str(), aWidth, aHeight))
         DebugUtility::OutputMessage("Failed to initialize OpenGL window");
+
+    PrintDebugInfo();
 }
 
-void Framework::Run(GameCore* pGameCore)
+void Framework::Run(GameCore* aGameCore)
 {
-    myGameCore = pGameCore;
+    myGameCore = aGameCore;
     myGameCore->OnSurfaceChanged(myCurrentWindowWidth, myCurrentWindowHeight);
     myGameCore->LoadContent();
 
@@ -70,14 +72,14 @@ void Framework::Shutdown() const
     KillGLWindow();
 }
 
-void Framework::SetWindowSize(int width, int height)
+void Framework::SetWindowSize(int aWidth, int aHeight)
 {
     const int maxWidth = 720;
     const int maxHeight = 480;
-    const float aspectRatio = static_cast<float>(width) / static_cast<float>(height);
+    const float aspectRatio = static_cast<float>(aWidth) / static_cast<float>(aHeight);
 
-    int nextWidth = width;
-    int nextHeight = height;
+    int nextWidth = aWidth;
+    int nextHeight = aHeight;
 
     if (nextWidth > maxWidth)
     {
@@ -103,22 +105,51 @@ void Framework::SetWindowIcon(unsigned char* aSource, int aWidth, int aHeight) c
     glfwSetWindowIcon(myWindow, 1, processIcon);
 }
 
-void Framework::ResizeWindow(int width, int height)
+void Framework::PrintDebugInfo() const
 {
-    if (height <= 0)
-        height = 1;
+    int major, minor, revision;
+    glfwGetVersion(&major, &minor, &revision);
+    DebugUtility::OutputMessage("GLFW %i.%i.%i", major, minor, revision);
+    DebugUtility::OutputMessage("OpenGL %s", glGetString(GL_VERSION));
+    DebugUtility::OutputMessage("Vendor %s", glGetString(GL_VENDOR));
+    DebugUtility::OutputMessage("Renderer %s", glGetString(GL_RENDERER));
+    DebugUtility::OutputMessage("GLSL %s", glGetString(GL_SHADING_LANGUAGE_VERSION));
 
-    if (width <= 0)
-        width = 1;
+     int xPosition, yPosition;
+    glfwGetWindowPos(myWindow, &xPosition, &yPosition);
+    DebugUtility::OutputMessage("Window position %i %i", xPosition, yPosition);
 
-    myCurrentWindowWidth = width;
-    myCurrentWindowHeight = height;
+    int width, height;
+    glfwGetFramebufferSize(myWindow, &width, &height);
+    DebugUtility::OutputMessage("Frame buffer size %i %i", width, height);
 
-    if (myGameCore)
-        myGameCore->OnSurfaceChanged(width, height);
+    float xScale, yScale;
+    glfwGetWindowContentScale(myWindow, &xScale, &yScale);
+    DebugUtility::OutputMessage("Window content scale %.1f %.1f", xScale, yScale);
+
+    int left, top, right, bottom;
+    glfwGetWindowFrameSize(myWindow, &left, &top, &right, &bottom);
+    DebugUtility::OutputMessage("Window Frame size %i %i %i %i", left, top, right, bottom);
+
+    DebugUtility::OutputMessage("Window size %ix%i", myCurrentWindowWidth, myCurrentWindowHeight);
 }
 
-bool Framework::CreateGLWindow(const char* title, int width, int height)
+void Framework::ResizeWindow(int aWidth, int aHeight)
+{
+    if (aHeight <= 0)
+        aHeight = 1;
+
+    if (aWidth <= 0)
+        aWidth = 1;
+
+    myCurrentWindowWidth = aWidth;
+    myCurrentWindowHeight = aHeight;
+
+    if (myGameCore)
+        myGameCore->OnSurfaceChanged(aWidth, aHeight);
+}
+
+bool Framework::CreateWindow(const char* aTitle, int aWidth, int aHeight)
 {
     glfwSetErrorCallback(GLHelpers::GLFWErrorCallback);
 
@@ -135,7 +166,7 @@ bool Framework::CreateGLWindow(const char* title, int width, int height)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
     glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
-    myWindow = glfwCreateWindow(width, height, title, nullptr, nullptr);
+    myWindow = glfwCreateWindow(aWidth, aHeight, aTitle, nullptr, nullptr);
     if (!myWindow)
     {
         glfwTerminate();
@@ -153,7 +184,7 @@ bool Framework::CreateGLWindow(const char* title, int width, int height)
     glfwSetScrollCallback(myWindow, ScrollCallback);
     glfwSetMouseButtonCallback(myWindow, MouseButtonCallback);
 
-    ResizeWindow(width, height);
+    ResizeWindow(aWidth, aHeight);
 
     if (!gladLoadGL())
         return false;
