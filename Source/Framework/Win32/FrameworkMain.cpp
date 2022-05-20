@@ -115,7 +115,7 @@ void Framework::PrintDebugInfo() const
     DebugUtility::OutputMessage("Renderer %s", glGetString(GL_RENDERER));
     DebugUtility::OutputMessage("GLSL %s", glGetString(GL_SHADING_LANGUAGE_VERSION));
 
-     int xPosition, yPosition;
+    int xPosition, yPosition;
     glfwGetWindowPos(myWindow, &xPosition, &yPosition);
     DebugUtility::OutputMessage("Window position %i %i", xPosition, yPosition);
 

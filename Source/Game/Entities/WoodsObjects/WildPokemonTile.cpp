@@ -1,4 +1,3 @@
-#include "GamePCH.h"
 #include "WildPokemonTile.h"
 
 #include "Controllers/AStarPathFinder.h"
@@ -6,6 +5,7 @@
 #include "Entities/Player.h"
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
+#include "Utility/MathUtility.h"
 
 WildPokemonTile::WildPokemonTile(TileMap* aTileMap, GameCore* aGameCore, Mesh* aMesh, unsigned int aTexture)
 	: Entity(aGameCore, aMesh, aTexture)

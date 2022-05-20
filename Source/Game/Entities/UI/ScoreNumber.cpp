@@ -1,4 +1,3 @@
-#include "GamePCH.h"
 #include "Entities/UI/ScoreNumber.h"
 
 #include "GameplayHelpers/ResourceManager.h"

@@ -1,6 +1,9 @@
 #pragma once
 
+#include <vector>
+
 #include "Entities/Entity.h"
+#include "GameplayHelpers/Frame.h"
 
 class TileMap;
 class ResourceManager;

@@ -11,22 +11,22 @@ OakLabPlantTop::OakLabPlantTop(ResourceManager* aResourceManager, TileMap* aTile
 
 	for (unsigned int i = 0; i < myOakLabPlantMap.size(); i++)
 	{
-		TileInfo atile = aTileMap->GetTileFromOakLabMap(Oak_Lab_Plant_);
-		Frame aframe = atile.myVariant.at(myOakLabPlantMap[i]);
-		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / aResourceManager->GetTextureSize(1).x), (aframe.myOrigin.myY / aResourceManager->GetTextureSize(1).y));
-		aframe.myUVScale = Vector2Float((aframe.mySize.myX / aResourceManager->GetTextureSize(1).x), (aframe.mySize.myY / aResourceManager->GetTextureSize(1).y));
-		aframe.myWorldSpace = Vector2Float((((i % myOakLabPlantMap.size()) * (NUM_LAB_COLUMNS - 1)) * TILESIZE), (2.0f * TILESIZE));
+		TileInfo tileInfo = aTileMap->GetTileFromOakLabMap(Oak_Lab_Plant_);
+		Frame frame = tileInfo.myVariant.at(myOakLabPlantMap[i]);
+		frame.myUVOffset = Vector2Float((frame.myOrigin.myX / aResourceManager->GetTextureSize(1).x), (frame.myOrigin.myY / aResourceManager->GetTextureSize(1).y));
+		frame.myUVScale = Vector2Float((frame.mySize.myX / aResourceManager->GetTextureSize(1).x), (frame.mySize.myY / aResourceManager->GetTextureSize(1).y));
+		frame.myWorldSpace = Vector2Float((((i % myOakLabPlantMap.size()) * (NUM_LAB_COLUMNS - 1)) * TILESIZE), (2.0f * TILESIZE));
 
 		if (i % 2 == 0)
 		{
-			aframe.myWorldSpace += Vector2Float(2.1f, 0.0f);
+			frame.myWorldSpace += Vector2Float(2.1f, 0.0f);
 		}
 		else
 		{
-			aframe.myWorldSpace -= Vector2Float(2.05f, 0.0f);
+			frame.myWorldSpace -= Vector2Float(2.05f, 0.0f);
 		}
 
-		myFrames.push_back(aframe);
+		myFrames.push_back(frame);
 	}
 }
 
