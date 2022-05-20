@@ -106,7 +106,7 @@ void Game::LoadContent()
 	unsigned char* iconSource = GLHelpers::LoadImage(GetFilePath(rootDirectory, "Data/Textures/Icon.png"), iconWidth, iconHeight, iconNumberOfComponents);
 	GetFramework()->SetWindowIcon(iconSource, iconWidth, iconHeight);
 
-	TilemapLoader::Load(GetFilePath(rootDirectory, "Data/Tilemaps/OakPokemonResearchLab.tmx"), GetFilePath(rootDirectory, "Data/Tilemaps/OakPokemonResearchLab.tsx"));
+	TilemapLoader::Load(GetFilePath(rootDirectory, "OakPokemonResearchLab.json"), GetFilePath(rootDirectory, "Data/Tilemaps/OakPokemonResearchLab.tsx"));
 
 	// Create our shaders.
 	myShader = new ShaderProgram(GetFilePath(rootDirectory, "Data/Shaders/Moving.vert"), GetFilePath(rootDirectory, "Data/Shaders/Moving.frag"));
