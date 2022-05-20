@@ -22,6 +22,7 @@
 #include "Scenes/Scene.h"
 #include "Utility/ShaderProgram.h"
 #include "Win32/FrameworkMain.h"
+#include "TilemapLoader.h"
 
 static std::string GetFilePath(const std::string& aRootDirectory, const char* aFilename)
 {
@@ -104,6 +105,8 @@ void Game::LoadContent()
 	int iconNumberOfComponents = 0;
 	unsigned char* iconSource = GLHelpers::LoadImage(GetFilePath(rootDirectory, "Data/Textures/Icon.png"), iconWidth, iconHeight, iconNumberOfComponents);
 	GetFramework()->SetWindowIcon(iconSource, iconWidth, iconHeight);
+
+	TilemapLoader::Load(GetFilePath(rootDirectory, "Data/Tilemaps/OakPokemonResearchLab.tmx"), GetFilePath(rootDirectory, "Data/Tilemaps/OakPokemonResearchLab.tsx"));
 
 	// Create our shaders.
 	myShader = new ShaderProgram(GetFilePath(rootDirectory, "Data/Shaders/Moving.vert"), GetFilePath(rootDirectory, "Data/Shaders/Moving.frag"));

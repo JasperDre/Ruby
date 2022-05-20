@@ -10,6 +10,3 @@
 [submodule "Submodules/stb"]
 	path = Submodules/stb
 	url = https://github.com/nothings/stb.git
-[submodule "Submodules/tileson"]
-	path = Submodules/tileson
-	url = https://github.com/SSBMTonberry/tileson.git

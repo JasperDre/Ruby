@@ -49,7 +49,4 @@ target_include_directories(Framework PUBLIC "${SUBMODULES_DIR}/rapidjson/include
 # STB
 target_include_directories(Framework PUBLIC "${SUBMODULES_DIR}/stb")
 
-# TILESON
-target_include_directories(Framework PUBLIC "${SUBMODULES_DIR}/tileson")
-
 ADD_PROJECT_FILTERS(${SRC_DIR} SRC Source)

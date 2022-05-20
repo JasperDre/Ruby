@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="16" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="1">
  <tileset firstgid="1" source="OakPokemonResearchLab.tsx"/>
- <layer id="1" name="Tile Layer 1" width="16" height="15">
+ <layer id="1" name="Layer1" width="16" height="15">
   <data encoding="csv">
 56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,
 84,84,84,84,84,84,0,0,0,0,84,84,48,34,20,6,
@@ -20,7 +20,7 @@
 38,24,10,10,10,10,10,50,92,10,10,10,10,10,10,26
 </data>
  </layer>
- <layer id="2" name="Tile Layer 2" width="16" height="15">
+ <layer id="2" name="Layer2" width="16" height="15">
   <data encoding="csv">
 0,0,0,0,0,0,85,71,57,70,0,0,0,0,0,0,
 100,15,29,73,87,101,42,28,14,99,0,0,0,0,0,0,
