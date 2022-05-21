@@ -23,23 +23,23 @@ void SceneManager::GenerateScenes(GameCore* aGameCore, Areas anArea, TileMap* aT
 	{
 		case Areas::Area_OakLab:
 		{
-			OakLab* myNewScene = new OakLab(aGameCore, Areas::Area_OakLab, aTileMap, aResourceManager, aMesh, aPlayer, aTextureIdentifier);
-			myNewScene->LoadContent();
-			myScenes.insert(std::pair<Areas, Scene*>(Areas::Area_OakLab, myNewScene));
+			OakLab* oakLabScene = new OakLab(aGameCore, Areas::Area_OakLab, aTileMap, aResourceManager, aMesh, aPlayer, aTextureIdentifier);
+			oakLabScene->LoadContent();
+			myScenes.insert(std::pair<Areas, Scene*>(Areas::Area_OakLab, oakLabScene));
 			break;
 		}
 		case Areas::Area_PalletTown:
 		{
-			PalletTown* MyNewScene = new PalletTown(aGameCore, Areas::Area_PalletTown, aTileMap, aResourceManager, aMesh, aPlayer, aTextureIdentifier);
-			MyNewScene->LoadContent();
-			myScenes.insert(std::pair<Areas, Scene*>(Areas::Area_PalletTown, MyNewScene));
+			PalletTown* palletTownScene = new PalletTown(aGameCore, Areas::Area_PalletTown, aTileMap, aResourceManager, aMesh, aPlayer, aTextureIdentifier);
+			palletTownScene->LoadContent();
+			myScenes.insert(std::pair<Areas, Scene*>(Areas::Area_PalletTown, palletTownScene));
 			break;
 		}
 		case Areas::Area_Woods:
 		{
-			PetalburgWoods* myNewScene = new PetalburgWoods(aGameCore, Areas::Area_Woods, aTileMap, aResourceManager, aMesh, aPlayer, aTextureIdentifier);
-			myNewScene->LoadContent();
-			myScenes.insert(std::pair<Areas, Scene*>(Areas::Area_Woods, myNewScene));
+			PetalburgWoods* petalburgWoodsScene = new PetalburgWoods(aGameCore, Areas::Area_Woods, aTileMap, aResourceManager, aMesh, aPlayer, aTextureIdentifier);
+			petalburgWoodsScene->LoadContent();
+			myScenes.insert(std::pair<Areas, Scene*>(Areas::Area_Woods, petalburgWoodsScene));
 			break;
 		}
 		case Areas::Area_RivalHouse:
@@ -51,10 +51,10 @@ void SceneManager::GenerateScenes(GameCore* aGameCore, Areas anArea, TileMap* aT
 
 void SceneManager::SetActiveScene(Areas aSceneHandle) const
 {
-	for (const auto& m_MyScene : myScenes)
+	for (const auto& scene : myScenes)
 	{
-		if (m_MyScene.second->IsActive())
-			m_MyScene.second->SetIsActive(false);
+		if (scene.second->IsActive())
+			scene.second->SetIsActive(false);
 	}
 
 	myScenes.at(aSceneHandle)->SetIsActive(true);
@@ -63,10 +63,10 @@ void SceneManager::SetActiveScene(Areas aSceneHandle) const
 
 Scene* SceneManager::GetActiveScene() const
 {
-	for (const auto& m_MyScene : myScenes)
+	for (const auto& scene : myScenes)
 	{
-		if (m_MyScene.second->IsActive())
-			return m_MyScene.second;
+		if (scene.second->IsActive())
+			return scene.second;
 	}
 
 	return nullptr;

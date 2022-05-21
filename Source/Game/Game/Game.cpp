@@ -48,7 +48,21 @@ Game::Game(Framework* aFramework)
 	, myWoodsTilesetTextureIdentifier(0)
 	, myExtrasSetTextureIdentifier(0)
 	, myBattleSceneTextureIdentifier(0)
-{}
+{
+	myResourceManager = new ResourceManager();
+	myShader = new ShaderProgram();
+	myDebugShader = new ShaderProgram();
+	mySceneManager = new SceneManager();
+	myPlayerController = new PlayerController();
+	myPlayerMesh = new Mesh();
+	myTileMesh = new Mesh();
+	myCameraMesh = new Mesh();
+	myUIMesh = new Mesh();
+	myPalletTileMap = new TileMapPalletTown(this, Areas::Area_PalletTown);
+	myOakLabTileMap = new TileMapOakLab(this, Areas::Area_OakLab);
+	myWoodsTileMap = new TileMapWoods(this, Areas::Area_Woods);
+	myExtrasTileMap = new TileMapExtras(this, Areas::Area_Null);
+}
 
 Game::~Game()
 {
@@ -99,43 +113,27 @@ void Game::LoadContent()
 	unsigned char* iconSource = GLHelpers::LoadImage("Data/Textures/Icon.png", iconWidth, iconHeight, iconNumberOfComponents);
 	GetFramework()->SetWindowIcon(iconSource, iconWidth, iconHeight);
 
-	TilemapLoader::Load("Data/Tilemaps/OakPokemonResearchLab.json", "Data/Tilemaps/OakPokemonResearchLab.tsx");
+	const std::vector<TilemapLoader::Tile> tiles = TilemapLoader::Load("Data/Tilemaps/OakPokemonResearchLabTilemap.json");
 
-	// Create our shaders.
-	myShader = new ShaderProgram();
 	myShader->LoadShaders("Data/Shaders/Moving.vert", "Data/Shaders/Moving.frag");
-	myDebugShader = new ShaderProgram();
 	myDebugShader->LoadShaders("Data/Shaders/Color.vert", "Data/Shaders/Color.frag");
 
-	// Create out meshes.
-	myPlayerMesh = new Mesh();
 	myPlayerMesh->SetShaders(myShader, myDebugShader);
 
-	myTileMesh = new Mesh();
 	myTileMesh->SetShaders(myShader, myDebugShader);
 	myTileMesh->GenerateTileMesh();
 
-	myCameraMesh = new Mesh();
 	myCameraMesh->SetShaders(myShader, myDebugShader);
 
-	myUIMesh = new Mesh();
 	myUIMesh->SetShaders(myShader, myDebugShader);
 	myUIMesh->GenerateTileMesh();
 
-	//Create our Textures
 	myTilesetTextureIdentifier = GLHelpers::LoadTexture("Data/Textures/TileSet.png");
 	myOakLabTilesetTextureIdentifier = GLHelpers::LoadTexture("Data/Textures/OakLabTileSet.png");
 	mySpritesTextureIdentifier = GLHelpers::LoadTexture("Data/Textures/Player_NPCSprites.png");
 	myWoodsTilesetTextureIdentifier = GLHelpers::LoadTexture("Data/Textures/WoodsTileSet.png");
 	myExtrasSetTextureIdentifier = GLHelpers::LoadTexture("Data/Textures/ExtrasTileSet.png");
 	myBattleSceneTextureIdentifier = GLHelpers::LoadTexture("Data/Textures/BattleScene.png");
-
-	//Create a Resource Manager to parse JSON file and set up frames from sprite sheet
-	myPalletTileMap = new TileMapPalletTown(this, Areas::Area_PalletTown);
-	myOakLabTileMap = new TileMapOakLab(this, Areas::Area_OakLab);
-	myWoodsTileMap = new TileMapWoods(this, Areas::Area_Woods);
-	myExtrasTileMap = new TileMapExtras(this, Areas::Area_Null);
-	myResourceManager = new ResourceManager();
 
 	myResourceManager->UnpackJson("Data/Textures/TileSet.json", myPalletTileMap);
 	myResourceManager->UnpackJson("Data/Textures/OakLabTileSet.json", myOakLabTileMap);
@@ -149,20 +147,14 @@ void Game::LoadContent()
 	myResourceManager->HoldTexture(TextureHandle::Player_NPCSprites, mySpritesTextureIdentifier);
 	myResourceManager->HoldTexture(TextureHandle::ForestTileSet, myWoodsTilesetTextureIdentifier);
 
-	//Create our game objects
 	myPlayer = new Player(myResourceManager, this, myPlayerMesh, mySpritesTextureIdentifier);
 	myUICanvas = new UIObject(myResourceManager, myExtrasTileMap, this, myUIMesh, myExtrasSetTextureIdentifier);
 
-	// Assign our controllers.
-	myPlayerController = new PlayerController();
 	myPlayer->SetPlayerController(myPlayerController);
 
-	//Create our player camera
 	myPlayerCamera = new GameCamera(this, myCameraMesh, 0, myPlayer);
 	myPlayerCamera->SetMyProjection(1.0f / (myWindowSize.myX / 40.0f));
 
-	//Finally Create our SceneManager and Scenes
-	mySceneManager = new SceneManager();
 	mySceneManager->GenerateScenes(this, Areas::Area_PalletTown, myPalletTileMap, myResourceManager, myTileMesh, myPlayer, myTilesetTextureIdentifier);
 	mySceneManager->GenerateScenes(this, Areas::Area_OakLab, myOakLabTileMap, myResourceManager, myTileMesh, myPlayer, myOakLabTilesetTextureIdentifier);
 	mySceneManager->GenerateScenes(this, Areas::Area_Woods, myWoodsTileMap, myResourceManager, myTileMesh, myPlayer, myWoodsTilesetTextureIdentifier);
