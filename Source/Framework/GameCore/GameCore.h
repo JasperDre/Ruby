@@ -20,6 +20,7 @@ public:
 	virtual void OnEvent(Event* pEvent) = 0;
 	virtual void Update(float deltatime) = 0;
 	virtual void Draw() = 0;
+	virtual void DrawImGUI() = 0;
 
 	[[nodiscard]] virtual TileMap* GetTileMap() const = 0;
 	[[nodiscard]] virtual SceneManager* GetSceneManager() const = 0;

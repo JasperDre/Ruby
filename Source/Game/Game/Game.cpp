@@ -2,6 +2,7 @@
 
 #include <filesystem>
 
+#include "imgui.h"
 #include "Controllers/PlayerController.h"
 #include "Entities/Entity.h"
 #include "Entities/GameCamera.h"
@@ -222,21 +223,23 @@ void Game::Update(float deltatime)
 
 void Game::Draw()
 {
-	// Setup the values we will clear to, then actually clear the color and depth buffers.
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // black
-#if WIN32
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClearDepth(1); // 1 is maximum depth
-#endif
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	Scene* aSceneDraw = mySceneManager->GetActiveScene();
-
-	// Draw our game objects.
 	aSceneDraw->Draw(myPlayerCamera->GetCameraPosition(), myPlayerCamera->GetCameraProjection());
 
 	myUICanvas->Draw(0, myPlayerCamera->GetCameraProjection());
 
 	GLHelpers::CheckForGLErrors();
+}
+
+void Game::DrawImGUI()
+{
+	ImGui::Begin("ImGUI");
+	ImGui::Text("Hello world!");
+	ImGui::End();
 }
 
 TileMap* Game::GetTileMap() const

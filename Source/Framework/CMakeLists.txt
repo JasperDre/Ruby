@@ -10,7 +10,25 @@ macro(ADD_PROJECT_FILTERS path input_list prepend)
   endforeach()
 endmacro()
 
+set(IMGUI_DIR "${SUBMODULES_DIR}/imgui")
 set(SRC_DIR "${CMAKE_CURRENT_LIST_DIR}/")
+
+file(GLOB IMGUI
+  "${IMGUI_DIR}/imconfig.h"
+  "${IMGUI_DIR}/imgui.h"
+  "${IMGUI_DIR}/imgui_internal.h"
+  "${IMGUI_DIR}/imstb_rectpack.h"
+  "${IMGUI_DIR}/imstb_textedit.h"
+  "${IMGUI_DIR}/imstb_truetype.h"
+  "${IMGUI_DIR}/backends/imgui_impl_opengl3.h"
+  "${IMGUI_DIR}/backends/imgui_impl_glfw.h"
+  "${IMGUI_DIR}/imgui.cpp"
+  "${IMGUI_DIR}/imgui_draw.cpp"
+  "${IMGUI_DIR}/imgui_tables.cpp"
+  "${IMGUI_DIR}/imgui_widgets.cpp"
+  "${IMGUI_DIR}/backends/imgui_impl_opengl3.cpp"
+  "${IMGUI_DIR}/backends/imgui_impl_glfw.cpp"
+)
 
 file(GLOB_RECURSE SRC SRC_DIR
     "*.cpp"
@@ -33,7 +51,9 @@ set_target_properties(glad PROPERTIES
 )
 target_compile_options(glad INTERFACE "$<$<CXX_COMPILER_ID:MSVC>:/MP>")
 
-add_library(Framework STATIC ${SRC})
+add_library(Framework STATIC ${SRC} ${IMGUI})
+
+source_group("imgui" FILES ${IMGUI})
 
 target_include_directories(Framework PRIVATE "${CMAKE_CURRENT_LIST_DIR}/")
 
@@ -51,5 +71,8 @@ target_include_directories(Framework PUBLIC "${SUBMODULES_DIR}/stb")
 
 # TILESON
 target_include_directories(Framework PUBLIC "${SUBMODULES_DIR}/tileson")
+
+# IMGUI
+target_include_directories(Framework PUBLIC "${IMGUI_DIR}")
 
 ADD_PROJECT_FILTERS(${SRC_DIR} SRC Source)

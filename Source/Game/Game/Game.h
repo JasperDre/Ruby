@@ -28,6 +28,7 @@ public:
 	void OnEvent(Event* pEvent) override;
 	void Update(float deltatime) override;
 	void Draw() override;
+	void DrawImGUI() override;
 
 	void SetCameraScreenSize(float width, float height);
 

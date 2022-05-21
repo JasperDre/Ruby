@@ -23,10 +23,14 @@ private:
     void ResizeWindow(int aWidth, int aHeight);
     bool CreateWindow(const char* aTitle, int aWidth, int aHeight);
     void KillGLWindow() const;
+    static void DestroyImGui();
     static void KeyCallback(GLFWwindow* aWindow, int aKey, int aScancode, int anAction, int aMode);
     static void CursorCallback(GLFWwindow* aWindow, double aXPosition, double aYPosition);
     static void ScrollCallback(GLFWwindow* aWindow, double aXOffset, double aYOffset);
     static void MouseButtonCallback(GLFWwindow* aWindow, int aButton, int anAction, int aModifiers);
+    static void NewImGUIFrame();
+    static void RenderImGUI();
+    static void RenderDrawDataImGUI();
 
     GLFWwindow* myWindow;
     GameCore* myGameCore;

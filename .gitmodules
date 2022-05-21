@@ -13,3 +13,6 @@
 [submodule "Submodules/tileson"]
 	path = Submodules/tileson
 	url = https://github.com/SSBMTonberry/tileson.git
+[submodule "Submodules/imgui"]
+	path = Submodules/imgui
+	url = https://github.com/ocornut/imgui.git

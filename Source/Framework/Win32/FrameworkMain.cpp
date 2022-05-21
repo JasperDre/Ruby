@@ -10,6 +10,10 @@
 #include "Input/InputManager.h"
 #include "Utility/DebugUtility.h"
 
+#include "imgui.h"
+#include "backends/imgui_impl_glfw.h"
+#include "backends/imgui_impl_opengl3.h"
+
 Framework::Framework()
     : myWindow(nullptr)
     , myGameCore(nullptr)
@@ -37,6 +41,13 @@ void Framework::Init(int aWidth, int aHeight)
         DebugUtility::OutputMessage("Failed to initialize OpenGL window");
 
     PrintDebugInfo();
+
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    const ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGui::StyleColorsDark();
+    ImGui_ImplGlfw_InitForOpenGL(myWindow, true);
+    ImGui_ImplOpenGL3_Init("#version 460");
 }
 
 void Framework::Run(GameCore* aGameCore)
@@ -59,16 +70,38 @@ void Framework::Run(GameCore* aGameCore)
         if (InputManager::GetInstance().IsKeyDown(Keys::Escape))
             glfwSetWindowShouldClose(myWindow, true);
 
+        NewImGUIFrame();
+        myGameCore->DrawImGUI();
+        RenderImGUI();
+        glfwGetFramebufferSize(myWindow, &myCurrentWindowWidth, &myCurrentWindowHeight);
         myGameCore->GetEventManager()->DispatchEvents(myGameCore);
         myGameCore->Update(deltaTime);
         myGameCore->Draw();
-        glfwGetFramebufferSize(myWindow, &myCurrentWindowWidth, &myCurrentWindowHeight);
+        RenderDrawDataImGUI();
         glfwSwapBuffers(myWindow);
     }
 }
 
+void Framework::NewImGUIFrame()
+{
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+}
+
+void Framework::RenderImGUI()
+{
+    ImGui::Render();
+}
+
+void Framework::RenderDrawDataImGUI()
+{
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
 void Framework::Shutdown() const
 {
+    DestroyImGui();
     KillGLWindow();
 }
 
@@ -212,6 +245,13 @@ void Framework::KillGLWindow() const
 {
     glfwDestroyWindow(myWindow);
     glfwTerminate();
+}
+
+void Framework::DestroyImGui()
+{
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
 }
 
 void Framework::KeyCallback(GLFWwindow* /*aWindow*/, int aKey, int aScancode, int anAction, int aMode)

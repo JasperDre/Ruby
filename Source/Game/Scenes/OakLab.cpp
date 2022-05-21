@@ -18,7 +18,6 @@
 OakLab::OakLab(GameCore* aGameCore, Areas anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player * aPlayer, unsigned int aTextureIdentifier)
 	: Scene(aGameCore, anArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(7.5f * TILESIZE, 2.0f * TILESIZE), aTextureIdentifier)
 {
-	myOakMesh = nullptr;
 	myOak = nullptr;
 	myOakAIController = nullptr;
 	myOakLabMap = nullptr;
@@ -27,6 +26,7 @@ OakLab::OakLab(GameCore* aGameCore, Areas anArea, TileMap* aTileMap, ResourceMan
 	myOakLabPlantTops = nullptr;
 	myOakLabTableTop = nullptr;
 	myOakStartPosition = Vector2Float(6.0f * TILESIZE, 11.0f * TILESIZE);
+	myOakMesh = new Mesh();
 }
 
 OakLab::~OakLab()
@@ -43,7 +43,6 @@ OakLab::~OakLab()
 
 void OakLab::LoadContent()
 {
-	myOakMesh = new Mesh();
 	myOakMesh->SetShaders(myGame->GetShader(), myGame->GetDebugShader());
 
 	myOakLabMap = new OakLabLevel(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
