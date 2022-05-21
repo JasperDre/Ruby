@@ -24,4 +24,15 @@ target_include_directories(Game PRIVATE "${CMAKE_CURRENT_LIST_DIR}/")
 target_link_libraries(Game PUBLIC Framework)
 target_include_directories(Game PUBLIC "../Framework/")
 
+set_target_properties(
+    Game PROPERTIES
+    VS_DEBUGGER_WORKING_DIRECTORY "$<TARGET_FILE_DIR:Game>")
+
+add_custom_command(
+  TARGET Game
+  POST_BUILD COMMAND ${CMAKE_COMMAND}
+  -E copy_directory
+  "${CMAKE_SOURCE_DIR}/Data"
+  "$<TARGET_FILE_DIR:Game>/Data")
+
 ADD_PROJECT_FILTERS(${SRC_DIR} SRC Source)

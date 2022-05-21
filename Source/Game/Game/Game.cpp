@@ -24,13 +24,6 @@
 #include "Win32/FrameworkMain.h"
 #include "TilemapLoader.h"
 
-static std::string GetFilePath(const std::string& aRootDirectory, const char* aFilename)
-{
-	std::string path = aRootDirectory;
-	path.append(aFilename);
-	return path;
-}
-
 Game::Game(Framework* aFramework)
 	: GameCore(aFramework, new EventManager())
 	, myShader(nullptr)
@@ -103,14 +96,14 @@ void Game::LoadContent()
 	int iconWidth = 0;
 	int iconHeight = 0;
 	int iconNumberOfComponents = 0;
-	unsigned char* iconSource = GLHelpers::LoadImage(GetFilePath(rootDirectory, "Data/Textures/Icon.png"), iconWidth, iconHeight, iconNumberOfComponents);
+	unsigned char* iconSource = GLHelpers::LoadImage("Data/Textures/Icon.png", iconWidth, iconHeight, iconNumberOfComponents);
 	GetFramework()->SetWindowIcon(iconSource, iconWidth, iconHeight);
 
-	TilemapLoader::Load(GetFilePath(rootDirectory, "OakPokemonResearchLab.json"), GetFilePath(rootDirectory, "Data/Tilemaps/OakPokemonResearchLab.tsx"));
+	TilemapLoader::Load("OakPokemonResearchLab.json", "Data/Tilemaps/OakPokemonResearchLab.tsx");
 
 	// Create our shaders.
-	myShader = new ShaderProgram(GetFilePath(rootDirectory, "Data/Shaders/Moving.vert"), GetFilePath(rootDirectory, "Data/Shaders/Moving.frag"));
-	myDebugShader = new ShaderProgram(GetFilePath(rootDirectory, "Data/Shaders/Color.vert"), GetFilePath(rootDirectory, "Data/Shaders/Color.frag"));
+	myShader = new ShaderProgram("Data/Shaders/Moving.vert", "Data/Shaders/Moving.frag");
+	myDebugShader = new ShaderProgram("Data/Shaders/Color.vert", "Data/Shaders/Color.frag");
 
 	// Create out meshes.
 	myPlayerMesh = new Mesh();
@@ -128,12 +121,12 @@ void Game::LoadContent()
 	myUIMesh->GenerateTileMesh();
 
 	//Create our Textures
-	myTilesetTextureIdentifier = GLHelpers::LoadTexture(GetFilePath(rootDirectory, "Data/Textures/TileSet.png"));
-	myOakLabTilesetTextureIdentifier = GLHelpers::LoadTexture(GetFilePath(rootDirectory, "Data/Textures/OakLabTileSet.png"));
-	mySpritesTextureIdentifier = GLHelpers::LoadTexture(GetFilePath(rootDirectory, "Data/Textures/Player_NPCSprites.png"));
-	myWoodsTilesetTextureIdentifier = GLHelpers::LoadTexture(GetFilePath(rootDirectory, "Data/Textures/WoodsTileSet.png"));
-	myExtrasSetTextureIdentifier = GLHelpers::LoadTexture(GetFilePath(rootDirectory, "Data/Textures/ExtrasTileSet.png"));
-	myBattleSceneTextureIdentifier = GLHelpers::LoadTexture(GetFilePath(rootDirectory, "Data/Textures/BattleScene.png"));
+	myTilesetTextureIdentifier = GLHelpers::LoadTexture("Data/Textures/TileSet.png");
+	myOakLabTilesetTextureIdentifier = GLHelpers::LoadTexture("Data/Textures/OakLabTileSet.png");
+	mySpritesTextureIdentifier = GLHelpers::LoadTexture("Data/Textures/Player_NPCSprites.png");
+	myWoodsTilesetTextureIdentifier = GLHelpers::LoadTexture("Data/Textures/WoodsTileSet.png");
+	myExtrasSetTextureIdentifier = GLHelpers::LoadTexture("Data/Textures/ExtrasTileSet.png");
+	myBattleSceneTextureIdentifier = GLHelpers::LoadTexture("Data/Textures/BattleScene.png");
 
 	//Create a Resource Manager to parse JSON file and set up frames from sprite sheet
 	myPalletTileMap = new TileMapPalletTown(this, Areas::Area_PalletTown);
@@ -142,12 +135,12 @@ void Game::LoadContent()
 	myExtrasTileMap = new TileMapExtras(this, Areas::Area_Null);
 	myResourceManager = new ResourceManager();
 
-	myResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/TileSet.json"), myPalletTileMap);
-	myResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/OakLabTileSet.json"), myOakLabTileMap);
-	myResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/Player_NPCSprites.json"), myPalletTileMap);
-	myResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/WoodsTileSet.json"), myWoodsTileMap);
-	myResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/ExtrasTileSet.json"), myExtrasTileMap);
-	myResourceManager->UnpackJson(GetFilePath(rootDirectory, "Data/Textures/BattleScene.json"), myExtrasTileMap);
+	myResourceManager->UnpackJson("Data/Textures/TileSet.json", myPalletTileMap);
+	myResourceManager->UnpackJson("Data/Textures/OakLabTileSet.json", myOakLabTileMap);
+	myResourceManager->UnpackJson("Data/Textures/Player_NPCSprites.json", myPalletTileMap);
+	myResourceManager->UnpackJson("Data/Textures/WoodsTileSet.json", myWoodsTileMap);
+	myResourceManager->UnpackJson("Data/Textures/ExtrasTileSet.json", myExtrasTileMap);
+	myResourceManager->UnpackJson("Data/Textures/BattleScene.json", myExtrasTileMap);
 
 	myResourceManager->HoldTexture(TextureHandle::TileSet, myTilesetTextureIdentifier);
 	myResourceManager->HoldTexture(TextureHandle::OakLabTileSet, myOakLabTilesetTextureIdentifier);
