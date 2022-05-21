@@ -47,9 +47,9 @@ PalletTown::~PalletTown()
 void PalletTown::LoadContent()
 {
 	myGirlMesh = new Mesh();
-	myGirlMesh->SetShader(myGame->GetShader(), myGame->GetDebugShader());
+	myGirlMesh->SetShaders(myGame->GetShader(), myGame->GetDebugShader());
 	myBoyMesh = new Mesh();
-	myBoyMesh->SetShader(myGame->GetShader(), myGame->GetDebugShader());
+	myBoyMesh->SetShaders(myGame->GetShader(), myGame->GetDebugShader());
 
 	myPalletTownMap = new PalletTownLevel(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
 	myOakHouseTop = new OakHouse(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);

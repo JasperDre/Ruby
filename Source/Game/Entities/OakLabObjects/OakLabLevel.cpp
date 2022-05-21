@@ -10,7 +10,7 @@ OakLabLevel::OakLabLevel(ResourceManager* aResourceManager, TileMap* aTileMap, G
 	: Level(aTileMap, aGameCore, aMesh, aTextureIdentifier)
 {
 	myCanvas = new Canvas(myTileMap, aResourceManager);
-	myCanvas->SetShader(myGameCore->GetShader(), myGameCore->GetDebugShader());
+	myCanvas->SetShaders(myGameCore->GetShader(), myGameCore->GetDebugShader());
 	myCanvas->GenerateLabVertexData(OakLabBitMap);
 	myCanvas->GenterateCanvasMesh((LABSIZE * 4) - (NUM_LAB_COLUMNS * 11));
 }

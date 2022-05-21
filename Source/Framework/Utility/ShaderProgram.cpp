@@ -16,30 +16,6 @@ ShaderProgram::ShaderProgram()
     myProgram = 0;
 }
 
-ShaderProgram::ShaderProgram(const char* aVertexShaderFilepath, const char* aFragmentShaderFilepath)
-{
-    myVertShaderString = nullptr;
-    myFragShaderString = nullptr;
-
-    myVertShader = 0;
-    myFragShader = 0;
-    myProgram = 0;
-
-    Init(aVertexShaderFilepath, aFragmentShaderFilepath);
-}
-
-ShaderProgram::ShaderProgram(const std::string& aVertexShaderFilepath, const std::string& aFragmentShaderFilepath)
-{
-    myVertShaderString = nullptr;
-    myFragShaderString = nullptr;
-
-    myVertShader = 0;
-    myFragShader = 0;
-    myProgram = 0;
-
-    Init(aVertexShaderFilepath.c_str(), aFragmentShaderFilepath.c_str());
-}
-
 ShaderProgram::~ShaderProgram()
 {
     Cleanup();
@@ -94,7 +70,7 @@ void ShaderProgram::CompileShader(unsigned int& shaderhandle, const char* shader
     }
 }
 
-bool ShaderProgram::Init(const char* vertfilename, const char* fragfilename)
+bool ShaderProgram::LoadShaders(const char* vertfilename, const char* fragfilename)
 {
     const bool isVertFileValid = FileUtility::IsFileValid(vertfilename);
     assert(isVertFileValid);

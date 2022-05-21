@@ -44,7 +44,7 @@ OakLab::~OakLab()
 void OakLab::LoadContent()
 {
 	myOakMesh = new Mesh();
-	myOakMesh->SetShader(myGame->GetShader(), myGame->GetDebugShader());
+	myOakMesh->SetShaders(myGame->GetShader(), myGame->GetDebugShader());
 
 	myOakLabMap = new OakLabLevel(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
 	myOakLabWorkDesk = new OakLabDeskTop(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);

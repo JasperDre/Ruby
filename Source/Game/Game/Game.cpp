@@ -99,25 +99,27 @@ void Game::LoadContent()
 	unsigned char* iconSource = GLHelpers::LoadImage("Data/Textures/Icon.png", iconWidth, iconHeight, iconNumberOfComponents);
 	GetFramework()->SetWindowIcon(iconSource, iconWidth, iconHeight);
 
-	TilemapLoader::Load("OakPokemonResearchLab.json", "Data/Tilemaps/OakPokemonResearchLab.tsx");
+	TilemapLoader::Load("Data/Tilemaps/OakPokemonResearchLab.json", "Data/Tilemaps/OakPokemonResearchLab.tsx");
 
 	// Create our shaders.
-	myShader = new ShaderProgram("Data/Shaders/Moving.vert", "Data/Shaders/Moving.frag");
-	myDebugShader = new ShaderProgram("Data/Shaders/Color.vert", "Data/Shaders/Color.frag");
+	myShader = new ShaderProgram();
+	myShader->LoadShaders("Data/Shaders/Moving.vert", "Data/Shaders/Moving.frag");
+	myDebugShader = new ShaderProgram();
+	myDebugShader->LoadShaders("Data/Shaders/Color.vert", "Data/Shaders/Color.frag");
 
 	// Create out meshes.
 	myPlayerMesh = new Mesh();
-	myPlayerMesh->SetShader(myShader, myDebugShader);
+	myPlayerMesh->SetShaders(myShader, myDebugShader);
 
 	myTileMesh = new Mesh();
-	myTileMesh->SetShader(myShader, myDebugShader);
+	myTileMesh->SetShaders(myShader, myDebugShader);
 	myTileMesh->GenerateTileMesh();
 
 	myCameraMesh = new Mesh();
-	myCameraMesh->SetShader(myShader, myDebugShader);
+	myCameraMesh->SetShaders(myShader, myDebugShader);
 
 	myUIMesh = new Mesh();
-	myUIMesh->SetShader(myShader, myDebugShader);
+	myUIMesh->SetShaders(myShader, myDebugShader);
 	myUIMesh->GenerateTileMesh();
 
 	//Create our Textures

@@ -42,7 +42,7 @@ public:
 	void GenerateDebugMesh();
 	void GenterateCanvasMesh(int aSize);
 
-	void SetShader(ShaderProgram* pShader, ShaderProgram* pDebug) { myShader = pShader; myDebugShader = pDebug; }
+	void SetShaders(ShaderProgram* pShader, ShaderProgram* pDebug) { myShader = pShader; myDebugShader = pDebug; }
 
 protected:
 	std::vector<VertexFormat> myCanvasVertices;
