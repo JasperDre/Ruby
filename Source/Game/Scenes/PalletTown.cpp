@@ -14,7 +14,7 @@
 #include "Mesh/Mesh.h"
 #include "Scenes/Scene.h"
 
-PalletTown::PalletTown(GameCore* aGameCore, Areas anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, unsigned int aTextureIdentifier)
+PalletTown::PalletTown(GameCore* aGameCore, Area anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, unsigned int aTextureIdentifier)
 	: Scene(aGameCore, anArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(9.0f * TILESIZE, 20.0f * TILESIZE), aTextureIdentifier)
 {
 	myPalletTownMap = nullptr;

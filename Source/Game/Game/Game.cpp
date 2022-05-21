@@ -43,6 +43,8 @@ Game::Game(Framework* aFramework)
 	, myPlayerCamera(nullptr)
 	, myPlayerController(nullptr)
 	, mySceneManager(nullptr)
+	, myDeltaTimeSum(0.0f)
+	, myDeltaTimeIndex(0)
 	, myTilesetTextureIdentifier(0)
 	, myOakLabTilesetTextureIdentifier(0)
 	, mySpritesTextureIdentifier(0)
@@ -50,6 +52,9 @@ Game::Game(Framework* aFramework)
 	, myExtrasSetTextureIdentifier(0)
 	, myBattleSceneTextureIdentifier(0)
 {
+	for (float& deltaTime : myDeltaTimes)
+		deltaTime = 0.0f;
+
 	myResourceManager = new ResourceManager();
 	myShader = new ShaderProgram();
 	myDebugShader = new ShaderProgram();
@@ -59,10 +64,10 @@ Game::Game(Framework* aFramework)
 	myTileMesh = new Mesh();
 	myCameraMesh = new Mesh();
 	myUIMesh = new Mesh();
-	myPalletTileMap = new TileMapPalletTown(this, Areas::Area_PalletTown);
-	myOakLabTileMap = new TileMapOakLab(this, Areas::Area_OakLab);
-	myWoodsTileMap = new TileMapWoods(this, Areas::Area_Woods);
-	myExtrasTileMap = new TileMapExtras(this, Areas::Area_Null);
+	myPalletTileMap = new TileMapPalletTown(this, Area::PalletTown);
+	myOakLabTileMap = new TileMapOakLab(this, Area::OakLab);
+	myWoodsTileMap = new TileMapWoods(this, Area::Woods);
+	myExtrasTileMap = new TileMapExtras(this, Area::Null);
 }
 
 Game::~Game()
@@ -85,22 +90,22 @@ Game::~Game()
 	delete myShader;
 }
 
-void Game::OnSurfaceChanged(int width, int height)
+void Game::OnSurfaceChanged(int aWidth, int aHeight)
 {
 	//Keep ratio of 1:1
-	if (width > height)
+	if (aWidth > aHeight)
 	{
-		const GLint newWidth = height;
-		const GLint centerOffset = width / 4;
-		glViewport(centerOffset, 0, newWidth, height);
+		const GLint newWidth = aHeight;
+		const GLint centerOffset = aWidth / 4;
+		glViewport(centerOffset, 0, newWidth, aHeight);
 	}
 	else
 	{
 		//open viewport of size if aspect ratio is already 1:1
-		glViewport(0, 0, width, height);
+		glViewport(0, 0, aWidth, aHeight);
 	}
 
-	SetCameraScreenSize(static_cast<float>(width), static_cast<float>(height));
+	SetCameraScreenSize(static_cast<float>(aWidth), static_cast<float>(aHeight));
 }
 
 void Game::LoadContent()
@@ -156,37 +161,37 @@ void Game::LoadContent()
 	myPlayerCamera = new GameCamera(this, myCameraMesh, 0, myPlayer);
 	myPlayerCamera->SetMyProjection(1.0f / (myWindowSize.myX / 40.0f));
 
-	mySceneManager->GenerateScenes(this, Areas::Area_PalletTown, myPalletTileMap, myResourceManager, myTileMesh, myPlayer, myTilesetTextureIdentifier);
-	mySceneManager->GenerateScenes(this, Areas::Area_OakLab, myOakLabTileMap, myResourceManager, myTileMesh, myPlayer, myOakLabTilesetTextureIdentifier);
-	mySceneManager->GenerateScenes(this, Areas::Area_Woods, myWoodsTileMap, myResourceManager, myTileMesh, myPlayer, myWoodsTilesetTextureIdentifier);
-	mySceneManager->SetActiveScene(Areas::Area_PalletTown);
+	mySceneManager->GenerateScenes(this, Area::PalletTown, myPalletTileMap, myResourceManager, myTileMesh, myPlayer, myTilesetTextureIdentifier);
+	mySceneManager->GenerateScenes(this, Area::OakLab, myOakLabTileMap, myResourceManager, myTileMesh, myPlayer, myOakLabTilesetTextureIdentifier);
+	mySceneManager->GenerateScenes(this, Area::Woods, myWoodsTileMap, myResourceManager, myTileMesh, myPlayer, myWoodsTilesetTextureIdentifier);
+	mySceneManager->SetActiveScene(Area::PalletTown);
 
 	myUICanvas->SetPosition(myPlayerCamera->GetPosition());
 
 	GLHelpers::CheckForGLErrors();
 }
 
-void Game::OnEvent(Event* pEvent)
+void Game::OnEvent(Event* anEvent)
 {
-	switch (pEvent->GetEventType())
+	switch (anEvent->GetEventType())
 	{
 		case EventTypes::EventType_Input:
 		{
-			myPlayerController->OnEvent(pEvent);
+			myPlayerController->OnEvent(anEvent);
 			break;
 		}
 		case EventTypes::EventType_Collision:
 		{
-			myPlayer->OnEvent(pEvent);
+			myPlayer->OnEvent(anEvent);
 			break;
 		}
 		case EventTypes::EventType_Door:
 		{
-			mySceneManager->OnEvent(pEvent);
-			if (pEvent->GetEventType() != EventTypes::EventType_Input)
+			mySceneManager->OnEvent(anEvent);
+			if (anEvent->GetEventType() != EventTypes::EventType_Input)
 			{
-				myPlayer->OnEvent(pEvent);
-				myPlayerCamera->OnEvent(pEvent);
+				myPlayer->OnEvent(anEvent);
+				myPlayerCamera->OnEvent(anEvent);
 			}
 
 			break;
@@ -194,28 +199,28 @@ void Game::OnEvent(Event* pEvent)
 	}
 }
 
-void Game::Update(float deltatime)
+void Game::Update(float aDeltaTime)
 {
-	if (deltatime > 1.0f / 60.0f)
-		deltatime = 1.0f / 60.0f;
+	if (aDeltaTime > 1.0f / 60.0f)
+		aDeltaTime = 1.0f / 60.0f;
 
-	Scene* aActiveScene = mySceneManager->GetActiveScene();
-	aActiveScene->Update(deltatime);
+	Scene* activeScene = mySceneManager->GetActiveScene();
+	activeScene->Update(aDeltaTime);
 
-	myPlayerCamera->Update(deltatime);
+	myPlayerCamera->Update(aDeltaTime);
 	myPlayerCamera->ClampToPlayer(myPlayer->GetPosition());
 	myUICanvas->SetPosition(myPlayerCamera->GetCameraPosition());
 
 	for (const Keys key : InputManager::GetInstance().GetPressedKeysThisFrame())
 	{
-		Event* pEvent = new InputEvent(key, false);
-		GetEventManager()->QueueEvent(pEvent);
+		Event* event = new InputEvent(key, false);
+		GetEventManager()->QueueEvent(event);
 	}
 
 	for (const Keys key : InputManager::GetInstance().GetReleasedKeysThisFrame())
 	{
-		Event* pEvent = new InputEvent(key, true);
-		GetEventManager()->QueueEvent(pEvent);
+		Event* event = new InputEvent(key, true);
+		GetEventManager()->QueueEvent(event);
 	}
 
 	InputManager::GetInstance().ClearKeyActionsThisFrame();
@@ -227,24 +232,28 @@ void Game::Draw()
 	glClearDepth(1); // 1 is maximum depth
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	Scene* aSceneDraw = mySceneManager->GetActiveScene();
-	aSceneDraw->Draw(myPlayerCamera->GetCameraPosition(), myPlayerCamera->GetCameraProjection());
+	Scene* activeScene = mySceneManager->GetActiveScene();
+	activeScene->Draw(myPlayerCamera->GetCameraPosition(), myPlayerCamera->GetCameraProjection());
 
 	myUICanvas->Draw(0, myPlayerCamera->GetCameraProjection());
 
 	GLHelpers::CheckForGLErrors();
 }
 
-void Game::DrawImGUI()
+void Game::DrawImGUI(float aDeltaTime)
 {
 	ImGui::Begin("ImGUI");
-	ImGui::Text("Hello world!");
+	const float averageFrameTime = GetAverageDeltaTime(aDeltaTime);
+	ImGui::Text("Average DeltaTime: %0.5f", averageFrameTime);
+	ImGui::Text("Average FPS: %0.f", (1.0f / averageFrameTime));
+	const Scene* activeScene = mySceneManager->GetActiveScene();
+	ImGui::Text("Area: %s", AreaToString(activeScene->GetArea()));
 	ImGui::End();
 }
 
 TileMap* Game::GetTileMap() const
 {
-	return mySceneManager->GetActiveScene()->GetMyTileMap();
+	return mySceneManager->GetActiveScene()->GetTilemap();
 }
 
 SceneManager* Game::GetSceneManager() const
@@ -267,9 +276,19 @@ Player* Game::GetMyPlayer() const
 	return myPlayer;
 }
 
-void Game::SetCameraScreenSize(float width, float height)
+float Game::GetAverageDeltaTime(float aCurrentDeltaTime)
 {
-	myWindowSize = Vector2Float(width, height);
+	myDeltaTimeSum -= myDeltaTimes[myDeltaTimeIndex]; // Subtract value falling off
+	myDeltaTimeSum += aCurrentDeltaTime;
+	myDeltaTimes[myDeltaTimeIndex] = aCurrentDeltaTime; // Save new value so it can be subtracted later
+	myDeltaTimeIndex = (myDeltaTimeIndex + 1) % myDeltaTimes.size();
+
+	return (myDeltaTimeSum / static_cast<float>(myDeltaTimes.size()));
+}
+
+void Game::SetCameraScreenSize(float aWidth, float aHeight)
+{
+	myWindowSize = Vector2Float(aWidth, aHeight);
 
 	if (myPlayerCamera)
 		myPlayerCamera->SetScreenSize(myWindowSize);

@@ -2,7 +2,7 @@
 
 #include "GameplayHelpers/TileMap.h"
 
-TileMapExtras::TileMapExtras(GameCore* aGameCore, Areas anArea)
+TileMapExtras::TileMapExtras(GameCore* aGameCore, Area anArea)
 	: TileMap(aGameCore, anArea)
 {}
 

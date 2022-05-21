@@ -71,7 +71,7 @@ void Framework::Run(GameCore* aGameCore)
             glfwSetWindowShouldClose(myWindow, true);
 
         NewImGUIFrame();
-        myGameCore->DrawImGUI();
+        myGameCore->DrawImGUI(deltaTime);
         RenderImGUI();
         glfwGetFramebufferSize(myWindow, &myCurrentWindowWidth, &myCurrentWindowHeight);
         myGameCore->GetEventManager()->DispatchEvents(myGameCore);

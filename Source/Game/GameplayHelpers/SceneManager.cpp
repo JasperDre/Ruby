@@ -12,44 +12,44 @@ SceneManager::SceneManager()
 
 SceneManager::~SceneManager()
 {
-	delete myScenes.at(Areas::Area_PalletTown);
-	delete myScenes.at(Areas::Area_OakLab);
-	delete myScenes.at(Areas::Area_Woods);
+	delete myScenes.at(Area::PalletTown);
+	delete myScenes.at(Area::OakLab);
+	delete myScenes.at(Area::Woods);
 }
 
-void SceneManager::GenerateScenes(GameCore* aGameCore, Areas anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, unsigned int aTextureIdentifier)
+void SceneManager::GenerateScenes(GameCore* aGameCore, Area anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, unsigned int aTextureIdentifier)
 {
 	switch (anArea)
 	{
-		case Areas::Area_OakLab:
+		case Area::OakLab:
 		{
-			OakLab* oakLabScene = new OakLab(aGameCore, Areas::Area_OakLab, aTileMap, aResourceManager, aMesh, aPlayer, aTextureIdentifier);
+			OakLab* oakLabScene = new OakLab(aGameCore, Area::OakLab, aTileMap, aResourceManager, aMesh, aPlayer, aTextureIdentifier);
 			oakLabScene->LoadContent();
-			myScenes.insert(std::pair<Areas, Scene*>(Areas::Area_OakLab, oakLabScene));
+			myScenes.insert(std::pair<Area, Scene*>(Area::OakLab, oakLabScene));
 			break;
 		}
-		case Areas::Area_PalletTown:
+		case Area::PalletTown:
 		{
-			PalletTown* palletTownScene = new PalletTown(aGameCore, Areas::Area_PalletTown, aTileMap, aResourceManager, aMesh, aPlayer, aTextureIdentifier);
+			PalletTown* palletTownScene = new PalletTown(aGameCore, Area::PalletTown, aTileMap, aResourceManager, aMesh, aPlayer, aTextureIdentifier);
 			palletTownScene->LoadContent();
-			myScenes.insert(std::pair<Areas, Scene*>(Areas::Area_PalletTown, palletTownScene));
+			myScenes.insert(std::pair<Area, Scene*>(Area::PalletTown, palletTownScene));
 			break;
 		}
-		case Areas::Area_Woods:
+		case Area::Woods:
 		{
-			PetalburgWoods* petalburgWoodsScene = new PetalburgWoods(aGameCore, Areas::Area_Woods, aTileMap, aResourceManager, aMesh, aPlayer, aTextureIdentifier);
+			PetalburgWoods* petalburgWoodsScene = new PetalburgWoods(aGameCore, Area::Woods, aTileMap, aResourceManager, aMesh, aPlayer, aTextureIdentifier);
 			petalburgWoodsScene->LoadContent();
-			myScenes.insert(std::pair<Areas, Scene*>(Areas::Area_Woods, petalburgWoodsScene));
+			myScenes.insert(std::pair<Area, Scene*>(Area::Woods, petalburgWoodsScene));
 			break;
 		}
-		case Areas::Area_RivalHouse:
-		case Areas::Area_TrainerHouse:
-		case Areas::Area_Null:
+		case Area::RivalHouse:
+		case Area::TrainerHouse:
+		case Area::Null:
 			break;
 	}
 }
 
-void SceneManager::SetActiveScene(Areas aSceneHandle) const
+void SceneManager::SetActiveScene(Area aSceneHandle) const
 {
 	for (const auto& scene : myScenes)
 	{
@@ -77,14 +77,14 @@ void SceneManager::OnEvent(Event* anEvent) const
 	const DoorEvent* doorEvent = dynamic_cast<DoorEvent*>(anEvent);
 
 	if (doorEvent->GetDoorType() == 11)
-		SetActiveScene(Areas::Area_OakLab);
+		SetActiveScene(Area::OakLab);
 
 	if (doorEvent->GetDoorType() == 10)
-		SetActiveScene(Areas::Area_PalletTown);
+		SetActiveScene(Area::PalletTown);
 
 	if (doorEvent->GetDoorType() == 12)
-		SetActiveScene(Areas::Area_Woods);
+		SetActiveScene(Area::Woods);
 
 	if (doorEvent->GetDoorType() == 13)
-		SetActiveScene(Areas::Area_PalletTown);
+		SetActiveScene(Area::PalletTown);
 }

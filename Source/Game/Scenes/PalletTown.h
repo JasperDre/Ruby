@@ -19,7 +19,7 @@ class PalletTown : public Scene
 {
 
 public:
-	PalletTown(GameCore* aGameCore, Areas anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, unsigned int aTextureIdentifier);
+	PalletTown(GameCore* aGameCore, Area anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, unsigned int aTextureIdentifier);
 	~PalletTown() override;
 
 	void LoadContent() override;

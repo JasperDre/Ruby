@@ -1,5 +1,7 @@
 #pragma once
 
+#include <array>
+
 #include "GameCore/GameCore.h"
 #include "Math/Vector2Float.h"
 
@@ -22,15 +24,15 @@ public:
 	Game(Framework* aFramework);
 	~Game() override;
 
-	void OnSurfaceChanged(int width, int height) override;
+	void OnSurfaceChanged(int aWidth, int aHeight) override;
 	void LoadContent() override;
 
-	void OnEvent(Event* pEvent) override;
-	void Update(float deltatime) override;
+	void OnEvent(Event* anEvent) override;
+	void Update(float aDeltaTime) override;
 	void Draw() override;
-	void DrawImGUI() override;
+	void DrawImGUI(float aDeltaTime) override;
 
-	void SetCameraScreenSize(float width, float height);
+	void SetCameraScreenSize(float aWidth, float aHeight);
 
 	[[nodiscard]] TileMap* GetTileMap() const override;
 	[[nodiscard]] SceneManager* GetSceneManager() const override;
@@ -38,7 +40,10 @@ public:
 	[[nodiscard]] ShaderProgram* GetDebugShader() const override;
 	[[nodiscard]] Player* GetMyPlayer() const override;
 
-protected:
+private:
+	float GetAverageDeltaTime(float aCurrentDeltaTime);
+
+	std::array<float, 100> myDeltaTimes;
 	Vector2Float myWindowSize;
 	ShaderProgram* myShader;
 	ShaderProgram* myDebugShader;
@@ -56,6 +61,8 @@ protected:
 	GameCamera* myPlayerCamera;
 	PlayerController* myPlayerController;
 	SceneManager* mySceneManager;
+	float myDeltaTimeSum;
+	int myDeltaTimeIndex;
 	unsigned int myTilesetTextureIdentifier;
 	unsigned int myOakLabTilesetTextureIdentifier;
 	unsigned int mySpritesTextureIdentifier;

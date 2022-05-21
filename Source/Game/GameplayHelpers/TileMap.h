@@ -66,7 +66,7 @@ protected:
 	                                                             {"Forest_Tree_6.png", Forest_Tree_},   {"Forest_Tree_7.png", Forest_Tree_},   {"Forest_Tree_8.png", Forest_Tree_},   {"Forest_Wild_Grass_1.png", Forest_Wild_Grass_}, {"Forest_Wild_Grass_2.png", Forest_Wild_Grass_} };
 
 public:
-	TileMap(GameCore* aGameCore, Areas aArea);
+	TileMap(GameCore* aGameCore, Area aArea);
 	virtual ~TileMap() = default;
 
 	virtual void AddTile(const std::string& anIndex, const Frame& aFrame) = 0;
@@ -84,7 +84,7 @@ public:
 	[[nodiscard]] virtual Vector2Int GetColumRowFromIndex(int anIndex) const = 0;
 
 protected:
-	Areas myArea;
+	Area myArea;
 	Frame myNullFrame;
 	GameCore* myGame;
 

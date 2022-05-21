@@ -7,7 +7,7 @@
 #include "Game/Game.h"
 #include "GameplayHelpers/TileMap.h"
 
-TileMapOakLab::TileMapOakLab(GameCore* aGameCore, Areas anArea)
+TileMapOakLab::TileMapOakLab(GameCore* aGameCore, Area anArea)
 	: TileMap(aGameCore, anArea)
 {
 	for (int i = 0; i < 2; i++)
@@ -36,7 +36,7 @@ TileMapOakLab::~TileMapOakLab()
 
 void TileMapOakLab::AddTile(const std::string& anIndex, const Frame& aFrame)
 {
-	if (myArea == Areas::Area_OakLab)
+	if (myArea == Area::OakLab)
 	{
 		//Check to see if the TileInfo does not exists, if so make a new TileInfo
 		if (OakLab_Tile_Type aType = LabTypeSelecter.find(anIndex)->second; m_TileInfoMap.find(aType) == m_TileInfoMap.end())

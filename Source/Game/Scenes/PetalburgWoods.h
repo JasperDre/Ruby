@@ -13,7 +13,7 @@ class PetalburgWoodsLevel;
 class PetalburgWoods : public Scene
 {
 public:
-	PetalburgWoods(GameCore* aGameCore, Areas anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, unsigned int aTextureIdentifier);
+	PetalburgWoods(GameCore* aGameCore, Area anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, unsigned int aTextureIdentifier);
 	~PetalburgWoods() override;
 
 	void LoadContent() override;

@@ -3,15 +3,30 @@
 #include "Math/Vector2Float.h"
 
 // Area names used to call the conrtuctors of initial areas through the Scene Manager as well as switching the active scene & loading/unloading inactive scenes
-enum class Areas
+enum class Area
 {
-	Area_PalletTown,
-	Area_TrainerHouse,
-	Area_RivalHouse,
-	Area_OakLab,
-	Area_Woods,
-	Area_Null
+	PalletTown,
+	TrainerHouse,
+	RivalHouse,
+	OakLab,
+	Woods,
+	Null
 };
+
+constexpr const char* AreaToString(Area anArea)
+{
+	switch (anArea)
+	{
+		case Area::PalletTown: return "PalletTown";
+		case Area::TrainerHouse: return "TrainerHouse";
+		case Area::RivalHouse: return "RivalHouse";
+		case Area::OakLab: return "OakLab";
+		case Area::Woods: return "Woods";
+		case Area::Null: return "Null";
+	}
+
+	return "";
+}
 
 // Names of Textures used to call texture charactistics from ResourceManager
 enum class TextureHandle

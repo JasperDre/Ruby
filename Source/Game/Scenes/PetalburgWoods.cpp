@@ -7,7 +7,7 @@
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 
-PetalburgWoods::PetalburgWoods(GameCore* aGameCore, Areas anArea, TileMap* aTileMap, ResourceManager * aResourceManager, Mesh* aMesh, Player* aPlayer, unsigned int aTextureIdentifier)
+PetalburgWoods::PetalburgWoods(GameCore* aGameCore, Area anArea, TileMap* aTileMap, ResourceManager * aResourceManager, Mesh* aMesh, Player* aPlayer, unsigned int aTextureIdentifier)
 	: Scene(aGameCore, anArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(37.0f * TILESIZE, TILESIZE), aTextureIdentifier)
 	, m_MyPetalburg(nullptr)
 {

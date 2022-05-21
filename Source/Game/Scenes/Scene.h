@@ -15,7 +15,7 @@ class Player;
 class Scene
 {
 public:
-	Scene(GameCore* aGame, Areas anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, Vector2Float aPlayerStartPosition, unsigned int aTextureIdentifier);
+	Scene(GameCore* aGame, Area anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, Vector2Float aPlayerStartPosition, unsigned int aTextureIdentifier);
 	virtual ~Scene() = default;
 
 	virtual void LoadContent() = 0;
@@ -30,14 +30,14 @@ public:
 	virtual void SetPlayerStart(Vector2Float PlayerLastPos) { myPlayerStartPosition = PlayerLastPos; }
 
 	[[nodiscard]] virtual bool IsActive() const { return myIsActive; }
-	[[nodiscard]] virtual Areas GetMyArea() const { return myArea; }
-	[[nodiscard]] virtual Player* GetMyPlayer() const { return myPlayer; }
-	[[nodiscard]] virtual TileMap* GetMyTileMap() const { return myTileMap;}
+	[[nodiscard]] virtual Area GetArea() const { return myArea; }
+	[[nodiscard]] virtual Player* GetPlayer() const { return myPlayer; }
+	[[nodiscard]] virtual TileMap* GetTilemap() const { return myTileMap;}
 	[[nodiscard]] virtual Vector2Float GetPlayerStart() const { return myPlayerStartPosition; }
 
 protected:
 	std::vector<Entity*> myEntities;
-	Areas myArea;
+	Area myArea;
 	Vector2Float myPlayerStartPosition;
 	TileMap* myTileMap;
 	GameCore* myGame;

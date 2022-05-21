@@ -106,18 +106,18 @@ void GameCamera::OnEvent(Event* anEvent)
 	const DoorEvent* doorEvent = dynamic_cast<DoorEvent*>(anEvent);
 	if (doorEvent->GetEventType() == EventTypes::EventType_Door)
 	{
-		const Areas newArea = myGameCore->GetSceneManager()->GetActiveScene()->GetMyArea();
-		if (newArea == Areas::Area_OakLab)
+		const Area newArea = myGameCore->GetSceneManager()->GetActiveScene()->GetArea();
+		if (newArea == Area::OakLab)
 		{
 			myCameraMin = Vector2Float(-6.0f, -6.0f);
 			myCameraMax = Vector2Float(32.0f, 32.0f);
 		}
-		if (newArea == Areas::Area_PalletTown)
+		if (newArea == Area::PalletTown)
 		{
 			myCameraMin = Vector2Float(15.0f, 15.0f);
 			myCameraMax = Vector2Float(48.0f, 48.0f);
 		}
-		if (newArea == Areas::Area_Woods)
+		if (newArea == Area::Woods)
 		{
 			myCameraMin = Vector2Float(16.0f, 18.0f);
 			myCameraMax = Vector2Float(76.0f, 80.0f);

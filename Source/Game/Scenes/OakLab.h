@@ -19,7 +19,7 @@ class AIController;
 class OakLab : public Scene
 {
 public:
-	OakLab(GameCore* aGameCore, Areas anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, unsigned int aTextureIdentifier);
+	OakLab(GameCore* aGameCore, Area anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, unsigned int aTextureIdentifier);
 	~OakLab() override;
 
 	void LoadContent() override;

@@ -15,7 +15,7 @@ class GameCore;
 class TileMapWoods : public TileMap
 {
 public:
-	TileMapWoods(GameCore* aGameCore, Areas anArea);
+	TileMapWoods(GameCore* aGameCore, Area anArea);
 	~TileMapWoods() override;
 
 	void AddTile(const std::string& anIndex, const Frame& aFrame) override;

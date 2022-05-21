@@ -7,7 +7,7 @@
 #include "Game/Game.h"
 #include "GameplayHelpers/TileMap.h"
 
-TileMapWoods::TileMapWoods(GameCore* aGameCore, Areas anArea)
+TileMapWoods::TileMapWoods(GameCore* aGameCore, Area anArea)
 	: TileMap(aGameCore, anArea)
 {
 	for (int i = 0; i < 2; i++)
@@ -37,7 +37,7 @@ TileMapWoods::~TileMapWoods()
 
 void TileMapWoods::AddTile(const std::string& anIndex, const Frame& aFrame)
 {
-	if (myArea == Areas::Area_Woods)
+	if (myArea == Area::Woods)
 	{
 		//Find the Tile Type from the index string
 		Forest_Tile_Type aType = WoodsTypeSelecter.find(anIndex)->second;

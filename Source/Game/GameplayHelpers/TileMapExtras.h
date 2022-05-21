@@ -7,7 +7,7 @@ class GameCore;
 class TileMapExtras : public TileMap
 {
 public:
-	TileMapExtras(GameCore* aGameCore, Areas anArea);
+	TileMapExtras(GameCore* aGameCore, Area anArea);
 	~TileMapExtras() override;
 
 	void AddTile(const std::string& anIndex, const Frame& aFrame) override;

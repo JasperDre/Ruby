@@ -1,6 +1,6 @@
 #include "TileMap.h"
 
-TileMap::TileMap(GameCore* aGameCore, Areas aArea)
+TileMap::TileMap(GameCore* aGameCore, Area aArea)
 {
 	myGame = aGameCore;
 	myArea = aArea;

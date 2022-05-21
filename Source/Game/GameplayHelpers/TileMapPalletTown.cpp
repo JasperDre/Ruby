@@ -7,7 +7,7 @@
 #include "Game/Game.h"
 #include "GameplayHelpers/TileMap.h"
 
-TileMapPalletTown::TileMapPalletTown(GameCore* aGameCore, Areas anArea) : TileMap(aGameCore, anArea)
+TileMapPalletTown::TileMapPalletTown(GameCore* aGameCore, Area anArea) : TileMap(aGameCore, anArea)
 {
 	for (int i = 0; i < 2; i++)
 	{
@@ -35,7 +35,7 @@ TileMapPalletTown::~TileMapPalletTown()
 
 void TileMapPalletTown::AddTile(const std::string& anIndex, const Frame& aFrame)
 {
-	if (myArea == Areas::Area_PalletTown)
+	if (myArea == Area::PalletTown)
 	{
 		//Find the Tile Type from the index string
 		Tile_Type aType = TypeSelecter.find(anIndex)->second;

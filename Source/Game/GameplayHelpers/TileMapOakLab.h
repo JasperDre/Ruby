@@ -7,7 +7,7 @@ class GameCore;
 class TileMapOakLab : public TileMap
 {
 public:
-	TileMapOakLab(GameCore* aGameCore, Areas anArea);
+	TileMapOakLab(GameCore* aGameCore, Area anArea);
 	~TileMapOakLab() override;
 
 	void AddTile(const std::string& anIndex, const Frame& aFrame) override;

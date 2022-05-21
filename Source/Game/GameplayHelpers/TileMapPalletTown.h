@@ -14,7 +14,7 @@ class GameCore;
 class TileMapPalletTown : public TileMap
 {
 public:
-	TileMapPalletTown(GameCore* aGameCore, Areas anArea);
+	TileMapPalletTown(GameCore* aGameCore, Area anArea);
 	~TileMapPalletTown() override;
 	
 	void AddTile(const std::string& anIndex, const Frame& aFrame) override;
