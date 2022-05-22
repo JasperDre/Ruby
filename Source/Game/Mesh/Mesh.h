@@ -44,6 +44,13 @@ public:
 
 	void SetShaders(ShaderProgram* pShader, ShaderProgram* pDebug) { myShader = pShader; myDebugShader = pDebug; }
 
+	[[nodiscard]] unsigned int GetVBOIdentifier() const { return myVBOIdentifier; }
+	[[nodiscard]] unsigned int GetTetureIdentifier() const { return myTextureIdentifier; }
+	[[nodiscard]] int GetNumberOfVerticesIdentifier() const { return myNumberOfVertices; }
+	[[nodiscard]] float GetWidth() const { return myWidth; }
+	[[nodiscard]] float GetHeight() const { return myHeight; }
+	[[nodiscard]] const std::vector<VertexFormat>& GetCanvasVertices() const { return myCanvasVertices; }
+
 protected:
 	std::vector<VertexFormat> myCanvasVertices;
 	ShaderProgram* myShader;

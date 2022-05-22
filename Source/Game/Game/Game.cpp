@@ -159,7 +159,7 @@ void Game::LoadContent()
 	myPlayer->SetPlayerController(myPlayerController);
 
 	myPlayerCamera = new GameCamera(this, myCameraMesh, 0, myPlayer);
-	myPlayerCamera->SetMyProjection(1.0f / (myWindowSize.myX / 40.0f));
+	myPlayerCamera->SetProjection(1.0f / (myWindowSize.myX / 40.0f));
 
 	mySceneManager->GenerateScenes(this, Area::PalletTown, myPalletTileMap, myResourceManager, myTileMesh, myPlayer, myTilesetTextureIdentifier);
 	mySceneManager->GenerateScenes(this, Area::OakLab, myOakLabTileMap, myResourceManager, myTileMesh, myPlayer, myOakLabTilesetTextureIdentifier);
@@ -233,21 +233,115 @@ void Game::Draw()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	Scene* activeScene = mySceneManager->GetActiveScene();
-	activeScene->Draw(myPlayerCamera->GetCameraPosition(), myPlayerCamera->GetCameraProjection());
+	activeScene->Draw(myPlayerCamera->GetCameraPosition(), myPlayerCamera->GetProjection());
 
-	myUICanvas->Draw(0, myPlayerCamera->GetCameraProjection());
+	myUICanvas->Draw(0, myPlayerCamera->GetProjection());
 
 	GLHelpers::CheckForGLErrors();
 }
 
 void Game::DrawImGUI(float aDeltaTime)
 {
-	ImGui::Begin("ImGUI");
-	const float averageFrameTime = GetAverageDeltaTime(aDeltaTime);
-	ImGui::Text("Average DeltaTime: %0.5f", averageFrameTime);
-	ImGui::Text("Average FPS: %0.f", (1.0f / averageFrameTime));
-	const Scene* activeScene = mySceneManager->GetActiveScene();
-	ImGui::Text("Area: %s", AreaToString(activeScene->GetArea()));
+	ImGui::Begin("Debug");
+	ImGui::SetNextItemOpen(true);
+	if (ImGui::TreeNode("Stats"))
+	{
+		const float averageFrameTime = GetAverageDeltaTime(aDeltaTime);
+		ImGui::Text("Average DeltaTime: %0.5f", averageFrameTime);
+		ImGui::Text("Average FPS: %0.f", (1.0f / averageFrameTime));
+		ImGui::TreePop();
+	}
+
+	ImGui::SetNextItemOpen(true);
+	if (ImGui::TreeNode("Scene"))
+	{
+		const Scene* activeScene = mySceneManager->GetActiveScene();
+		ImGui::Text("Area: %s", AreaToString(activeScene->GetArea()));
+		ImGui::TreePop();
+	}
+
+	ImGui::SetNextItemOpen(true);
+	if (ImGui::TreeNode("Player"))
+	{
+		const Vector2Float playerPosition = myPlayer->GetPosition();
+		ImGui::Text("Position: %0.1f %0.1f", playerPosition.myX, playerPosition.myY);
+		ImGui::TreePop();
+	}
+
+	ImGui::SetNextItemOpen(true);
+	if (ImGui::TreeNode("Camera"))
+	{
+		const Vector2Float cameraPosition = myPlayerCamera->GetCameraPosition();
+		ImGui::Text("Position: %0.1f %0.1f", cameraPosition.myX, cameraPosition.myY);
+		const Vector2Float projection = myPlayerCamera->GetProjection();
+		ImGui::Text("Projection: %0.1f %0.1f", projection.myX, projection.myY);
+		const Vector2Float min = myPlayerCamera->GetMin();
+		ImGui::Text("Min: %0.1f %0.1f", min.myX, min.myY);
+		const Vector2Float max = myPlayerCamera->GetMax();
+		ImGui::Text("Max: %0.1f %0.1f", max.myX, max.myY);
+		const Vector2Float offset = myPlayerCamera->GetOffset();
+		ImGui::Text("Offset: %0.1f %0.1f", offset.myX, offset.myY);
+		ImGui::Text("Is in transition: %s", myPlayerCamera->IsInTransition() ? "True" : "False");
+		ImGui::TreePop();
+	}
+
+	ImGui::SetNextItemOpen(true);
+	if (ImGui::TreeNode("Resources"))
+	{
+		ImGui::Text("Number of textures: %i", myResourceManager->GetTextures().size());
+		ImGui::TreePop();
+	}
+
+	ImGui::SetNextItemOpen(true);
+	if (ImGui::TreeNode("Meshes"))
+	{
+		if (ImGui::TreeNode("Player"))
+		{
+			ImGui::Text("VBO: %u", myPlayerMesh->GetVBOIdentifier());
+			ImGui::Text("Texture identifier: %i", myPlayerMesh->GetTetureIdentifier());
+			ImGui::Text("Number of vertices: %i", myPlayerMesh->GetNumberOfVerticesIdentifier());
+			ImGui::Text("Number of canvas vertices: %i", myPlayerMesh->GetCanvasVertices().size());
+			ImGui::Text("Width: %0.1f", myPlayerMesh->GetWidth());
+			ImGui::Text("Height: %0.1f", myPlayerMesh->GetHeight());
+			ImGui::TreePop();
+		}
+
+		if (ImGui::TreeNode("Tile"))
+		{
+			ImGui::Text("VBO: %u", myTileMesh->GetVBOIdentifier());
+			ImGui::Text("Texture identifier: %i", myTileMesh->GetTetureIdentifier());
+			ImGui::Text("Number of vertices: %i", myTileMesh->GetNumberOfVerticesIdentifier());
+			ImGui::Text("Number of canvas vertices: %i", myTileMesh->GetCanvasVertices().size());
+			ImGui::Text("Width: %0.1f", myTileMesh->GetWidth());
+			ImGui::Text("Height: %0.1f", myTileMesh->GetHeight());
+			ImGui::TreePop();
+		}
+
+		if (ImGui::TreeNode("Camera"))
+		{
+			ImGui::Text("VBO: %u", myCameraMesh->GetVBOIdentifier());
+			ImGui::Text("Texture identifier: %i", myCameraMesh->GetTetureIdentifier());
+			ImGui::Text("Number of vertices: %i", myCameraMesh->GetNumberOfVerticesIdentifier());
+			ImGui::Text("Number of canvas vertices: %i", myCameraMesh->GetCanvasVertices().size());
+			ImGui::Text("Width: %0.1f", myCameraMesh->GetWidth());
+			ImGui::Text("Height: %0.1f", myCameraMesh->GetHeight());
+			ImGui::TreePop();
+		}
+
+		if (ImGui::TreeNode("UI"))
+		{
+			ImGui::Text("VBO: %u", myUIMesh->GetVBOIdentifier());
+			ImGui::Text("Texture identifier: %i", myUIMesh->GetTetureIdentifier());
+			ImGui::Text("Number of vertices: %i", myUIMesh->GetNumberOfVerticesIdentifier());
+			ImGui::Text("Number of canvas vertices: %i", myUIMesh->GetCanvasVertices().size());
+			ImGui::Text("Width: %0.1f", myUIMesh->GetWidth());
+			ImGui::Text("Height: %0.1f", myUIMesh->GetHeight());
+			ImGui::TreePop();
+		}
+		
+		ImGui::TreePop();
+	}
+
 	ImGui::End();
 }
 

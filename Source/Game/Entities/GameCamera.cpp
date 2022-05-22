@@ -21,7 +21,6 @@ GameCamera::GameCamera(GameCore* aGameCore, Mesh* aMesh, unsigned int aTextureId
 	myCameraMax = Vector2Float(48.0f, 48.0f);
 
 	myIsInTransition = false;
-	myNewCamPosition = Vector2Float(0.0f, 0.0f);
 }
 
 void GameCamera::ClampToPlayer(Vector2Float aPlayerPos)
@@ -83,22 +82,17 @@ void GameCamera::ClampToPlayer(Vector2Float aPlayerPos)
 
 Vector2Float GameCamera::GetCameraPosition() const
 {
-	Vector2Float pos = myPosition;
+	Vector2Float position = myPosition;
 
-	pos.myX -= std::fmod(pos.myX, (myScreenSize.myX / 150.0f) / myScreenSize.myX);
-	pos.myY -= std::fmod(pos.myY, (myScreenSize.myY / 150.0f) / myScreenSize.myY);
+	position.myX -= std::fmod(position.myX, (myScreenSize.myX / 150.0f) / myScreenSize.myX);
+	position.myY -= std::fmod(position.myY, (myScreenSize.myY / 150.0f) / myScreenSize.myY);
 
-	return pos;
+	return position;
 }
 
-void GameCamera::SetMyProjection(Vector2Float aProjection)
+void GameCamera::SetProjection(Vector2Float aProjection)
 {
 	myProjection = aProjection;
-}
-
-Vector2Float GameCamera::GetCameraProjection() const
-{
-	return myProjection;
 }
 
 void GameCamera::OnEvent(Event* anEvent)
@@ -130,9 +124,9 @@ void GameCamera::OnEvent(Event* anEvent)
 
 			myCameraOffset = aDirection * (myCameraMin);
 
-			myNewCamPosition = newpos + myCameraOffset;
+			const Vector2Float newCamPosition = newpos + myCameraOffset;
 
-			SetPosition(myNewCamPosition);
+			SetPosition(newCamPosition);
 
 			myIsInTransition = true;
 		}

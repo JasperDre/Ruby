@@ -35,7 +35,7 @@ void ResourceManager::UnpackJson(const std::string& aFilepath, TileMap* aTileMap
 	const int textureWidth = document["width"].GetInt();
 	const int textureHeight = document["height"].GetInt();
 
-	myTextureSize.emplace_back(Vector2Int(textureWidth, textureHeight));
+	myTextureSizes.emplace_back(Vector2Int(textureWidth, textureHeight));
 
 	const rapidjson::Value& frames = document["Files"];
 	//Extract the Array of Frames from the root
@@ -96,7 +96,7 @@ Frame ResourceManager::GetFrameAtIndex(const std::string& anIndex) const
 
 Vector2Int ResourceManager::GetTextureSize(int anIndex) const
 {
-	return myTextureSize.at(anIndex);
+	return myTextureSizes.at(anIndex);
 }
 
 unsigned int ResourceManager::GetTexture(TextureHandle aTextureName) const
