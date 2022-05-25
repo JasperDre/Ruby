@@ -373,15 +373,15 @@ void Mesh::GenerateDebugMesh()
 	myNumberOfVertices = 4;
 }
 
-void Mesh::GenterateCanvasMesh(int aSize)
+void Mesh::GenterateCanvasMesh()
 {
 	assert(myVBOIdentifier == 0);
 
 	glGenBuffers(1, &myVBOIdentifier);
 	glBindBuffer(GL_ARRAY_BUFFER, myVBOIdentifier);
-	glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(sizeof(VertexFormat) * aSize), &myCanvasVertices.front(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(sizeof(VertexFormat) * myCanvasVertices.size()), &myCanvasVertices.front(), GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	myPrimitiveType = GL_TRIANGLE_STRIP;
-	myNumberOfVertices = aSize;
+	myNumberOfVertices = static_cast<int>(myCanvasVertices.size());
 }

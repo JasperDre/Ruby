@@ -12,7 +12,7 @@ PetalburgWoodsLevel::PetalburgWoodsLevel(ResourceManager* aResourceManager, Tile
 	myCanvas = new Canvas(myTileMap, aResourceManager);
 	myCanvas->SetShaders(myGameCore->GetShader(), myGameCore->GetDebugShader());
 	myCanvas->GenerateForestVertexData(ForestBitMap);
-	myCanvas->GenterateCanvasMesh((FORESTMAPSIZE * 4) - (NUM_FOREST_COLUMNS));
+	myCanvas->GenterateCanvasMesh();
 }
 
 PetalburgWoodsLevel::~PetalburgWoodsLevel()

@@ -12,7 +12,7 @@ PalletTownLevel::PalletTownLevel(ResourceManager* aResourceManager, TileMap* aTi
 	myCanvas = new Canvas(myTileMap, aResourceManager);
 	myCanvas->SetShaders(myGameCore->GetShader(), myGameCore->GetDebugShader());
 	myCanvas->GeneratePalletVertexData(PalletTownBitMap);
-	myCanvas->GenterateCanvasMesh((MAPSIZE * 4) - NUM_COLUMNS);
+	myCanvas->GenterateCanvasMesh();
 }
 
 PalletTownLevel::~PalletTownLevel()

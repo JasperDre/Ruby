@@ -40,7 +40,7 @@ public:
 	void GenerateWildTileMesh();
 	void GenerateTextureMesh(Vector2Float aSize);
 	void GenerateDebugMesh();
-	void GenterateCanvasMesh(int aSize);
+	void GenterateCanvasMesh();
 
 	void SetShaders(ShaderProgram* pShader, ShaderProgram* pDebug) { myShader = pShader; myDebugShader = pDebug; }
 
