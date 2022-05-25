@@ -117,7 +117,7 @@ void Game::LoadContent()
 	int iconHeight = 0;
 	int iconNumberOfComponents = 0;
 	unsigned char* iconSource = GLHelpers::LoadImage("Data/Textures/Icon.png", iconWidth, iconHeight, iconNumberOfComponents);
-	GetFramework()->SetWindowIcon(iconSource, iconWidth, iconHeight);
+	myFramework->SetWindowIcon(iconSource, iconWidth, iconHeight);
 
 	const std::vector<TilemapLoader::Tile> tiles = TilemapLoader::Load("Data/Tilemaps/OakPokemonResearchLabTilemap.json");
 
@@ -212,16 +212,10 @@ void Game::Update(float aDeltaTime)
 	myUICanvas->SetPosition(myPlayerCamera->GetCameraPosition());
 
 	for (const Keys key : InputManager::GetInstance().GetPressedKeysThisFrame())
-	{
-		Event* event = new InputEvent(key, false);
-		GetEventManager()->QueueEvent(event);
-	}
+		myEventManager->QueueEvent(new InputEvent(key, false));
 
 	for (const Keys key : InputManager::GetInstance().GetReleasedKeysThisFrame())
-	{
-		Event* event = new InputEvent(key, true);
-		GetEventManager()->QueueEvent(event);
-	}
+		myEventManager->QueueEvent(new InputEvent(key, true));
 
 	InputManager::GetInstance().ClearKeyActionsThisFrame();
 }
