@@ -11,7 +11,7 @@ OakLabLevel::OakLabLevel(ResourceManager* aResourceManager, TileMap* aTileMap, G
 {
 	myCanvas = new Canvas(myTileMap, aResourceManager);
 	myCanvas->SetShaders(myGameCore->GetShader(), myGameCore->GetDebugShader());
-	myCanvas->GenerateLabVertexData(OakLabBitMap);
+	myCanvas->GenerateLabVertexData(myTileMap->GetBitMap());
 	myCanvas->GenterateCanvasMesh();
 }
 
@@ -20,7 +20,7 @@ OakLabLevel::~OakLabLevel()
 	delete myCanvas;
 }
 
-void OakLabLevel::Draw(Vector2Float camPos, Vector2Float projecScale)
+void OakLabLevel::Draw(Vector2Float aCamPos, Vector2Float aProjecScale)
 {
-	myCanvas->DrawCanvas(camPos, projecScale, myTextureIdentifier);
+	myCanvas->DrawCanvas(aCamPos, aProjecScale, myTextureIdentifier);
 }

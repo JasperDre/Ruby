@@ -75,7 +75,7 @@ bool TileMapOakLab::IsTileAtPlayer(Vector2Int playerColumnRow) const
 {
 	const int anIndex = (NUM_LAB_COLUMNS * playerColumnRow.y) + playerColumnRow.x;
 	constexpr short TypeMask = 15;
-	const TileInfo aTileInfo = m_TileInfoMap.find(static_cast<OakLab_Tile_Type>(TypeMask & OakLabBitMap[anIndex]))->second;
+	const TileInfo aTileInfo = m_TileInfoMap.find(static_cast<OakLab_Tile_Type>(TypeMask & GetBitMap()[anIndex]))->second;
 
 	if (aTileInfo.myLabType == Oak_Lab_NullDoor_)
 	{
@@ -90,7 +90,7 @@ bool TileMapOakLab::IsTileAtNPC(Vector2Int npcColumnRow) const
 {
 	const int anIndex = (NUM_LAB_COLUMNS * npcColumnRow.y) + npcColumnRow.x;
 	constexpr short TypeMask = 15;
-	const TileInfo aTileInfo = m_TileInfoMap.find(static_cast<OakLab_Tile_Type>(TypeMask & OakLabBitMap[anIndex]))->second;
+	const TileInfo aTileInfo = m_TileInfoMap.find(static_cast<OakLab_Tile_Type>(TypeMask & GetBitMap()[anIndex]))->second;
 
 	return aTileInfo.myIsWalkable;
 }
@@ -98,7 +98,7 @@ bool TileMapOakLab::IsTileAtNPC(Vector2Int npcColumnRow) const
 TileInfo TileMapOakLab::GetTileAtIndex(int anIndex) const
 {
 	constexpr short TypeMask = 15;
-	TileInfo aTileInfo = m_TileInfoMap.find(static_cast<OakLab_Tile_Type>(TypeMask & OakLabBitMap[anIndex]))->second;
+	TileInfo aTileInfo = m_TileInfoMap.find(static_cast<OakLab_Tile_Type>(TypeMask & GetBitMap()[anIndex]))->second;
 
 	return aTileInfo;
 }

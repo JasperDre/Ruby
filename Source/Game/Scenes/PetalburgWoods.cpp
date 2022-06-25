@@ -7,6 +7,9 @@
 #include "GameplayHelpers/TileMap.h"
 #include "Mesh/Mesh.h"
 
+#include <fstream>
+#include <sstream>
+
 PetalburgWoods::PetalburgWoods(GameCore* aGameCore, Area anArea, TileMap* aTileMap, ResourceManager * aResourceManager, Mesh* aMesh, Player* aPlayer, unsigned int aTextureIdentifier)
 	: Scene(aGameCore, anArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(37.0f * TILESIZE, TILESIZE), aTextureIdentifier)
 	, m_MyPetalburg(nullptr)
@@ -21,6 +24,19 @@ PetalburgWoods::~PetalburgWoods()
 
 void PetalburgWoods::LoadContent()
 {
+	std::vector<unsigned int> bitMap;
+	std::string csvLine;
+	std::fstream input("Data/BitMaps/ForestBitMap.csv", std::ios::in);
+	while (getline(input, csvLine))
+	{
+		std::istringstream csvStream(csvLine);
+		std::string csvElement;
+		while (getline(csvStream, csvElement, ','))
+			bitMap.push_back(stoi(csvElement));
+	}
+
+	myTileMap->SetBitMap(bitMap);
+
 	m_MyPetalburg = new PetalburgWoodsLevel(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
 }
 

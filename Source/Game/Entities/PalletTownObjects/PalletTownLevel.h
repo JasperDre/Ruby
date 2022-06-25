@@ -15,5 +15,5 @@ public:
 	~PalletTownLevel() override;
 
 	void Update(float deltatime) override {}
-	void Draw(Vector2Float camPos, Vector2Float projecScale) override;
+	void Draw(Vector2Float aCamPos, Vector2Float aProjecScale) override;
 };

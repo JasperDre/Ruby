@@ -15,6 +15,9 @@
 #include "Mesh/Mesh.h"
 #include "Scenes/Scene.h"
 
+#include <fstream>
+#include <sstream>
+
 OakLab::OakLab(GameCore* aGameCore, Area anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player * aPlayer, unsigned int aTextureIdentifier)
 	: Scene(aGameCore, anArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(7.5f * TILESIZE, 2.0f * TILESIZE), aTextureIdentifier)
 {
@@ -43,6 +46,19 @@ OakLab::~OakLab()
 
 void OakLab::LoadContent()
 {
+	std::vector<unsigned int> bitMap;
+	std::string csvLine;
+	std::fstream input("Data/BitMaps/OakLabBitMap.csv", std::ios::in);
+	while (getline(input, csvLine))
+	{
+		std::istringstream csvStream(csvLine);
+		std::string csvElement;
+		while (getline(csvStream, csvElement, ','))
+			bitMap.push_back(stoi(csvElement));
+	}
+
+	myTileMap->SetBitMap(bitMap);
+
 	myOakMesh->SetShaders(myGame->GetShader(), myGame->GetDebugShader());
 
 	myOakLabMap = new OakLabLevel(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);

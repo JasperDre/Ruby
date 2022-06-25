@@ -15,19 +15,19 @@ public:
 	Canvas(TileMap* aTileMap, ResourceManager* aResourceManager);
 	~Canvas() override = default;
 
-	void GeneratePalletVertexData(const unsigned short BitMap[MAPSIZE]);
-	void GenerateLabVertexData(const unsigned short BitMap[LABSIZE]);
-	void GenerateForestVertexData(const unsigned short BitMap[FORESTMAPSIZE]);
-	void AddVert(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float aUVscale, Vector2Float aUVoffset);
+	void GeneratePalletVertexData(const std::vector<unsigned>& aBitMap);
+	void GenerateLabVertexData(const std::vector<unsigned>& aBitMap);
+	void GenerateForestVertexData(const std::vector<unsigned>& aBitMap);
+	void AddVertex(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float aUVscale, Vector2Float aUVoffset);
 
-	void SetIsReverse(bool isreverse);
+	void SetIsReverse(bool anIsreverse);
 
 private:
 	TileMap* myTileMap;
 	ResourceManager* myResourceManager;
 	bool myIsReversed;
 
-	std::vector<VertexFormat> m_BaseTileVerts =
+	std::vector<VertexFormat> myBaseTileVerts =
 	{
 		VertexFormat(Vector2Float(0.0f, 0.0f), Color(255, 255, 255, 255), Vector2Float(0.0f, 0.0f)),
 		VertexFormat(Vector2Float(0.0f, 1.0f), Color(255, 255, 255, 255), Vector2Float(0.0f, 1.0f)),
@@ -35,7 +35,7 @@ private:
 		VertexFormat(Vector2Float(1.0f, 1.0f), Color(255, 255, 255, 255), Vector2Float(1.0f, 1.0f))
 	};
 
-	std::vector<VertexFormat> m_BaseTileVertsReverse =
+	std::vector<VertexFormat> myBaseTileVertsReverse =
 	{
 		VertexFormat(Vector2Float(1.0f, 0.0f), Color(255, 255, 255, 255), Vector2Float(1.0f, 0.0f)),
 		VertexFormat(Vector2Float(1.0f, 1.0f), Color(255, 255, 255, 255), Vector2Float(1.0f, 1.0f)),

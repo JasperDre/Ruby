@@ -11,7 +11,7 @@ PalletTownLevel::PalletTownLevel(ResourceManager* aResourceManager, TileMap* aTi
 {
 	myCanvas = new Canvas(myTileMap, aResourceManager);
 	myCanvas->SetShaders(myGameCore->GetShader(), myGameCore->GetDebugShader());
-	myCanvas->GeneratePalletVertexData(PalletTownBitMap);
+	myCanvas->GeneratePalletVertexData(aTileMap->GetBitMap());
 	myCanvas->GenterateCanvasMesh();
 }
 
@@ -20,7 +20,7 @@ PalletTownLevel::~PalletTownLevel()
 	delete myCanvas;
 }
 
-void PalletTownLevel::Draw(Vector2Float camPos, Vector2Float projecScale)
+void PalletTownLevel::Draw(Vector2Float aCamPos, Vector2Float aProjecScale)
 {
-	myCanvas->DrawCanvas(camPos, projecScale, myTextureIdentifier);
+	myCanvas->DrawCanvas(aCamPos, aProjecScale, myTextureIdentifier);
 }

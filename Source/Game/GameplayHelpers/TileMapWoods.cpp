@@ -85,7 +85,7 @@ bool TileMapWoods::IsTileAtPlayer(Vector2Int playerColumnRow) const
 {
 	const int anIndex = (NUM_FOREST_COLUMNS * playerColumnRow.y) + playerColumnRow.x;
 	constexpr short TypeMask = 15;
-	const TileInfo aTileInfo = myTileInfoMap.find(static_cast<Forest_Tile_Type>(TypeMask & ForestBitMap[anIndex]))->second;
+	const TileInfo aTileInfo = myTileInfoMap.find(static_cast<Forest_Tile_Type>(TypeMask & GetBitMap()[anIndex]))->second;
 
 	if (aTileInfo.myForestType == Forest_Null_Door)
 	{
@@ -94,24 +94,23 @@ bool TileMapWoods::IsTileAtPlayer(Vector2Int playerColumnRow) const
 	}
 
 	return aTileInfo.myIsWalkable;
-
 }
 
 bool TileMapWoods::IsTileAtNPC(Vector2Int npcColumnRow) const
 {
-	const int anIndex = (NUM_COLUMNS * npcColumnRow.y) + npcColumnRow.x;
-	constexpr short TypeMask = 15;
-	const TileInfo aTileInfo = myTileInfoMap.find(static_cast<Forest_Tile_Type>(TypeMask & ForestBitMap[anIndex]))->second;
+	const int index = (NUM_COLUMNS * npcColumnRow.y) + npcColumnRow.x;
+	constexpr short typeMask = 15;
+	const TileInfo tileInfo = myTileInfoMap.find(static_cast<Forest_Tile_Type>(typeMask & GetBitMap()[index]))->second;
 
-	return aTileInfo.myIsWalkable;
+	return tileInfo.myIsWalkable;
 }
 
 TileInfo TileMapWoods::GetTileAtIndex(int anIndex) const
 {
-	constexpr short TypeMask = 15;
-	TileInfo aTileInfo = myTileInfoMap.find(static_cast<Forest_Tile_Type>(TypeMask & ForestBitMap[anIndex]))->second;
+	constexpr short typeMask = 15;
+	TileInfo tileInfo = myTileInfoMap.find(static_cast<Forest_Tile_Type>(typeMask & GetBitMap()[anIndex]))->second;
 
-	return aTileInfo;
+	return tileInfo;
 }
 
 int TileMapWoods::GetMapWidth() const
@@ -136,4 +135,3 @@ Vector2Int TileMapWoods::GetColumRowFromIndex(int anIndex) const
 {
 	return Vector2Int(anIndex % NUM_FOREST_COLUMNS, anIndex / NUM_FOREST_COLUMNS);
 }
-

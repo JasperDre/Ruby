@@ -83,7 +83,7 @@ bool TileMapPalletTown::IsTileAtPlayer(Vector2Int playerColumnRow) const
 {
 	const int anIndex = (NUM_COLUMNS * playerColumnRow.y) + playerColumnRow.x;
 	constexpr short TypeMask = 15;
-	const TileInfo aTileInfo = myTileInfoMap.find(static_cast<Tile_Type>(TypeMask & PalletTownBitMap[anIndex]))->second;
+	const TileInfo aTileInfo = myTileInfoMap.find(static_cast<Tile_Type>(TypeMask & GetBitMap()[anIndex]))->second;
 
 	if (aTileInfo.myType == Oak_Door_)
 	{
@@ -104,7 +104,7 @@ bool TileMapPalletTown::IsTileAtNPC(Vector2Int npcColumnRow) const
 {
 	const int anIndex = (NUM_COLUMNS * npcColumnRow.y) + npcColumnRow.x;
 	constexpr short TypeMask = 15;
-	const TileInfo aTileInfo = myTileInfoMap.find(static_cast<Tile_Type>(TypeMask & PalletTownBitMap[anIndex]))->second;
+	const TileInfo aTileInfo = myTileInfoMap.find(static_cast<Tile_Type>(TypeMask & GetBitMap()[anIndex]))->second;
 
 	return aTileInfo.myIsWalkable;
 }
@@ -112,7 +112,7 @@ bool TileMapPalletTown::IsTileAtNPC(Vector2Int npcColumnRow) const
 TileInfo TileMapPalletTown::GetTileAtIndex(int anIndex) const
 {
 	constexpr short TypeMask = 15;
-	TileInfo aTileInfo = myTileInfoMap.find(static_cast<Tile_Type>(TypeMask & PalletTownBitMap[anIndex]))->second;
+	TileInfo aTileInfo = myTileInfoMap.find(static_cast<Tile_Type>(TypeMask & GetBitMap()[anIndex]))->second;
 
 	return aTileInfo;
 }

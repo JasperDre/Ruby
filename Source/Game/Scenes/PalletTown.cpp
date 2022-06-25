@@ -14,6 +14,9 @@
 #include "Mesh/Mesh.h"
 #include "Scenes/Scene.h"
 
+#include <fstream>
+#include <sstream>
+
 PalletTown::PalletTown(GameCore* aGameCore, Area anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, unsigned int aTextureIdentifier)
 	: Scene(aGameCore, anArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(9.0f * TILESIZE, 20.0f * TILESIZE), aTextureIdentifier)
 {
@@ -46,6 +49,19 @@ PalletTown::~PalletTown()
 
 void PalletTown::LoadContent()
 {
+	std::vector<unsigned int> bitMap;
+	std::string csvLine;
+	std::fstream input("Data/BitMaps/PalletTownBitMap.csv", std::ios::in);
+	while (getline(input, csvLine))
+	{
+		std::istringstream csvStream(csvLine);
+		std::string csvElement;
+		while (getline(csvStream, csvElement, ','))
+			bitMap.push_back(stoi(csvElement));
+	}
+
+	myTileMap->SetBitMap(bitMap);
+
 	myGirlMesh = new Mesh();
 	myGirlMesh->SetShaders(myGame->GetShader(), myGame->GetDebugShader());
 	myBoyMesh = new Mesh();

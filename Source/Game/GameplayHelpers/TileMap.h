@@ -83,7 +83,12 @@ public:
 	[[nodiscard]] virtual int GetIndexFromColumnRow(int aColumn, int aRow) const = 0;
 	[[nodiscard]] virtual Vector2Int GetColumRowFromIndex(int anIndex) const = 0;
 
+	void SetBitMap(const std::vector<unsigned int>& aBitMap) { myBitMap = aBitMap; }
+
+	[[nodiscard]] const std::vector<unsigned int>& GetBitMap() const { return myBitMap; }
+
 protected:
+	std::vector<unsigned int> myBitMap;
 	Area myArea;
 	Frame myNullFrame;
 	GameCore* myGame;
