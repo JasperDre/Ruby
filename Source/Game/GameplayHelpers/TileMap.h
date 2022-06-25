@@ -88,11 +88,11 @@ public:
 	[[nodiscard]] const std::vector<unsigned int>& GetBitMap() const { return myBitMap; }
 
 protected:
-	std::vector<unsigned int> myBitMap;
 	Area myArea;
 	Frame myNullFrame;
 	GameCore* myGame;
 
 private:
+	std::vector<unsigned int> myBitMap;
 	TileInfo myNullTileInfo;
 };
