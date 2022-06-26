@@ -1,0 +1,136 @@
+{
+  "OakHouse": [
+    "Oak_House_1.png",
+    "Oak_House_2.png",
+    "Oak_House_3.png",
+    "Oak_House_4.png",
+    "Oak_House_5.png",
+    "Oak_House_6.png",
+    "Oak_House_7.png",
+    "Oak_House_8.png",
+    "Oak_House_9.png",
+    "Oak_House_10.png",
+    "Oak_House_11.png",
+    "Oak_House_12.png",
+    "Oak_House_13.png",
+    "Oak_House_14.png",
+    "Oak_House_15.png",
+    "Oak_House_16.png",
+    "Oak_House_17.png",
+    "Oak_House_18.png",
+    "Oak_House_19.png",
+    "Oak_House_20.png",
+    "Oak_House_21.png",
+    "Oak_House_22.png",
+    "Oak_House_23.png",
+    "Oak_House_24.png",
+    "Oak_House_25.png",
+    "Oak_House_26.png",
+    "Oak_House_27.png",
+    "Oak_House_28.png",
+    "Oak_House_29.png",
+    "Oak_House_30.png",
+    "Oak_House_31.png",
+    "Oak_House_33.png",
+    "Oak_House_34.png",
+    "Oak_House_35.png"
+  ],
+  "OakDoor": [
+    "Oak_House_32.png"
+  ],
+  "TownFence": [
+    "Town_Fence_1.png",
+    "Town_Fence_2.png",
+    "Town_Fence_3.png",
+    "Town_Fence_4.png",
+    "Town_Fence_5.png",
+    "Town_Fence_6.png",
+    "Town_Fence_7.png"
+  ],
+  "TownFlower": [
+    "Town_Flower_1.png"
+  ],
+  "TownGrassA": [
+    "Town_Grass_A_1.png",
+    "Town_Grass_A_2.png",
+    "Town_Grass_A_3.png",
+    "Town_Grass_A_4.png",
+    "Town_Grass_A_5.png",
+    "Town_Grass_A_6.png",
+    "Town_Grass_A_7.png",
+    "Town_Grass_A_8.png",
+    "Town_Grass_A_9.png",
+    "Town_Grass_A_10.png",
+    "Town_Grass_A_11.png",
+    "Town_Grass_A_12.png",
+    "Town_Grass_A_13.png"
+  ],
+  "TownGrassB": [
+    "Town_Grass_B_1.png",
+    "Town_Grass_B_2.png",
+    "Town_Grass_B_3.png"
+  ],
+  "TownMailBox": [
+    "Town_Mailbox_1.png",
+    "Town_Mailbox_2.png"
+  ],
+  "TownSign": [
+    "Town_Sign_1.png",
+    "Town_Sign_2.png"
+  ],
+  "TownTree": [
+    "Town_Tree_1.png",
+    "Town_Tree_2.png",
+    "Town_Tree_3.png",
+    "Town_Tree_4.png",
+    "Town_Tree_5.png",
+    "Town_Tree_6.png",
+    "Town_Tree_7.png",
+    "Town_Tree_8.png",
+    "Town_Tree_9.png",
+    "Town_Tree_10.png"
+  ],
+   "TrainerHouse": [
+    "Trainer_House_1.png",
+    "Trainer_House_2.png",
+    "Trainer_House_3.png",
+    "Trainer_House_4.png",
+    "Trainer_House_5.png",
+    "Trainer_House_6.png",
+    "Trainer_House_7.png",
+    "Trainer_House_8.png",
+    "Trainer_House_9.png",
+    "Trainer_House_10.png",
+    "Trainer_House_11.png",
+    "Trainer_House_12.png",
+    "Trainer_House_13.png",
+    "Trainer_House_14.png",
+    "Trainer_House_15.png",
+    "Trainer_House_16.png",
+    "Trainer_House_17.png",
+    "Trainer_House_18.png",
+    "Trainer_House_19.png",
+    "Trainer_House_20.png",
+    "Trainer_House_21.png",
+    "Trainer_House_23.png",
+    "Trainer_House_24.png",
+    "Trainer_House_25.png"
+  ],
+  "PlayerDoor": [
+    "Trainer_House_22.png"
+  ],
+  "WaterA": [
+    "Water_A_1.png",
+    "Water_A_2.png",
+    "Water_A_3.png",
+    "Water_A_4.png",
+    "Water_A_5.png",
+    "Water_A_6.png",
+    "Water_A_7.png",
+    "Water_A_8.png",
+    "Water_A_9.png"
+  ],
+  "WildGrass": [
+    "Wild_Grass_1.png"
+  ]
+}

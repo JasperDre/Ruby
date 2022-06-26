@@ -150,7 +150,7 @@ void Game::LoadContent()
 
 	myResourceManager->HoldTexture(TextureHandle::TileSet, myTilesetTextureIdentifier);
 	myResourceManager->HoldTexture(TextureHandle::OakLabTileSet, myOakLabTilesetTextureIdentifier);
-	myResourceManager->HoldTexture(TextureHandle::Player_NPCSprites, mySpritesTextureIdentifier);
+	myResourceManager->HoldTexture(TextureHandle::PlayerNPCSprites, mySpritesTextureIdentifier);
 	myResourceManager->HoldTexture(TextureHandle::ForestTileSet, myWoodsTilesetTextureIdentifier);
 
 	myPlayer = new Player(myResourceManager, this, myPlayerMesh, mySpritesTextureIdentifier);

@@ -19,7 +19,7 @@ public:
 	
 	void AddTile(const std::string& anIndex, const Frame& aFrame) override;
 
-	[[nodiscard]] TileInfo GetTileFromPalletMap(Tile_Type aType) const override;
+	[[nodiscard]] TileInfo GetTileFromPalletTownMap(PalletTownTileType aType) const override;
 	[[nodiscard]] bool IsTileAtPlayer(Vector2Int playerColumnRow) const override;
 	[[nodiscard]] bool IsTileAtNPC(Vector2Int npcColumnRow) const override;
 	[[nodiscard]] TileInfo GetTileAtIndex(int anIndex) const override;
@@ -29,5 +29,6 @@ public:
 	[[nodiscard]] Vector2Int GetColumRowFromIndex(int anIndex) const override;
 
 private:
-	std::map<Tile_Type, TileInfo> myTileInfoMap;
+	std::map<std::string, PalletTownTileType> myPalletTownTypeSelecter;
+	std::map<PalletTownTileType, TileInfo> myTileInfoMap;
 };

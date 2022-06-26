@@ -14,7 +14,7 @@ PlayerHouse::PlayerHouse(ResourceManager* aResourceManager, TileMap* aTileMap, G
 
 	for (unsigned int i = 0; i < myPlayerHouseMap.size(); i++)
 	{
-		TileInfo atile = aTileMap->GetTileFromPalletMap(Trainer_House_);
+		TileInfo atile = aTileMap->GetTileFromPalletTownMap(PalletTownTileType::TrainerHouse);
 		Frame aframe = atile.myVariant.at(myPlayerHouseMap[i]);
 		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / aResourceManager->GetTextureSize(0).x), (aframe.myOrigin.myY / aResourceManager->GetTextureSize(0).y));
 		aframe.myUVScale = Vector2Float((aframe.mySize.myX / aResourceManager->GetTextureSize(0).x), (aframe.mySize.myY / aResourceManager->GetTextureSize(0).y));

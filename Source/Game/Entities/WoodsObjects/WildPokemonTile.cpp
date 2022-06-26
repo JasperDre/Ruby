@@ -20,7 +20,7 @@ WildPokemonTile::WildPokemonTile(TileMap* aTileMap, GameCore* aGameCore, Mesh* a
 
 	myIsFirstInput = true;
 
-	myState = AI_States::PathingState;
+	myState = AIStates::PathingState;
 
 	myCurrentInput = 0;
 
@@ -45,16 +45,16 @@ void WildPokemonTile::Update(float deltatime)
 {
 	switch (myState)
 	{
-		case AI_States::PathingState:
+		case AIStates::PathingState:
 			PathingUpdate(deltatime);
 			break;
-		case AI_States::WalkingState:
+		case AIStates::WalkingState:
 			WalkingUpdate(deltatime);
 			break;
-		case AI_States::TrackToPlayerState:
+		case AIStates::TrackToPlayerState:
 			TrackToPlayerUpdate(deltatime);
 			break;
-		case AI_States::IdleState:
+		case AIStates::IdleState:
 			break;
 	}
 }
@@ -62,7 +62,7 @@ void WildPokemonTile::Update(float deltatime)
 void WildPokemonTile::PathingUpdate(float delatime)
 {
 	if (GetNextPath(GetMyIndex()))
-		SetMyState(AI_States::WalkingState);
+		SetMyState(AIStates::WalkingState);
 }
 
 void WildPokemonTile::WalkingUpdate(float deltatime)
@@ -89,7 +89,7 @@ void WildPokemonTile::WalkingUpdate(float deltatime)
 	else
 	{
 		myIsFirstInput = true;
-		SetMyState(AI_States::PathingState);
+		SetMyState(AIStates::PathingState);
 	}
 
 	const Vector2Float PlayerPos = myGameCore->GetMyPlayer()->GetPosition();
@@ -100,7 +100,7 @@ void WildPokemonTile::WalkingUpdate(float deltatime)
 	const Vector2Int MaxRange = myTileMap->GetColumRowFromIndex(myMaxIndex);
 
 	if (aPlayerColumnRow.x > MinRange.x && aPlayerColumnRow.x < MaxRange.x && aPlayerColumnRow.y > MinRange.y && aPlayerColumnRow.y < MaxRange.y)
-		SetMyState(AI_States::TrackToPlayerState);
+		SetMyState(AIStates::TrackToPlayerState);
 }
 
 void WildPokemonTile::Draw(Vector2Float camPos, Vector2Float projecScale)
@@ -125,7 +125,7 @@ void WildPokemonTile::Move(SpriteDirection dir, float deltatime)
 	}
 	else
 	{
-		myState = AI_States::PathingState;
+		myState = AIStates::PathingState;
 	}
 }
 
@@ -206,12 +206,12 @@ SpriteDirection WildPokemonTile::CalculateNextInput(Vector2Int anIndex)
 	return SpriteDirection::SpriteDirectionStop;
 }
 
-AI_States WildPokemonTile::GetMyState() const
+AIStates WildPokemonTile::GetMyState() const
 {
 	return myState;
 }
 
-void WildPokemonTile::SetMyState(AI_States aState)
+void WildPokemonTile::SetMyState(AIStates aState)
 {
 	myState = aState;
 }
@@ -223,7 +223,7 @@ bool WildPokemonTile::IsNodeClearOnSpecial(int tx, int ty) const
 	if (tx > MinColumnRow.x && tx < MaxColumnRow.x && ty > MinColumnRow.y && ty < MaxColumnRow.y)
 	{
 		const int CheckTileIndex = myTileMap->GetIndexFromColumnRow(tx, ty);
-		if (myTileMap->GetTileAtIndex(CheckTileIndex).myForestType == Forest_Wild_Grass_)
+		if (myTileMap->GetTileAtIndex(CheckTileIndex).myForestType == ForestWildGrass)
 			return true;
 	}
 

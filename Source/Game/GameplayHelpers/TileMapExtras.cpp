@@ -8,17 +8,17 @@ TileMapExtras::TileMapExtras(GameCore* aGameCore, Area anArea)
 
 TileMapExtras::~TileMapExtras()
 {
-	m_TileInfoMap.clear();
+	myTileInfoMap.clear();
 }
 
 void TileMapExtras::AddTile(const std::string& anIndex, const Frame& aFrame)
 {
-	m_TileInfoMap.insert(std::pair<std::string, Frame>(anIndex, aFrame));
+	myTileInfoMap.insert(std::pair<std::string, Frame>(anIndex, aFrame));
 }
 
 Frame TileMapExtras::GetFrameFromExtrasMap(const std::string& aType) const
 {
-	return m_TileInfoMap.find(aType)->second;
+	return myTileInfoMap.find(aType)->second;
 }
 
 bool TileMapExtras::IsTileAtPlayer(Vector2Int playerColumnRow) const

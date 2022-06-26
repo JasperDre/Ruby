@@ -21,9 +21,9 @@ void Entity::Draw(Vector2Float camPos, Vector2Float projScale)
 		myMesh->Draw(myPosition, myAngle, 1, camPos, projScale, myTextureIdentifier, Vector2Float(1.0f, 1.0f), myUVOffset);
 }
 
-AI_States Entity::GetMyState() const
+AIStates Entity::GetMyState() const
 {
-	return AI_States::IdleState;
+	return AIStates::IdleState;
 }
 
 Vector2Int Entity::GetMyIndex() const

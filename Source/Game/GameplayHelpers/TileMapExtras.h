@@ -2,6 +2,8 @@
 
 #include "TileMap.h"
 
+#include <map>
+
 class GameCore;
 
 class TileMapExtras : public TileMap
@@ -21,5 +23,5 @@ public:
 	[[nodiscard]] Vector2Int GetColumRowFromIndex(int anIndex) const override;
 
 private:
-	std::map<std::string, Frame> m_TileInfoMap;
+	std::map<std::string, Frame> myTileInfoMap;
 };

@@ -12,7 +12,7 @@ OakHouse::OakHouse(ResourceManager* aResourceManager, TileMap* aTileMap, GameCor
 
 	for (unsigned int i = 0; i < myOakHouseMap.size(); i++)
 	{
-		TileInfo atile = aTileMap->GetTileFromPalletMap(Oak_House_);
+		TileInfo atile = aTileMap->GetTileFromPalletTownMap(PalletTownTileType::OakHouse);
 		Frame aframe = atile.myVariant.at(myOakHouseMap[i]);
 		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / aResourceManager->GetTextureSize(0).x), (aframe.myOrigin.myY / aResourceManager->GetTextureSize(0).y));
 		aframe.myUVScale = Vector2Float((aframe.mySize.myX / aResourceManager->GetTextureSize(0).x), (aframe.mySize.myY / aResourceManager->GetTextureSize(0).y));

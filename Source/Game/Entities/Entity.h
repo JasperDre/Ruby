@@ -8,7 +8,7 @@ class Event;
 class AStarPathFinder;
 class GameCore;
 class Vector2Float;
-enum class AI_States;
+enum class AIStates;
 
 class Entity
 {
@@ -25,14 +25,14 @@ public:
 
 	virtual void SetInputSet(int* aPath) {}
 	virtual void SetCurrentInput(int aCurrentInput) {}
-	virtual void SetMyState(AI_States aState) {}
+	virtual void SetMyState(AIStates aState) {}
 	virtual void SetMyDirection(SpriteDirection aDirection) {}
 	void SetPosition(Vector2Float pos) { myPosition = pos; }
 	void SetAngle(float angle) { myAngle = angle; }
 	void SetRadius(float radius) { myRadius = radius; }
 
 	[[nodiscard]] virtual bool IsColliding(Entity* pOtherGameObject) const { return false; }
-	[[nodiscard]] virtual AI_States GetMyState() const;
+	[[nodiscard]] virtual AIStates GetMyState() const;
 	[[nodiscard]] virtual bool IsNodeClearOnSpecial(int tx, int ty) const { return false; }
 	[[nodiscard]] virtual int* GetInputSet() const { return nullptr; }
 	[[nodiscard]] virtual int GetCurrentInput() const { return 0; }

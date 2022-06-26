@@ -6,17 +6,17 @@ TileMap::TileMap(GameCore* aGameCore, Area aArea)
 	myArea = aArea;
 }
 
-TileInfo TileMap::GetTileFromPalletMap(Tile_Type /*aType*/) const
+TileInfo TileMap::GetTileFromPalletTownMap(PalletTownTileType /*aType*/) const
 {
-	return TileInfo(static_cast<Tile_Type>(0));
+	return TileInfo(static_cast<PalletTownTileType>(0));
 }
 
-TileInfo TileMap::GetTileFromOakLabMap(OakLab_Tile_Type /*aType*/) const
+TileInfo TileMap::GetTileFromOakLabMap(OakLabTileType /*aType*/) const
 {
-	return TileInfo(static_cast<OakLab_Tile_Type>(0));
+	return TileInfo(static_cast<OakLabTileType>(0));
 }
 
-TileInfo TileMap::GetTileFromWoodsMap(Forest_Tile_Type /*aType*/) const
+TileInfo TileMap::GetTileFromWoodsMap(ForestTileType /*aType*/) const
 {
-	return TileInfo(static_cast<Forest_Tile_Type>(0));
+	return TileInfo(static_cast<ForestTileType>(0));
 }

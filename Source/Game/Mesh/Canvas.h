@@ -15,8 +15,8 @@ public:
 	Canvas(TileMap* aTileMap, ResourceManager* aResourceManager);
 	~Canvas() override = default;
 
-	void GeneratePalletVertexData(const std::vector<unsigned>& aBitMap);
-	void GenerateLabVertexData(const std::vector<unsigned>& aBitMap);
+	void GeneratePalletTownVertexData(const std::vector<unsigned>& aBitMap);
+	void GenerateOakLabVertexData(const std::vector<unsigned>& aBitMap);
 	void GenerateForestVertexData(const std::vector<unsigned>& aBitMap);
 	void AddVertex(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float aUVscale, Vector2Float aUVoffset);
 

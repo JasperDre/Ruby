@@ -66,7 +66,7 @@ void OakLab::LoadContent()
 	myOakLabMachineTop = new OakLabMachineTop(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
 	myOakLabPlantTops = new OakLabPlantTop(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
 	myOakLabTableTop = new OakLabTableTop(myResourceManager, myTileMap, myGame, myMesh, myTextureIdentifier);
-	myOak = new ProfessorOak(myResourceManager, myTileMap, myGame, myOakMesh, myResourceManager->GetTexture(TextureHandle::Player_NPCSprites));
+	myOak = new ProfessorOak(myResourceManager, myTileMap, myGame, myOakMesh, myResourceManager->GetTexture(TextureHandle::PlayerNPCSprites));
 }
 
 void OakLab::Update(float deltatime)

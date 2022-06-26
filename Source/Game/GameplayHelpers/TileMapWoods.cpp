@@ -12,11 +12,11 @@ TileMapWoods::TileMapWoods(GameCore* aGameCore, Area anArea)
 {
 	for (int i = 0; i < 2; i++)
 	{
-		const Forest_Tile_Type aType = static_cast<Forest_Tile_Type>(i + 6);
+		const ForestTileType aType = static_cast<ForestTileType>(i + 6);
 
 		TileInfo aNullTile = TileInfo(aType);
 
-		if (aNullTile.myForestType == Forest_Null_Wall)
+		if (aNullTile.myForestType == ForestNullWall)
 		{
 			aNullTile.myIsWalkable = false;
 		}
@@ -26,7 +26,7 @@ TileMapWoods::TileMapWoods(GameCore* aGameCore, Area anArea)
 			aNullTile.myIsDoor = true;
 		}
 
-		myTileInfoMap.insert(std::pair<Forest_Tile_Type, TileInfo>(static_cast<Forest_Tile_Type>(i + 6), aNullTile));
+		myTileInfoMap.insert(std::pair<ForestTileType, TileInfo>(static_cast<ForestTileType>(i + 6), aNullTile));
 	}
 }
 
@@ -40,7 +40,7 @@ void TileMapWoods::AddTile(const std::string& anIndex, const Frame& aFrame)
 	if (myArea == Area::Woods)
 	{
 		//Find the Tile Type from the index string
-		Forest_Tile_Type aType = WoodsTypeSelecter.find(anIndex)->second;
+		ForestTileType aType = myWoodsTypeSelecter.find(anIndex)->second;
 
 		//Check to see if the TileInfo does not exists, if so make a new TileInfo
 		if (myTileInfoMap.find(aType) == myTileInfoMap.end())
@@ -48,11 +48,11 @@ void TileMapWoods::AddTile(const std::string& anIndex, const Frame& aFrame)
 
 			TileInfo myNewTile = TileInfo(aType);
 
-			if (myNewTile.myForestType == Forest_Grass_ || myNewTile.myForestType == Forest_Wild_Grass_)
+			if (myNewTile.myForestType == ForestGrass || myNewTile.myForestType == ForestWildGrass)
 			{
 				myNewTile.myIsWalkable = true;
 			}
-			else if (myNewTile.myForestType == Forest_Null_Door) //if the tile is a door
+			else if (myNewTile.myForestType == ForestNullDoor) //if the tile is a door
 			{
 				myNewTile.myIsWalkable = true;
 				myNewTile.myIsDoor = true;
@@ -66,7 +66,7 @@ void TileMapWoods::AddTile(const std::string& anIndex, const Frame& aFrame)
 			myNewTile.myVariant.push_back(aFrame);
 
 			//insert the new TileInfo into the TileInfo Map
-			myTileInfoMap.insert(std::pair<Forest_Tile_Type, TileInfo>(aType, myNewTile));
+			myTileInfoMap.insert(std::pair<ForestTileType, TileInfo>(aType, myNewTile));
 		}
 		//if the TileInfo does exist then push back the new frame attributes into its variant vector
 		else
@@ -76,7 +76,7 @@ void TileMapWoods::AddTile(const std::string& anIndex, const Frame& aFrame)
 	}
 }
 
-TileInfo TileMapWoods::GetTileFromWoodsMap(Forest_Tile_Type aType) const
+TileInfo TileMapWoods::GetTileFromWoodsMap(ForestTileType aType) const
 {
 	return myTileInfoMap.find(aType)->second;
 }
@@ -85,9 +85,9 @@ bool TileMapWoods::IsTileAtPlayer(Vector2Int playerColumnRow) const
 {
 	const int anIndex = (NUM_FOREST_COLUMNS * playerColumnRow.y) + playerColumnRow.x;
 	constexpr short TypeMask = 15;
-	const TileInfo aTileInfo = myTileInfoMap.find(static_cast<Forest_Tile_Type>(TypeMask & GetBitMap()[anIndex]))->second;
+	const TileInfo aTileInfo = myTileInfoMap.find(static_cast<ForestTileType>(TypeMask & GetBitMap()[anIndex]))->second;
 
-	if (aTileInfo.myForestType == Forest_Null_Door)
+	if (aTileInfo.myForestType == ForestNullDoor)
 	{
 		Event* doorEvent = new DoorEvent(13);
 		myGame->GetEventManager()->QueueEvent(doorEvent);
@@ -100,7 +100,7 @@ bool TileMapWoods::IsTileAtNPC(Vector2Int npcColumnRow) const
 {
 	const int index = (NUM_COLUMNS * npcColumnRow.y) + npcColumnRow.x;
 	constexpr short typeMask = 15;
-	const TileInfo tileInfo = myTileInfoMap.find(static_cast<Forest_Tile_Type>(typeMask & GetBitMap()[index]))->second;
+	const TileInfo tileInfo = myTileInfoMap.find(static_cast<ForestTileType>(typeMask & GetBitMap()[index]))->second;
 
 	return tileInfo.myIsWalkable;
 }
@@ -108,7 +108,7 @@ bool TileMapWoods::IsTileAtNPC(Vector2Int npcColumnRow) const
 TileInfo TileMapWoods::GetTileAtIndex(int anIndex) const
 {
 	constexpr short typeMask = 15;
-	TileInfo tileInfo = myTileInfoMap.find(static_cast<Forest_Tile_Type>(typeMask & GetBitMap()[anIndex]))->second;
+	TileInfo tileInfo = myTileInfoMap.find(static_cast<ForestTileType>(typeMask & GetBitMap()[anIndex]))->second;
 
 	return tileInfo;
 }

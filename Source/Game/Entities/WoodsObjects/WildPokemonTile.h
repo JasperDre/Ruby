@@ -25,14 +25,14 @@ public:
 	void ResetInputSet() override;
 	void NPCSeekStartPath() override;
 
-	void SetMyState(AI_States aState) override;
+	void SetMyState(AIStates aState) override;
 	void SetInputSet(int* aPath) override;
 	void SetCurrentInput(int aCurrentInput) override;
 	void SetMyDirection(SpriteDirection aDirection) override;
 	virtual void SetMaxIndex(int anIndex) { myMaxIndex = anIndex; }
 	virtual void SetMinIndex(int anIndex) { myMinIndex = anIndex; }
 
-	[[nodiscard]] AI_States GetMyState() const override;
+	[[nodiscard]] AIStates GetMyState() const override;
 	[[nodiscard]] bool IsNodeClearOnSpecial(int tx, int ty) const override;
 	[[nodiscard]] bool IsColliding(Vector2Float NPCNewPosition) const;
 	[[nodiscard]] int* GetInputSet() const override;
@@ -57,5 +57,5 @@ private:
 	bool myPathingComplete;
 	SpriteDirection myDirection;
 	SpriteDirection myNewDirection;
-	AI_States myState;
+	AIStates myState;
 };

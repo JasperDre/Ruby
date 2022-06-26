@@ -18,7 +18,7 @@ Canvas::Canvas(TileMap* aTileMap, ResourceManager* aResourceManager)
 	, myIsReversed(false)
 {}
 
-void Canvas::GeneratePalletVertexData(const std::vector<unsigned>& aBitMap)
+void Canvas::GeneratePalletTownVertexData(const std::vector<unsigned>& aBitMap)
 {
 	for (unsigned int i = 0; i < aBitMap.size(); i++)
 	{
@@ -33,10 +33,10 @@ void Canvas::GeneratePalletVertexData(const std::vector<unsigned>& aBitMap)
 			const unsigned int tileSelecter = aBitMap[((i / NUM_COLUMNS) * NUM_COLUMNS) + j] & CanvasDefinitions::tileMask;
 			const unsigned int variantSelecter = aBitMap[((i / NUM_COLUMNS) * NUM_COLUMNS) + j] & CanvasDefinitions::variantMask;
 
-			if (static_cast<Tile_Type>(tileSelecter) != Town_Null_Wall_ && static_cast<Tile_Type>(tileSelecter) != Town_Null_Door_)
+			if (static_cast<PalletTownTileType>(tileSelecter) != PalletTownTileType::TownNullWall && static_cast<PalletTownTileType>(tileSelecter) != PalletTownTileType::TownNullDoor)
 			{
 				//create a temp TileInfo struct to access the attributes
-				const TileInfo tileInfo = myTileMap->GetTileFromPalletMap(static_cast<Tile_Type>(tileSelecter));
+				const TileInfo tileInfo = myTileMap->GetTileFromPalletTownMap(static_cast<PalletTownTileType>(tileSelecter));
 
 				//extract the Frame attribute of the correct variant
 				const Frame aframe = tileInfo.myVariant.at(variantSelecter / 16 - 1);
@@ -59,10 +59,10 @@ void Canvas::GeneratePalletVertexData(const std::vector<unsigned>& aBitMap)
 			const unsigned short tileSelecter = aBitMap[i] & CanvasDefinitions::tileMask;
 			const unsigned short variantSelecter = aBitMap[i] & CanvasDefinitions::variantMask;
 
-			if (static_cast<Tile_Type>(tileSelecter) != Town_Null_Wall_ && static_cast<Tile_Type>(tileSelecter) != Town_Null_Door_)
+			if (static_cast<PalletTownTileType>(tileSelecter) != PalletTownTileType::TownNullWall && static_cast<PalletTownTileType>(tileSelecter) != PalletTownTileType::TownNullDoor)
 			{
 				//create a temp TileInfo struct to access the attributes
-				const TileInfo tileInfo = myTileMap->GetTileFromPalletMap(Tile_Type(tileSelecter));
+				const TileInfo tileInfo = myTileMap->GetTileFromPalletTownMap(static_cast<PalletTownTileType>(tileSelecter));
 
 				//extract the Frame attribute of the correct variant
 				const Frame frame = tileInfo.myVariant.at(variantSelecter / 16 - 1);
@@ -79,7 +79,7 @@ void Canvas::GeneratePalletVertexData(const std::vector<unsigned>& aBitMap)
 		}
 	}
 }
-void Canvas::GenerateLabVertexData(const std::vector<unsigned>& aBitMap)
+void Canvas::GenerateOakLabVertexData(const std::vector<unsigned>& aBitMap)
 {
 	for (unsigned int i = 0; i < aBitMap.size(); i++)
 	{
@@ -94,10 +94,10 @@ void Canvas::GenerateLabVertexData(const std::vector<unsigned>& aBitMap)
 			const unsigned short tileSelecter = aBitMap[((i / NUM_LAB_COLUMNS) * NUM_LAB_COLUMNS) + j] & CanvasDefinitions::tileMask;
 			const unsigned short variantSelecter = aBitMap[((i / NUM_LAB_COLUMNS) * NUM_LAB_COLUMNS) + j] & CanvasDefinitions::variantMask;
 
-			if (static_cast<OakLab_Tile_Type>(tileSelecter) != Oak_Lab_NullWall_ && static_cast<OakLab_Tile_Type>(tileSelecter) != Oak_Lab_NullDoor_)
+			if (static_cast<OakLabTileType>(tileSelecter) != OakLabTileType::OakLabNullWall && static_cast<OakLabTileType>(tileSelecter) != OakLabTileType::OakLabNullDoor)
 			{
 				//create a temp TileInfo struct to access the attributes
-				const TileInfo tileInfo = myTileMap->GetTileFromOakLabMap(static_cast<OakLab_Tile_Type>(tileSelecter));
+				const TileInfo tileInfo = myTileMap->GetTileFromOakLabMap(static_cast<OakLabTileType>(tileSelecter));
 
 				//extract the Frame attribute of the correct variant
 				const Frame frame = tileInfo.myVariant.at(variantSelecter / 16 - 1);
@@ -118,12 +118,12 @@ void Canvas::GenerateLabVertexData(const std::vector<unsigned>& aBitMap)
 
 			//Find the index of the Tile Type and Variant at the map index
 			unsigned short tileSelecter = aBitMap[i] & CanvasDefinitions::tileMask;
-			unsigned short variantSelecter = aBitMap[i] & CanvasDefinitions::variantMask;
+			const unsigned short variantSelecter = aBitMap[i] & CanvasDefinitions::variantMask;
 
-			if (static_cast<OakLab_Tile_Type>(tileSelecter) != Oak_Lab_NullWall_ && static_cast<OakLab_Tile_Type>(tileSelecter) != Oak_Lab_NullDoor_)
+			if (static_cast<OakLabTileType>(tileSelecter) != OakLabTileType::OakLabNullWall && static_cast<OakLabTileType>(tileSelecter) != OakLabTileType::OakLabNullDoor)
 			{
 				//create a temp TileInfo struct to access the attributes
-				const TileInfo tileInfo = myTileMap->GetTileFromOakLabMap(static_cast<OakLab_Tile_Type>(tileSelecter));
+				const TileInfo tileInfo = myTileMap->GetTileFromOakLabMap(static_cast<OakLabTileType>(tileSelecter));
 
 				//extract the Frame attribute of the correct variant
 				const Frame frame = tileInfo.myVariant.at(variantSelecter / 16 - 1);
@@ -155,10 +155,10 @@ void Canvas::GenerateForestVertexData(const std::vector<unsigned>& aBitMap)
 			const unsigned short tileSelecter = aBitMap[((i / NUM_FOREST_COLUMNS) * NUM_FOREST_COLUMNS) + j] & CanvasDefinitions::tileMask;
 			const unsigned short variantSelecter = aBitMap[((i / NUM_FOREST_COLUMNS) * NUM_FOREST_COLUMNS) + j] & CanvasDefinitions::variantMask;
 
-			if (static_cast<Forest_Tile_Type>(tileSelecter) != Forest_Null_Wall && static_cast<Forest_Tile_Type>(tileSelecter) != Forest_Null_Door)
+			if (static_cast<ForestTileType>(tileSelecter) != ForestTileType::ForestNullWall && static_cast<ForestTileType>(tileSelecter) != ForestTileType::ForestNullDoor)
 			{
 				//create a temp TileInfo struct to access the attributes
-				const TileInfo tileInfo = myTileMap->GetTileFromWoodsMap(static_cast<Forest_Tile_Type>(tileSelecter));
+				const TileInfo tileInfo = myTileMap->GetTileFromWoodsMap(static_cast<ForestTileType>(tileSelecter));
 
 				//extract the Frame attribute of the correct variant
 				const Frame frame = tileInfo.myVariant.at(variantSelecter / 16 - 1);
@@ -179,10 +179,10 @@ void Canvas::GenerateForestVertexData(const std::vector<unsigned>& aBitMap)
 
 			const unsigned short tileSelecter = aBitMap[i] & CanvasDefinitions::tileMask;
 			const unsigned short variantSelecter = aBitMap[i] & CanvasDefinitions::variantMask;
-			if (static_cast<Forest_Tile_Type>(tileSelecter) != Forest_Null_Wall && static_cast<Forest_Tile_Type>(tileSelecter) != Forest_Null_Door)
+			if (static_cast<ForestTileType>(tileSelecter) != ForestTileType::ForestNullWall && static_cast<ForestTileType>(tileSelecter) != ForestTileType::ForestNullDoor)
 			{
 				//create a temp TileInfo struct to access the attributes
-				const TileInfo tileInfo = myTileMap->GetTileFromWoodsMap(static_cast<Forest_Tile_Type>(tileSelecter));
+				const TileInfo tileInfo = myTileMap->GetTileFromWoodsMap(static_cast<ForestTileType>(tileSelecter));
 
 				//extract the Frame attribute of the correct variant
 				const Frame frame = tileInfo.myVariant.at(variantSelecter / 16 - 1);

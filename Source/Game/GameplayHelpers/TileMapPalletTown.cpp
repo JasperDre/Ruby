@@ -1,20 +1,129 @@
 #include "TileMapPalletTown.h"
 
 #include <cassert>
+#include <rapidjson/document.h>
+#include <rapidjson/rapidjson.h>
 
 #include "Events/DoorEvent.h"
 #include "Events/EventManager.h"
 #include "Game/Game.h"
 #include "GameplayHelpers/TileMap.h"
+#include "Utility/DebugUtility.h"
+#include "Utility/FileUtility.h"
 
 TileMapPalletTown::TileMapPalletTown(GameCore* aGameCore, Area anArea) : TileMap(aGameCore, anArea)
 {
+	const bool isFileValid = FileUtility::IsFileValid("Data/TileTypes/PalletTownTileTypes.json");
+	assert(isFileValid);
+	if (!isFileValid)
+		return;
+
+	const char* buffer = FileUtility::ReadFileIntoBuffer("Data/TileTypes/PalletTownTileTypes.json");
+	rapidjson::Document document;
+	document.Parse(buffer);
+	if (document.HasParseError())
+	{
+		DebugUtility::OutputMessage("Failed to read json");
+		return;
+	}
+
+	const rapidjson::Value& oakHouse = document["OakHouse"];
+	for (unsigned int i = 0; i < oakHouse.Size(); i++)
+	{
+		std::string tile = oakHouse[i].GetString();
+		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::OakHouse));
+	}
+
+	const rapidjson::Value& oakDoor = document["OakDoor"];
+	for (unsigned int i = 0; i < oakDoor.Size(); i++)
+	{
+		std::string tile = oakDoor[i].GetString();
+		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::OakDoor));
+	}
+
+	const rapidjson::Value& townFence = document["TownFence"];
+	for (unsigned int i = 0; i < townFence.Size(); i++)
+	{
+		std::string tile = townFence[i].GetString();
+		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::TownFence));
+	}
+
+	const rapidjson::Value& townFlower = document["TownFlower"];
+	for (unsigned int i = 0; i < townFlower.Size(); i++)
+	{
+		std::string tile = townFlower[i].GetString();
+		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::TownFlower));
+	}
+
+	const rapidjson::Value& townGrassA = document["TownGrassA"];
+	for (unsigned int i = 0; i < townGrassA.Size(); i++)
+	{
+		std::string tile = townGrassA[i].GetString();
+		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::TownGrassA));
+	}
+
+	const rapidjson::Value& townGrassB = document["TownGrassB"];
+	for (unsigned int i = 0; i < townGrassB.Size(); i++)
+	{
+		std::string tile = townGrassB[i].GetString();
+		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::TownGrassB));
+	}
+
+	const rapidjson::Value& townMailBox = document["TownMailBox"];
+	for (unsigned int i = 0; i < townMailBox.Size(); i++)
+	{
+		std::string tile = townMailBox[i].GetString();
+		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::TownMailBox));
+	}
+
+	const rapidjson::Value& townSign = document["TownSign"];
+	for (unsigned int i = 0; i < townSign.Size(); i++)
+	{
+		std::string tile = townSign[i].GetString();
+		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::TownSign));
+	}
+
+	const rapidjson::Value& townTree = document["TownTree"];
+	for (unsigned int i = 0; i < townTree.Size(); i++)
+	{
+		std::string tile = townTree[i].GetString();
+		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::TownTree));
+	}
+
+	const rapidjson::Value& trainerHouse = document["TrainerHouse"];
+	for (unsigned int i = 0; i < trainerHouse.Size(); i++)
+	{
+		std::string tile = trainerHouse[i].GetString();
+		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::TrainerHouse));
+	}
+
+	const rapidjson::Value& playerDoor = document["PlayerDoor"];
+	for (unsigned int i = 0; i < playerDoor.Size(); i++)
+	{
+		std::string tile = playerDoor[i].GetString();
+		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::PlayerDoor));
+	}
+
+	const rapidjson::Value& waterA = document["WaterA"];
+	for (unsigned int i = 0; i < waterA.Size(); i++)
+	{
+		std::string tile = waterA[i].GetString();
+		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::WaterA));
+	}
+
+	const rapidjson::Value& wildGrass = document["WildGrass"];
+	for (unsigned int i = 0; i < wildGrass.Size(); i++)
+	{
+		std::string tile = wildGrass[i].GetString();
+		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::WildGrass));
+	}
+
 	for (int i = 0; i < 2; i++)
 	{
-		const Tile_Type aType = static_cast<Tile_Type>(i + 13);
+		const PalletTownTileType aType = static_cast<PalletTownTileType>(i + 13);
 		TileInfo aNullTile = TileInfo(aType);
 
-		if (aNullTile.myType == Town_Null_Wall_)
+		if (aNullTile.myType == PalletTownTileType::TownNullWall)
 		{
 			aNullTile.myIsWalkable = false;
 		}
@@ -24,7 +133,7 @@ TileMapPalletTown::TileMapPalletTown(GameCore* aGameCore, Area anArea) : TileMap
 			aNullTile.myIsDoor = true;
 		}
 
-		myTileInfoMap.insert(std::pair<Tile_Type, TileInfo>(static_cast<Tile_Type>(i + 13), aNullTile));
+		myTileInfoMap.insert(std::pair<PalletTownTileType, TileInfo>(static_cast<PalletTownTileType>(i + 13), aNullTile));
 	}
 }
 
@@ -38,43 +147,44 @@ void TileMapPalletTown::AddTile(const std::string& anIndex, const Frame& aFrame)
 	if (myArea == Area::PalletTown)
 	{
 		//Find the Tile Type from the index string
-		Tile_Type aType = TypeSelecter.find(anIndex)->second;
+		if (myPalletTownTypeSelecter.find(anIndex) == myPalletTownTypeSelecter.end())
+			DebugUtility::OutputMessage("%s doesn't exist\n", anIndex.c_str());
+
+		PalletTownTileType tileType = myPalletTownTypeSelecter.find(anIndex)->second;
 
 		//Check to see if the TileInfo does not exists, if so make a new TileInfo
-		if (myTileInfoMap.find(aType) == myTileInfoMap.end())
+		if (myTileInfoMap.find(tileType) == myTileInfoMap.end())
 		{
-
-			TileInfo myNewTile = TileInfo(aType);
-
-			if (myNewTile.myType == Town_Flower_ || myNewTile.myType == Town_Grass_A_ || myNewTile.myType == Town_Grass_B_ || myNewTile.myType == Wild_Grass_)
+			TileInfo tile = TileInfo(tileType);
+			if (tile.myType == PalletTownTileType::TownFlower || tile.myType == PalletTownTileType::TownGrassA || tile.myType == PalletTownTileType::TownGrassB || tile.myType == PalletTownTileType::WildGrass)
 			{
-				myNewTile.myIsWalkable = true;
+				tile.myIsWalkable = true;
 			}
-			else if (myNewTile.myType == Oak_Door_ || myNewTile.myType == Player_Door_) //if the tile is a door
+			else if (tile.myType == PalletTownTileType::OakDoor || tile.myType == PalletTownTileType::PlayerDoor) //if the tile is a door
 			{
-				myNewTile.myIsWalkable = true;
-				myNewTile.myIsDoor = true;
+				tile.myIsWalkable = true;
+				tile.myIsDoor = true;
 			}
 			else
 			{
-				myNewTile.myIsWalkable = false;
+				tile.myIsWalkable = false;
 			}
 
 			//push the frame attributes into the Variant vector
-			myNewTile.myVariant.push_back(aFrame);
+			tile.myVariant.push_back(aFrame);
 
 			//insert the new TileInfo into the TileInfo Map
-			myTileInfoMap.insert(std::pair<Tile_Type, TileInfo>(aType, myNewTile));
+			myTileInfoMap.insert(std::pair<PalletTownTileType, TileInfo>(tileType, tile));
 		}
 		//if the TileInfo does exist then push back the new frame attributes into its variant vector
 		else
 		{
-			myTileInfoMap.at(aType).myVariant.push_back(aFrame);
+			myTileInfoMap.at(tileType).myVariant.push_back(aFrame);
 		}
 	}
 }
 
-TileInfo TileMapPalletTown::GetTileFromPalletMap(Tile_Type aType) const
+TileInfo TileMapPalletTown::GetTileFromPalletTownMap(PalletTownTileType aType) const
 {
 	return myTileInfoMap.find(aType)->second;
 }
@@ -83,14 +193,14 @@ bool TileMapPalletTown::IsTileAtPlayer(Vector2Int playerColumnRow) const
 {
 	const int anIndex = (NUM_COLUMNS * playerColumnRow.y) + playerColumnRow.x;
 	constexpr short TypeMask = 15;
-	const TileInfo aTileInfo = myTileInfoMap.find(static_cast<Tile_Type>(TypeMask & GetBitMap()[anIndex]))->second;
+	const TileInfo aTileInfo = myTileInfoMap.find(static_cast<PalletTownTileType>(TypeMask & GetBitMap()[anIndex]))->second;
 
-	if (aTileInfo.myType == Oak_Door_)
+	if (aTileInfo.myType == PalletTownTileType::OakDoor)
 	{
 		Event* doorEvent = new DoorEvent(11);
 		myGame->GetEventManager()->QueueEvent(doorEvent);
 	}
-	else if (aTileInfo.myType == Town_Null_Door_)
+	else if (aTileInfo.myType == PalletTownTileType::TownNullDoor)
 	{
 		Event* doorEvent = new DoorEvent(12);
 		myGame->GetEventManager()->QueueEvent(doorEvent);
@@ -104,7 +214,7 @@ bool TileMapPalletTown::IsTileAtNPC(Vector2Int npcColumnRow) const
 {
 	const int anIndex = (NUM_COLUMNS * npcColumnRow.y) + npcColumnRow.x;
 	constexpr short TypeMask = 15;
-	const TileInfo aTileInfo = myTileInfoMap.find(static_cast<Tile_Type>(TypeMask & GetBitMap()[anIndex]))->second;
+	const TileInfo aTileInfo = myTileInfoMap.find(static_cast<PalletTownTileType>(TypeMask & GetBitMap()[anIndex]))->second;
 
 	return aTileInfo.myIsWalkable;
 }
@@ -112,7 +222,7 @@ bool TileMapPalletTown::IsTileAtNPC(Vector2Int npcColumnRow) const
 TileInfo TileMapPalletTown::GetTileAtIndex(int anIndex) const
 {
 	constexpr short TypeMask = 15;
-	TileInfo aTileInfo = myTileInfoMap.find(static_cast<Tile_Type>(TypeMask & GetBitMap()[anIndex]))->second;
+	TileInfo aTileInfo = myTileInfoMap.find(static_cast<PalletTownTileType>(TypeMask & GetBitMap()[anIndex]))->second;
 
 	return aTileInfo;
 }

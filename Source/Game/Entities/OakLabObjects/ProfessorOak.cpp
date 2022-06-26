@@ -37,7 +37,7 @@ ProfessorOak::ProfessorOak(ResourceManager* aResourceManager, TileMap* aTileMap,
 
 	myIsFirstInput = true;
 
-	myState = AI_States::PathingState;
+	myState = AIStates::PathingState;
 
 	myCurrentInput = 0;
 
@@ -67,14 +67,14 @@ void ProfessorOak::Update(float deltatime)
 
 	switch (myState)
 	{
-		case AI_States::PathingState:
+		case AIStates::PathingState:
 			PathingUpdate(deltatime);
 			break;
-		case AI_States::WalkingState:
+		case AIStates::WalkingState:
 			WalkingUpdate(deltatime);
 			break;
-		case AI_States::IdleState:
-		case AI_States::TrackToPlayerState:
+		case AIStates::IdleState:
+		case AIStates::TrackToPlayerState:
 			break;
 	}
 
@@ -88,7 +88,7 @@ void ProfessorOak::Update(float deltatime)
 void ProfessorOak::PathingUpdate(float delatime)
 {
 	if (GetNextPath(GetMyIndex()))
-		SetMyState(AI_States::WalkingState);
+		SetMyState(AIStates::WalkingState);
 }
 
 void ProfessorOak::WalkingUpdate(float deltatime)
@@ -118,7 +118,7 @@ void ProfessorOak::WalkingUpdate(float deltatime)
 			m_Animation->SetFrameIndex(0);
 
 		myIsFirstInput = true;
-		SetMyState(AI_States::PathingState);
+		SetMyState(AIStates::PathingState);
 	}
 }
 
@@ -146,7 +146,7 @@ void ProfessorOak::Move(SpriteDirection dir, float deltatime)
 	}
 	else
 	{
-		myState = AI_States::PathingState;
+		myState = AIStates::PathingState;
 	}
 }
 
@@ -238,7 +238,7 @@ SpriteDirection ProfessorOak::CalculateNextInput(Vector2Int anIndex)
 	return SpriteDirection::SpriteDirectionStop;
 }
 
-void ProfessorOak::SetMyState(AI_States aState)
+void ProfessorOak::SetMyState(AIStates aState)
 {
 	myState = aState;
 }
