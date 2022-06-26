@@ -223,7 +223,7 @@ bool WildPokemonTile::IsNodeClearOnSpecial(int tx, int ty) const
 	if (tx > MinColumnRow.x && tx < MaxColumnRow.x && ty > MinColumnRow.y && ty < MaxColumnRow.y)
 	{
 		const int CheckTileIndex = myTileMap->GetIndexFromColumnRow(tx, ty);
-		if (myTileMap->GetTileAtIndex(CheckTileIndex).myForestType == ForestWildGrass)
+		if (myTileMap->GetTileAtIndex(CheckTileIndex).myForestType == ForestTileType::ForestWildGrass)
 			return true;
 	}
 

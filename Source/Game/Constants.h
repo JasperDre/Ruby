@@ -58,7 +58,7 @@ enum class PalletTownTileType
 	TownNullWall = 14,	//(0000 0000 0000 1110)
 };
 
-enum OakLabTileType
+enum class OakLabTileType
 {
 	OakLabFloor = 0,		//(0000 0000 0000 0000)
 	OakLabEntrance = 1,		//(0000 0000 0000 0001)
@@ -73,7 +73,7 @@ enum OakLabTileType
 	OakLabNullDoor = 10,	//(0000 0000 0000 1010)
 };
 
-enum ForestTileType
+enum class ForestTileType
 {
 	ForestGrass = 0,
 	ForestRidge = 1,

@@ -12,7 +12,7 @@ OakLabMachineTop::OakLabMachineTop(ResourceManager* aResourceManager, TileMap* a
 
 	for (unsigned int i = 0; i < myOakLabMachineMap.size(); i++)
 	{
-		TileInfo atile = aTileMap->GetTileFromOakLabMap(OakLabMachine);
+		TileInfo atile = aTileMap->GetTileFromOakLabMap(OakLabTileType::OakLabMachine);
 		Frame aframe = atile.myVariant.at(myOakLabMachineMap[i]);
 		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / aResourceManager->GetTextureSize(1).x), (aframe.myOrigin.myY / aResourceManager->GetTextureSize(1).y));
 		aframe.myUVScale = Vector2Float((aframe.mySize.myX / aResourceManager->GetTextureSize(1).x), (aframe.mySize.myY / aResourceManager->GetTextureSize(1).y));

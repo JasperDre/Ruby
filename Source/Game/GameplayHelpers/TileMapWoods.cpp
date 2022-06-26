@@ -16,7 +16,7 @@ TileMapWoods::TileMapWoods(GameCore* aGameCore, Area anArea)
 
 		TileInfo aNullTile = TileInfo(aType);
 
-		if (aNullTile.myForestType == ForestNullWall)
+		if (aNullTile.myForestType == ForestTileType::ForestNullWall)
 		{
 			aNullTile.myIsWalkable = false;
 		}
@@ -48,11 +48,11 @@ void TileMapWoods::AddTile(const std::string& anIndex, const Frame& aFrame)
 
 			TileInfo myNewTile = TileInfo(aType);
 
-			if (myNewTile.myForestType == ForestGrass || myNewTile.myForestType == ForestWildGrass)
+			if (myNewTile.myForestType == ForestTileType::ForestGrass || myNewTile.myForestType == ForestTileType::ForestWildGrass)
 			{
 				myNewTile.myIsWalkable = true;
 			}
-			else if (myNewTile.myForestType == ForestNullDoor) //if the tile is a door
+			else if (myNewTile.myForestType == ForestTileType::ForestNullDoor) //if the tile is a door
 			{
 				myNewTile.myIsWalkable = true;
 				myNewTile.myIsDoor = true;
@@ -87,7 +87,7 @@ bool TileMapWoods::IsTileAtPlayer(Vector2Int playerColumnRow) const
 	constexpr short TypeMask = 15;
 	const TileInfo aTileInfo = myTileInfoMap.find(static_cast<ForestTileType>(TypeMask & GetBitMap()[anIndex]))->second;
 
-	if (aTileInfo.myForestType == ForestNullDoor)
+	if (aTileInfo.myForestType == ForestTileType::ForestNullDoor)
 	{
 		Event* doorEvent = new DoorEvent(13);
 		myGame->GetEventManager()->QueueEvent(doorEvent);

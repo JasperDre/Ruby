@@ -11,7 +11,7 @@ OakLabPlantTop::OakLabPlantTop(ResourceManager* aResourceManager, TileMap* aTile
 
 	for (unsigned int i = 0; i < myOakLabPlantMap.size(); i++)
 	{
-		TileInfo tileInfo = aTileMap->GetTileFromOakLabMap(OakLabPlant);
+		TileInfo tileInfo = aTileMap->GetTileFromOakLabMap(OakLabTileType::OakLabPlant);
 		Frame frame = tileInfo.myVariant.at(myOakLabPlantMap[i]);
 		frame.myUVOffset = Vector2Float((frame.myOrigin.myX / aResourceManager->GetTextureSize(1).x), (frame.myOrigin.myY / aResourceManager->GetTextureSize(1).y));
 		frame.myUVScale = Vector2Float((frame.mySize.myX / aResourceManager->GetTextureSize(1).x), (frame.mySize.myY / aResourceManager->GetTextureSize(1).y));
