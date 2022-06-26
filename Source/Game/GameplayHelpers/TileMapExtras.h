@@ -12,6 +12,7 @@ public:
 	TileMapExtras(GameCore* aGameCore, Area anArea);
 	~TileMapExtras() override;
 
+	void LoadTileTypeMap(const std::string& /*aFilepath*/) override {}
 	void AddTile(const std::string& anIndex, const Frame& aFrame) override;
 
 	[[nodiscard]] Frame GetFrameFromExtrasMap(const std::string& aType) const override;

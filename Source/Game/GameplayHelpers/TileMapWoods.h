@@ -18,6 +18,7 @@ public:
 	TileMapWoods(GameCore* aGameCore, Area anArea);
 	~TileMapWoods() override;
 
+	void LoadTileTypeMap(const std::string& /*aFilepath*/) override {}
 	void AddTile(const std::string& anIndex, const Frame& aFrame) override;
 
 	[[nodiscard]] TileInfo GetTileFromWoodsMap(ForestTileType aType) const override;

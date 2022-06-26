@@ -12,6 +12,7 @@ public:
 	TileMapOakLab(GameCore* aGameCore, Area anArea);
 	~TileMapOakLab() override;
 
+	void LoadTileTypeMap(const std::string& /*aFilepath*/) override {}
 	void AddTile(const std::string& anIndex, const Frame& aFrame) override;
 
 	[[nodiscard]] TileInfo GetTileFromOakLabMap(OakLabTileType aType) const override;

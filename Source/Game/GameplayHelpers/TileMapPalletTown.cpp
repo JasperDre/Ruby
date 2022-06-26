@@ -13,12 +13,38 @@
 
 TileMapPalletTown::TileMapPalletTown(GameCore* aGameCore, Area anArea) : TileMap(aGameCore, anArea)
 {
-	const bool isFileValid = FileUtility::IsFileValid("Data/TileTypes/PalletTownTileTypes.json");
+	for (int i = 0; i < 2; i++)
+	{
+		const PalletTownTileType aType = static_cast<PalletTownTileType>(i + 13);
+		TileInfo aNullTile = TileInfo(aType);
+
+		if (aNullTile.myType == PalletTownTileType::TownNullWall)
+		{
+			aNullTile.myIsWalkable = false;
+		}
+		else
+		{
+			aNullTile.myIsWalkable = true;
+			aNullTile.myIsDoor = true;
+		}
+
+		myTileInfoMap.insert(std::pair<PalletTownTileType, TileInfo>(static_cast<PalletTownTileType>(i + 13), aNullTile));
+	}
+}
+
+TileMapPalletTown::~TileMapPalletTown()
+{
+	myTileInfoMap.clear();
+}
+
+void TileMapPalletTown::LoadTileTypeMap(const std::string& aFilepath)
+{
+	const bool isFileValid = FileUtility::IsFileValid(aFilepath);
 	assert(isFileValid);
 	if (!isFileValid)
 		return;
 
-	const char* buffer = FileUtility::ReadFileIntoBuffer("Data/TileTypes/PalletTownTileTypes.json");
+	const char* buffer = FileUtility::ReadFileIntoBuffer(aFilepath);
 	rapidjson::Document document;
 	document.Parse(buffer);
 	if (document.HasParseError())
@@ -117,29 +143,6 @@ TileMapPalletTown::TileMapPalletTown(GameCore* aGameCore, Area anArea) : TileMap
 		std::string tile = wildGrass[i].GetString();
 		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::WildGrass));
 	}
-
-	for (int i = 0; i < 2; i++)
-	{
-		const PalletTownTileType aType = static_cast<PalletTownTileType>(i + 13);
-		TileInfo aNullTile = TileInfo(aType);
-
-		if (aNullTile.myType == PalletTownTileType::TownNullWall)
-		{
-			aNullTile.myIsWalkable = false;
-		}
-		else
-		{
-			aNullTile.myIsWalkable = true;
-			aNullTile.myIsDoor = true;
-		}
-
-		myTileInfoMap.insert(std::pair<PalletTownTileType, TileInfo>(static_cast<PalletTownTileType>(i + 13), aNullTile));
-	}
-}
-
-TileMapPalletTown::~TileMapPalletTown()
-{
-	myTileInfoMap.clear();
 }
 
 void TileMapPalletTown::AddTile(const std::string& anIndex, const Frame& aFrame)

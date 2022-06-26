@@ -16,7 +16,8 @@ class TileMapPalletTown : public TileMap
 public:
 	TileMapPalletTown(GameCore* aGameCore, Area anArea);
 	~TileMapPalletTown() override;
-	
+
+	void LoadTileTypeMap(const std::string& aFilepath) override;
 	void AddTile(const std::string& anIndex, const Frame& aFrame) override;
 
 	[[nodiscard]] TileInfo GetTileFromPalletTownMap(PalletTownTileType aType) const override;

@@ -141,6 +141,8 @@ void Game::LoadContent()
 	myExtrasSetTextureIdentifier = GLHelpers::LoadTexture("Data/Textures/ExtrasTileSet.png");
 	myBattleSceneTextureIdentifier = GLHelpers::LoadTexture("Data/Textures/BattleScene.png");
 
+	myPalletTileMap->LoadTileTypeMap("Data/TileTypes/PalletTownTileTypes.json");
+
 	myResourceManager->UnpackJson("Data/Textures/TileSet.json", myPalletTileMap);
 	myResourceManager->UnpackJson("Data/Textures/OakLabTileSet.json", myOakLabTileMap);
 	myResourceManager->UnpackJson("Data/Textures/Player_NPCSprites.json", myPalletTileMap);

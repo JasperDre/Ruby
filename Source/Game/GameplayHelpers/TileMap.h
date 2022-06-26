@@ -15,6 +15,7 @@ public:
 	TileMap(GameCore* aGameCore, Area aArea);
 	virtual ~TileMap() = default;
 
+	virtual void LoadTileTypeMap(const std::string& aFilepath) = 0;
 	virtual void AddTile(const std::string& anIndex, const Frame& aFrame) = 0;
 
 	[[nodiscard]] virtual bool IsTileAtPlayer(Vector2Int playerColumnRow) const = 0;
