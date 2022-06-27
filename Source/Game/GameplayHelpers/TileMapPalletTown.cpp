@@ -15,20 +15,20 @@ TileMapPalletTown::TileMapPalletTown(GameCore* aGameCore, Area anArea) : TileMap
 {
 	for (int i = 0; i < 2; i++)
 	{
-		const PalletTownTileType aType = static_cast<PalletTownTileType>(i + 13);
-		TileInfo aNullTile = TileInfo(aType);
+		const PalletTownTileType type = static_cast<PalletTownTileType>(i + 13);
+		TileInfo nullTile = TileInfo(type);
 
-		if (aNullTile.myType == PalletTownTileType::TownNullWall)
+		if (nullTile.myType == PalletTownTileType::TownNullWall)
 		{
-			aNullTile.myIsWalkable = false;
+			nullTile.myIsWalkable = false;
 		}
 		else
 		{
-			aNullTile.myIsWalkable = true;
-			aNullTile.myIsDoor = true;
+			nullTile.myIsWalkable = true;
+			nullTile.myIsDoor = true;
 		}
 
-		myTileInfoMap.insert(std::pair<PalletTownTileType, TileInfo>(static_cast<PalletTownTileType>(i + 13), aNullTile));
+		myTileInfoMap.insert(std::pair<PalletTownTileType, TileInfo>(static_cast<PalletTownTileType>(i + 13), nullTile));
 	}
 }
 
@@ -215,19 +215,19 @@ bool TileMapPalletTown::IsTileAtPlayer(Vector2Int playerColumnRow) const
 
 bool TileMapPalletTown::IsTileAtNPC(Vector2Int npcColumnRow) const
 {
-	const int anIndex = (NUM_COLUMNS * npcColumnRow.y) + npcColumnRow.x;
-	constexpr short TypeMask = 15;
-	const TileInfo aTileInfo = myTileInfoMap.find(static_cast<PalletTownTileType>(TypeMask & GetBitMap()[anIndex]))->second;
+	const int index = (NUM_COLUMNS * npcColumnRow.y) + npcColumnRow.x;
+	constexpr short typeMask = 15;
+	const TileInfo tileInfo = myTileInfoMap.find(static_cast<PalletTownTileType>(typeMask & GetBitMap()[index]))->second;
 
-	return aTileInfo.myIsWalkable;
+	return tileInfo.myIsWalkable;
 }
 
 TileInfo TileMapPalletTown::GetTileAtIndex(int anIndex) const
 {
-	constexpr short TypeMask = 15;
-	TileInfo aTileInfo = myTileInfoMap.find(static_cast<PalletTownTileType>(TypeMask & GetBitMap()[anIndex]))->second;
+	constexpr short typeMask = 15;
+	TileInfo tileInfo = myTileInfoMap.find(static_cast<PalletTownTileType>(typeMask & GetBitMap()[anIndex]))->second;
 
-	return aTileInfo;
+	return tileInfo;
 }
 
 int TileMapPalletTown::GetMapWidth() const
@@ -243,9 +243,9 @@ int TileMapPalletTown::GetMapHeight() const
 int TileMapPalletTown::GetIndexFromColumnRow(int aColumn, int aRow) const
 {
 	assert(aColumn >= 0 && aRow >= 0 && aColumn <= NUM_COLUMNS && aRow <= NUM_COLUMNS);
-	const int anIndexOnMap = (aRow * NUM_COLUMNS) + aColumn;
+	const int indexOnMap = (aRow * NUM_COLUMNS) + aColumn;
 
-	return anIndexOnMap;
+	return indexOnMap;
 }
 
 Vector2Int TileMapPalletTown::GetColumRowFromIndex(int anIndex) const

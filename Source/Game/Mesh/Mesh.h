@@ -14,11 +14,11 @@ public:
 	struct VertexFormat
 	{
 		VertexFormat() : myPosition(0.0f), myUVCoordinates(0.0f) {}
-		VertexFormat(Vector2Float pos, Color color, Vector2Float UV)
+		VertexFormat(Vector2Float aPos, Color aColor, Vector2Float anUV)
 		{
-			myPosition = pos;
-			myColor = color;
-			myUVCoordinates = UV;
+			myPosition = aPos;
+			myColor = aColor;
+			myUVCoordinates = anUV;
 		}
 
 		Vector2Float myPosition;
@@ -29,12 +29,12 @@ public:
 	Mesh();
 	virtual ~Mesh();
 
-	void Draw(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float camPos, Vector2Float projScale, unsigned int aTexture, Vector2Float aUVscale, Vector2Float aUVoffset) const;
-	void DrawCanvas(Vector2Float cameraPos, Vector2Float projectionScale, unsigned int aTexture) const;
-	void DebugDraw(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float camPos, Vector2Float projScale) const;
+	void Draw(Vector2Float anObjectPos, float anOobjectAngle, Vector2Float anObjectScale, Vector2Float aCameraPos, Vector2Float aProjectionScale, unsigned int aTexture, Vector2Float aUVscale, Vector2Float aUVoffset) const;
+	void DrawCanvas(Vector2Float aCameraPos, Vector2Float aProjectionScale, unsigned int aTexture) const;
+	void DebugDraw(Vector2Float anObjectPos, float anObjectAngle, Vector2Float anObjectScale, Vector2Float aCameraPos, Vector2Float aProjectionScale) const;
 	void GenerateTriangle();
 	void GenerateCircle();
-	void GeneratePolygon(float radius, int vertices, char r, char g, char b, char a);
+	void GeneratePolygon(float aRadius, int aVertices, char aRed, char aGreen, char aBlue, char anAlpha);
 	void GenerateFrameMesh();
 	void GenerateTileMesh();
 	void GenerateWildTileMesh();
@@ -42,7 +42,7 @@ public:
 	void GenerateDebugMesh();
 	void GenterateCanvasMesh();
 
-	void SetShaders(ShaderProgram* pShader, ShaderProgram* pDebug) { myShader = pShader; myDebugShader = pDebug; }
+	void SetShaders(ShaderProgram* aShader, ShaderProgram* aDebug) { myShader = aShader; myDebugShader = aDebug; }
 
 	[[nodiscard]] unsigned int GetVBOIdentifier() const { return myVBOIdentifier; }
 	[[nodiscard]] unsigned int GetTetureIdentifier() const { return myTextureIdentifier; }

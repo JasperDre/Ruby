@@ -27,7 +27,7 @@ Mesh::~Mesh()
 	myCanvasVertices.clear();
 }
 
-void Mesh::Draw(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float camPos, Vector2Float projScale, unsigned int aTexture, Vector2Float aUVscale, Vector2Float aUVoffset) const
+void Mesh::Draw(Vector2Float anObjectPos, float anOobjectAngle, Vector2Float anObjectScale, Vector2Float aCameraPos, Vector2Float aProjectionScale, unsigned int aTexture, Vector2Float aUVscale, Vector2Float aUVoffset) const
 {
 	assert(myPrimitiveType != static_cast<GLenum>(-1));
 	assert(myNumberOfVertices != 0);
@@ -60,11 +60,11 @@ void Mesh::Draw(Vector2Float objectPos, float objectAngle, Vector2Float objectSc
 
 	glUseProgram(shaderProgram);
 
-	GLHelpers::SetUniform2f(shaderProgram, "u_ObjectScale", objectScale);
-	GLHelpers::SetUniform1f(shaderProgram, "u_ObjectAngleRadians", objectAngle / 180.0f * Math::pi);
-	GLHelpers::SetUniform2f(shaderProgram, "u_ObjectPosition", objectPos);
-	GLHelpers::SetUniform2f(shaderProgram, "u_CameraTranslation", camPos * -1.0f);
-	GLHelpers::SetUniform2f(shaderProgram, "u_ProjectionScale", projScale);
+	GLHelpers::SetUniform2f(shaderProgram, "u_ObjectScale", anObjectScale);
+	GLHelpers::SetUniform1f(shaderProgram, "u_ObjectAngleRadians", anOobjectAngle / 180.0f * Math::pi);
+	GLHelpers::SetUniform2f(shaderProgram, "u_ObjectPosition", anObjectPos);
+	GLHelpers::SetUniform2f(shaderProgram, "u_CameraTranslation", aCameraPos * -1.0f);
+	GLHelpers::SetUniform2f(shaderProgram, "u_ProjectionScale", aProjectionScale);
 
 	glActiveTexture(GL_TEXTURE0 + 8);
 	glBindTexture(GL_TEXTURE_2D, aTexture);
@@ -80,12 +80,12 @@ void Mesh::Draw(Vector2Float objectPos, float objectAngle, Vector2Float objectSc
 	GLHelpers::CheckForGLErrors();
 
 	if (myIsDebug)
-		DebugDraw(objectPos, objectAngle, objectScale, camPos, projScale);
+		DebugDraw(anObjectPos, anOobjectAngle, anObjectScale, aCameraPos, aProjectionScale);
 
 	GLHelpers::CheckForGLErrors();
 }
 
-void Mesh::DrawCanvas(Vector2Float cameraPos, Vector2Float projectionScale, unsigned int aTexture) const
+void Mesh::DrawCanvas(Vector2Float aCameraPos, Vector2Float aProjectionScale, unsigned int aTexture) const
 {
 	assert(myPrimitiveType != static_cast<GLenum>(-1));
 	assert(myNumberOfVertices != 0);
@@ -121,8 +121,8 @@ void Mesh::DrawCanvas(Vector2Float cameraPos, Vector2Float projectionScale, unsi
 	GLHelpers::SetUniform2f(shaderProgram, "u_ObjectScale", 1.0f);
 	GLHelpers::SetUniform1f(shaderProgram, "u_ObjectAngleRadians", 0 / 180.0f * Math::pi);
 	GLHelpers::SetUniform2f(shaderProgram, "u_ObjectPosition", Vector2Float(0.0f, 0.0f));
-	GLHelpers::SetUniform2f(shaderProgram, "u_CameraTranslation", cameraPos * -1);
-	GLHelpers::SetUniform2f(shaderProgram, "u_ProjectionScale", projectionScale);
+	GLHelpers::SetUniform2f(shaderProgram, "u_CameraTranslation", aCameraPos * -1);
+	GLHelpers::SetUniform2f(shaderProgram, "u_ProjectionScale", aProjectionScale);
 
 	glActiveTexture(GL_TEXTURE0 + 8);
 	glBindTexture(GL_TEXTURE_2D, aTexture);
@@ -138,11 +138,11 @@ void Mesh::DrawCanvas(Vector2Float cameraPos, Vector2Float projectionScale, unsi
 	GLHelpers::CheckForGLErrors();
 
 	if (myIsDebug)
-		DebugDraw(Vector2Float(0.0f, 0.0f), 0 / 180.0f * Math::pi, 1, cameraPos, projectionScale);
+		DebugDraw(Vector2Float(0.0f, 0.0f), 0 / 180.0f * Math::pi, 1, aCameraPos, aProjectionScale);
 
 	GLHelpers::CheckForGLErrors();
 }
-void Mesh::DebugDraw(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float camPos, Vector2Float projScale) const
+void Mesh::DebugDraw(Vector2Float anObjectPos, float anObjectAngle, Vector2Float anObjectScale, Vector2Float aCameraPos, Vector2Float aProjectionScale) const
 {
 	assert(myPrimitiveType != static_cast<GLenum>(-1));
 	assert(myNumberOfVertices != 0);
@@ -168,11 +168,11 @@ void Mesh::DebugDraw(Vector2Float objectPos, float objectAngle, Vector2Float obj
 
 	glUseProgram(shaderProgram);
 
-	GLHelpers::SetUniform2f(shaderProgram, "u_ObjectScale", objectScale);
-	GLHelpers::SetUniform1f(shaderProgram, "u_ObjectAngleRadians", objectAngle / 180.0f * Math::pi);
-	GLHelpers::SetUniform2f(shaderProgram, "u_ObjectPosition", objectPos);
-	GLHelpers::SetUniform2f(shaderProgram, "u_CameraTranslation", camPos * -1);
-	GLHelpers::SetUniform2f(shaderProgram, "u_ProjectionScale", projScale);
+	GLHelpers::SetUniform2f(shaderProgram, "u_ObjectScale", anObjectScale);
+	GLHelpers::SetUniform1f(shaderProgram, "u_ObjectAngleRadians", anObjectAngle / 180.0f * Math::pi);
+	GLHelpers::SetUniform2f(shaderProgram, "u_ObjectPosition", anObjectPos);
+	GLHelpers::SetUniform2f(shaderProgram, "u_CameraTranslation", aCameraPos * -1);
+	GLHelpers::SetUniform2f(shaderProgram, "u_ProjectionScale", aProjectionScale);
 
 	glDrawArrays(GL_LINE_LOOP, 0, myNumberOfVertices);
 }
@@ -183,7 +183,8 @@ void Mesh::GenerateTriangle()
 	assert(myVBOIdentifier == 0);
 
 	// Vertex info for a diamond.
-	const VertexFormat vertexAttributes[] = {
+	const VertexFormat vertexAttributes[] =
+	{
 		VertexFormat(Vector2Float(0.0f, 1.0f), Color(255, 255, 255, 255), Vector2Float(0.5f, 1.0f)),
 		VertexFormat(Vector2Float(-0.5f, -1.0f), Color(255, 255, 255, 255), Vector2Float(0.25f, 0.0f)),
 		VertexFormat(Vector2Float(0.5f, -1.0f), Color(255, 255, 255, 255), Vector2Float(0.75f, 0.0f)),
@@ -223,14 +224,14 @@ void Mesh::GenerateCircle()
 
 	GLHelpers::CheckForGLErrors();
 }
-void Mesh::GeneratePolygon(float radius, int vertices, char r, char g, char b, char a)
+void Mesh::GeneratePolygon(float aRadius, int aVertices, char aRed, char aGreen, char aBlue, char anAlpha)
 {
 	// ATM this can only be called once, so we assert if it's called again with a VBO already allocated
 	assert(myVBOIdentifier == 0);
 
-	myRadius = radius;
-	myWidth = radius * 2;
-	myHeight = radius * 2;
+	myRadius = aRadius;
+	myWidth = aRadius * 2;
+	myHeight = aRadius * 2;
 
 	std::vector<float> m_Circle;
 
@@ -240,28 +241,28 @@ void Mesh::GeneratePolygon(float radius, int vertices, char r, char g, char b, c
 	m_Circle.push_back(x);
 	m_Circle.push_back(y);
 
-	for (int i = 1; i <= vertices; i++)
+	for (int i = 1; i <= aVertices; i++)
 	{
-		x = -(radius * std::cos(static_cast<float>(i) * (2.0f * Math::pi / static_cast<float>(vertices))));
-		y = -(radius * std::sin(static_cast<float>(i) * (2.0f * Math::pi / static_cast<float>(vertices))));
+		x = -(aRadius * std::cos(static_cast<float>(i) * (2.0f * Math::pi / static_cast<float>(aVertices))));
+		y = -(aRadius * std::sin(static_cast<float>(i) * (2.0f * Math::pi / static_cast<float>(aVertices))));
 
 		m_Circle.push_back(x);
 		m_Circle.push_back(y);
-		m_Circle.push_back(r);
-		m_Circle.push_back(g);
-		m_Circle.push_back(b);
-		m_Circle.push_back(a);
+		m_Circle.push_back(aRed);
+		m_Circle.push_back(aGreen);
+		m_Circle.push_back(aBlue);
+		m_Circle.push_back(anAlpha);
 	}
 
-	x = -(radius * std::cos(1.0f * (2.0f * Math::pi / static_cast<float>(vertices))));
-	y = -(radius * std::sin(1.0f * (2.0f * Math::pi / static_cast<float>(vertices))));
+	x = -(aRadius * std::cos(1.0f * (2.0f * Math::pi / static_cast<float>(aVertices))));
+	y = -(aRadius * std::sin(1.0f * (2.0f * Math::pi / static_cast<float>(aVertices))));
 
 	m_Circle.push_back(x);
 	m_Circle.push_back(y);
-	m_Circle.push_back(r);
-	m_Circle.push_back(g);
-	m_Circle.push_back(b);
-	m_Circle.push_back(a);
+	m_Circle.push_back(aRed);
+	m_Circle.push_back(aGreen);
+	m_Circle.push_back(aBlue);
+	m_Circle.push_back(anAlpha);
 
 	glGenBuffers(1, &myVBOIdentifier);
 	glBindBuffer(GL_ARRAY_BUFFER, myVBOIdentifier);
@@ -269,7 +270,7 @@ void Mesh::GeneratePolygon(float radius, int vertices, char r, char g, char b, c
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	myPrimitiveType = GL_TRIANGLE_FAN;
-	myNumberOfVertices = vertices + 2;
+	myNumberOfVertices = aVertices + 2;
 
 	GLHelpers::CheckForGLErrors();
 }
