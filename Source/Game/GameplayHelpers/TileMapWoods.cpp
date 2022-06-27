@@ -1,11 +1,14 @@
 #include "TileMapWoods.h"
 
 #include <cassert>
+#include <rapidjson/document.h>
 
 #include "Events/DoorEvent.h"
 #include "Events/EventManager.h"
 #include "Game/Game.h"
 #include "GameplayHelpers/TileMap.h"
+#include "Utility/DebugUtility.h"
+#include "Utility/FileUtility.h"
 
 TileMapWoods::TileMapWoods(GameCore* aGameCore, Area anArea)
 	: TileMap(aGameCore, anArea)
@@ -34,6 +37,40 @@ TileMapWoods::~TileMapWoods()
 	myTileInfoMap.clear();
 }
 
+void TileMapWoods::LoadTileTypeMap(const std::string& aFilepath)
+{
+	const bool isFileValid = FileUtility::IsFileValid(aFilepath);
+	assert(isFileValid);
+	if (!isFileValid)
+		return;
+
+	const char* buffer = FileUtility::ReadFileIntoBuffer(aFilepath);
+	rapidjson::Document document;
+	document.Parse(buffer);
+	if (document.HasParseError())
+	{
+		DebugUtility::OutputMessage("Failed to read json");
+		return;
+	}
+
+	auto loadType = [&document](const char* aValueName, ForestTileType aType, std::map<std::string, ForestTileType>& aSelector)
+	{
+		const rapidjson::Value& oakHouse = document[aValueName];
+		for (unsigned int i = 0; i < oakHouse.Size(); i++)
+		{
+			std::string tile = oakHouse[i].GetString();
+			aSelector.insert(std::pair<std::string, ForestTileType>(tile, aType));
+		}
+	};
+
+	loadType("ForestFence", ForestTileType::ForestFence, myWoodsTypeSelecter);
+	loadType("ForestGrass", ForestTileType::ForestGrass, myWoodsTypeSelecter);
+	loadType("ForestRidge", ForestTileType::ForestRidge, myWoodsTypeSelecter);
+	loadType("ForestSign", ForestTileType::ForestSign, myWoodsTypeSelecter);
+	loadType("ForestTree", ForestTileType::ForestTree, myWoodsTypeSelecter);
+	loadType("ForestWildGrass", ForestTileType::ForestWildGrass, myWoodsTypeSelecter);
+}
+
 void TileMapWoods::AddTile(const std::string& anIndex, const Frame& aFrame)
 {
 	if (myArea == Area::Woods)
@@ -41,7 +78,6 @@ void TileMapWoods::AddTile(const std::string& anIndex, const Frame& aFrame)
 		//Find the Tile Type from the index string
 		ForestTileType type = myWoodsTypeSelecter.find(anIndex)->second;
 
-		//Check to see if the TileInfo does not exists, if so make a new TileInfo
 		if (myTileInfoMap.find(type) == myTileInfoMap.end())
 		{
 			TileInfo tileInfo = TileInfo(type);

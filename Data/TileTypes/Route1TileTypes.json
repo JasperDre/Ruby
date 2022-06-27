@@ -1,0 +1,31 @@
+{
+  "ForestFence": [
+    "Forest_Fence_1.png"
+  ],
+  "ForestGrass": [
+    "Forest_Grass_1.png",
+    "Forest_Grass_2.png"
+  ],
+  "ForestRidge": [
+    "Forest_Ridge_1.png",
+    "Forest_Ridge_2.png",
+    "Forest_Ridge_3.png"
+  ],
+  "ForestSign": [
+    "Forest_Sign_1.png"
+  ],
+  "ForestTree": [
+    "Forest_Tree_1.png",
+    "Forest_Tree_2.png",
+    "Forest_Tree_3.png",
+    "Forest_Tree_4.png",
+    "Forest_Tree_5.png",
+    "Forest_Tree_6.png",
+    "Forest_Tree_7.png",
+    "Forest_Tree_8.png"
+  ],
+  "ForestWildGrass": [
+    "Forest_Wild_Grass_1.png",
+    "Forest_Wild_Grass_2.png"
+  ]
+}

@@ -142,6 +142,7 @@ void Game::LoadContent()
 	myBattleSceneTextureIdentifier = GLHelpers::LoadTexture("Data/Textures/BattleScene.png");
 
 	myPalletTileMap->LoadTileTypeMap("Data/TileTypes/PalletTownTileTypes.json");
+	myWoodsTileMap->LoadTileTypeMap("Data/TileTypes/Route1TileTypes.json");
 
 	myResourceManager->UnpackJson("Data/Textures/TileSet.json", myPalletTileMap);
 	myResourceManager->UnpackJson("Data/Textures/OakLabTileSet.json", myOakLabTileMap);
