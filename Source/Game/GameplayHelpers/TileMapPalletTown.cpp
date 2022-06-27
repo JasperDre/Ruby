@@ -53,96 +53,29 @@ void TileMapPalletTown::LoadTileTypeMap(const std::string& aFilepath)
 		return;
 	}
 
-	const rapidjson::Value& oakHouse = document["OakHouse"];
-	for (unsigned int i = 0; i < oakHouse.Size(); i++)
+	auto loadType = [&document](const char* aValueName, PalletTownTileType aType, std::map<std::string, PalletTownTileType>& aSelector)
 	{
-		std::string tile = oakHouse[i].GetString();
-		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::OakHouse));
-	}
+		const rapidjson::Value& oakHouse = document[aValueName];
+		for (unsigned int i = 0; i < oakHouse.Size(); i++)
+		{
+			std::string tile = oakHouse[i].GetString();
+			aSelector.insert(std::pair<std::string, PalletTownTileType>(tile, aType));
+		}
+	};
 
-	const rapidjson::Value& oakDoor = document["OakDoor"];
-	for (unsigned int i = 0; i < oakDoor.Size(); i++)
-	{
-		std::string tile = oakDoor[i].GetString();
-		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::OakDoor));
-	}
-
-	const rapidjson::Value& townFence = document["TownFence"];
-	for (unsigned int i = 0; i < townFence.Size(); i++)
-	{
-		std::string tile = townFence[i].GetString();
-		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::TownFence));
-	}
-
-	const rapidjson::Value& townFlower = document["TownFlower"];
-	for (unsigned int i = 0; i < townFlower.Size(); i++)
-	{
-		std::string tile = townFlower[i].GetString();
-		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::TownFlower));
-	}
-
-	const rapidjson::Value& townGrassA = document["TownGrassA"];
-	for (unsigned int i = 0; i < townGrassA.Size(); i++)
-	{
-		std::string tile = townGrassA[i].GetString();
-		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::TownGrassA));
-	}
-
-	const rapidjson::Value& townGrassB = document["TownGrassB"];
-	for (unsigned int i = 0; i < townGrassB.Size(); i++)
-	{
-		std::string tile = townGrassB[i].GetString();
-		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::TownGrassB));
-	}
-
-	const rapidjson::Value& townMailBox = document["TownMailBox"];
-	for (unsigned int i = 0; i < townMailBox.Size(); i++)
-	{
-		std::string tile = townMailBox[i].GetString();
-		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::TownMailBox));
-	}
-
-	const rapidjson::Value& townSign = document["TownSign"];
-	for (unsigned int i = 0; i < townSign.Size(); i++)
-	{
-		std::string tile = townSign[i].GetString();
-		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::TownSign));
-	}
-
-	const rapidjson::Value& townTree = document["TownTree"];
-	for (unsigned int i = 0; i < townTree.Size(); i++)
-	{
-		std::string tile = townTree[i].GetString();
-		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::TownTree));
-	}
-
-	const rapidjson::Value& trainerHouse = document["TrainerHouse"];
-	for (unsigned int i = 0; i < trainerHouse.Size(); i++)
-	{
-		std::string tile = trainerHouse[i].GetString();
-		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::TrainerHouse));
-	}
-
-	const rapidjson::Value& playerDoor = document["PlayerDoor"];
-	for (unsigned int i = 0; i < playerDoor.Size(); i++)
-	{
-		std::string tile = playerDoor[i].GetString();
-		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::PlayerDoor));
-	}
-
-	const rapidjson::Value& waterA = document["WaterA"];
-	for (unsigned int i = 0; i < waterA.Size(); i++)
-	{
-		std::string tile = waterA[i].GetString();
-		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::WaterA));
-	}
-
-	const rapidjson::Value& wildGrass = document["WildGrass"];
-	for (unsigned int i = 0; i < wildGrass.Size(); i++)
-	{
-		std::string tile = wildGrass[i].GetString();
-		myPalletTownTypeSelecter.insert(std::pair<std::string, PalletTownTileType>(tile, PalletTownTileType::WildGrass));
-	}
+	loadType("OakHouse", PalletTownTileType::OakHouse, myPalletTownTypeSelecter);
+	loadType("OakDoor", PalletTownTileType::OakDoor, myPalletTownTypeSelecter);
+	loadType("TownFence", PalletTownTileType::TownFence, myPalletTownTypeSelecter);
+	loadType("TownFlower", PalletTownTileType::TownFlower, myPalletTownTypeSelecter);
+	loadType("TownGrassA", PalletTownTileType::TownGrassA, myPalletTownTypeSelecter);
+	loadType("TownGrassB", PalletTownTileType::TownGrassB, myPalletTownTypeSelecter);
+	loadType("TownMailBox", PalletTownTileType::TownMailBox, myPalletTownTypeSelecter);
+	loadType("TownSign", PalletTownTileType::TownSign, myPalletTownTypeSelecter);
+	loadType("TownTree", PalletTownTileType::TownTree, myPalletTownTypeSelecter);
+	loadType("TrainerHouse", PalletTownTileType::TrainerHouse, myPalletTownTypeSelecter);
+	loadType("PlayerDoor", PalletTownTileType::PlayerDoor, myPalletTownTypeSelecter);
+	loadType("WaterA", PalletTownTileType::WaterA, myPalletTownTypeSelecter);
+	loadType("WildGrass", PalletTownTileType::WildGrass, myPalletTownTypeSelecter);
 }
 
 void TileMapPalletTown::AddTile(const std::string& anIndex, const Frame& aFrame)
