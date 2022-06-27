@@ -142,7 +142,7 @@ SpriteDirection AIController::CalculateNextInput()
 
 Vector2Int AIController::SetNPCCurrentPosition(Vector2Float aNPCPosition)
 {
-	return Vector2Int(static_cast<int>(aNPCPosition.myX / TILESIZE), static_cast<int>(aNPCPosition.myY / TILESIZE));
+	return Vector2Int(static_cast<int>(aNPCPosition.myX / TileSize), static_cast<int>(aNPCPosition.myY / TileSize));
 }
 
 Vector2Int AIController::CalculatedDirection(Vector2Int aCurrentIndex, Vector2Float aDirection)

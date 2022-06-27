@@ -47,9 +47,9 @@ public:
 	[[nodiscard]] int GetMaxPathSize() const override;
 
 private:
-	std::array<std::string, NUM_DIRECTIONS> myAnimationKeys;
-	std::array<int, OAKMAXPATHSIZE> myInputSet;
-	std::array<AnimatedSprite*, NUM_DIRECTIONS> myAnimations;
+	std::array<std::string, Directions> myAnimationKeys;
+	std::array<int, OakMaxPathSize> myInputSet;
+	std::array<AnimatedSprite*, Directions> myAnimations;
 	Vector2Float myNewPosition;
 	Vector2Int myNewDestination;
 	Vector2Int myIndex;

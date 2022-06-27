@@ -12,16 +12,16 @@
 class TileMap;
 class GameCore;
 
-class TileMapWoods : public TileMap
+class TileMapRoute1 : public TileMap
 {
 public:
-	TileMapWoods(GameCore* aGameCore, Area anArea);
-	~TileMapWoods() override;
+	TileMapRoute1(GameCore* aGameCore, Area anArea);
+	~TileMapRoute1() override;
 
 	void LoadTileTypeMap(const std::string& aFilepath) override;
 	void AddTile(const std::string& anIndex, const Frame& aFrame) override;
 
-	[[nodiscard]] TileInfo GetTileFromWoodsMap(ForestTileType aType) const override;
+	[[nodiscard]] TileInfo GetTileFromWoodsMap(Route1TileType aType) const override;
 	[[nodiscard]] bool IsTileAtPlayer(Vector2Int playerColumnRow) const override;
 	[[nodiscard]] bool IsTileAtNPC(Vector2Int npcColumnRow) const override;
 	[[nodiscard]] TileInfo GetTileAtIndex(int anIndex) const override;
@@ -31,6 +31,6 @@ public:
 	[[nodiscard]] Vector2Int GetColumRowFromIndex(int anIndex) const override;
 
 private:
-	std::map<std::string, ForestTileType> myWoodsTypeSelecter;
-	std::map<ForestTileType, TileInfo> myTileInfoMap;
+	std::map<std::string, Route1TileType> myWoodsTypeSelecter;
+	std::map<Route1TileType, TileInfo> myTileInfoMap;
 };

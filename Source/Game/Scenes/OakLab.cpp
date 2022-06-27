@@ -19,7 +19,7 @@
 #include <sstream>
 
 OakLab::OakLab(GameCore* aGameCore, Area anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player * aPlayer, unsigned int aTextureIdentifier)
-	: Scene(aGameCore, anArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(7.5f * TILESIZE, 2.0f * TILESIZE), aTextureIdentifier)
+	: Scene(aGameCore, anArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(7.5f * TileSize, 2.0f * TileSize), aTextureIdentifier)
 {
 	myOak = nullptr;
 	myOakAIController = nullptr;
@@ -28,7 +28,7 @@ OakLab::OakLab(GameCore* aGameCore, Area anArea, TileMap* aTileMap, ResourceMana
 	myOakLabMachineTop = nullptr;
 	myOakLabPlantTops = nullptr;
 	myOakLabTableTop = nullptr;
-	myOakStartPosition = Vector2Float(6.0f * TILESIZE, 11.0f * TILESIZE);
+	myOakStartPosition = Vector2Float(6.0f * TileSize, 11.0f * TileSize);
 	myOakMesh = new Mesh();
 }
 
@@ -102,5 +102,5 @@ void OakLab::Reload()
 
 void OakLab::Unload()
 {
-	myPlayerStartPosition = Vector2Float(7.5f * TILESIZE, TILESIZE + 0.3f);
+	myPlayerStartPosition = Vector2Float(7.5f * TileSize, TileSize + 0.3f);
 }

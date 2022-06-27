@@ -16,7 +16,7 @@ TileInfo TileMap::GetTileFromOakLabMap(OakLabTileType /*aType*/) const
 	return TileInfo(static_cast<OakLabTileType>(0));
 }
 
-TileInfo TileMap::GetTileFromWoodsMap(ForestTileType /*aType*/) const
+TileInfo TileMap::GetTileFromWoodsMap(Route1TileType /*aType*/) const
 {
-	return TileInfo(static_cast<ForestTileType>(0));
+	return TileInfo(static_cast<Route1TileType>(0));
 }

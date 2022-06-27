@@ -46,7 +46,7 @@ public:
 	bool GetNextPath(Vector2Int anIndex);
 
 private:
-	std::array<int, MAXPATHSIZE_TOWN_NPC> myInputSet;
+	std::array<int, TownNPCMaxPathSize> myInputSet;
 	Vector2Float myNewPosition;
 	Vector2Int myNewDestination;
 	Vector2Int myIndex;

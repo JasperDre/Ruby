@@ -120,7 +120,7 @@ void GameCamera::OnEvent(Event* anEvent)
 		{
 			const Vector2Float newpos = myGameCore->GetSceneManager()->GetActiveScene()->GetPlayerStart();
 
-			const Vector2Float aDirection = DIRECTIONVECTOR[static_cast<int>(myGameCore->GetMyPlayer()->GetMyDirection())];
+			const Vector2Float aDirection = DirectionVector[static_cast<int>(myGameCore->GetMyPlayer()->GetMyDirection())];
 
 			myCameraOffset = aDirection * (myCameraMin);
 

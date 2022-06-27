@@ -54,7 +54,7 @@ void AnimatedSprite::Update(float deltatime)
 
 void AnimatedSprite::Draw(Vector2Float camPos, Vector2Float projScale)
 {
-	myMesh->Draw(myPosition, myAngle, Vector2Float((TILESIZE / 10.0f) * 5.5f, (TILESIZE / 10.0f) * 11.0f), camPos, projScale, myTextureIdentifier, mUVScale, myUVOffset);
+	myMesh->Draw(myPosition, myAngle, Vector2Float((TileSize / 10.0f) * 5.5f, (TileSize / 10.0f) * 11.0f), camPos, projScale, myTextureIdentifier, mUVScale, myUVOffset);
 }
 
 void AnimatedSprite::AddFrame(const std::string& newframe)

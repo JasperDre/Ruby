@@ -6,7 +6,7 @@
 class Event;
 class Mesh;
 class TileMap;
-class TileMapWoods;
+class TileMapRoute1;
 class Player;
 class PetalburgWoodsLevel;
 

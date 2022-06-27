@@ -46,7 +46,7 @@ TownBoy::TownBoy(ResourceManager* aResourceManager, TileMap* aTileMap, GameCore*
 	myPathFinder = new AStarPathFinder(myTileMap, this);
 
 	myIsPathingComplete = false;
-	myIndex = Vector2Int(static_cast<int>(myPosition.myX / TILESIZE), static_cast<int>(myPosition.myY / TILESIZE));
+	myIndex = Vector2Int(static_cast<int>(myPosition.myX / TileSize), static_cast<int>(myPosition.myY / TileSize));
 }
 
 TownBoy::~TownBoy()
@@ -61,7 +61,7 @@ void TownBoy::Update(float deltatime)
 {
 	Pause();
 
-	myIndex = Vector2Int(static_cast<int>(myPosition.myX / TILESIZE), static_cast<int>(myPosition.myY / TILESIZE));
+	myIndex = Vector2Int(static_cast<int>(myPosition.myX / TileSize), static_cast<int>(myPosition.myY / TileSize));
 
 	if (myIsStopped)
 	{
@@ -81,7 +81,7 @@ void TownBoy::Update(float deltatime)
 			myNewDirection = CalculateNextInput(myIndex);
 			myIsFirstInput = false;
 		}
-		else if (myTarget == ((NUM_COLUMNS * myIndex.y) + myIndex.x))
+		else if (myTarget == ((Columns * myIndex.y) + myIndex.x))
 		{
 			myNewDirection = CalculateNextInput(myIndex);
 		}
@@ -91,7 +91,7 @@ void TownBoy::Update(float deltatime)
 
 		else if (myNewDirection == SpriteDirection::SpriteDirectionStop)
 		{
-			for (unsigned int i = 0; i < NUM_DIRECTIONS; i++)
+			for (unsigned int i = 0; i < Directions; i++)
 				myAnimations[i]->SetFrameIndex(0);
 
 			myIsStopped = true;
@@ -99,7 +99,7 @@ void TownBoy::Update(float deltatime)
 	}
 
 
-	for (unsigned int i = 0; i < NUM_DIRECTIONS; i++)
+	for (unsigned int i = 0; i < Directions; i++)
 	{
 		myAnimations[i]->SetPosition(GetPosition());
 		myAnimations[i]->Update(deltatime);
@@ -120,7 +120,7 @@ void TownBoy::Move(SpriteDirection dir, float deltatime)
 	if (myDirection != dir)
 		myDirection = dir;
 
-	const Vector2Float velocity = DIRECTIONVECTOR[static_cast<int>(dir)] * NPC_SPEED;
+	const Vector2Float velocity = DirectionVector[static_cast<int>(dir)] * NPCSpeed;
 
 	myNewPosition += velocity * deltatime;
 
@@ -137,7 +137,7 @@ void TownBoy::Move(SpriteDirection dir, float deltatime)
 
 void TownBoy::Pause() const
 {
-	for (unsigned int i = 0; i < NUM_DIRECTIONS; i++)
+	for (unsigned int i = 0; i < Directions; i++)
 	{
 		myAnimations[i]->Pause();
 	}
@@ -145,7 +145,7 @@ void TownBoy::Pause() const
 
 void TownBoy::Resume() const
 {
-	for (unsigned int i = 0; i < NUM_DIRECTIONS; i++)
+	for (unsigned int i = 0; i < Directions; i++)
 	{
 		myAnimations[i]->Resume();
 	}
@@ -168,7 +168,7 @@ bool TownBoy::GetNextPath(Vector2Int anIndex)
 {
 	const Vector2Int BoyIndex = anIndex;
 
-	for (int i = 0; i < MAXPATHSIZE_TOWN_NPC; i++)
+	for (int i = 0; i < TownNPCMaxPathSize; i++)
 	{
 		myInputSet[i] = -1;
 	}
@@ -179,14 +179,14 @@ bool TownBoy::GetNextPath(Vector2Int anIndex)
 
 	while (myIsPathingComplete == false)
 	{
-		myNewDestination.x = MathUtility::GetRandomRangeInteger(myMinIndex % NUM_COLUMNS, myMaxIndex % NUM_COLUMNS);
-		myNewDestination.y = MathUtility::GetRandomRangeInteger(myMinIndex / NUM_COLUMNS, myMaxIndex / NUM_COLUMNS);
+		myNewDestination.x = MathUtility::GetRandomRangeInteger(myMinIndex % Columns, myMaxIndex % Columns);
+		myNewDestination.y = MathUtility::GetRandomRangeInteger(myMinIndex / Columns, myMaxIndex / Columns);
 
 		myIsPathingComplete = myPathFinder->FindPath(BoyIndex.x, BoyIndex.y, myNewDestination.x, myNewDestination.y);
 
 		if (myIsPathingComplete == true)
 		{
-			myPathFinder->GetPath(myPath, MAXPATHSIZE_TOWN_NPC, myNewDestination.x, myNewDestination.y);
+			myPathFinder->GetPath(myPath, TownNPCMaxPathSize, myNewDestination.x, myNewDestination.y);
 		}
 		if (myPath == nullptr)
 		{
@@ -210,7 +210,7 @@ SpriteDirection TownBoy::CalculateNextInput(Vector2Int anIndex)
 
 	if (myCurrentInput != -1)
 	{
-		const Vector2Int m_NextTileColumnRow = Vector2Int(myInputSet[myCurrentInput] % NUM_COLUMNS, myInputSet[myCurrentInput] / NUM_COLUMNS);
+		const Vector2Int m_NextTileColumnRow = Vector2Int(myInputSet[myCurrentInput] % Columns, myInputSet[myCurrentInput] / Columns);
 
 		if (m_NextTileColumnRow.x != anIndex.x)
 		{
@@ -243,10 +243,10 @@ SpriteDirection TownBoy::CalculateNextInput(Vector2Int anIndex)
 bool TownBoy::IsColliding(Vector2Float NPCNewPosition) const
 {
 	//Get the location of each point of collision on the player and then truncate it to a row and column
-	const Vector2Int OriginIndex = Vector2Int(static_cast<int>(NPCNewPosition.myX / TILESIZE), static_cast<int>((NPCNewPosition.myY - 0.3f) / TILESIZE));
-	const Vector2Int TopLeftIndex = Vector2Int(static_cast<int>(NPCNewPosition.myX / TILESIZE), static_cast<int>(((NPCNewPosition.myY - 0.5f) + (TILESIZE / 2)) / TILESIZE));
-	const Vector2Int TopRightIndex = Vector2Int(static_cast<int>((NPCNewPosition.myX + (TILESIZE / 2)) / TILESIZE), static_cast<int>(((NPCNewPosition.myY - 0.5f) + (TILESIZE / 2)) / TILESIZE));
-	const Vector2Int BottomRightIndex = Vector2Int(static_cast<int>((NPCNewPosition.myX + (TILESIZE / 2)) / TILESIZE), static_cast<int>((NPCNewPosition.myY - 0.3f) / TILESIZE));
+	const Vector2Int OriginIndex = Vector2Int(static_cast<int>(NPCNewPosition.myX / TileSize), static_cast<int>((NPCNewPosition.myY - 0.3f) / TileSize));
+	const Vector2Int TopLeftIndex = Vector2Int(static_cast<int>(NPCNewPosition.myX / TileSize), static_cast<int>(((NPCNewPosition.myY - 0.5f) + (TileSize / 2)) / TileSize));
+	const Vector2Int TopRightIndex = Vector2Int(static_cast<int>((NPCNewPosition.myX + (TileSize / 2)) / TileSize), static_cast<int>(((NPCNewPosition.myY - 0.5f) + (TileSize / 2)) / TileSize));
+	const Vector2Int BottomRightIndex = Vector2Int(static_cast<int>((NPCNewPosition.myX + (TileSize / 2)) / TileSize), static_cast<int>((NPCNewPosition.myY - 0.3f) / TileSize));
 
 	//Check each index for whether the tile it lands on is walkable
 	const bool CheckOrigin = myGameCore->GetTileMap()->IsTileAtNPC(OriginIndex);
@@ -281,5 +281,5 @@ int TownBoy::GetMyMapWidth() const
 
 int TownBoy::GetMaxPathSize() const
 {
-	return MAXPATHSIZE_TOWN_NPC;
+	return TownNPCMaxPathSize;
 }

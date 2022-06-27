@@ -193,7 +193,7 @@ void AStarPathFinder::AddNeighboursToOpenList(int nodeIndex, int endNodeIndex)
 	int NeighbourNodes[4];
 
 	for (int i = 0; i < 4; i++)
-		NeighbourNodes[i] = CheckIfNodeIsClearAndReturnNodeIndex(TileColumn + static_cast<int>(DIRECTIONVECTOR[i].myX), TileRow + static_cast<int>(DIRECTIONVECTOR[i].myY));
+		NeighbourNodes[i] = CheckIfNodeIsClearAndReturnNodeIndex(TileColumn + static_cast<int>(DirectionVector[i].myX), TileRow + static_cast<int>(DirectionVector[i].myY));
 
 	// Loop through the array.
 	for (const int NeighbourNode : NeighbourNodes)

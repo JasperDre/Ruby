@@ -8,7 +8,7 @@ OakLabDeskTop::OakLabDeskTop(ResourceManager* aResourceManager, TileMap* aTileMa
 	: Sprite(aTileMap, aGameCore, aMesh, aTextureIdentifier)
 {
 	myOakLabDeskTopMap = { 11, 10, 9, 8, 7, 6 };
-	myPosition = Vector2Float(1.0f * TILESIZE, 13.0f * TILESIZE);
+	myPosition = Vector2Float(1.0f * TileSize, 13.0f * TileSize);
 
 	for (unsigned int i = 0; i < myOakLabDeskTopMap.size(); i++)
 	{
@@ -16,7 +16,7 @@ OakLabDeskTop::OakLabDeskTop(ResourceManager* aResourceManager, TileMap* aTileMa
 		Frame aframe = atile.myVariant.at(myOakLabDeskTopMap[i]);
 		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / aResourceManager->GetTextureSize(1).x), (aframe.myOrigin.myY / aResourceManager->GetTextureSize(1).y));
 		aframe.myUVScale = Vector2Float((aframe.mySize.myX / aResourceManager->GetTextureSize(1).x), (aframe.mySize.myY / aResourceManager->GetTextureSize(1).y));
-		aframe.myWorldSpace = Vector2Float((((i % myOakLabDeskTopMap.size()) * TILESIZE) + myPosition.myX), (((i / myOakLabDeskTopMap.size())* TILESIZE) + myPosition.myY));
+		aframe.myWorldSpace = Vector2Float((((i % myOakLabDeskTopMap.size()) * TileSize) + myPosition.myX), (((i / myOakLabDeskTopMap.size())* TileSize) + myPosition.myY));
 
 		myFrames.push_back(aframe);
 	}
@@ -30,5 +30,5 @@ OakLabDeskTop::~OakLabDeskTop()
 void OakLabDeskTop::Draw(Vector2Float camPos, Vector2Float camProject)
 {
 	for (unsigned int i = 0; i < myOakLabDeskTopMap.size(); i++)
-		myMesh->Draw(myFrames.at(i).myWorldSpace, myAngle, Vector2Float(TILESIZE, TILESIZE), camPos, camProject, myTextureIdentifier, myFrames.at(i).myUVScale, myFrames.at(i).myUVOffset);
+		myMesh->Draw(myFrames.at(i).myWorldSpace, myAngle, Vector2Float(TileSize, TileSize), camPos, camProject, myTextureIdentifier, myFrames.at(i).myUVScale, myFrames.at(i).myUVOffset);
 }

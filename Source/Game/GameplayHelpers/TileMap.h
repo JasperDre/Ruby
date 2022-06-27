@@ -22,7 +22,7 @@ public:
 	[[nodiscard]] virtual bool IsTileAtNPC(Vector2Int npcColumnRow) const = 0;
 	[[nodiscard]] virtual TileInfo GetTileFromPalletTownMap(PalletTownTileType aType) const;
 	[[nodiscard]] virtual TileInfo GetTileFromOakLabMap(OakLabTileType aType) const;
-	[[nodiscard]] virtual TileInfo GetTileFromWoodsMap(ForestTileType aType) const;
+	[[nodiscard]] virtual TileInfo GetTileFromWoodsMap(Route1TileType aType) const;
 	[[nodiscard]] virtual TileInfo GetTileAtIndex(int anIndex) const { return myNullTileInfo; }
 	[[nodiscard]] virtual Frame GetFrameFromExtrasMap(const std::string& anIndex) const { return myNullFrame; }
 	[[nodiscard]] virtual int GetMapWidth() const = 0;

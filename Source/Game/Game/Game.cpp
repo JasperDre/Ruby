@@ -16,7 +16,7 @@
 #include "GameplayHelpers/TileMapExtras.h"
 #include "GameplayHelpers/TileMapOakLab.h"
 #include "GameplayHelpers/TileMapPalletTown.h"
-#include "GameplayHelpers/TileMapWoods.h"
+#include "GameplayHelpers/TileMapRoute1.h"
 #include "GL/GLHelpers.h"
 #include "Input/InputManager.h"
 #include "Mesh/Mesh.h"
@@ -36,7 +36,7 @@ Game::Game(Framework* aFramework)
 	, myResourceManager(nullptr)
 	, myPalletTileMap(nullptr)
 	, myOakLabTileMap(nullptr)
-	, myWoodsTileMap(nullptr)
+	, myRoute1TileMap(nullptr)
 	, myExtrasTileMap(nullptr)
 	, myPlayer(nullptr)
 	, myUICanvas(nullptr)
@@ -66,7 +66,7 @@ Game::Game(Framework* aFramework)
 	myUIMesh = new Mesh();
 	myPalletTileMap = new TileMapPalletTown(this, Area::PalletTown);
 	myOakLabTileMap = new TileMapOakLab(this, Area::OakLab);
-	myWoodsTileMap = new TileMapWoods(this, Area::Woods);
+	myRoute1TileMap = new TileMapRoute1(this, Area::Woods);
 	myExtrasTileMap = new TileMapExtras(this, Area::Null);
 }
 
@@ -78,7 +78,7 @@ Game::~Game()
 	delete myUICanvas;
 	delete myPlayer;
 	delete myExtrasTileMap;
-	delete myWoodsTileMap;
+	delete myRoute1TileMap;
 	delete myOakLabTileMap;
 	delete myPalletTileMap;
 	delete myResourceManager;
@@ -142,19 +142,19 @@ void Game::LoadContent()
 	myBattleSceneTextureIdentifier = GLHelpers::LoadTexture("Data/Textures/BattleScene.png");
 
 	myPalletTileMap->LoadTileTypeMap("Data/TileTypes/PalletTownTileTypes.json");
-	myWoodsTileMap->LoadTileTypeMap("Data/TileTypes/Route1TileTypes.json");
+	myRoute1TileMap->LoadTileTypeMap("Data/TileTypes/Route1TileTypes.json");
 
 	myResourceManager->UnpackJson("Data/Textures/TileSet.json", myPalletTileMap);
 	myResourceManager->UnpackJson("Data/Textures/OakLabTileSet.json", myOakLabTileMap);
 	myResourceManager->UnpackJson("Data/Textures/Player_NPCSprites.json", myPalletTileMap);
-	myResourceManager->UnpackJson("Data/Textures/WoodsTileSet.json", myWoodsTileMap);
+	myResourceManager->UnpackJson("Data/Textures/WoodsTileSet.json", myRoute1TileMap);
 	myResourceManager->UnpackJson("Data/Textures/ExtrasTileSet.json", myExtrasTileMap);
 	myResourceManager->UnpackJson("Data/Textures/BattleScene.json", myExtrasTileMap);
 
 	myResourceManager->HoldTexture(TextureHandle::TileSet, myTilesetTextureIdentifier);
 	myResourceManager->HoldTexture(TextureHandle::OakLabTileSet, myOakLabTilesetTextureIdentifier);
 	myResourceManager->HoldTexture(TextureHandle::PlayerNPCSprites, mySpritesTextureIdentifier);
-	myResourceManager->HoldTexture(TextureHandle::ForestTileSet, myWoodsTilesetTextureIdentifier);
+	myResourceManager->HoldTexture(TextureHandle::Route1TileSet, myWoodsTilesetTextureIdentifier);
 
 	myPlayer = new Player(myResourceManager, this, myPlayerMesh, mySpritesTextureIdentifier);
 	myUICanvas = new UIObject(myResourceManager, myExtrasTileMap, this, myUIMesh, myExtrasSetTextureIdentifier);
@@ -166,7 +166,7 @@ void Game::LoadContent()
 
 	mySceneManager->GenerateScenes(this, Area::PalletTown, myPalletTileMap, myResourceManager, myTileMesh, myPlayer, myTilesetTextureIdentifier);
 	mySceneManager->GenerateScenes(this, Area::OakLab, myOakLabTileMap, myResourceManager, myTileMesh, myPlayer, myOakLabTilesetTextureIdentifier);
-	mySceneManager->GenerateScenes(this, Area::Woods, myWoodsTileMap, myResourceManager, myTileMesh, myPlayer, myWoodsTilesetTextureIdentifier);
+	mySceneManager->GenerateScenes(this, Area::Woods, myRoute1TileMap, myResourceManager, myTileMesh, myPlayer, myWoodsTilesetTextureIdentifier);
 	mySceneManager->SetActiveScene(Area::PalletTown);
 
 	myUICanvas->SetPosition(myPlayerCamera->GetPosition());

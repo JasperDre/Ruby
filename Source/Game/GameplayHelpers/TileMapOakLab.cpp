@@ -73,7 +73,7 @@ TileInfo TileMapOakLab::GetTileFromOakLabMap(OakLabTileType aType) const
 
 bool TileMapOakLab::IsTileAtPlayer(Vector2Int playerColumnRow) const
 {
-	const int index = (NUM_LAB_COLUMNS * playerColumnRow.y) + playerColumnRow.x;
+	const int index = (LabColumns * playerColumnRow.y) + playerColumnRow.x;
 	constexpr short typeMask = 15;
 	const TileInfo tileInfo = m_TileInfoMap.find(static_cast<OakLabTileType>(typeMask & GetBitMap()[index]))->second;
 
@@ -88,7 +88,7 @@ bool TileMapOakLab::IsTileAtPlayer(Vector2Int playerColumnRow) const
 
 bool TileMapOakLab::IsTileAtNPC(Vector2Int npcColumnRow) const
 {
-	const int index = (NUM_LAB_COLUMNS * npcColumnRow.y) + npcColumnRow.x;
+	const int index = (LabColumns * npcColumnRow.y) + npcColumnRow.x;
 	constexpr short typeMask = 15;
 	const TileInfo tileInfo = m_TileInfoMap.find(static_cast<OakLabTileType>(typeMask & GetBitMap()[index]))->second;
 
@@ -105,23 +105,23 @@ TileInfo TileMapOakLab::GetTileAtIndex(int anIndex) const
 
 int TileMapOakLab::GetMapWidth() const
 {
-	return NUM_LAB_COLUMNS;
+	return LabColumns;
 }
 
 int TileMapOakLab::GetMapHeight() const
 {
-	return NUM_LAB_ROWS;
+	return LabRows;
 }
 
 int TileMapOakLab::GetIndexFromColumnRow(int aColumn, int aRow) const
 {
-	assert(aColumn >= 0 && aRow >= 0 && aColumn <= NUM_LAB_COLUMNS && aRow <= NUM_LAB_ROWS);
-	const int indexOnMap = (aRow * NUM_LAB_COLUMNS) + aColumn;
+	assert(aColumn >= 0 && aRow >= 0 && aColumn <= LabColumns && aRow <= LabRows);
+	const int indexOnMap = (aRow * LabColumns) + aColumn;
 
 	return indexOnMap;
 }
 
 Vector2Int TileMapOakLab::GetColumRowFromIndex(int anIndex) const
 {
-	return Vector2Int(anIndex % NUM_LAB_COLUMNS, anIndex / NUM_LAB_COLUMNS);
+	return Vector2Int(anIndex % LabColumns, anIndex / LabColumns);
 }

@@ -9,7 +9,7 @@ struct TileInfo
 {
 	TileInfo(PalletTownTileType aType)
 		: myLabType(OakLabTileType::OakLabBookShelf)
-		, myForestType(ForestTileType::ForestFence)
+		, myRoute1Type(Route1TileType::Fence)
 		, myType(aType)
 		, myIndex(0)
 		, myIsDoor(false)
@@ -18,16 +18,16 @@ struct TileInfo
 
 	TileInfo(OakLabTileType aType)
 		: myLabType(aType)
-		, myForestType(ForestTileType::ForestFence)
+		, myRoute1Type(Route1TileType::Fence)
 		, myType(PalletTownTileType::OakDoor)
 		, myIndex(0)
 		, myIsDoor(false)
 		, myIsWalkable(true)
 	{}
 
-	TileInfo(ForestTileType aType)
+	TileInfo(Route1TileType aType)
 		: myLabType(OakLabTileType::OakLabBookShelf)
-		, myForestType(aType)
+		, myRoute1Type(aType)
 		, myType(PalletTownTileType::OakDoor)
 		, myIndex(0)
 		, myIsDoor(false)
@@ -36,7 +36,7 @@ struct TileInfo
 
 	TileInfo()
 		: myLabType(OakLabTileType::OakLabBookShelf)
-		, myForestType(ForestTileType::ForestFence)
+		, myRoute1Type(Route1TileType::Fence)
 		, myType(PalletTownTileType::OakDoor)
 		, myIndex(0)
 		, myIsDoor(false)
@@ -45,7 +45,7 @@ struct TileInfo
 
 	std::vector<Frame> myVariant;
 	OakLabTileType myLabType;
-	ForestTileType myForestType;
+	Route1TileType myRoute1Type;
 	PalletTownTileType myType;
 	int myIndex;
 	bool myIsDoor;

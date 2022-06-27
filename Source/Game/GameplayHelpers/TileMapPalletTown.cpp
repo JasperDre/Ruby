@@ -128,7 +128,7 @@ TileInfo TileMapPalletTown::GetTileFromPalletTownMap(PalletTownTileType aType) c
 
 bool TileMapPalletTown::IsTileAtPlayer(Vector2Int playerColumnRow) const
 {
-	const int index = (NUM_COLUMNS * playerColumnRow.y) + playerColumnRow.x;
+	const int index = (Columns * playerColumnRow.y) + playerColumnRow.x;
 	constexpr short typeMask = 15;
 	const TileInfo tileInfo = myTileInfoMap.find(static_cast<PalletTownTileType>(typeMask & GetBitMap()[index]))->second;
 
@@ -148,7 +148,7 @@ bool TileMapPalletTown::IsTileAtPlayer(Vector2Int playerColumnRow) const
 
 bool TileMapPalletTown::IsTileAtNPC(Vector2Int npcColumnRow) const
 {
-	const int index = (NUM_COLUMNS * npcColumnRow.y) + npcColumnRow.x;
+	const int index = (Columns * npcColumnRow.y) + npcColumnRow.x;
 	constexpr short typeMask = 15;
 	const TileInfo tileInfo = myTileInfoMap.find(static_cast<PalletTownTileType>(typeMask & GetBitMap()[index]))->second;
 
@@ -165,23 +165,23 @@ TileInfo TileMapPalletTown::GetTileAtIndex(int anIndex) const
 
 int TileMapPalletTown::GetMapWidth() const
 {
-	return NUM_COLUMNS;
+	return Columns;
 }
 
 int TileMapPalletTown::GetMapHeight() const
 {
-	return NUM_ROWS;
+	return Rows;
 }
 
 int TileMapPalletTown::GetIndexFromColumnRow(int aColumn, int aRow) const
 {
-	assert(aColumn >= 0 && aRow >= 0 && aColumn <= NUM_COLUMNS && aRow <= NUM_COLUMNS);
-	const int indexOnMap = (aRow * NUM_COLUMNS) + aColumn;
+	assert(aColumn >= 0 && aRow >= 0 && aColumn <= Columns && aRow <= Columns);
+	const int indexOnMap = (aRow * Columns) + aColumn;
 
 	return indexOnMap;
 }
 
 Vector2Int TileMapPalletTown::GetColumRowFromIndex(int anIndex) const
 {
-	return Vector2Int(anIndex % NUM_COLUMNS, anIndex / NUM_COLUMNS);
+	return Vector2Int(anIndex % Columns, anIndex / Columns);
 }

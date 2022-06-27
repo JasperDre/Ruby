@@ -29,8 +29,8 @@ public:
 	[[nodiscard]] bool CheckForCollision(Vector2Float aPosition) const;
 
 private:
-	std::array<std::string, NUM_DIRECTIONS> myAnimationKeys;
-	std::array<AnimatedSprite*, NUM_DIRECTIONS> myAnimations;
+	std::array<std::string, Directions> myAnimationKeys;
+	std::array<AnimatedSprite*, Directions> myAnimations;
 	Vector2Float myNewPosition;
 	Vector2Float myTransitionDestination;
 	ResourceManager* myResourceManager;

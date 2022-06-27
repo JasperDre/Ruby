@@ -17,7 +17,7 @@ public:
 
 	void GeneratePalletTownVertexData(const std::vector<unsigned>& aBitMap);
 	void GenerateOakLabVertexData(const std::vector<unsigned>& aBitMap);
-	void GenerateForestVertexData(const std::vector<unsigned>& aBitMap);
+	void GenerateRoute1VertexData(const std::vector<unsigned>& aBitMap);
 	void AddVertex(Vector2Float objectPos, float objectAngle, Vector2Float objectScale, Vector2Float aUVscale, Vector2Float aUVoffset);
 
 	void SetIsReverse(bool anIsreverse);

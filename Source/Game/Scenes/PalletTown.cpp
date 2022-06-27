@@ -18,7 +18,7 @@
 #include <sstream>
 
 PalletTown::PalletTown(GameCore* aGameCore, Area anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, unsigned int aTextureIdentifier)
-	: Scene(aGameCore, anArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(9.0f * TILESIZE, 19.0f * TILESIZE), aTextureIdentifier)
+	: Scene(aGameCore, anArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(9.0f * TileSize, 19.0f * TileSize), aTextureIdentifier)
 {
 	myPalletTownMap = nullptr;
 	myOakHouseTop = nullptr;
@@ -28,8 +28,8 @@ PalletTown::PalletTown(GameCore* aGameCore, Area anArea, TileMap* aTileMap, Reso
 	myBoyNPC = nullptr;
 	myGirlMesh = nullptr;
 	myBoyMesh = nullptr;
-	myGirlNPCStartPosition = Vector2Float(16.0f * TILESIZE, 9.0f * TILESIZE);
-	myBoyNPCStartPosition = Vector2Float(14.0f * TILESIZE, 19.0f * TILESIZE);
+	myGirlNPCStartPosition = Vector2Float(16.0f * TileSize, 9.0f * TileSize);
+	myBoyNPCStartPosition = Vector2Float(14.0f * TileSize, 19.0f * TileSize);
 	mySavedPlayerPosition = Vector2Float(0.0f, 0.0f);
 	mySavedGirlPosition = Vector2Float(0.0f, 0.0f);
 	mySavedBoyPosition = Vector2Float(0.0f, 0.0f);

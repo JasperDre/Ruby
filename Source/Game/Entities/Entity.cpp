@@ -28,5 +28,5 @@ AIStates Entity::GetMyState() const
 
 Vector2Int Entity::GetMyIndex() const
 {
-	return Vector2Int(static_cast<int>(myPosition.myX / TILESIZE), static_cast<int>(myPosition.myY / TILESIZE));
+	return Vector2Int(static_cast<int>(myPosition.myX / TileSize), static_cast<int>(myPosition.myY / TileSize));
 }

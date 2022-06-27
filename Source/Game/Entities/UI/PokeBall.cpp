@@ -19,5 +19,5 @@ PokeBall::PokeBall(ResourceManager* aResourceManager, TileMap* aTileMap, GameCor
 void PokeBall::Draw(Vector2Float camPos, Vector2Float camProjection)
 {
 	myFrame.myWorldSpace = myPosition;
-	myMesh->Draw(myFrame.myWorldSpace, 0.0f, TILESIZE * 0.8f, 0, camProjection, myTextureIdentifier, myFrame.myUVScale, myFrame.myUVOffset);
+	myMesh->Draw(myFrame.myWorldSpace, 0.0f, TileSize * 0.8f, 0, camProjection, myTextureIdentifier, myFrame.myUVScale, myFrame.myUVOffset);
 }

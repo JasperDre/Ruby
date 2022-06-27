@@ -23,15 +23,15 @@ void Canvas::GeneratePalletTownVertexData(const std::vector<unsigned>& aBitMap)
 	for (unsigned int i = 0; i < aBitMap.size(); i++)
 	{
 		int j = 0;
-		if ((i / NUM_COLUMNS) % 2 == 1)
+		if ((i / Columns) % 2 == 1)
 		{
 			SetIsReverse(true);
 
-			j = (NUM_COLUMNS - 1) - (i % NUM_COLUMNS);
+			j = (Columns - 1) - (i % Columns);
 
 			//Find the index of the Tile Type and Variant at the map index
-			const unsigned int tileSelecter = aBitMap[((i / NUM_COLUMNS) * NUM_COLUMNS) + j] & CanvasDefinitions::tileMask;
-			const unsigned int variantSelecter = aBitMap[((i / NUM_COLUMNS) * NUM_COLUMNS) + j] & CanvasDefinitions::variantMask;
+			const unsigned int tileSelecter = aBitMap[((i / Columns) * Columns) + j] & CanvasDefinitions::tileMask;
+			const unsigned int variantSelecter = aBitMap[((i / Columns) * Columns) + j] & CanvasDefinitions::variantMask;
 
 			if (static_cast<PalletTownTileType>(tileSelecter) != PalletTownTileType::TownNullWall && static_cast<PalletTownTileType>(tileSelecter) != PalletTownTileType::TownNullDoor)
 			{
@@ -46,9 +46,9 @@ void Canvas::GeneratePalletTownVertexData(const std::vector<unsigned>& aBitMap)
 				const Vector2Float uvScale = Vector2Float((aframe.mySize.myX / myResourceManager->GetTextureSize(0).x), (aframe.mySize.myY / myResourceManager->GetTextureSize(0).y));
 
 				//set up the position
-				const Vector2Float pos = Vector2Float(((((i / NUM_COLUMNS) * NUM_COLUMNS) + j) % NUM_COLUMNS) * TILESIZE, ((((i / NUM_COLUMNS) * NUM_COLUMNS) + j) / NUM_COLUMNS) * TILESIZE);
+				const Vector2Float pos = Vector2Float(((((i / Columns) * Columns) + j) % Columns) * TileSize, ((((i / Columns) * Columns) + j) / Columns) * TileSize);
 
-				AddVertex(pos, 0, Vector2Float(TILESIZE, TILESIZE), uvScale, uvOffset);
+				AddVertex(pos, 0, Vector2Float(TileSize, TileSize), uvScale, uvOffset);
 			}
 		}
 		else
@@ -72,9 +72,9 @@ void Canvas::GeneratePalletTownVertexData(const std::vector<unsigned>& aBitMap)
 				const Vector2Float uvScale = Vector2Float((frame.mySize.myX / myResourceManager->GetTextureSize(0).x), (frame.mySize.myY / myResourceManager->GetTextureSize(0).y));
 
 				//set up the position
-				const Vector2Float pos = Vector2Float((i % NUM_COLUMNS) * TILESIZE, (i / NUM_COLUMNS) * TILESIZE);
+				const Vector2Float pos = Vector2Float((i % Columns) * TileSize, (i / Columns) * TileSize);
 
-				AddVertex(pos, 0, Vector2Float(TILESIZE, TILESIZE), uvScale, uvOffset);
+				AddVertex(pos, 0, Vector2Float(TileSize, TileSize), uvScale, uvOffset);
 			}
 		}
 	}
@@ -84,15 +84,15 @@ void Canvas::GenerateOakLabVertexData(const std::vector<unsigned>& aBitMap)
 	for (unsigned int i = 0; i < aBitMap.size(); i++)
 	{
 		int j = 0;
-		if ((i / NUM_LAB_COLUMNS) % 2 == 1)
+		if ((i / LabColumns) % 2 == 1)
 		{
 			SetIsReverse(true);
 
-			j = (NUM_LAB_COLUMNS - 1) - (i % NUM_LAB_COLUMNS);
+			j = (LabColumns - 1) - (i % LabColumns);
 
 			//Find the index of the Tile Type and Variant at the map index
-			const unsigned short tileSelecter = aBitMap[((i / NUM_LAB_COLUMNS) * NUM_LAB_COLUMNS) + j] & CanvasDefinitions::tileMask;
-			const unsigned short variantSelecter = aBitMap[((i / NUM_LAB_COLUMNS) * NUM_LAB_COLUMNS) + j] & CanvasDefinitions::variantMask;
+			const unsigned short tileSelecter = aBitMap[((i / LabColumns) * LabColumns) + j] & CanvasDefinitions::tileMask;
+			const unsigned short variantSelecter = aBitMap[((i / LabColumns) * LabColumns) + j] & CanvasDefinitions::variantMask;
 
 			if (static_cast<OakLabTileType>(tileSelecter) != OakLabTileType::OakLabNullWall && static_cast<OakLabTileType>(tileSelecter) != OakLabTileType::OakLabNullDoor)
 			{
@@ -107,9 +107,9 @@ void Canvas::GenerateOakLabVertexData(const std::vector<unsigned>& aBitMap)
 				const Vector2Float uvScale = Vector2Float((frame.mySize.myX / myResourceManager->GetTextureSize(1).x), (frame.mySize.myY / myResourceManager->GetTextureSize(1).y));
 
 				//set up the position
-				const Vector2Float pos = Vector2Float(((((i / NUM_LAB_COLUMNS) * NUM_LAB_COLUMNS) + j) % NUM_LAB_COLUMNS) * TILESIZE, ((((i / NUM_LAB_COLUMNS) * NUM_LAB_COLUMNS) + j) / NUM_LAB_COLUMNS) * TILESIZE);
+				const Vector2Float pos = Vector2Float(((((i / LabColumns) * LabColumns) + j) % LabColumns) * TileSize, ((((i / LabColumns) * LabColumns) + j) / LabColumns) * TileSize);
 
-				AddVertex(pos, 0, Vector2Float(TILESIZE, TILESIZE), uvScale, uvOffset);
+				AddVertex(pos, 0, Vector2Float(TileSize, TileSize), uvScale, uvOffset);
 			}
 		}
 		else
@@ -133,32 +133,32 @@ void Canvas::GenerateOakLabVertexData(const std::vector<unsigned>& aBitMap)
 				const Vector2Float uvScale = Vector2Float((frame.mySize.myX / myResourceManager->GetTextureSize(1).x), (frame.mySize.myY / myResourceManager->GetTextureSize(1).y));
 
 				//set up the position
-				const Vector2Float pos = Vector2Float((i % NUM_LAB_COLUMNS) * TILESIZE, (i / NUM_LAB_COLUMNS) * TILESIZE);
+				const Vector2Float pos = Vector2Float((i % LabColumns) * TileSize, (i / LabColumns) * TileSize);
 
-				AddVertex(pos, 0, Vector2Float(TILESIZE, TILESIZE), uvScale, uvOffset);
+				AddVertex(pos, 0, Vector2Float(TileSize, TileSize), uvScale, uvOffset);
 			}
 		}
 	}
 }
-void Canvas::GenerateForestVertexData(const std::vector<unsigned>& aBitMap)
+void Canvas::GenerateRoute1VertexData(const std::vector<unsigned>& aBitMap)
 {
 	for (unsigned int i = 0; i < aBitMap.size(); i++)
 	{
 		int j = 0;
-		if ((i / NUM_FOREST_COLUMNS) % 2 == 1)
+		if ((i / Route1Columns) % 2 == 1)
 		{
 			SetIsReverse(true);
 
-			j = (NUM_FOREST_COLUMNS - 1) - (i % NUM_FOREST_COLUMNS);
+			j = (Route1Columns - 1) - (i % Route1Columns);
 
 			//Find the index of the Tile Type and Variant at the map index
-			const unsigned short tileSelecter = aBitMap[((i / NUM_FOREST_COLUMNS) * NUM_FOREST_COLUMNS) + j] & CanvasDefinitions::tileMask;
-			const unsigned short variantSelecter = aBitMap[((i / NUM_FOREST_COLUMNS) * NUM_FOREST_COLUMNS) + j] & CanvasDefinitions::variantMask;
+			const unsigned short tileSelecter = aBitMap[((i / Route1Columns) * Route1Columns) + j] & CanvasDefinitions::tileMask;
+			const unsigned short variantSelecter = aBitMap[((i / Route1Columns) * Route1Columns) + j] & CanvasDefinitions::variantMask;
 
-			if (static_cast<ForestTileType>(tileSelecter) != ForestTileType::ForestNullWall && static_cast<ForestTileType>(tileSelecter) != ForestTileType::ForestNullDoor)
+			if (static_cast<Route1TileType>(tileSelecter) != Route1TileType::NullWall && static_cast<Route1TileType>(tileSelecter) != Route1TileType::NullDoor)
 			{
 				//create a temp TileInfo struct to access the attributes
-				const TileInfo tileInfo = myTileMap->GetTileFromWoodsMap(static_cast<ForestTileType>(tileSelecter));
+				const TileInfo tileInfo = myTileMap->GetTileFromWoodsMap(static_cast<Route1TileType>(tileSelecter));
 
 				//extract the Frame attribute of the correct variant
 				const Frame frame = tileInfo.myVariant.at(variantSelecter / 16 - 1);
@@ -168,9 +168,9 @@ void Canvas::GenerateForestVertexData(const std::vector<unsigned>& aBitMap)
 				const Vector2Float uvScale = Vector2Float((frame.mySize.myX / myResourceManager->GetTextureSize(3).x), (frame.mySize.myY / myResourceManager->GetTextureSize(3).y));
 
 				//set up the position
-				const Vector2Float pos = Vector2Float(((((i / NUM_FOREST_COLUMNS) * NUM_FOREST_COLUMNS) + j) % NUM_FOREST_COLUMNS) * TILESIZE, ((((i / NUM_FOREST_COLUMNS) * NUM_FOREST_COLUMNS) + j) / NUM_FOREST_COLUMNS) * TILESIZE);
+				const Vector2Float pos = Vector2Float(((((i / Route1Columns) * Route1Columns) + j) % Route1Columns) * TileSize, ((((i / Route1Columns) * Route1Columns) + j) / Route1Columns) * TileSize);
 
-				AddVertex(pos, 0, Vector2Float(TILESIZE, TILESIZE), uvScale, uvOffset);
+				AddVertex(pos, 0, Vector2Float(TileSize, TileSize), uvScale, uvOffset);
 			}
 		}
 		else
@@ -179,10 +179,10 @@ void Canvas::GenerateForestVertexData(const std::vector<unsigned>& aBitMap)
 
 			const unsigned short tileSelecter = aBitMap[i] & CanvasDefinitions::tileMask;
 			const unsigned short variantSelecter = aBitMap[i] & CanvasDefinitions::variantMask;
-			if (static_cast<ForestTileType>(tileSelecter) != ForestTileType::ForestNullWall && static_cast<ForestTileType>(tileSelecter) != ForestTileType::ForestNullDoor)
+			if (static_cast<Route1TileType>(tileSelecter) != Route1TileType::NullWall && static_cast<Route1TileType>(tileSelecter) != Route1TileType::NullDoor)
 			{
 				//create a temp TileInfo struct to access the attributes
-				const TileInfo tileInfo = myTileMap->GetTileFromWoodsMap(static_cast<ForestTileType>(tileSelecter));
+				const TileInfo tileInfo = myTileMap->GetTileFromWoodsMap(static_cast<Route1TileType>(tileSelecter));
 
 				//extract the Frame attribute of the correct variant
 				const Frame frame = tileInfo.myVariant.at(variantSelecter / 16 - 1);
@@ -192,9 +192,9 @@ void Canvas::GenerateForestVertexData(const std::vector<unsigned>& aBitMap)
 				const Vector2Float uvScale = Vector2Float((frame.mySize.myX / myResourceManager->GetTextureSize(3).x), (frame.mySize.myY / myResourceManager->GetTextureSize(3).y));
 
 				//set up the position
-				const Vector2Float pos = Vector2Float((i % NUM_FOREST_COLUMNS) * TILESIZE, (i / NUM_FOREST_COLUMNS) * TILESIZE);
+				const Vector2Float pos = Vector2Float((i % Route1Columns) * TileSize, (i / Route1Columns) * TileSize);
 
-				AddVertex(pos, 0, Vector2Float(TILESIZE, TILESIZE), uvScale, uvOffset);
+				AddVertex(pos, 0, Vector2Float(TileSize, TileSize), uvScale, uvOffset);
 			}
 		}
 	}

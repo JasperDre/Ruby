@@ -146,7 +146,7 @@ void Player::Move(SpriteDirection dir, float deltatime)
 		myDirection = dir;
 	}
 
-	const Vector2Float velocity = DIRECTIONVECTOR[static_cast<int>(dir)] * PLAYER_SPEED;
+	const Vector2Float velocity = DirectionVector[static_cast<int>(dir)] * PlayerSpeed;
 
 	myNewPosition += velocity * deltatime;
 	if (myIsInTransition == false)
@@ -200,7 +200,7 @@ void Player::OnEvent(Event* anEvent)
 void Player::PlayerTransition()
 {
 	myIsInTransition = true;
-	myTransitionDestination = GetPosition() + Vector2Float(DIRECTIONVECTOR[static_cast<int>(myDirection)] * (TILESIZE / 4));
+	myTransitionDestination = GetPosition() + Vector2Float(DirectionVector[static_cast<int>(myDirection)] * (TileSize / 4));
 }
 
 SpriteDirection Player::GetMyDirection() const
@@ -211,10 +211,10 @@ SpriteDirection Player::GetMyDirection() const
 bool Player::CheckForCollision(Vector2Float aPosition) const
 {
 	//Get the location of each point of collision on the player and then truncate it to a row and column
-	const Vector2Int OriginIndex = Vector2Int(static_cast<int>(aPosition.myX / TILESIZE), static_cast<int>((aPosition.myY - 0.3f) / TILESIZE));
-	const Vector2Int TopLeftIndex = Vector2Int(static_cast<int>(aPosition.myX / TILESIZE), static_cast<int>(((aPosition.myY - 0.5f) + (TILESIZE / 2)) / TILESIZE));
-	const Vector2Int TopRightIndex = Vector2Int(static_cast<int>((aPosition.myX + (TILESIZE / 2)) / TILESIZE), static_cast<int>(((aPosition.myY - 0.5f) + (TILESIZE / 2)) / TILESIZE));
-	const Vector2Int BottomRightIndex = Vector2Int(static_cast<int>((aPosition.myX + (TILESIZE / 2)) / TILESIZE), static_cast<int>((aPosition.myY - 0.3f) / TILESIZE));
+	const Vector2Int OriginIndex = Vector2Int(static_cast<int>(aPosition.myX / TileSize), static_cast<int>((aPosition.myY - 0.3f) / TileSize));
+	const Vector2Int TopLeftIndex = Vector2Int(static_cast<int>(aPosition.myX / TileSize), static_cast<int>(((aPosition.myY - 0.5f) + (TileSize / 2)) / TileSize));
+	const Vector2Int TopRightIndex = Vector2Int(static_cast<int>((aPosition.myX + (TileSize / 2)) / TileSize), static_cast<int>(((aPosition.myY - 0.5f) + (TileSize / 2)) / TileSize));
+	const Vector2Int BottomRightIndex = Vector2Int(static_cast<int>((aPosition.myX + (TileSize / 2)) / TileSize), static_cast<int>((aPosition.myY - 0.3f) / TileSize));
 
 	//Check each index for whether the tile it lands on is walkable
 	const bool CheckOrigin = myGameCore->GetTileMap()->IsTileAtPlayer(OriginIndex);

@@ -33,7 +33,7 @@ WildPokemonTile::WildPokemonTile(TileMap* aTileMap, GameCore* aGameCore, Mesh* a
 
 	myPathFinder = new AStarPathFinder(myTileMap, this);
 
-	myIndex = Vector2Int(static_cast<int>(myPosition.myX / TILESIZE), static_cast<int>(myPosition.myY / TILESIZE));
+	myIndex = Vector2Int(static_cast<int>(myPosition.myX / TileSize), static_cast<int>(myPosition.myY / TileSize));
 }
 
 WildPokemonTile::~WildPokemonTile()
@@ -94,7 +94,7 @@ void WildPokemonTile::WalkingUpdate(float deltatime)
 
 	const Vector2Float PlayerPos = myGameCore->GetMyPlayer()->GetPosition();
 
-	const Vector2Int aPlayerColumnRow = Vector2Int(static_cast<int>(PlayerPos.myX / TILESIZE), static_cast<int>(PlayerPos.myY / TILESIZE));
+	const Vector2Int aPlayerColumnRow = Vector2Int(static_cast<int>(PlayerPos.myX / TileSize), static_cast<int>(PlayerPos.myY / TileSize));
 
 	const Vector2Int MinRange = myTileMap->GetColumRowFromIndex(myMinIndex);
 	const Vector2Int MaxRange = myTileMap->GetColumRowFromIndex(myMaxIndex);
@@ -105,7 +105,7 @@ void WildPokemonTile::WalkingUpdate(float deltatime)
 
 void WildPokemonTile::Draw(Vector2Float camPos, Vector2Float projecScale)
 {
-	myMesh->DebugDraw(myPosition, 0, TILESIZE, camPos, projecScale);
+	myMesh->DebugDraw(myPosition, 0, TileSize, camPos, projecScale);
 }
 
 void WildPokemonTile::Move(SpriteDirection dir, float deltatime)
@@ -115,7 +115,7 @@ void WildPokemonTile::Move(SpriteDirection dir, float deltatime)
 	if (myDirection != dir)
 		myDirection = dir;
 
-	const Vector2Float velocity = DIRECTIONVECTOR[static_cast<int>(dir)] * NPC_SPEED;
+	const Vector2Float velocity = DirectionVector[static_cast<int>(dir)] * NPCSpeed;
 
 	myNewPosition += velocity * deltatime;
 
@@ -223,7 +223,7 @@ bool WildPokemonTile::IsNodeClearOnSpecial(int tx, int ty) const
 	if (tx > MinColumnRow.x && tx < MaxColumnRow.x && ty > MinColumnRow.y && ty < MaxColumnRow.y)
 	{
 		const int CheckTileIndex = myTileMap->GetIndexFromColumnRow(tx, ty);
-		if (myTileMap->GetTileAtIndex(CheckTileIndex).myForestType == ForestTileType::ForestWildGrass)
+		if (myTileMap->GetTileAtIndex(CheckTileIndex).myRoute1Type == Route1TileType::WildGrass)
 			return true;
 	}
 
@@ -233,10 +233,10 @@ bool WildPokemonTile::IsNodeClearOnSpecial(int tx, int ty) const
 bool WildPokemonTile::IsColliding(Vector2Float NPCNewPosition) const
 {
 	//Get the location of each point of collision on the player and then truncate it to a row and column
-	const Vector2Int OriginIndex = Vector2Int(static_cast<int>(NPCNewPosition.myX / TILESIZE), static_cast<int>((NPCNewPosition.myY - 0.3f) / TILESIZE));
-	const Vector2Int TopLeftIndex = Vector2Int(static_cast<int>(NPCNewPosition.myX / TILESIZE), static_cast<int>(((NPCNewPosition.myY - 0.5f) + (TILESIZE / 2)) / TILESIZE));
-	const Vector2Int TopRightIndex = Vector2Int(static_cast<int>((NPCNewPosition.myX + (TILESIZE / 2)) / TILESIZE), static_cast<int>(((NPCNewPosition.myY - 0.5f) + (TILESIZE / 2)) / TILESIZE));
-	const Vector2Int BottomRightIndex = Vector2Int(static_cast<int>((NPCNewPosition.myX + (TILESIZE / 2)) / TILESIZE), static_cast<int>((NPCNewPosition.myY - 0.3f) / TILESIZE));
+	const Vector2Int OriginIndex = Vector2Int(static_cast<int>(NPCNewPosition.myX / TileSize), static_cast<int>((NPCNewPosition.myY - 0.3f) / TileSize));
+	const Vector2Int TopLeftIndex = Vector2Int(static_cast<int>(NPCNewPosition.myX / TileSize), static_cast<int>(((NPCNewPosition.myY - 0.5f) + (TileSize / 2)) / TileSize));
+	const Vector2Int TopRightIndex = Vector2Int(static_cast<int>((NPCNewPosition.myX + (TileSize / 2)) / TileSize), static_cast<int>(((NPCNewPosition.myY - 0.5f) + (TileSize / 2)) / TileSize));
+	const Vector2Int BottomRightIndex = Vector2Int(static_cast<int>((NPCNewPosition.myX + (TileSize / 2)) / TileSize), static_cast<int>((NPCNewPosition.myY - 0.3f) / TileSize));
 
 	//Check each index for whether the tile it lands on is walkable
 	const bool CheckOrigin = myGameCore->GetTileMap()->IsTileAtNPC(OriginIndex);
@@ -277,7 +277,7 @@ int WildPokemonTile::GetNextTileFromSet(int aCurrentInput) const
 
 void WildPokemonTile::ResetInputSet()
 {
-	for (int i = 0; i < MAXPATHSIZE_TOWN_NPC; i++)
+	for (int i = 0; i < TownNPCMaxPathSize; i++)
 		myInputSet[i] = -1;
 
 	myCurrentInput = 0;
@@ -308,7 +308,7 @@ int WildPokemonTile::GetMyMapWidth() const
 
 int WildPokemonTile::GetMaxPathSize() const
 {
-	return MAXPATHSIZE_TOWN_NPC;
+	return TownNPCMaxPathSize;
 }
 
 void WildPokemonTile::SetMyDirection(SpriteDirection aDirection)

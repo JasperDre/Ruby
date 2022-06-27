@@ -35,9 +35,9 @@ public:
 	bool GetNextPath(Vector2Int anIndex);
 
 private:
-	std::array<std::string, NUM_DIRECTIONS> myAnimationKeys;
-	std::array<int, MAXPATHSIZE_TOWN_NPC> myInputSet;
-	std::array<AnimatedSprite*, NUM_DIRECTIONS> myAnimations;
+	std::array<std::string, Directions> myAnimationKeys;
+	std::array<int, TownNPCMaxPathSize> myInputSet;
+	std::array<AnimatedSprite*, Directions> myAnimations;
 	Vector2Float myNewPosition;
 	Vector2Int myNewDestination;
 	Vector2Int myIndex;

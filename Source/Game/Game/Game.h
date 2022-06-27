@@ -54,7 +54,7 @@ private:
 	ResourceManager* myResourceManager;
 	TileMap* myPalletTileMap;
 	TileMap* myOakLabTileMap;
-	TileMap* myWoodsTileMap;
+	TileMap* myRoute1TileMap;
 	TileMap* myExtrasTileMap;
 	Player* myPlayer;
 	UIObject* myUICanvas;

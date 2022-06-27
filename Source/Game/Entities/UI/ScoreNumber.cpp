@@ -31,8 +31,8 @@ void ScoreNumber::Draw(Vector2Float camPos, Vector2Float camProjection)
 {
 	for (unsigned int i = 0; i < 7; i++)
 	{
-		myScoreFrames.at(i).myWorldSpace = Vector2Float((static_cast<float>(i % 7) * TILESIZE) + myPosition.myX, myPosition.myY);
-		myMesh->Draw(myScoreFrames.at(i).myWorldSpace, 0, TILESIZE * 0.8f, 0, camProjection, myTextureIdentifier, myScoreFrames.at(i).myUVScale, myScoreFrames.at(i).myUVOffset);
+		myScoreFrames.at(i).myWorldSpace = Vector2Float((static_cast<float>(i % 7) * TileSize) + myPosition.myX, myPosition.myY);
+		myMesh->Draw(myScoreFrames.at(i).myWorldSpace, 0, TileSize * 0.8f, 0, camProjection, myTextureIdentifier, myScoreFrames.at(i).myUVScale, myScoreFrames.at(i).myUVOffset);
 	}
 }
 
