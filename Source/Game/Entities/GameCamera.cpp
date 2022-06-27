@@ -31,28 +31,28 @@ void GameCamera::ClampToPlayer(Vector2Float aPlayerPos)
 
 		const SpriteDirection aDirection = myGameCore->GetMyPlayer()->GetMyDirection();
 
-		if (aDirection == SpriteDirection::SpriteWalkDown)
+		if (aDirection == SpriteDirection::WalkDown)
 		{
 			if (Target.myY > aPlayerPos.myY)
 			{
 				myIsInTransition = false;
 			}
 		}
-		else if (aDirection == SpriteDirection::SpriteWalkUp)
+		else if (aDirection == SpriteDirection::WalkUp)
 		{
 			if (Target.myY < aPlayerPos.myY)
 			{
 				myIsInTransition = false;
 			}
 		}
-		else if (aDirection == SpriteDirection::SpriteWalkLeft)
+		else if (aDirection == SpriteDirection::WalkLeft)
 		{
 			if (Target.myX > aPlayerPos.myX)
 			{
 				myIsInTransition = false;
 			}
 		}
-		else if (aDirection == SpriteDirection::SpriteWalkRight)
+		else if (aDirection == SpriteDirection::WalkRight)
 		{
 			if (Target.myX < aPlayerPos.myX)
 			{

@@ -8,7 +8,7 @@
 struct TileInfo
 {
 	TileInfo(PalletTownTileType aType)
-		: myLabType(OakLabTileType::OakLabBookShelf)
+		: myLabType(OakLabTileType::BookShelf)
 		, myRoute1Type(Route1TileType::Fence)
 		, myType(aType)
 		, myIndex(0)
@@ -26,7 +26,7 @@ struct TileInfo
 	{}
 
 	TileInfo(Route1TileType aType)
-		: myLabType(OakLabTileType::OakLabBookShelf)
+		: myLabType(OakLabTileType::BookShelf)
 		, myRoute1Type(aType)
 		, myType(PalletTownTileType::OakDoor)
 		, myIndex(0)
@@ -35,7 +35,7 @@ struct TileInfo
 	{}
 
 	TileInfo()
-		: myLabType(OakLabTileType::OakLabBookShelf)
+		: myLabType(OakLabTileType::BookShelf)
 		, myRoute1Type(Route1TileType::Fence)
 		, myType(PalletTownTileType::OakDoor)
 		, myIndex(0)

@@ -15,7 +15,7 @@ TileMapOakLab::TileMapOakLab(GameCore* aGameCore, Area anArea)
 		const OakLabTileType type = static_cast<OakLabTileType>(i + 9);
 		TileInfo nullTile = TileInfo(type);
 
-		if (nullTile.myLabType == OakLabTileType::OakLabNullWall)
+		if (nullTile.myLabType == OakLabTileType::NullWall)
 		{
 			nullTile.myIsWalkable = false;
 		}
@@ -43,7 +43,7 @@ void TileMapOakLab::AddTile(const std::string& anIndex, const Frame& aFrame)
 		{
 			TileInfo tileInfo = TileInfo(type);
 
-			if (tileInfo.myLabType == OakLabTileType::OakLabFloor || tileInfo.myLabType == OakLabTileType::OakLabSeat || tileInfo.myLabType == OakLabTileType::OakLabEntrance)
+			if (tileInfo.myLabType == OakLabTileType::Floor || tileInfo.myLabType == OakLabTileType::Seat || tileInfo.myLabType == OakLabTileType::Entrance)
 			{
 				tileInfo.myIsWalkable = true;
 			}
@@ -77,7 +77,7 @@ bool TileMapOakLab::IsTileAtPlayer(Vector2Int playerColumnRow) const
 	constexpr short typeMask = 15;
 	const TileInfo tileInfo = m_TileInfoMap.find(static_cast<OakLabTileType>(typeMask & GetBitMap()[index]))->second;
 
-	if (tileInfo.myLabType == OakLabTileType::OakLabNullDoor)
+	if (tileInfo.myLabType == OakLabTileType::NullDoor)
 	{
 		Event* doorevent = new DoorEvent(10);
 		myGame->GetEventManager()->QueueEvent(doorevent);

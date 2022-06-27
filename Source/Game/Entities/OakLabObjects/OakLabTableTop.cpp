@@ -13,7 +13,7 @@ OakLabTableTop::OakLabTableTop(ResourceManager* aResourceManager, TileMap* aTile
 
 	for (unsigned int i = 0; i < myOakLabTableTopMap.size(); i++)
 	{
-		TileInfo atile = aTileMap->GetTileFromOakLabMap(OakLabTileType::OakLabTable);
+		TileInfo atile = aTileMap->GetTileFromOakLabMap(OakLabTileType::Table);
 		Frame aframe = atile.myVariant.at(myOakLabTableTopMap[i]);
 		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / aResourceManager->GetTextureSize(1).x), (aframe.myOrigin.myY / aResourceManager->GetTextureSize(1).y));
 		aframe.myUVScale = Vector2Float((aframe.mySize.myX / aResourceManager->GetTextureSize(1).x), (aframe.mySize.myY / aResourceManager->GetTextureSize(1).y));

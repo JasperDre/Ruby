@@ -51,57 +51,57 @@ enum class PalletTownTileType
 	//(0000 0000 0000 0000)
 	OakHouse = 1,
 	//(0000 0000 0000 0001)
-	TownSign = 2,
+	Sign = 2,
 	//(0000 0000 0000 0010)
-	TownMailBox = 3,
+	MailBox = 3,
 	//(0000 0000 0000 0011)
-	TownFence = 4,
+	Fence = 4,
 	//(0000 0000 0000 0100)
-	TownGrassA = 5,
+	GrassA = 5,
 	//(0000 0000 0000 0101)
-	TownFlower = 6,
+	Flower = 6,
 	//(0000 0000 0000 0110)
-	TownGrassB = 7,
+	GrassB = 7,
 	//(0000 0000 0000 0111)
 	WildGrass = 8,
 	//(0000 0000 0000 1000)
 	WaterA = 9,
 	//(0000 0000 0000 1001)
-	TownTree = 10,
+	Tree = 10,
 	//(0000 0000 0000 1010)
 	OakDoor = 11,
 	//(0000 0000 0000 1011)
 	PlayerDoor = 12,
 	//(0000 0000 0000 1100)
-	TownNullDoor = 13,
+	NullDoor = 13,
 	//(0000 0000 0000 1101)
-	TownNullWall = 14,
+	NullWall = 14,
 	//(0000 0000 0000 1110)
 };
 
 enum class OakLabTileType
 {
-	OakLabFloor = 0,
+	Floor = 0,
 	//(0000 0000 0000 0000)
-	OakLabEntrance = 1,
+	Entrance = 1,
 	//(0000 0000 0000 0001)
-	OakLabBookShelf = 2,
+	BookShelf = 2,
 	//(0000 0000 0000 0010)
-	OakLabMachine = 3,
+	Machine = 3,
 	//(0000 0000 0000 0011)
-	OakLabPlant = 4,
+	Plant = 4,
 	//(0000 0000 0000 0100)
-	OakLabSeat = 5,
+	Seat = 5,
 	//(0000 0000 0000 0101)
-	OakLabTable = 6,
+	Table = 6,
 	//(0000 0000 0000 0110)
-	OakLabWall = 7,
+	Wall = 7,
 	//(0000 0000 0000 0111)
-	OakLabWorkDesk = 8,
+	WorkDesk = 8,
 	//(0000 0000 0000 1000)
-	OakLabNullWall = 9,
+	NullWall = 9,
 	//(0000 0000 0000 1001)
-	OakLabNullDoor = 10,
+	NullDoor = 10,
 	//(0000 0000 0000 1010)
 };
 
@@ -119,21 +119,21 @@ enum class Route1TileType
 
 enum class SpriteDirection
 {
-	SpriteWalkDown,
-	SpriteWalkRight,
-	SpriteWalkLeft,
-	SpriteWalkUp,
-	SpriteDirectionStop
+	WalkDown,
+	WalkRight,
+	WalkLeft,
+	WalkUp,
+	DirectionStop
 };
 
 const Vector2Float DirectionVector[] = { Vector2Float(0.0f, -1.0f), Vector2Float(1.0f, 0.0f), Vector2Float(-1.0f, 0.0f), Vector2Float(0.0f, 1.0f) };
 
 enum class AIStates
 {
-	IdleState,
-	WalkingState,
-	PathingState,
-	TrackToPlayerState
+	Idle,
+	Walking,
+	Pathing,
+	TrackToPlayer
 };
 
 constexpr float PlayerSpeed = 4.4f;

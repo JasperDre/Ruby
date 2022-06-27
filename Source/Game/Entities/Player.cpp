@@ -29,7 +29,7 @@ Player::Player(ResourceManager* aResourceManager, GameCore* aGameCore, Mesh* aMe
 		myAnimations[i]->SetPosition(myPosition);
 	}
 
-	myDirection = SpriteDirection::SpriteWalkDown;
+	myDirection = SpriteDirection::WalkDown;
 	myResourceManager = aResourceManager;
 	myMesh->GenerateFrameMesh();
 
@@ -54,19 +54,19 @@ void Player::Update(float deltatime)
 			{
 				if (myController->IsForwardHeld())
 				{
-					Move(SpriteDirection::SpriteWalkUp, deltatime);
+					Move(SpriteDirection::WalkUp, deltatime);
 				}
 				if (myController->IsReverseHeld())
 				{
-					Move(SpriteDirection::SpriteWalkDown, deltatime);
+					Move(SpriteDirection::WalkDown, deltatime);
 				}
 				if (myController->IsTurnRightHeld())
 				{
-					Move(SpriteDirection::SpriteWalkRight, deltatime);
+					Move(SpriteDirection::WalkRight, deltatime);
 				}
 				if (myController->IsTurnLeftHeld())
 				{
-					Move(SpriteDirection::SpriteWalkLeft, deltatime);
+					Move(SpriteDirection::WalkLeft, deltatime);
 				}
 				if (myController->IsInputReleased())
 				{
@@ -82,8 +82,8 @@ void Player::Update(float deltatime)
 	{
 		switch (myDirection)
 		{
-			case SpriteDirection::SpriteWalkUp:
-			case SpriteDirection::SpriteWalkRight:
+			case SpriteDirection::WalkUp:
+			case SpriteDirection::WalkRight:
 			{
 				if (myPosition.myY < myTransitionDestination.myY)
 				{
@@ -100,8 +100,8 @@ void Player::Update(float deltatime)
 
 				break;
 			}
-			case SpriteDirection::SpriteWalkDown:
-			case SpriteDirection::SpriteWalkLeft:
+			case SpriteDirection::WalkDown:
+			case SpriteDirection::WalkLeft:
 			{
 				if (myPosition.myY > myTransitionDestination.myY)
 				{
@@ -118,7 +118,7 @@ void Player::Update(float deltatime)
 
 				break;
 			}
-			case SpriteDirection::SpriteDirectionStop:
+			case SpriteDirection::DirectionStop:
 				break;
 		}
 	}
@@ -185,13 +185,13 @@ void Player::OnEvent(Event* anEvent)
 	const DoorEvent* doorEvent = dynamic_cast<DoorEvent*>(anEvent);
 	if (doorEvent->GetDoorType() == 11)
 	{
-		myDirection = SpriteDirection::SpriteWalkUp;
+		myDirection = SpriteDirection::WalkUp;
 		SetPosition(myGameCore->GetSceneManager()->GetActiveScene()->GetPlayerStart());
 		PlayerTransition();
 	}
 	if (doorEvent->GetDoorType() == 10)
 	{
-		myDirection = SpriteDirection::SpriteWalkDown;
+		myDirection = SpriteDirection::WalkDown;
 		SetPosition(myGameCore->GetSceneManager()->GetActiveScene()->GetPlayerStart());
 		PlayerTransition();
 	}

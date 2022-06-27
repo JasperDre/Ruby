@@ -14,13 +14,13 @@ WildPokemonTile::WildPokemonTile(TileMap* aTileMap, GameCore* aGameCore, Mesh* a
 	for (int& i : myInputSet)
 		i = -1;
 
-	myDirection = SpriteDirection::SpriteWalkDown;
-	myNewDirection = SpriteDirection::SpriteWalkDown;
+	myDirection = SpriteDirection::WalkDown;
+	myNewDirection = SpriteDirection::WalkDown;
 	myTileMap = aTileMap;
 
 	myIsFirstInput = true;
 
-	myState = AIStates::PathingState;
+	myState = AIStates::Pathing;
 
 	myCurrentInput = 0;
 
@@ -45,16 +45,16 @@ void WildPokemonTile::Update(float deltatime)
 {
 	switch (myState)
 	{
-		case AIStates::PathingState:
+		case AIStates::Pathing:
 			PathingUpdate(deltatime);
 			break;
-		case AIStates::WalkingState:
+		case AIStates::Walking:
 			WalkingUpdate(deltatime);
 			break;
-		case AIStates::TrackToPlayerState:
+		case AIStates::TrackToPlayer:
 			TrackToPlayerUpdate(deltatime);
 			break;
-		case AIStates::IdleState:
+		case AIStates::Idle:
 			break;
 	}
 }
@@ -62,7 +62,7 @@ void WildPokemonTile::Update(float deltatime)
 void WildPokemonTile::PathingUpdate(float delatime)
 {
 	if (GetNextPath(GetMyIndex()))
-		SetMyState(AIStates::WalkingState);
+		SetMyState(AIStates::Walking);
 }
 
 void WildPokemonTile::WalkingUpdate(float deltatime)
@@ -81,7 +81,7 @@ void WildPokemonTile::WalkingUpdate(float deltatime)
 		myNewDirection = CalculateNextInput(aNPCIndex);
 	}
 
-	if (myNewDirection != SpriteDirection::SpriteDirectionStop)
+	if (myNewDirection != SpriteDirection::DirectionStop)
 	{
 		Move(myNewDirection, deltatime);
 		SetMyDirection(myNewDirection);
@@ -89,7 +89,7 @@ void WildPokemonTile::WalkingUpdate(float deltatime)
 	else
 	{
 		myIsFirstInput = true;
-		SetMyState(AIStates::PathingState);
+		SetMyState(AIStates::Pathing);
 	}
 
 	const Vector2Float PlayerPos = myGameCore->GetMyPlayer()->GetPosition();
@@ -100,7 +100,7 @@ void WildPokemonTile::WalkingUpdate(float deltatime)
 	const Vector2Int MaxRange = myTileMap->GetColumRowFromIndex(myMaxIndex);
 
 	if (aPlayerColumnRow.x > MinRange.x && aPlayerColumnRow.x < MaxRange.x && aPlayerColumnRow.y > MinRange.y && aPlayerColumnRow.y < MaxRange.y)
-		SetMyState(AIStates::TrackToPlayerState);
+		SetMyState(AIStates::TrackToPlayer);
 }
 
 void WildPokemonTile::Draw(Vector2Float camPos, Vector2Float projecScale)
@@ -125,7 +125,7 @@ void WildPokemonTile::Move(SpriteDirection dir, float deltatime)
 	}
 	else
 	{
-		myState = AIStates::PathingState;
+		myState = AIStates::Pathing;
 	}
 }
 
@@ -184,26 +184,26 @@ SpriteDirection WildPokemonTile::CalculateNextInput(Vector2Int anIndex)
 		if (m_NextTileColumnRow.x != anIndex.x)
 		{
 			if (m_NextTileColumnRow.x > anIndex.x)
-				return SpriteDirection::SpriteWalkRight;
+				return SpriteDirection::WalkRight;
 
 			if (m_NextTileColumnRow.x < anIndex.x)
-				return SpriteDirection::SpriteWalkLeft;
+				return SpriteDirection::WalkLeft;
 		}
 		else if (m_NextTileColumnRow.y != anIndex.y)
 		{
 			if (m_NextTileColumnRow.y > anIndex.y)
-				return SpriteDirection::SpriteWalkUp;
+				return SpriteDirection::WalkUp;
 
 			if (m_NextTileColumnRow.y < anIndex.y)
-				return SpriteDirection::SpriteWalkDown;
+				return SpriteDirection::WalkDown;
 		}
 	}
 	else
 	{
-		return SpriteDirection::SpriteDirectionStop;
+		return SpriteDirection::DirectionStop;
 	}
 
-	return SpriteDirection::SpriteDirectionStop;
+	return SpriteDirection::DirectionStop;
 }
 
 AIStates WildPokemonTile::GetMyState() const

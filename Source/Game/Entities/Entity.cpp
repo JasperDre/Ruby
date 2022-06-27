@@ -23,7 +23,7 @@ void Entity::Draw(Vector2Float camPos, Vector2Float projScale)
 
 AIStates Entity::GetMyState() const
 {
-	return AIStates::IdleState;
+	return AIStates::Idle;
 }
 
 Vector2Int Entity::GetMyIndex() const

@@ -18,7 +18,7 @@ TileMapPalletTown::TileMapPalletTown(GameCore* aGameCore, Area anArea) : TileMap
 		const PalletTownTileType type = static_cast<PalletTownTileType>(i + 13);
 		TileInfo nullTile = TileInfo(type);
 
-		if (nullTile.myType == PalletTownTileType::TownNullWall)
+		if (nullTile.myType == PalletTownTileType::NullWall)
 		{
 			nullTile.myIsWalkable = false;
 		}
@@ -65,13 +65,13 @@ void TileMapPalletTown::LoadTileTypeMap(const std::string& aFilepath)
 
 	loadType("OakHouse", PalletTownTileType::OakHouse, myPalletTownTypeSelecter);
 	loadType("OakDoor", PalletTownTileType::OakDoor, myPalletTownTypeSelecter);
-	loadType("TownFence", PalletTownTileType::TownFence, myPalletTownTypeSelecter);
-	loadType("TownFlower", PalletTownTileType::TownFlower, myPalletTownTypeSelecter);
-	loadType("TownGrassA", PalletTownTileType::TownGrassA, myPalletTownTypeSelecter);
-	loadType("TownGrassB", PalletTownTileType::TownGrassB, myPalletTownTypeSelecter);
-	loadType("TownMailBox", PalletTownTileType::TownMailBox, myPalletTownTypeSelecter);
-	loadType("TownSign", PalletTownTileType::TownSign, myPalletTownTypeSelecter);
-	loadType("TownTree", PalletTownTileType::TownTree, myPalletTownTypeSelecter);
+	loadType("TownFence", PalletTownTileType::Fence, myPalletTownTypeSelecter);
+	loadType("TownFlower", PalletTownTileType::Flower, myPalletTownTypeSelecter);
+	loadType("TownGrassA", PalletTownTileType::GrassA, myPalletTownTypeSelecter);
+	loadType("TownGrassB", PalletTownTileType::GrassB, myPalletTownTypeSelecter);
+	loadType("TownMailBox", PalletTownTileType::MailBox, myPalletTownTypeSelecter);
+	loadType("TownSign", PalletTownTileType::Sign, myPalletTownTypeSelecter);
+	loadType("TownTree", PalletTownTileType::Tree, myPalletTownTypeSelecter);
 	loadType("TrainerHouse", PalletTownTileType::TrainerHouse, myPalletTownTypeSelecter);
 	loadType("PlayerDoor", PalletTownTileType::PlayerDoor, myPalletTownTypeSelecter);
 	loadType("WaterA", PalletTownTileType::WaterA, myPalletTownTypeSelecter);
@@ -92,12 +92,12 @@ void TileMapPalletTown::AddTile(const std::string& anIndex, const Frame& aFrame)
 		if (myTileInfoMap.find(tileType) == myTileInfoMap.end())
 		{
 			TileInfo tile = TileInfo(tileType);
-			if (tile.myType == PalletTownTileType::TownFlower || tile.myType == PalletTownTileType::TownGrassA || tile.myType == PalletTownTileType::TownGrassB || tile.myType ==
+			if (tile.myType == PalletTownTileType::Flower || tile.myType == PalletTownTileType::GrassA || tile.myType == PalletTownTileType::GrassB || tile.myType ==
 				PalletTownTileType::WildGrass)
 			{
 				tile.myIsWalkable = true;
 			}
-			else if (tile.myType == PalletTownTileType::OakDoor || tile.myType == PalletTownTileType::TownNullDoor)
+			else if (tile.myType == PalletTownTileType::OakDoor || tile.myType == PalletTownTileType::NullDoor)
 			{
 				tile.myIsWalkable = true;
 				tile.myIsDoor = true;
@@ -137,7 +137,7 @@ bool TileMapPalletTown::IsTileAtPlayer(Vector2Int playerColumnRow) const
 		Event* doorEvent = new DoorEvent(11);
 		myGame->GetEventManager()->QueueEvent(doorEvent);
 	}
-	else if (tileInfo.myType == PalletTownTileType::TownNullDoor)
+	else if (tileInfo.myType == PalletTownTileType::NullDoor)
 	{
 		Event* doorEvent = new DoorEvent(12);
 		myGame->GetEventManager()->QueueEvent(doorEvent);

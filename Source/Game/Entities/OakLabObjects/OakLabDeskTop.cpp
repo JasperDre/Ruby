@@ -12,7 +12,7 @@ OakLabDeskTop::OakLabDeskTop(ResourceManager* aResourceManager, TileMap* aTileMa
 
 	for (unsigned int i = 0; i < myOakLabDeskTopMap.size(); i++)
 	{
-		TileInfo atile = aTileMap->GetTileFromOakLabMap(OakLabTileType::OakLabWorkDesk);
+		TileInfo atile = aTileMap->GetTileFromOakLabMap(OakLabTileType::WorkDesk);
 		Frame aframe = atile.myVariant.at(myOakLabDeskTopMap[i]);
 		aframe.myUVOffset = Vector2Float((aframe.myOrigin.myX / aResourceManager->GetTextureSize(1).x), (aframe.myOrigin.myY / aResourceManager->GetTextureSize(1).y));
 		aframe.myUVScale = Vector2Float((aframe.mySize.myX / aResourceManager->GetTextureSize(1).x), (aframe.mySize.myY / aResourceManager->GetTextureSize(1).y));

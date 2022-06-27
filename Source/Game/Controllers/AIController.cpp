@@ -28,7 +28,7 @@ AIController::AIController(TileMap* aTileMap, int aMinIndex, int aMaxIndex, Enti
 	myNewDestination = myNPCindex;
 	myIsPathingComplete = false;
 
-	myCurrentDirection = SpriteDirection::SpriteDirectionStop;
+	myCurrentDirection = SpriteDirection::DirectionStop;
 }
 
 AIController::~AIController()
@@ -77,31 +77,31 @@ SpriteDirection AIController::MoveNPC()
 {
 	myCurrentDirection = CalculateNextInput();
 
-	if (myCurrentDirection == SpriteDirection::SpriteDirectionStop)
-		return SpriteDirection::SpriteDirectionStop;
+	if (myCurrentDirection == SpriteDirection::DirectionStop)
+		return SpriteDirection::DirectionStop;
 
 	if (myNextTileColumnRow != myNPCindex)
 	{
-		if (myCurrentDirection == SpriteDirection::SpriteWalkRight)
+		if (myCurrentDirection == SpriteDirection::WalkRight)
 		{
-			return SpriteDirection::SpriteWalkRight;
+			return SpriteDirection::WalkRight;
 		}
-		if (myCurrentDirection == SpriteDirection::SpriteWalkLeft)
+		if (myCurrentDirection == SpriteDirection::WalkLeft)
 		{
-			return SpriteDirection::SpriteWalkLeft;
+			return SpriteDirection::WalkLeft;
 		}
-		if (myCurrentDirection == SpriteDirection::SpriteWalkDown)
+		if (myCurrentDirection == SpriteDirection::WalkDown)
 		{
-			return SpriteDirection::SpriteWalkDown;
+			return SpriteDirection::WalkDown;
 		}
-		if (myCurrentDirection == SpriteDirection::SpriteWalkUp)
+		if (myCurrentDirection == SpriteDirection::WalkUp)
 		{
-			return SpriteDirection::SpriteWalkUp;
+			return SpriteDirection::WalkUp;
 		}
 	}
 	else
 	{
-		myCurrentDirection = SpriteDirection::SpriteDirectionStop;
+		myCurrentDirection = SpriteDirection::DirectionStop;
 	}
 
 	return myCurrentDirection;
@@ -118,26 +118,26 @@ SpriteDirection AIController::CalculateNextInput()
 		if (myNextTileColumnRow.x != myNPCindex.x)
 		{
 			if (myNextTileColumnRow.x > myNPCindex.x)
-				return SpriteDirection::SpriteWalkRight;
+				return SpriteDirection::WalkRight;
 
 			if (myNextTileColumnRow.x < myNPCindex.x)
-				return SpriteDirection::SpriteWalkLeft;
+				return SpriteDirection::WalkLeft;
 		}
 		else if (myNextTileColumnRow.y != myNPCindex.y)
 		{
 			if (myNextTileColumnRow.y > myNPCindex.y)
-				return SpriteDirection::SpriteWalkUp;
+				return SpriteDirection::WalkUp;
 		}
 
 		if (myNextTileColumnRow.y < myNPCindex.y)
-			return SpriteDirection::SpriteWalkDown;
+			return SpriteDirection::WalkDown;
 	}
 	else
 	{
-		return SpriteDirection::SpriteDirectionStop;
+		return SpriteDirection::DirectionStop;
 	}
 
-	return SpriteDirection::SpriteDirectionStop;
+	return SpriteDirection::DirectionStop;
 }
 
 Vector2Int AIController::SetNPCCurrentPosition(Vector2Float aNPCPosition)

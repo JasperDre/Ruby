@@ -29,8 +29,8 @@ TownGirl::TownGirl(ResourceManager* aResourceManager, TileMap* aTileMap, GameCor
 		myAnimations[i]->SetPosition(myPosition);
 	}
 
-	myDirection = SpriteDirection::SpriteWalkDown;
-	myNewDirection = SpriteDirection::SpriteWalkDown;
+	myDirection = SpriteDirection::WalkDown;
+	myNewDirection = SpriteDirection::WalkDown;
 	myTileMap = aTileMap;
 	myMesh->GenerateFrameMesh();
 
@@ -83,11 +83,11 @@ void TownGirl::Update(float deltatime)
 		{
 			myNewDirection = CalculateNextInput(myIndex);
 		}
-		if (myNewDirection != SpriteDirection::SpriteDirectionStop)
+		if (myNewDirection != SpriteDirection::DirectionStop)
 		{
 			Move(myNewDirection, deltatime);
 		}
-		else if (myNewDirection == SpriteDirection::SpriteDirectionStop)
+		else if (myNewDirection == SpriteDirection::DirectionStop)
 		{
 			for (unsigned int i = 0; i < Directions; i++)
 			{
@@ -201,26 +201,26 @@ SpriteDirection TownGirl::CalculateNextInput(Vector2Int anIndex)
 		if (m_NextTileColumnRow.x != anIndex.x)
 		{
 			if (m_NextTileColumnRow.x > anIndex.x)
-				return SpriteDirection::SpriteWalkRight;
+				return SpriteDirection::WalkRight;
 
 			if (m_NextTileColumnRow.x < anIndex.x)
-				return SpriteDirection::SpriteWalkLeft;
+				return SpriteDirection::WalkLeft;
 		}
 		else if (m_NextTileColumnRow.y != anIndex.y)
 		{
 			if (m_NextTileColumnRow.y > anIndex.y)
-				return SpriteDirection::SpriteWalkUp;
+				return SpriteDirection::WalkUp;
 
 			if (m_NextTileColumnRow.y < anIndex.y)
-				return SpriteDirection::SpriteWalkDown;
+				return SpriteDirection::WalkDown;
 		}
 	}
 	else
 	{
-		return SpriteDirection::SpriteDirectionStop;
+		return SpriteDirection::DirectionStop;
 	}
 
-	return SpriteDirection::SpriteDirectionStop;
+	return SpriteDirection::DirectionStop;
 
 }
 

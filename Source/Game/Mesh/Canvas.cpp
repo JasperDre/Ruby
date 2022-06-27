@@ -33,7 +33,7 @@ void Canvas::GeneratePalletTownVertexData(const std::vector<unsigned>& aBitMap)
 			const unsigned int tileSelecter = aBitMap[((i / Columns) * Columns) + j] & CanvasDefinitions::tileMask;
 			const unsigned int variantSelecter = aBitMap[((i / Columns) * Columns) + j] & CanvasDefinitions::variantMask;
 
-			if (static_cast<PalletTownTileType>(tileSelecter) != PalletTownTileType::TownNullWall && static_cast<PalletTownTileType>(tileSelecter) != PalletTownTileType::TownNullDoor)
+			if (static_cast<PalletTownTileType>(tileSelecter) != PalletTownTileType::NullWall && static_cast<PalletTownTileType>(tileSelecter) != PalletTownTileType::NullDoor)
 			{
 				//create a temp TileInfo struct to access the attributes
 				const TileInfo tileInfo = myTileMap->GetTileFromPalletTownMap(static_cast<PalletTownTileType>(tileSelecter));
@@ -59,7 +59,7 @@ void Canvas::GeneratePalletTownVertexData(const std::vector<unsigned>& aBitMap)
 			const unsigned short tileSelecter = aBitMap[i] & CanvasDefinitions::tileMask;
 			const unsigned short variantSelecter = aBitMap[i] & CanvasDefinitions::variantMask;
 
-			if (static_cast<PalletTownTileType>(tileSelecter) != PalletTownTileType::TownNullWall && static_cast<PalletTownTileType>(tileSelecter) != PalletTownTileType::TownNullDoor)
+			if (static_cast<PalletTownTileType>(tileSelecter) != PalletTownTileType::NullWall && static_cast<PalletTownTileType>(tileSelecter) != PalletTownTileType::NullDoor)
 			{
 				//create a temp TileInfo struct to access the attributes
 				const TileInfo tileInfo = myTileMap->GetTileFromPalletTownMap(static_cast<PalletTownTileType>(tileSelecter));
@@ -94,7 +94,7 @@ void Canvas::GenerateOakLabVertexData(const std::vector<unsigned>& aBitMap)
 			const unsigned short tileSelecter = aBitMap[((i / LabColumns) * LabColumns) + j] & CanvasDefinitions::tileMask;
 			const unsigned short variantSelecter = aBitMap[((i / LabColumns) * LabColumns) + j] & CanvasDefinitions::variantMask;
 
-			if (static_cast<OakLabTileType>(tileSelecter) != OakLabTileType::OakLabNullWall && static_cast<OakLabTileType>(tileSelecter) != OakLabTileType::OakLabNullDoor)
+			if (static_cast<OakLabTileType>(tileSelecter) != OakLabTileType::NullWall && static_cast<OakLabTileType>(tileSelecter) != OakLabTileType::NullDoor)
 			{
 				//create a temp TileInfo struct to access the attributes
 				const TileInfo tileInfo = myTileMap->GetTileFromOakLabMap(static_cast<OakLabTileType>(tileSelecter));
@@ -120,7 +120,7 @@ void Canvas::GenerateOakLabVertexData(const std::vector<unsigned>& aBitMap)
 			unsigned short tileSelecter = aBitMap[i] & CanvasDefinitions::tileMask;
 			const unsigned short variantSelecter = aBitMap[i] & CanvasDefinitions::variantMask;
 
-			if (static_cast<OakLabTileType>(tileSelecter) != OakLabTileType::OakLabNullWall && static_cast<OakLabTileType>(tileSelecter) != OakLabTileType::OakLabNullDoor)
+			if (static_cast<OakLabTileType>(tileSelecter) != OakLabTileType::NullWall && static_cast<OakLabTileType>(tileSelecter) != OakLabTileType::NullDoor)
 			{
 				//create a temp TileInfo struct to access the attributes
 				const TileInfo tileInfo = myTileMap->GetTileFromOakLabMap(static_cast<OakLabTileType>(tileSelecter));

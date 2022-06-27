@@ -30,14 +30,14 @@ ProfessorOak::ProfessorOak(ResourceManager* aResourceManager, TileMap* aTileMap,
 		myAnimations[i]->SetPosition(myPosition);
 	}
 
-	myDirection = SpriteDirection::SpriteWalkDown;
-	myNewDirection = SpriteDirection::SpriteWalkDown;
+	myDirection = SpriteDirection::WalkDown;
+	myNewDirection = SpriteDirection::WalkDown;
 	myTileMap = aTileMap;
 	aMesh->GenerateFrameMesh();
 
 	myIsFirstInput = true;
 
-	myState = AIStates::PathingState;
+	myState = AIStates::Pathing;
 
 	myCurrentInput = 0;
 
@@ -67,14 +67,14 @@ void ProfessorOak::Update(float deltatime)
 
 	switch (myState)
 	{
-		case AIStates::PathingState:
+		case AIStates::Pathing:
 			PathingUpdate(deltatime);
 			break;
-		case AIStates::WalkingState:
+		case AIStates::Walking:
 			WalkingUpdate(deltatime);
 			break;
-		case AIStates::IdleState:
-		case AIStates::TrackToPlayerState:
+		case AIStates::Idle:
+		case AIStates::TrackToPlayer:
 			break;
 	}
 
@@ -88,7 +88,7 @@ void ProfessorOak::Update(float deltatime)
 void ProfessorOak::PathingUpdate(float delatime)
 {
 	if (GetNextPath(GetMyIndex()))
-		SetMyState(AIStates::WalkingState);
+		SetMyState(AIStates::Walking);
 }
 
 void ProfessorOak::WalkingUpdate(float deltatime)
@@ -107,7 +107,7 @@ void ProfessorOak::WalkingUpdate(float deltatime)
 		myNewDirection = CalculateNextInput(aNPCIndex);
 	}
 
-	if (myNewDirection != SpriteDirection::SpriteDirectionStop)
+	if (myNewDirection != SpriteDirection::DirectionStop)
 	{
 		Move(myNewDirection, deltatime);
 		SetMyDirection(myNewDirection);
@@ -118,7 +118,7 @@ void ProfessorOak::WalkingUpdate(float deltatime)
 			m_Animation->SetFrameIndex(0);
 
 		myIsFirstInput = true;
-		SetMyState(AIStates::PathingState);
+		SetMyState(AIStates::Pathing);
 	}
 }
 
@@ -146,7 +146,7 @@ void ProfessorOak::Move(SpriteDirection dir, float deltatime)
 	}
 	else
 	{
-		myState = AIStates::PathingState;
+		myState = AIStates::Pathing;
 	}
 }
 
@@ -216,26 +216,26 @@ SpriteDirection ProfessorOak::CalculateNextInput(Vector2Int anIndex)
 		if (m_NextTileColumnRow.x != anIndex.x)
 		{
 			if (m_NextTileColumnRow.x > anIndex.x)
-				return SpriteDirection::SpriteWalkRight;
+				return SpriteDirection::WalkRight;
 
 			if (m_NextTileColumnRow.x < anIndex.x)
-				return SpriteDirection::SpriteWalkLeft;
+				return SpriteDirection::WalkLeft;
 		}
 		else if (m_NextTileColumnRow.y != anIndex.y)
 		{
 			if (m_NextTileColumnRow.y > anIndex.y)
-				return SpriteDirection::SpriteWalkUp;
+				return SpriteDirection::WalkUp;
 
 			if (m_NextTileColumnRow.y < anIndex.y)
-				return SpriteDirection::SpriteWalkDown;
+				return SpriteDirection::WalkDown;
 		}
 	}
 	else
 	{
-		return SpriteDirection::SpriteDirectionStop;
+		return SpriteDirection::DirectionStop;
 	}
 
-	return SpriteDirection::SpriteDirectionStop;
+	return SpriteDirection::DirectionStop;
 }
 
 void ProfessorOak::SetMyState(AIStates aState)
