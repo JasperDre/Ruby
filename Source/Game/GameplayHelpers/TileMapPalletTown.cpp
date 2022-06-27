@@ -92,11 +92,12 @@ void TileMapPalletTown::AddTile(const std::string& anIndex, const Frame& aFrame)
 		if (myTileInfoMap.find(tileType) == myTileInfoMap.end())
 		{
 			TileInfo tile = TileInfo(tileType);
-			if (tile.myType == PalletTownTileType::TownFlower || tile.myType == PalletTownTileType::TownGrassA || tile.myType == PalletTownTileType::TownGrassB || tile.myType == PalletTownTileType::WildGrass)
+			if (tile.myType == PalletTownTileType::TownFlower || tile.myType == PalletTownTileType::TownGrassA || tile.myType == PalletTownTileType::TownGrassB || tile.myType ==
+				PalletTownTileType::WildGrass)
 			{
 				tile.myIsWalkable = true;
 			}
-			else if (tile.myType == PalletTownTileType::OakDoor || tile.myType == PalletTownTileType::PlayerDoor) //if the tile is a door
+			else if (tile.myType == PalletTownTileType::OakDoor || tile.myType == PalletTownTileType::TownNullDoor)
 			{
 				tile.myIsWalkable = true;
 				tile.myIsDoor = true;
@@ -127,23 +128,22 @@ TileInfo TileMapPalletTown::GetTileFromPalletTownMap(PalletTownTileType aType) c
 
 bool TileMapPalletTown::IsTileAtPlayer(Vector2Int playerColumnRow) const
 {
-	const int anIndex = (NUM_COLUMNS * playerColumnRow.y) + playerColumnRow.x;
-	constexpr short TypeMask = 15;
-	const TileInfo aTileInfo = myTileInfoMap.find(static_cast<PalletTownTileType>(TypeMask & GetBitMap()[anIndex]))->second;
+	const int index = (NUM_COLUMNS * playerColumnRow.y) + playerColumnRow.x;
+	constexpr short typeMask = 15;
+	const TileInfo tileInfo = myTileInfoMap.find(static_cast<PalletTownTileType>(typeMask & GetBitMap()[index]))->second;
 
-	if (aTileInfo.myType == PalletTownTileType::OakDoor)
+	if (tileInfo.myType == PalletTownTileType::OakDoor)
 	{
 		Event* doorEvent = new DoorEvent(11);
 		myGame->GetEventManager()->QueueEvent(doorEvent);
 	}
-	else if (aTileInfo.myType == PalletTownTileType::TownNullDoor)
+	else if (tileInfo.myType == PalletTownTileType::TownNullDoor)
 	{
 		Event* doorEvent = new DoorEvent(12);
 		myGame->GetEventManager()->QueueEvent(doorEvent);
 	}
 
-	return aTileInfo.myIsWalkable;
-
+	return tileInfo.myIsWalkable;
 }
 
 bool TileMapPalletTown::IsTileAtNPC(Vector2Int npcColumnRow) const

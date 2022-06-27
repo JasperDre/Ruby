@@ -18,7 +18,7 @@
 #include <sstream>
 
 PalletTown::PalletTown(GameCore* aGameCore, Area anArea, TileMap* aTileMap, ResourceManager* aResourceManager, Mesh* aMesh, Player* aPlayer, unsigned int aTextureIdentifier)
-	: Scene(aGameCore, anArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(9.0f * TILESIZE, 20.0f * TILESIZE), aTextureIdentifier)
+	: Scene(aGameCore, anArea, aTileMap, aResourceManager, aMesh, aPlayer, Vector2Float(9.0f * TILESIZE, 19.0f * TILESIZE), aTextureIdentifier)
 {
 	myPalletTownMap = nullptr;
 	myOakHouseTop = nullptr;
