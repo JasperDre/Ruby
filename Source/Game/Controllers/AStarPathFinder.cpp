@@ -137,21 +137,21 @@ void AStarPathFinder::RemoveFromOpen(int nodeindex)
 
 int AStarPathFinder::FindNodeIndexWithLowestFInOpen() const
 {
-	float LowestF = FLT_MAX;
-	int IndexofLowest = 0;
+	float lowestF = FLT_MAX;
+	int indexofLowest = 0;
 
 	// Loop through the nodes in the open list, then find and return the node with the lowest F score.
 	for (int i = 0; i < myNumOpen; i++)
 	{
-		const int anIndex = myOpenNodes[i];
-		if (myNodes[anIndex].mySum < LowestF)
+		const int index = myOpenNodes[i];
+		if (myNodes[index].mySum < lowestF)
 		{
-			LowestF = myNodes[anIndex].mySum;
-			IndexofLowest = anIndex;
+			lowestF = myNodes[index].mySum;
+			indexofLowest = index;
 		}
 	}
 
-	return IndexofLowest;
+	return indexofLowest;
 }
 
 int AStarPathFinder::CalculateNodeIndex(int tx, int ty) const
@@ -169,54 +169,54 @@ int AStarPathFinder::CheckIfNodeIsClearAndReturnNodeIndex(int tx, int ty) const
 		return -1;
 
 	//If the node is already closed, return -1 (an invalid tile index).
-	const int anIndex = CalculateNodeIndex(tx, ty);
+	const int index = CalculateNodeIndex(tx, ty);
 
-	if (myNodes[anIndex].myStatus == PathNodeStatus::Closed)
+	if (myNodes[index].myStatus == PathNodeStatus::Closed)
 		return -1;
 
 	// If the node can't be walked on, return -1 (an invalid tile index).
-	const TileInfo aNodeTile = myTileMap->GetTileAtIndex(ty * myMapWidth + tx);
-	if (!aNodeTile.myIsWalkable)
+	const TileInfo nodeTile = myTileMap->GetTileAtIndex(ty * myMapWidth + tx);
+	if (!nodeTile.myIsWalkable)
 		return -1;
 
 	// Return a valid tile index.
 	return CalculateNodeIndex(tx, ty);
 }
 
-void AStarPathFinder::AddNeighboursToOpenList(int nodeIndex, int endNodeIndex)
+void AStarPathFinder::AddNeighboursToOpenList(int aNodeIndex, int anEndNodeIndex)
 {
 	// Calculate the tile x/y based on the nodeIndex.
-	const int TileColumn = nodeIndex % myMapWidth;
-	const int TileRow = nodeIndex / myMapWidth;
+	const int tileColumn = aNodeIndex % myMapWidth;
+	const int tileRow = aNodeIndex / myMapWidth;
 
 	// Fill an array with the four neighbour tile indices. (use CheckIfNodeIsClearAndReturnNodeIndex() for each to see if it's valid).
-	int NeighbourNodes[4];
+	int neighbourNodes[4];
 
 	for (int i = 0; i < 4; i++)
-		NeighbourNodes[i] = CheckIfNodeIsClearAndReturnNodeIndex(TileColumn + static_cast<int>(DirectionVector[i].myX), TileRow + static_cast<int>(DirectionVector[i].myY));
+		neighbourNodes[i] = CheckIfNodeIsClearAndReturnNodeIndex(tileColumn + static_cast<int>(DirectionVector[i].myX), tileRow + static_cast<int>(DirectionVector[i].myY));
 
 	// Loop through the array.
-	for (const int NeighbourNode : NeighbourNodes)
+	for (const int neighbourNode : neighbourNodes)
 	{
 		// Check if the node to add has a valid node index.
-		if (NeighbourNode != -1)
+		if (neighbourNode != -1)
 		{
 			constexpr int cost = 1; // Assume a travel cost of 1 for each tile.
 
 			// Add the node to the open list.
-			AddToOpen(NeighbourNode);
+			AddToOpen(neighbourNode);
 
 			// If the cost to get there from here (new G) is less than the previous cost (old G) to get there, then overwrite the values.
-			if (myNodes[NeighbourNode].myCost > myNodes[nodeIndex].myCost)
+			if (myNodes[neighbourNode].myCost > myNodes[aNodeIndex].myCost)
 			{
 				// Set the parent node.
-				(myNodes + NeighbourNode)->myParentNodeIndex = nodeIndex;
+				(myNodes + neighbourNode)->myParentNodeIndex = aNodeIndex;
 				// Set the new cost to travel to that node.
-				(myNodes + NeighbourNode)->myCost = (myNodes + nodeIndex)->myCost + cost;
+				(myNodes + neighbourNode)->myCost = (myNodes + aNodeIndex)->myCost + cost;
 				// If we haven't already calculated the heuristic, calculate it.
-				(myNodes + NeighbourNode)->myDistance = static_cast<float>(CalculateH(NeighbourNode, endNodeIndex));
+				(myNodes + neighbourNode)->myDistance = static_cast<float>(CalculateH(neighbourNode, anEndNodeIndex));
 				// Calculate the final value.
-				(myNodes + NeighbourNode)->mySum = myNodes[NeighbourNode].myCost + myNodes[NeighbourNode].myDistance;
+				(myNodes + neighbourNode)->mySum = myNodes[neighbourNode].myCost + myNodes[neighbourNode].myDistance;
 			}
 		}
 	}

@@ -41,7 +41,7 @@ public:
 private:
 	void AddToOpen(int nodeindex);
 	void RemoveFromOpen(int nodeindex);
-	void AddNeighboursToOpenList(int nodeIndex, int endNodeIndex);
+	void AddNeighboursToOpenList(int aNodeIndex, int anEndNodeIndex);
 
 	TileMap* myTileMap;
 	Entity* myNPC;
